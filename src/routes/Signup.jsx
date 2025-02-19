@@ -2,20 +2,57 @@ import { useState } from "react";
 import DefaultLayout from "../layout/DefaultLayout";
 import { useAuth } from "../auth/AuthProvider";
 import { Navigate } from "react-router-dom";
+import { API_URL } from "../auth/constants";
 
 function Signup() {
-  const [name, setName] = useState();
-  const [username, setUsername] = useState();
-  const [password, setPassword] = useState();
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [errorResponse, setErrorResponse] = useState();
 
   const auth = useAuth();
 
   if (auth.isAuthenticated) return <Navigate to="/dashboard" />;
 
+  async function handleSubmit(e) {
+    e.preventDefault();
+
+    try {
+      let response = await fetch(`${API_URL}/signup`, {
+        method: "POST",
+        headers: {
+          "content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          username,
+          password,
+        }),
+      });
+
+      if (!response.ok) {
+        console.log("Something Went Wrong");
+        const json = await response.json();
+        setErrorResponse(json.body.error);
+
+        return;
+      }
+      setErrorResponse("");
+      console.log("User Created Successfully");
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   return (
     <DefaultLayout>
-      <form className="flex justify-center w-max mx-auto items-center flex-col min-h-screen">
+      <form
+        onSubmit={handleSubmit}
+        className="flex justify-center w-max mx-auto items-center flex-col min-h-screen"
+      >
         <h1 className="mb-20">Registro</h1>
+
+        {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
 
         <label className="mb-2.5 w-full text-left font-semibold">
           Nombre y Apellido
