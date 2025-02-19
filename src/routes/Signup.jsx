@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DefaultLayout from "../layout/DefaultLayout";
 import { useAuth } from "../auth/AuthProvider";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { API_URL } from "../auth/constants";
 
 function Signup() {
@@ -11,6 +11,7 @@ function Signup() {
   const [errorResponse, setErrorResponse] = useState();
 
   const auth = useAuth();
+  const goTo = useNavigate();
 
   if (auth.isAuthenticated) return <Navigate to="/dashboard" />;
 
@@ -38,7 +39,8 @@ function Signup() {
         return;
       }
       setErrorResponse("");
-      console.log("User Created Successfully");
+
+      goTo("/");
     } catch (error) {
       console.log(error);
     }
