@@ -17,7 +17,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      let response = await fetch(`${API_URL}/signup`, {
+      let response = await fetch(`${API_URL}/login`, {
         method: "POST",
         headers: {
           "content-Type": "application/json",
@@ -36,7 +36,6 @@ function Login() {
         return;
       }
       setErrorResponse("");
-
       goTo("/");
     } catch (error) {
       console.log(error);
