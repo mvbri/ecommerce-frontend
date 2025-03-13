@@ -35,7 +35,16 @@ function Login() {
 
         return;
       }
+      console.log("Login Successful");
       setErrorResponse("");
+
+      const json = await response.json();
+
+      if (json.body.accessToken && json.body.refreshToken) {
+        auth.saveUser(json);
+        goTo("/dashboard");
+      }
+
       goTo("/");
     } catch (error) {
       console.log(error);
