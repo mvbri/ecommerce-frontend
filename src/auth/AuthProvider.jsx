@@ -13,7 +13,7 @@ export function AuthProvider({ children }) {
   const [accesToken, setAccessToken] = useState("");
   const [user, setUser] = useState("");
 
-  useEffect(() => {}, []);
+  useEffect(() => {checkAuth()}, []);
 
   async function requestNewAccessToken(refreshToken) {
     try {
@@ -28,11 +28,13 @@ export function AuthProvider({ children }) {
       if (!response.ok) {
         throw new Error(response.statusText);
       }
-
-      if (json.error) throw new Error(json.error);
-
       const json = await response.json();
-      return json.body.accesToken;
+
+      console.log("json: %O",json );
+
+      // if (json.error) throw new Error(json.error);
+
+      return json.body.accessToken;
     } catch (error) {
       console.log(error);
       return null;
@@ -65,12 +67,16 @@ export function AuthProvider({ children }) {
   }
 
   async function checkAuth() {
+    
     if (accesToken) {
     } else {
-      const token = getRefreshToken();
+      const token = getRefreshToken();     
 
       if (token) {
         const newAccessToken = await requestNewAccessToken(token);
+
+
+        console.log("data: %O", newAccessToken);
         if (newAccessToken) {
           const userInfo = await getUserInfo(newAccessToken);
           if (userInfo) {
@@ -96,11 +102,14 @@ export function AuthProvider({ children }) {
   }
 
   function getRefreshToken() {
-    const token = localStorage.getItem("token");
+    const tokenData = localStorage.getItem("token");
 
-    if (token) {
-      const { refreshToken } = JSON.parse(token);
-      return refreshToken;
+    
+
+    if (tokenData) {
+      const  token  = JSON.parse(tokenData);
+
+      return token;
     }
 
     return null;
