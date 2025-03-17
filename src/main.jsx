@@ -7,6 +7,8 @@ import Dashboard from "./routes/Dashboard.jsx";
 import Login from "./routes/Login.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import { AuthProvider } from "./auth/AuthProvider.jsx";
+import AdminDashboard from "./routes/adminDashboard.jsx";
+import CreateProducts from "./routes/CreateProducts.jsx";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,18 @@ const router = createBrowserRouter([
       {
         path: "/dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "/admin-dashboard",
+        element: <AdminDashboard />,
+      },
+      {
+        path: "/create",
+        element: <CreateProducts />,
+      },
+      {
+        path: "/show",
+        element: <AdminDashboard />,
       },
     ],
   },

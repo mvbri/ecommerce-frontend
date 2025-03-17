@@ -1,5 +1,13 @@
+import AdminLayout from "../layout/AdminLayout";
+
 function AdminDashboard() {
-  return <div>adminDashboard</div>;
+  return (
+    <AdminLayout>
+      <div>
+        <h1>Admin</h1>
+      </div>
+    </AdminLayout>
+  );
 }
 
 export default AdminDashboard;
