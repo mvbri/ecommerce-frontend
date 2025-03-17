@@ -30,10 +30,11 @@ export function AuthProvider({ children }) {
       if (!response.ok) {
         throw new Error(response.status);
       }
-
       const json = await response.json();
 
-      if (json.error) throw new Error(json.error);
+      console.log("json: %O", json);
+
+      // if (json.error) throw new Error(json.error);
 
       return json.body.accessToken;
     } catch (error) {
@@ -75,6 +76,8 @@ export function AuthProvider({ children }) {
 
       if (token) {
         const newAccessToken = await requestNewAccessToken(token);
+
+        console.log("data: %O", newAccessToken);
         if (newAccessToken) {
           const userInfo = await getUserInfo(newAccessToken);
           if (userInfo) {
@@ -101,9 +104,9 @@ export function AuthProvider({ children }) {
 
   function getRefreshToken() {
     const tokenData = localStorage.getItem("token");
-
     if (tokenData) {
       const token = JSON.parse(tokenData);
+
       return token;
     }
 
