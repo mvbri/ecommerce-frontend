@@ -1,20 +1,21 @@
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { axiosInstance, setAuthToken } from "../services/axios.config";
-import { useAuth } from "../auth/AuthProvider";
+import { axiosInstance } from "../services/axios.config";
 
-function FormCreateProducts() {
-  const { accessToken } = useAuth();
-  setAuthToken(accessToken);
+// eslint-disable-next-line react/prop-types
+function FormEditProduct({ data, updateItem, closeModal }) {
+  const arr = data.split(",");
+  const [id, name, description, image, category, stock, price, priceIVA] = arr;
 
   const initialValues = {
-    name: "",
-    description: "",
-    image: "",
-    category: "",
-    stock: "",
-    price: "",
-    priceIVA: "",
+    id: id || "",
+    name: name || "",
+    description: description || "",
+    image: image || "",
+    category: category || "",
+    stock: stock || "",
+    price: price || "",
+    priceIVA: priceIVA || "",
   };
 
   const validationSchema = Yup.object().shape({
@@ -35,17 +36,23 @@ function FormCreateProducts() {
       .max(20, "Nombre demasiado largo")
       .required("El campo es obligatorio"),
   });
+
   return (
     <>
+      <h2 className="text-gray-950 text-center text-2xl font-semibold pt-3">
+        Editar Producto
+      </h2>
       <Formik
         initialValues={initialValues}
+        enableReinitialize
         validationSchema={validationSchema}
         onSubmit={(values, { setSubmitting }) =>
           axiosInstance
-            .post("/stockProducts", values)
+            .put(`/stockProducts/${id}`, values)
             .then((res) => {
-              if (res.status === 201) {
-                console.log(res);
+              if (res.status === 200) {
+                updateItem(res.data);
+                closeModal();
               } else {
                 throw Error(`[${res.status}] error en la solicitud`);
               }
@@ -56,9 +63,21 @@ function FormCreateProducts() {
             .finally(() => setSubmitting(false))
         }
       >
-        {({ values, isSubmitting, errors, touched }) => (
+        {({ values, isSubmitting, errors, touched, handleChange }) => (
           <Form className="flex flex-col p-4 md:px-8 max-w-5xl m-auto">
-            <label className="mb-3 text-lg" htmlFor="name">
+            <label className="mb-3 text-lg text-gray-950" htmlFor="name">
+              id
+            </label>
+            <Field
+              className="mb-3 p-2 w-full rounded-lg"
+              id="name"
+              type="text"
+              placeholder="Nombre"
+              name="id"
+              readOnly
+              disabled
+            />
+            <label className="mb-3 text-lg text-gray-950" htmlFor="name">
               Nombre
             </label>
             <Field
@@ -67,6 +86,7 @@ function FormCreateProducts() {
               type="text"
               placeholder="Nombre"
               name="name"
+              onChange={handleChange}
             />
             {errors.name && touched.name && (
               <ErrorMessage
@@ -75,7 +95,7 @@ function FormCreateProducts() {
                 component="div"
               ></ErrorMessage>
             )}
-            <label className="mb-2 text-lg" htmlFor="description">
+            <label className="mb-2 text-lg text-gray-950" htmlFor="description">
               Description
             </label>
             <Field
@@ -84,6 +104,7 @@ function FormCreateProducts() {
               type="text"
               placeholder="Description"
               name="description"
+              onChange={handleChange}
             />
             {errors.description && touched.description && (
               <ErrorMessage
@@ -92,7 +113,7 @@ function FormCreateProducts() {
                 component="div"
               ></ErrorMessage>
             )}
-            <label className="mb-2 text-lg" htmlFor="image">
+            <label className="mb-2 text-lg text-gray-950" htmlFor="image">
               Imagen
             </label>
             <Field
@@ -101,6 +122,7 @@ function FormCreateProducts() {
               type="text"
               placeholder="Imagen"
               name="image"
+              onChange={handleChange}
             />
             {errors.image && touched.image && (
               <ErrorMessage
@@ -109,15 +131,16 @@ function FormCreateProducts() {
                 component="div"
               ></ErrorMessage>
             )}
-            <label className="mb-2 text-lg" htmlFor="category">
+            <label className="mb-2 text-lg text-gray-950" htmlFor="category">
               Categoria
             </label>
             <Field
-              className="mb-3 p-2 w-full rounded-lg"
+              className="mb-3 p-2 w-full rounded-lg "
               id="category"
               type="text"
               placeholder="Category"
               name="category"
+              onChange={handleChange}
             />
             {errors.category && touched.category && (
               <ErrorMessage
@@ -126,7 +149,7 @@ function FormCreateProducts() {
                 component="div"
               ></ErrorMessage>
             )}
-            <label className="mb-2 text-lg" htmlFor="stock">
+            <label className="mb-2 text-lg text-gray-950" htmlFor="stock">
               Stock
             </label>
             <Field
@@ -135,15 +158,16 @@ function FormCreateProducts() {
               type="text"
               placeholder="Stock"
               name="stock"
+              onChange={handleChange}
             />
             {errors.stock && touched.stock && (
               <ErrorMessage
-                className="mb-3 -mt-2 w-full p-2 bg-red-500"
+                className="md:mb-3 -mt-2 w-full p-2 bg-red-500"
                 name="stock"
                 component="div"
               ></ErrorMessage>
             )}
-            <label className="mb-2 text-lg" htmlFor="price">
+            <label className="mb-2 text-lg text-gray-950" htmlFor="price">
               Precio
             </label>
             <Field
@@ -152,6 +176,7 @@ function FormCreateProducts() {
               type="text"
               placeholder="Precio"
               name="price"
+              onChange={handleChange}
             />
             {errors.price && touched.price && (
               <ErrorMessage
@@ -160,7 +185,7 @@ function FormCreateProducts() {
                 component="div"
               ></ErrorMessage>
             )}
-            <label className="mb-2 text-lg" htmlFor="priceIVA">
+            <label className="mb-2 text-lg text-gray-950" htmlFor="priceIVA">
               Precio con IVA
             </label>
             <Field
@@ -169,6 +194,7 @@ function FormCreateProducts() {
               type="text"
               placeholder="Precio con IVA"
               name="priceIVA"
+              onChange={handleChange}
             />
             {errors.priceIVA && touched.priceIVA && (
               <ErrorMessage
@@ -179,7 +205,7 @@ function FormCreateProducts() {
             )}
 
             <button className="w-fit mt-3 m-auto" type="submit">
-              Cargar nuevo producto
+              Actualizar producto
             </button>
             {isSubmitting ? (
               <p className="mb-3 text-center">Enviando nuevo producto</p>
@@ -191,4 +217,4 @@ function FormCreateProducts() {
   );
 }
 
-export default FormCreateProducts;
+export default FormEditProduct;

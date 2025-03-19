@@ -9,6 +9,7 @@ import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import { AuthProvider } from "./auth/AuthProvider.jsx";
 import AdminDashboard from "./routes/adminDashboard.jsx";
 import CreateProducts from "./routes/CreateProducts.jsx";
+import ShowProducts from "./routes/showProducts.jsx";
 
 const router = createBrowserRouter([
   {
@@ -37,7 +38,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/show",
-        element: <AdminDashboard />,
+        element: <ShowProducts />,
       },
     ],
   },
