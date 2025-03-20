@@ -9,6 +9,7 @@ function ShowProducts() {
   const [items, setItems] = useState([]);
   const [selectedItem, setSelectedItem] = useState(null);
   const [isOpen, openModal, closeModal] = useModal(false);
+  const [isOpenConfirm, openModalConfirm, closeModalConfirm] = useModal(false);
 
   useEffect(() => {
     axiosInstance
@@ -34,7 +35,12 @@ function ShowProducts() {
   };
 
   const handleDeletetItem = (item) => {
-    const id = item.split(",").shift();
+    setSelectedItem(item);
+    openModalConfirm();
+  };
+
+  const deleteItem = (selectedItem) => {
+    const id = selectedItem.split(",").shift();
     axiosInstance
       .delete(`/stockProducts/${id}`)
       .then((res) => {
@@ -45,6 +51,8 @@ function ShowProducts() {
         }
       })
       .catch((err) => console.log(err));
+
+    closeModalConfirm();
   };
 
   // Función para actualizar el estado local
@@ -63,7 +71,6 @@ function ShowProducts() {
     <div>
       <h1 className="text-center p-4">Lista de Productos</h1>
       <div className="p-4">
-        {console.log(items)}
         {items.length > 0 ? (
           <Table onSelectItem={handleSelectedItem} items={items} />
         ) : (
@@ -75,6 +82,21 @@ function ShowProducts() {
           data={selectedItem}
           updateItem={updateItem}
         ></Modal>
+        <Modal
+          isOpen={isOpenConfirm}
+          closeModal={closeModalConfirm}
+          updateItem={updateItem}
+        >
+          <div className="flex items-center justify-center size-full flex-col">
+            <h2 className="text-center text-gray-950 mb-8 text-xl">
+              ¿Está seguro que desea elimiar el siguiente Item?{" "}
+              {selectedItem ? selectedItem.split(",").shift() : ""}
+            </h2>
+            <button className="w-fit" onClick={() => deleteItem(selectedItem)}>
+              Eliminar
+            </button>
+          </div>
+        </Modal>
       </div>
     </div>
   );
