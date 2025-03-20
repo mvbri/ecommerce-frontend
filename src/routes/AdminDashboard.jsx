@@ -1,11 +1,11 @@
 import AdminLayout from "../layout/AdminLayout";
+import { useAuth } from "../auth/AuthProvider";
 
 function AdminDashboard() {
+  const auth = useAuth();
   return (
     <AdminLayout>
-      <div>
-        <h1>Admin</h1>
-      </div>
+      <div>Dashboard {auth.getUser()?.name || null}</div>;
     </AdminLayout>
   );
 }

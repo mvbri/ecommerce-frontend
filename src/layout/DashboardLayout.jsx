@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
 
-function AdminLayout({ children }) {
+function DashboardLayout({ children }) {
   const auth = useAuth();
   return (
     <>
@@ -10,11 +10,8 @@ function AdminLayout({ children }) {
           <Link className="ml-4" to="/">
             Inicio
           </Link>
-          <Link className="ml-2" to="/create">
-            Crear Producto
-          </Link>
-          <Link className="ml-2" to="/show">
-            Lista de Productos
+          <Link className="ml-2" to="/productos">
+            Ver productos
           </Link>
           <a className="ml-2" href="#" onClick={auth.handleSignOut}>
             Cerrar sesión
@@ -27,4 +24,4 @@ function AdminLayout({ children }) {
   );
 }
 
-export default AdminLayout;
+export default DashboardLayout;

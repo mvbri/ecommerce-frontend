@@ -6,6 +6,8 @@ const AuthContext = createContext({
   getAccessToken: () => {},
   saveUser: () => {},
   getRefreshToken: () => {},
+  getUser: () => {},
+  handleSignOut: () => {},
 });
 
 export function AuthProvider({ children }) {
@@ -32,10 +34,6 @@ export function AuthProvider({ children }) {
       }
       const json = await response.json();
 
-      console.log("json: %O", json);
-
-      // if (json.error) throw new Error(json.error);
-
       return json.body.accessToken;
     } catch (error) {
       console.log(error);
@@ -60,8 +58,7 @@ export function AuthProvider({ children }) {
       const json = await response.json();
 
       if (json.error) throw new Error(json.error);
-
-      return json;
+      return json.body;
     } catch (error) {
       console.log(error);
       return null;
@@ -76,8 +73,6 @@ export function AuthProvider({ children }) {
 
       if (token) {
         const newAccessToken = await requestNewAccessToken(token);
-
-        console.log("data: %O", newAccessToken);
         if (newAccessToken) {
           const userInfo = await getUserInfo(newAccessToken);
           if (userInfo) {
@@ -98,8 +93,39 @@ export function AuthProvider({ children }) {
     setIsAuthenticated(true);
   }
 
+  const signOut = () => {
+    setIsAuthenticated(false);
+    setAccessToken("");
+    setUser(undefined);
+    localStorage.removeItem("token");
+  };
+
+  const handleSignOut = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`${API_URL}/signout`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getRefreshToken()}`,
+        },
+      });
+
+      if (response.ok) {
+        signOut();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   function getAccessToken() {
     return accessToken;
+  }
+
+  function getUser() {
+    return user;
   }
 
   function getRefreshToken() {
@@ -123,7 +149,15 @@ export function AuthProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, getAccessToken, saveUser, getRefreshToken }}
+      value={{
+        isAuthenticated,
+        getAccessToken,
+        saveUser,
+        getRefreshToken,
+        getUserInfo,
+        getUser,
+        handleSignOut,
+      }}
     >
       {children}
     </AuthContext.Provider>

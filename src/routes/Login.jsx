@@ -11,7 +11,7 @@ function Login() {
   const auth = useAuth();
   const goTo = useNavigate();
 
-  if (auth.isAuthenticated) return <Navigate to="/show" />;
+  if (auth.isAuthenticated) return <Navigate to="/dashboard" />;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -42,7 +42,7 @@ function Login() {
 
       if (json.body.accessToken && json.body.refreshToken) {
         auth.saveUser(json);
-        goTo("/show");
+        goTo("/dashboard");
       }
     } catch (error) {
       console.log(error);
