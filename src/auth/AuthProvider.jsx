@@ -6,14 +6,18 @@ const AuthContext = createContext({
   getAccessToken: () => {},
   saveUser: () => {},
   getRefreshToken: () => {},
+  getUser: () => {},
+  handleSignOut: () => {},
 });
 
 export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [accesToken, setAccessToken] = useState("");
+  const [accessToken, setAccessToken] = useState("");
   const [user, setUser] = useState("");
 
-  useEffect(() => {checkAuth()}, []);
+  useEffect(() => {
+    checkAuth();
+  }, []);
 
   async function requestNewAccessToken(refreshToken) {
     try {
@@ -26,13 +30,9 @@ export function AuthProvider({ children }) {
       });
 
       if (!response.ok) {
-        throw new Error(response.statusText);
+        throw new Error(response.status);
       }
       const json = await response.json();
-
-      console.log("json: %O",json );
-
-      // if (json.error) throw new Error(json.error);
 
       return json.body.accessToken;
     } catch (error) {
@@ -58,8 +58,7 @@ export function AuthProvider({ children }) {
       const json = await response.json();
 
       if (json.error) throw new Error(json.error);
-
-      return json;
+      return json.body;
     } catch (error) {
       console.log(error);
       return null;
@@ -67,16 +66,13 @@ export function AuthProvider({ children }) {
   }
 
   async function checkAuth() {
-    
-    if (accesToken) {
+    if (accessToken) {
+      console.log("Estas logeado");
     } else {
-      const token = getRefreshToken();     
+      const token = getRefreshToken();
 
       if (token) {
         const newAccessToken = await requestNewAccessToken(token);
-
-
-        console.log("data: %O", newAccessToken);
         if (newAccessToken) {
           const userInfo = await getUserInfo(newAccessToken);
           if (userInfo) {
@@ -97,17 +93,45 @@ export function AuthProvider({ children }) {
     setIsAuthenticated(true);
   }
 
+  const signOut = () => {
+    setIsAuthenticated(false);
+    setAccessToken("");
+    setUser(undefined);
+    localStorage.removeItem("token");
+  };
+
+  const handleSignOut = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await fetch(`${API_URL}/signout`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${getRefreshToken()}`,
+        },
+      });
+
+      if (response.ok) {
+        signOut();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   function getAccessToken() {
-    return accesToken;
+    return accessToken;
+  }
+
+  function getUser() {
+    return user;
   }
 
   function getRefreshToken() {
     const tokenData = localStorage.getItem("token");
-
-    
-
     if (tokenData) {
-      const  token  = JSON.parse(tokenData);
+      const token = JSON.parse(tokenData);
 
       return token;
     }
@@ -118,14 +142,22 @@ export function AuthProvider({ children }) {
   function saveUser(userData) {
     saveSessionInfo(
       userData.body.user,
-      userData.body.accesToken,
+      userData.body.accessToken,
       userData.body.refreshToken
     );
   }
 
   return (
     <AuthContext.Provider
-      value={{ isAuthenticated, getAccessToken, saveUser, getRefreshToken }}
+      value={{
+        isAuthenticated,
+        getAccessToken,
+        saveUser,
+        getRefreshToken,
+        getUserInfo,
+        getUser,
+        handleSignOut,
+      }}
     >
       {children}
     </AuthContext.Provider>
