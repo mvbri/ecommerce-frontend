@@ -57,17 +57,21 @@ function Login() {
       >
         <h1 className="mb-20">Login</h1>
 
-        {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
+        {!!errorResponse && (
+          <div className="bg-red-500 w-full text-center p-1 mb-2">
+            {errorResponse}
+          </div>
+        )}
 
-        <label className="mb-2.5 w-full text-left font-semibold">Correo</label>
+        <label className="mb-2 w-full text-left font-semibold">Correo</label>
         <input
-          className="mb-2.5 w-64 p-1 pl-3.5 rounded"
+          className="mb-3 w-64 p-1 pl-3.5 rounded"
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
 
-        <label className="mb-2.5 w-full text-left font-semibold">
+        <label className="mb-2 w-full text-left font-semibold">
           Contraseña
         </label>
         <input

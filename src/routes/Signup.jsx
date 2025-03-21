@@ -86,7 +86,11 @@ function Signup() {
     <DefaultLayout>
       <h1 className="mb-20 text-center">Registro</h1>
 
-      {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
+      {!!errorResponse && (
+        <div className="bg-red-500 w-full text-center p-1 mb-2">
+          {errorResponse}
+        </div>
+      )}
 
       <Formik
         initialValues={initialValues}
