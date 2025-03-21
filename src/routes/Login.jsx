@@ -5,13 +5,13 @@ import { useState } from "react";
 import { API_URL } from "../auth/constants";
 
 function Login() {
-  const [username, setUsername] = useState();
+  const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [errorResponse, setErrorResponse] = useState();
   const auth = useAuth();
   const goTo = useNavigate();
 
-  if (auth.isAuthenticated) return <Navigate to="/show" />;
+  if (auth.isAuthenticated) return <Navigate to="/dashboard" />;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -23,7 +23,7 @@ function Login() {
           "content-Type": "application/json",
         },
         body: JSON.stringify({
-          username,
+          email,
           password,
         }),
       });
@@ -59,14 +59,12 @@ function Login() {
 
         {!!errorResponse && <div className="errorMessage">{errorResponse}</div>}
 
-        <label className="mb-2.5 w-full text-left font-semibold">
-          Nombre de usuario
-        </label>
+        <label className="mb-2.5 w-full text-left font-semibold">Correo</label>
         <input
           className="mb-2.5 w-64 p-1 pl-3.5 rounded"
           type="text"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
 
         <label className="mb-2.5 w-full text-left font-semibold">
