@@ -2,6 +2,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { axiosInstance, setAuthToken } from "../services/axios.config";
 import { useAuth } from "../auth/AuthProvider";
+import Dropzone from "./Dropzone";
 
 function FormCreateProducts() {
   const { accessToken } = useAuth();
@@ -44,6 +45,7 @@ function FormCreateProducts() {
           axiosInstance
             .post("/stockProducts", values)
             .then((res) => {
+              console.log(values);
               if (res.status === 201) {
                 console.log(res);
               } else {
@@ -95,13 +97,7 @@ function FormCreateProducts() {
             <label className="mb-2 text-lg" htmlFor="image">
               Imagen
             </label>
-            <Field
-              className="mb-3 p-2 w-full rounded-lg"
-              id="image"
-              type="text"
-              placeholder="Imagen"
-              name="image"
-            />
+            <Dropzone className="p-16 mt-10 border border-neutral-200 text-center mb-3" />
             {errors.image && touched.image && (
               <ErrorMessage
                 className="mb-3 -mt-2 w-full p-2 bg-red-500"
