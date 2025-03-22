@@ -4,11 +4,11 @@ function DefaultLayout({ children }) {
   return (
     <>
       <header>
-        <nav className="p-2">
+        <nav className="px-3 py-4">
           <Link className="ml-4" to="/">
             Inicio
           </Link>
-          <Link className="ml-2" to="/signup">
+          <Link className="ml-4" to="/signup">
             Signup
           </Link>
         </nav>

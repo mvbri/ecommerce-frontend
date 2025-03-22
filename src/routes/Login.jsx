@@ -11,7 +11,7 @@ function Login() {
   const auth = useAuth();
   const goTo = useNavigate();
 
-  if (auth.isAuthenticated) return <Navigate to="/create" />;
+  if (auth.isAuthenticated) return <Navigate to="/dashboard" />;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -53,9 +53,9 @@ function Login() {
     <DefaultLayout>
       <form
         onSubmit={handleSubmit}
-        className="flex justify-center w-max mx-auto items-center flex-col min-h-screen"
+        className="flex w-max mx-auto items-center flex-col min-h-screen"
       >
-        <h1 className="mb-20">Login</h1>
+        <h1 className="mb-20 pt-[6rem]">Login</h1>
 
         {!!errorResponse && (
           <div className="bg-red-500 w-full text-center p-1 mb-2">
@@ -65,7 +65,7 @@ function Login() {
 
         <label className="mb-2 w-full text-left font-semibold">Correo</label>
         <input
-          className="mb-3 w-64 p-1 pl-3.5 rounded"
+          className="mb-4 w-64 p-1 pl-3.5 rounded"
           type="text"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
@@ -75,7 +75,7 @@ function Login() {
           Contraseña
         </label>
         <input
-          className="mb-7 w-64 p-1 pl-3.5 rounded"
+          className="mb-8 w-64 p-1 pl-3.5 rounded"
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}

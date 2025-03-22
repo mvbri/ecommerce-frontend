@@ -180,14 +180,14 @@ function Signup() {
             </div>
 
             <button
-              className="w-fit mt-3 m-auto bg-sky-500/75 w-[100px] py-1 px-2 rounded-md
+              className="w-fit mt-3 m-auto bg-sky-500/75 w-[100px] py-2 px-3 rounded-md
  hover:bg-sky-700  hover:border-sky- font-semibold"
               type="submit"
             >
               Registrarse
             </button>
             {isSubmitting ? (
-              <p className="mb-3 text-center">Cargando productos</p>
+              <p className="mb-3 text-center">Cargando...</p>
             ) : null}
           </Form>
         )}

@@ -6,14 +6,14 @@ function DashboardLayout({ children }) {
   return (
     <>
       <header>
-        <nav className="p-2">
+        <nav className="px-3 py-4">
           <Link className="ml-4" to="/">
             Inicio
           </Link>
-          <Link className="ml-2" to="/productos">
+          <Link className="ml-4" to="/productos">
             Ver productos
           </Link>
-          <a className="ml-2" href="#" onClick={auth.handleSignOut}>
+          <a className="ml-4" href="#" onClick={auth.handleSignOut}>
             Cerrar sesión
           </a>
         </nav>
