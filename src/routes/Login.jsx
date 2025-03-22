@@ -11,7 +11,7 @@ function Login() {
   const auth = useAuth();
   const goTo = useNavigate();
 
-  if (auth.isAuthenticated) return <Navigate to="/create" />;
+  if (auth.isAuthenticated) return <Navigate to="/show" />;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -81,7 +81,10 @@ function Login() {
           onChange={(e) => setPassword(e.target.value)}
         />
 
-        <button className="bg-sky-500/75 hover:bg-sky-700  hover:border-sky- font-semibold">
+        <button
+          className="bg-sky-500/75 w-[100px] py-1 px-2 rounded-md
+ hover:bg-sky-700  hover:border-sky- font-semibold"
+        >
           Login
         </button>
       </form>

@@ -179,7 +179,11 @@ function Signup() {
               )}
             </div>
 
-            <button className="w-fit mt-3 m-auto" type="submit">
+            <button
+              className="w-fit mt-3 m-auto bg-sky-500/75 w-[100px] py-1 px-2 rounded-md
+ hover:bg-sky-700  hover:border-sky- font-semibold"
+              type="submit"
+            >
               Registrarse
             </button>
             {isSubmitting ? (

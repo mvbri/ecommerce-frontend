@@ -45,7 +45,10 @@ function ShowProducts() {
       .delete(`/stockProducts/${id}`)
       .then((res) => {
         if (res.status === 200) {
-          console.log(res.data);
+          const selectedItemID = selectedItem.split(",").shift();
+          setItems((prevItems) =>
+            prevItems.filter((item) => item.id !== selectedItemID)
+          );
         } else {
           throw new Error(`[${res.status}] ERROR en la solicitud`);
         }
@@ -57,14 +60,11 @@ function ShowProducts() {
 
   // Función para actualizar el estado local
   const updateItem = (updatedItem) => {
-    console.log("Elemento actualizado:", updatedItem);
-    setItems((prevItems) => {
-      const updatedItems = prevItems.map((item) =>
-        String(item.id) === String(updatedItem.id) ? { ...updatedItem } : item
-      );
-
-      return [...updatedItems]; // 🔄 Forzar un nuevo array en memoria
-    });
+    setItems((prevItems) =>
+      prevItems.map((item) =>
+        item.id === updatedItem.id ? { ...updatedItem } : item
+      )
+    );
   };
 
   return (
@@ -92,7 +92,11 @@ function ShowProducts() {
               ¿Está seguro que desea elimiar el siguiente Item?{" "}
               {selectedItem ? selectedItem.split(",").shift() : ""}
             </h2>
-            <button className="w-fit" onClick={() => deleteItem(selectedItem)}>
+            <button
+              className="w-fit bg-sky-500/75 w-[100px] py-1 px-2 rounded-md
+ hover:bg-sky-700  hover:border-sky- font-semibold"
+              onClick={() => deleteItem(selectedItem)}
+            >
               Eliminar
             </button>
           </div>

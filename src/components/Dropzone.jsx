@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
-import { Field } from "formik";
+
 import { XMarkIcon } from "@heroicons/react/24/solid";
 
 const Dropzone = ({ className }) => {

@@ -204,7 +204,11 @@ function FormEditProduct({ data, updateItem, closeModal }) {
               ></ErrorMessage>
             )}
 
-            <button className="w-fit mt-3 m-auto" type="submit">
+            <button
+              className="w-fit bg-sky-500/75 py-1 px-3 rounded-md
+ hover:bg-sky-700  hover:border-sky- font-semibold mt-3 m-auto"
+              type="submit"
+            >
               Actualizar producto
             </button>
             {isSubmitting ? (

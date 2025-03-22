@@ -4,39 +4,94 @@ import { Grid, html } from "gridjs";
 import "gridjs/dist/theme/mermaid.css";
 import { useRef, useEffect } from "react";
 
-function Table({ onSelectItem }) {
+function Table({ onSelectItem, items }) {
   const wrapperRef = useRef(null);
-  let gridInstance = useRef(null);
+  const gridInstance = useRef(null); // Mantiene la instancia de la tabla
 
   useEffect(() => {
-    if (wrapperRef.current) {
-      wrapperRef.current.innerHTML = "";
+    if (!wrapperRef.current) return;
+
+    // Limpia el contenedor antes de renderizar la nueva tabla
+    wrapperRef.current.innerHTML = "";
+
+    // Si ya hay una instancia de grid, la destruimos antes de crear otra
+    if (gridInstance.current) {
+      gridInstance.current.destroy();
     }
 
-    // Evita renderizar múltiples instancias del grid
-    if (!gridInstance.current) {
-      grid.render(wrapperRef.current);
+    // Crear la tabla Grid.js
+    gridInstance.current = new Grid({
+      columns: [
+        "#id",
+        "Name",
+        "Description",
+        "Imagen",
+        "Categoria",
+        "Stock",
+        "Precio",
+        "Precio con IVA",
+        {
+          name: "Modificar",
+          formatter: (_, row) =>
+            html(`
+              <div class="flex justify-center items-center">
+                <a class="edit-btn cursor-pointer" data-info='${row.cells.map(
+                  (cell) => cell.data
+                )}'>
+                  ✎
+                </a>
+                <a class="delete-btn ml-4 cursor-pointer" data-info='${row.cells.map(
+                  (cell) => cell.data
+                )}'>
+                  ⌫
+                </a>
+              </div>
+            `),
+        },
+      ],
+      data: items.map((product) => [
+        product.id,
+        product.name,
+        product.description,
+        product.image,
+        product.category,
+        product.stock,
+        product.price,
+        product.priceIVA,
+      ]),
+      sort: true,
+      search: true,
+    });
 
-      // Agrega el listener para el botón de edición
-      wrapperRef.current.addEventListener("click", (e) => {
-        if (e.target.classList.contains("edit-btn")) {
-          const rowData = e.target.getAttribute("data-info");
-          editItem(rowData); // Aquí pasas la fila completa a tu función
-        }
-        if (e.target.classList.contains("delete-btn")) {
-          const rowData = e.target.getAttribute("data-info");
-          deleteItem(rowData); // Aquí pasas la fila completa a tu función
-        }
-      });
-    }
+    // Renderiza la tabla en el contenedor
+    gridInstance.current.render(wrapperRef.current);
 
+    // Agrega event listeners para los botones de editar y eliminar
+    const handleClick = (e) => {
+      if (e.target.classList.contains("edit-btn")) {
+        const rowData = e.target.getAttribute("data-info");
+        editItem(rowData);
+      }
+      if (e.target.classList.contains("delete-btn")) {
+        const rowData = e.target.getAttribute("data-info");
+        deleteItem(rowData);
+      }
+    };
+
+    wrapperRef.current.addEventListener("click", handleClick);
+
+    // Cleanup: elimina la tabla y los event listeners al desmontar el componente
     return () => {
       if (gridInstance.current) {
         gridInstance.current.destroy();
-        gridInstance.current = null; // Reinicia la referencia para evitar que se dupliquen
+        gridInstance.current = null;
+      }
+      if (wrapperRef.current) {
+        // ✅ Verifica que el ref no sea null antes de eliminar el evento
+        wrapperRef.current.removeEventListener("click", handleClick);
       }
     };
-  }, []);
+  }, [items]); // Se ejecuta cada vez que `items` cambia
 
   const editItem = (item) => {
     onSelectItem(item, "edit");
@@ -45,68 +100,6 @@ function Table({ onSelectItem }) {
   const deleteItem = (item) => {
     onSelectItem(item, "delete");
   };
-
-  const grid = new Grid({
-    columns: [
-      "#id",
-      "Name",
-      "Description",
-      "Imagen",
-      "Categoria",
-      "Stock",
-      "Precio",
-      "Precio con IVA",
-      {
-        name: "Modificar",
-        formatter: (_, row) =>
-          html(`
-            <div class="flex justify-center items-center">
-               <a class="edit-btn cursor-pointer" data-info="${row.cells.map(
-                 (cell) => cell.data
-               )}">
-              ✎
-            </a>
-            <a class="delete-btn ml-4 cursor-pointer" data-info="${row.cells.map(
-              (cell) => cell.data
-            )}">
-              ⌫
-            </a>
-            </div>
-          `),
-      },
-    ],
-    data: () => {
-      return new Promise((resolve, reject) => {
-        fetch(`${import.meta.env.VITE_API_URL}/stockProducts`)
-          .then((response) => {
-            if (!response.ok) {
-              throw new Error("Hubo un problema con la respuesta de la API");
-            }
-            return response.json();
-          })
-          .then((data) => {
-            resolve(
-              data.map((product) => [
-                product.id,
-                product.name,
-                product.description,
-                product.image,
-                product.category,
-                product.stock,
-                product.price,
-                product.priceIVA,
-              ])
-            );
-          })
-          .catch((error) => {
-            console.error("Error al cargar los datos:", error);
-            resolve([]); // En caso de error, devolver un array vacío
-          });
-      });
-    },
-    sort: true,
-    search: true,
-  });
 
   return <div ref={wrapperRef} />;
 }
