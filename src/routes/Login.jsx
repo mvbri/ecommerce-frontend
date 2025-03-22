@@ -53,33 +53,34 @@ function Login() {
     <DefaultLayout>
       <form
         onSubmit={handleSubmit}
-        className="flex w-max mx-auto items-center flex-col min-h-screen"
+        className="flex w-[80%] mx-auto items-center flex-col min-h-screen"
       >
         <h1 className="mb-20 pt-[6rem]">Login</h1>
 
         {!!errorResponse && (
-          <div className="bg-red-500 w-full text-center p-1 mb-2">
+          <div className="bg-red-500 w-80 text-center p-1 mb-3">
             {errorResponse}
           </div>
         )}
+        <div className="flex flex-col w-80 mb-4">
+          <label className="mb-2 text-left font-semibold">Correo</label>
+          <input
+            className="p-2 px-3 rounded"
+            type="text"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+          />
+        </div>
 
-        <label className="mb-2 w-full text-left font-semibold">Correo</label>
-        <input
-          className="mb-4 w-64 p-1 pl-3.5 rounded"
-          type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-
-        <label className="mb-2 w-full text-left font-semibold">
-          Contraseña
-        </label>
-        <input
-          className="mb-8 w-64 p-1 pl-3.5 rounded"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="flex flex-col w-80 mb-8">
+          <label className="mb-2 text-left font-semibold">Contraseña</label>
+          <input
+            className="p-2 px-3 rounded"
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+        </div>
 
         <button
           className="bg-sky-500/75 w-[100px] py-1 px-2 rounded-md
