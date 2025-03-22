@@ -1,4 +1,4 @@
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
 import DefaultLayout from "../layout/DefaultLayout";
 import { useState } from "react";
@@ -84,10 +84,13 @@ function Login() {
 
         <button
           className="bg-sky-500/75 w-[100px] py-1 px-2 rounded-md
- hover:bg-sky-700  hover:border-sky- font-semibold"
+ hover:bg-sky-700  hover:border-sky- font-semibold mb-3"
         >
           Login
         </button>
+        <p className="pt-3">
+          ¿No tienes cuenta todavía? <Link to="/signup">Registrate</Link>
+        </p>
       </form>
     </DefaultLayout>
   );
