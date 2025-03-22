@@ -4,6 +4,7 @@ import { axiosInstance } from "../services/axios.config";
 import Table from "../components/Table";
 import Modal from "../components/Modal";
 import { useModal } from "../hooks/useModal";
+import AdminLayout from "../layout/AdminLayout";
 
 function ShowProducts() {
   const [items, setItems] = useState([]);
@@ -68,41 +69,43 @@ function ShowProducts() {
   };
 
   return (
-    <div>
-      <h1 className="text-center p-4">Lista de Productos</h1>
-      <div className="p-4">
-        {items.length > 0 ? (
-          <Table onSelectItem={handleSelectedItem} items={items} />
-        ) : (
-          <p>No hay productos en el sistema</p>
-        )}
-        <Modal
-          isOpen={isOpen}
-          closeModal={closeModal}
-          data={selectedItem}
-          updateItem={updateItem}
-        ></Modal>
-        <Modal
-          isOpen={isOpenConfirm}
-          closeModal={closeModalConfirm}
-          updateItem={updateItem}
-        >
-          <div className="flex items-center justify-center size-full flex-col">
-            <h2 className="text-center text-gray-950 mb-8 text-xl">
-              ¿Está seguro que desea elimiar el siguiente Item?{" "}
-              {selectedItem ? selectedItem.split(",").shift() : ""}
-            </h2>
-            <button
-              className="w-fit bg-sky-500/75 w-[100px] py-1 px-2 rounded-md
+    <AdminLayout>
+      <div>
+        <h1 className="text-center p-4">Lista de Productos</h1>
+        <div className="p-4">
+          {items.length > 0 ? (
+            <Table onSelectItem={handleSelectedItem} items={items} />
+          ) : (
+            <p>No hay productos en el sistema</p>
+          )}
+          <Modal
+            isOpen={isOpen}
+            closeModal={closeModal}
+            data={selectedItem}
+            updateItem={updateItem}
+          ></Modal>
+          <Modal
+            isOpen={isOpenConfirm}
+            closeModal={closeModalConfirm}
+            updateItem={updateItem}
+          >
+            <div className="flex items-center justify-center size-full flex-col">
+              <h2 className="text-center text-gray-950 mb-8 text-xl">
+                ¿Está seguro que desea elimiar el siguiente Item?{" "}
+                {selectedItem ? selectedItem.split(",").shift() : ""}
+              </h2>
+              <button
+                className="w-fit bg-sky-500/75 w-[100px] py-1 px-2 rounded-md
  hover:bg-sky-700  hover:border-sky- font-semibold"
-              onClick={() => deleteItem(selectedItem)}
-            >
-              Eliminar
-            </button>
-          </div>
-        </Modal>
+                onClick={() => deleteItem(selectedItem)}
+              >
+                Eliminar
+              </button>
+            </div>
+          </Modal>
+        </div>
       </div>
-    </div>
+    </AdminLayout>
   );
 }
 
