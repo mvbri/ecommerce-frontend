@@ -58,10 +58,15 @@ export function shoppingReducer(state, action) {
                   }
                 : item
             ),
+            total: state.total + itemInCart.price,
           }
         : {
             ...state,
-            cart: [...state.cart, { ...newItem, quantity: 1 }],
+            cart: [
+              ...state.cart,
+              { ...newItem, quantity: 1, total: newItem.price * 1 },
+            ],
+            total: newItem.price + state.total,
           };
     }
     case TYPES.REMOVE_ONE_FROM_CART: {
@@ -79,16 +84,21 @@ export function shoppingReducer(state, action) {
                   }
                 : item
             ),
+            total: state.total - itemToDelete.price,
           }
         : {
             ...state,
             cart: state.cart.filter((item) => item.id !== action.payload),
+            total: state.total - itemToDelete.price,
           };
     }
     case TYPES.REMOVE_ALL_FROM_CART: {
       return {
         ...state,
         cart: state.cart.filter((item) => item.id !== action.payload),
+        total:
+          state.total -
+          state.cart.find((item) => item.id === action.payload).total,
       };
     }
     case TYPES.CLEAR_CART: {

@@ -39,25 +39,19 @@ const ShoppingCart = () => {
     });
   };
 
-  const calculateTotal = () => {
-    dispatch({
-      type: TYPES.CALCULATE_TOTAL_CART,
-    });
-  };
-
   return (
-    <div>
-      <h2>Carrito de compras</h2>
-      <h3>Productos</h3>
-      <article className="box grid-responsive">
+    <div className="p-3 max-w-[1200px] m-auto">
+      <h2 className="text-center text-xl mb-4 font-bold">Carrito de compras</h2>
+      <h3 className="text-center text-lg font-semibold">Productos</h3>
+      <article className="box grid-responsive mb-3">
         {products.map((product) => (
           <ProductItem key={product.id} data={product} addToCart={addToCart} />
         ))}
       </article>
-      <h3>Carrito</h3>
-      <article className="box">
+      <h3 className="text-center text-lg font-semibold">Carrito</h3>
+      <article className="box flex flex-col">
         <button
-          className="bg-sky-500/75 w-fit py-1 px-2 rounded-md
+          className="bg-sky-500/75 self-end mr-3 mt-2 w-fit py-1 px-2 rounded-md
  hover:bg-sky-700  hover:border-sky- font-semibold mb-3"
           onClick={clearCart}
         >
@@ -68,7 +62,9 @@ const ShoppingCart = () => {
         ))}
       </article>
       <div>
-        <h2>{total}</h2>
+        <h2 className="ml-4 p-2 text-2xl text-center font-bold">
+          TOTAL: {total}
+        </h2>
       </div>
     </div>
   );

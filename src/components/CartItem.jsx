@@ -2,9 +2,9 @@ const CartItem = ({ data, delFromCart }) => {
   let { id, name, price, quantity } = data;
 
   return (
-    <div className="border-b">
-      <h4>{name}</h4>
-      <h5>
+    <div className="border-b p-2 mb-2">
+      <h4 className="mb-2">{name}</h4>
+      <h5 className="mb-3">
         {price} x{quantity} = {price * quantity}.00
       </h5>
       <button
