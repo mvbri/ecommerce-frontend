@@ -3,13 +3,27 @@ import {
   shoppingReducer,
 } from "../reducers/shoppingReducer";
 import ProductItem from "./ProductItem";
-import { useReducer } from "react";
+import { useEffect, useReducer } from "react";
 import "../components/css/ShoppingCart.css";
 import CartItem from "./cartItem";
 import { TYPES } from "../actions/shoppingAction";
+import { axiosInstance } from "../services/axios.config";
 
 const ShoppingCart = () => {
   const [state, dispatch] = useReducer(shoppingReducer, shoppingInitialState);
+
+  useEffect(() => {
+    axiosInstance
+      .get(`/stockProducts`)
+      .then((res) => {
+        if (res.status === 200) {
+          dispatch({ type: "SET_PRODUCTS", payload: res.data });
+        } else {
+          throw new Error(`[${res.status}] Error en la solicitud`);
+        }
+      })
+      .catch((err) => console.log(err));
+  }, []);
 
   const { products, cart, total } = state;
   const addToCart = (id) => {
@@ -63,7 +77,7 @@ const ShoppingCart = () => {
       </article>
       <div>
         <h2 className="ml-4 p-2 text-2xl text-center font-bold">
-          TOTAL: {total}
+          TOTAL: {total.toFixed(2)}
         </h2>
       </div>
     </div>
