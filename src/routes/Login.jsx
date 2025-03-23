@@ -42,7 +42,7 @@ function Login() {
 
       if (json.body.accessToken && json.body.refreshToken) {
         auth.saveUser(json);
-        goTo("/show");
+        goTo("/dashboard");
       }
     } catch (error) {
       console.log(error);

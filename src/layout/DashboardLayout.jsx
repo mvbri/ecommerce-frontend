@@ -13,6 +13,9 @@ function DashboardLayout({ children }) {
           <Link className="ml-4" to="/productos">
             Ver productos
           </Link>
+          <Link className="ml-4" to="/shopping">
+            Shopping cart
+          </Link>
           <a className="ml-4" href="#" onClick={auth.handleSignOut}>
             Cerrar sesión
           </a>

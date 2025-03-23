@@ -10,6 +10,7 @@ import { AuthProvider } from "./auth/AuthProvider.jsx";
 import AdminDashboard from "./routes/adminDashboard.jsx";
 import CreateProducts from "./routes/CreateProducts.jsx";
 import ShowProducts from "./routes/showProducts.jsx";
+import Shopping from "./routes/Shopping.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,6 +40,10 @@ const router = createBrowserRouter([
       {
         path: "/show",
         element: <ShowProducts />,
+      },
+      {
+        path: "/shopping",
+        element: <Shopping />,
       },
     ],
   },
