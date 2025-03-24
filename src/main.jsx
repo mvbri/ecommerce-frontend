@@ -10,6 +10,7 @@ import { AuthProvider } from "./auth/AuthProvider.jsx";
 import AdminDashboard from "./routes/adminDashboard.jsx";
 import CreateProducts from "./routes/CreateProducts.jsx";
 import ShowProducts from "./routes/showProducts.jsx";
+import AdminLogin from "./routes/AdminLogin.jsx";
 
 const router = createBrowserRouter([
   {
@@ -21,23 +22,31 @@ const router = createBrowserRouter([
     element: <Signup />,
   },
   {
-    path: "/",
+    path: "dashboard",
+    element: <Dashboard />,
+  },
+  {
+    path: "/admin",
     element: <ProtectedRoute />,
     children: [
       {
-        path: "/dashboard",
-        element: <Dashboard />,
+        path: "",
+        element: <AdminLogin />,
       },
       {
-        path: "/admin-dashboard",
+        path: "dashboard",
         element: <AdminDashboard />,
       },
       {
-        path: "/create",
+        path: "product/create",
         element: <CreateProducts />,
       },
       {
-        path: "/show",
+        path: "product/:id/edit",
+        element: <CreateProducts />,
+      },
+      {
+        path: "product",
         element: <ShowProducts />,
       },
     ],

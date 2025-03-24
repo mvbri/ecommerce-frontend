@@ -1,28 +1,23 @@
-import { Link, Navigate, useNavigate } from "react-router-dom";
+import {  Navigate, useNavigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
 import DefaultLayout from "../layout/DefaultLayout";
 import { useState } from "react";
 import { API_URL } from "../auth/constants";
 
-function Login() {
+function AdminLogin() {
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
   const [errorResponse, setErrorResponse] = useState();
   const auth = useAuth();
   const goTo = useNavigate();
 
-  if (auth.isAuthenticated && auth.getUser().role == 'customer'){
-     return <Navigate to="/dashboard" />
-    }
-    else if(auth.isAuthenticated && auth.getUser().role == 'admin'){
-      return <Navigate to="/admin/dashboard" />
-    }
+  if (auth.isAuthenticated) return <Navigate to="/admin/dashboard" />;
 
   async function handleSubmit(e) {
     e.preventDefault();
 
     try {
-      let response = await fetch(`${API_URL}/login`, {
+      let response = await fetch(`${API_URL}/admin/login`, {
         method: "POST",
         headers: {
           "content-Type": "application/json",
@@ -40,14 +35,14 @@ function Login() {
 
         return;
       }
-      console.log("Login Successful");
+      console.log("AdminLogin Successful");
       setErrorResponse("");
 
       const json = await response.json();
 
       if (json.body.accessToken && json.body.refreshToken) {
         auth.saveUser(json);
-        goTo("/show");
+        goTo("/admin/dashboard");
       }
     } catch (error) {
       console.log(error);
@@ -60,7 +55,7 @@ function Login() {
         onSubmit={handleSubmit}
         className="flex w-[80%] mx-auto items-center flex-col min-h-screen"
       >
-        <h1 className="mb-20 pt-[6rem]">Login</h1>
+        <h1 className="mb-20 pt-[6rem]">AdminLogin</h1>
 
         {!!errorResponse && (
           <div className="bg-red-500 w-80 text-center p-1 mb-3">
@@ -91,14 +86,11 @@ function Login() {
           className="bg-sky-500/75 w-[100px] py-1 px-2 rounded-md
  hover:bg-sky-700  hover:border-sky- font-semibold mb-3"
         >
-          Login
-        </button>
-        <p className="pt-3">
-          ¿No tienes cuenta todavía? <Link to="/signup">Registrate</Link>
-        </p>
+          AdminLogin
+        </button>       
       </form>
     </DefaultLayout>
   );
 }
 
-export default Login;
+export default AdminLogin;

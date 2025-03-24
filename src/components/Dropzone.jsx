@@ -3,8 +3,8 @@ import { useDropzone } from "react-dropzone";
 
 import { XMarkIcon } from "@heroicons/react/24/solid";
 
-const Dropzone = ({ className }) => {
-  const [files, setFiles] = useState([]);
+const Dropzone = ({ className , files, setFiles}) => {
+  /*const [files, setFiles] = useState([]);*/
   const [rejected, setRejected] = useState([]);
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {

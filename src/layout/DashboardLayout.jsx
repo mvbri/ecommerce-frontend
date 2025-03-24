@@ -10,7 +10,7 @@ function DashboardLayout({ children }) {
           <Link className="ml-4" to="/">
             Inicio
           </Link>
-          <Link className="ml-4" to="/productos">
+          <Link className="ml-4" to="/admin/product/">
             Ver productos
           </Link>
           <a className="ml-4" href="#" onClick={auth.handleSignOut}>
