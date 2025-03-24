@@ -33,7 +33,7 @@ export function shoppingReducer(state, action) {
             ...state,
             cart: [
               ...state.cart,
-              { ...newItem, quantity: 1, total: newItem.price * 1 },
+              { ...newItem, quantity: 1, total: newItem.priceIVA * 1 },
             ],
             total: newItem.priceIVA + state.total,
           };
