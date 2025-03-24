@@ -13,7 +13,11 @@ const ShoppingCart = () => {
       <h3 className="text-center text-lg font-semibold">Productos</h3>
       <article className="box grid-responsive mb-3">
         {products.map((product) => (
-          <ProductItem key={product.id} data={product} addToCart={addToCart} />
+          <ProductItem
+            key={product.id}
+            product={product}
+            addToCart={addToCart}
+          />
         ))}
       </article>
       <h3 className="text-center text-lg font-semibold">Carrito</h3>

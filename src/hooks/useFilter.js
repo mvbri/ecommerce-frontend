@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { FilterContext } from "../context/Filter";
 
 export const useFilter = () => {

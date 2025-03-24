@@ -5,6 +5,7 @@ import {
   productsInitialState,
   productsReducer,
 } from "../reducers/productReducer";
+import ProductItem from "../components/ProductItem";
 
 const Products = () => {
   const { filterProducts } = useFilter();
@@ -30,26 +31,11 @@ const Products = () => {
 
   return (
     <>
-      <div className="grid-responsive max-w-[1200px] m-auto">
+      <article className="box grid-responsive mb-3">
         {filteredProducts.map((product) => (
-          <div className="flex flex-col items-center" key={product.id}>
-            <div className="mb-2">
-              <img
-                className="h-[300px] object-cover"
-                src={product.image}
-                alt={product.name}
-              />
-            </div>
-            <h3 className="mb-4 font-semibold">{product.name}</h3>
-            <button
-              className="bg-sky-500/75 w-fit py-1 px-2 rounded-md
- hover:bg-sky-700  hover:border-sky- font-semibold mb-3"
-            >
-              Agrega al carrito
-            </button>
-          </div>
+          <ProductItem key={product.id} product={product} />
         ))}
-      </div>
+      </article>
     </>
   );
 };

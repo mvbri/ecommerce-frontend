@@ -1,11 +1,16 @@
-const ProductItem = ({ data, addToCart }) => {
-  let { id, name, description, image, categoria, price, priceIVA } = data;
+import { useCart } from "../hooks/useCart";
+
+const ProductItem = ({ product }) => {
+  console.log(product);
+  const { addToCart } = useCart();
+
+  let { id, name, description, image, categoria, price, priceIVA } = product;
 
   return (
     <div className="p-2 border border-gray-400">
       <h4 className="text-lg font-semibold mb-1">{name}</h4>
       <p className="mb-2">{description}</p>
-      <img src={image}></img>
+      <img className="w-full" src={image}></img>
       <h5>{categoria}</h5>
       <h4 className="mb-2">
         {price} - <span className="font-bold"> Precio con IVA: {priceIVA}</span>

@@ -654,10 +654,6 @@ video {
   height: 100%;
 }
 
-.h-\[300px\] {
-  height: 300px;
-}
-
 .max-h-\[300px\] {
   max-height: 300px;
 }
@@ -765,11 +761,6 @@ video {
 
 .bg-transparent {
   background-color: transparent;
-}
-
-.object-cover {
-  -o-object-fit: cover;
-     object-fit: cover;
 }
 
 .p-1 {
