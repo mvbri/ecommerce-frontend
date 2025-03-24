@@ -11,7 +11,7 @@ function Login() {
   const auth = useAuth();
   const goTo = useNavigate();
 
-  if (auth.isAuthenticated) return <Navigate to="/dashboard" />;
+  if (auth.isAuthenticated) return <Navigate to="/products" />;
 
   async function handleSubmit(e) {
     e.preventDefault();

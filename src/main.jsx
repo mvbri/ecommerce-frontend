@@ -9,8 +9,10 @@ import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import { AuthProvider } from "./auth/AuthProvider.jsx";
 import AdminDashboard from "./routes/adminDashboard.jsx";
 import CreateProducts from "./routes/CreateProducts.jsx";
-import ShowProducts from "./routes/showProducts.jsx";
+import AdminShowProducts from "./routes/AdminShowProducts.jsx";
 import Shopping from "./routes/Shopping.jsx";
+import ShowProducts from "./routes/ShowProducts.jsx";
+import { FilterProvider } from "./context/filter.jsx";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +32,10 @@ const router = createBrowserRouter([
         element: <Dashboard />,
       },
       {
+        path: "/products",
+        element: <ShowProducts />,
+      },
+      {
         path: "/admin-dashboard",
         element: <AdminDashboard />,
       },
@@ -38,8 +44,8 @@ const router = createBrowserRouter([
         element: <CreateProducts />,
       },
       {
-        path: "/show",
-        element: <ShowProducts />,
+        path: "/admin-show",
+        element: <AdminShowProducts />,
       },
       {
         path: "/shopping",
@@ -52,7 +58,9 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <FilterProvider>
+        <RouterProvider router={router} />
+      </FilterProvider>
     </AuthProvider>
   </StrictMode>
 );
