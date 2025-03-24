@@ -19,7 +19,9 @@ const CartItem = ({ data, delFromCart }) => {
       <h5 className="mb-3">
         {priceIVA} x{quantity} = {priceIVA * quantity}
       </h5>
-      <img src={image} />
+      <figure className="mb-3">
+        <img className="object-fit max-h-[300px]" src={image} />
+      </figure>
       <h5>{categoria}</h5>
       <button
         onClick={() => delFromCart(id)}

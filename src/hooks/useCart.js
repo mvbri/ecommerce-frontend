@@ -2,9 +2,12 @@ import { useContext } from "react";
 import { CartContext } from "../context/cart";
 
 export const useCart = () => {
-  const cart = useContext(CartContext);
+  const { cart, addToCart, clearCart, delFromCart, products, total } =
+    useContext(CartContext);
 
   if (cart === undefined) {
     throw new Error("Probablemente no esta en el rango de un provider");
   }
+
+  return { cart, addToCart, clearCart, delFromCart, products, total };
 };

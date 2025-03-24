@@ -1,57 +1,11 @@
-import {
-  shoppingInitialState,
-  shoppingReducer,
-} from "../reducers/shoppingReducer";
 import ProductItem from "./ProductItem";
-import { useEffect, useReducer } from "react";
 import "../components/css/ShoppingCart.css";
 import CartItem from "./cartItem";
-import { TYPES } from "../actions/shoppingAction";
-import { axiosInstance } from "../services/axios.config";
+import { useCart } from "../hooks/useCart";
 
 const ShoppingCart = () => {
-  const [state, dispatch] = useReducer(shoppingReducer, shoppingInitialState);
-
-  useEffect(() => {
-    axiosInstance
-      .get(`/stockProducts`)
-      .then((res) => {
-        if (res.status === 200) {
-          dispatch({ type: "SET_PRODUCTS", payload: res.data });
-        } else {
-          throw new Error(`[${res.status}] Error en la solicitud`);
-        }
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  const { products, cart, total } = state;
-  const addToCart = (id) => {
-    dispatch({
-      type: TYPES.ADD_TO_CART,
-      payload: id,
-    });
-  };
-  const delFromCart = (id, all = false) => {
-    if (!all) {
-      dispatch({
-        type: TYPES.REMOVE_ONE_FROM_CART,
-        payload: id,
-      });
-      return;
-    }
-
-    dispatch({
-      type: TYPES.REMOVE_ALL_FROM_CART,
-      payload: id,
-    });
-  };
-
-  const clearCart = () => {
-    dispatch({
-      type: TYPES.CLEAR_CART,
-    });
-  };
+  const { cart, addToCart, clearCart, delFromCart, products, total } =
+    useCart();
 
   return (
     <div className="p-3 max-w-[1200px] m-auto">

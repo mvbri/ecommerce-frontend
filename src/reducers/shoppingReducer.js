@@ -49,7 +49,7 @@ export function shoppingReducer(state, action) {
                 ? {
                     ...item,
                     quantity: item.quantity - 1,
-                    total: item.price * (item.quantity - 1),
+                    total: item.priceIVA * (item.quantity - 1),
                   }
                 : item
             ),
@@ -71,7 +71,11 @@ export function shoppingReducer(state, action) {
       };
     }
     case TYPES.CLEAR_CART: {
-      return shoppingInitialState;
+      return {
+        ...state,
+        cart: [],
+        total: 0,
+      };
     }
     case TYPES.SET_PRODUCTS: {
       return {

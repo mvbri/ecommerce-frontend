@@ -13,6 +13,7 @@ import AdminShowProducts from "./routes/AdminShowProducts.jsx";
 import Shopping from "./routes/Shopping.jsx";
 import ShowProducts from "./routes/ShowProducts.jsx";
 import { FilterProvider } from "./context/filter.jsx";
+import { CartProvider } from "./context/cart.jsx";
 
 const router = createBrowserRouter([
   {
@@ -58,9 +59,11 @@ const router = createBrowserRouter([
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <AuthProvider>
-      <FilterProvider>
-        <RouterProvider router={router} />
-      </FilterProvider>
+      <CartProvider>
+        <FilterProvider>
+          <RouterProvider router={router} />
+        </FilterProvider>
+      </CartProvider>
     </AuthProvider>
   </StrictMode>
 );
