@@ -14,10 +14,10 @@ function AdminShowProducts() {
 
   useEffect(() => {
     axiosInstance
-      .get("/stockProducts")
+      .get("/api/admin/products")
       .then((res) => {
         if (res.status === 200) {
-          setItems(res.data);
+          setItems(res.data.data);
         } else {
           throw new Error(`[${res.status}] ERROR en la solicitud`);
         }
@@ -40,16 +40,12 @@ function AdminShowProducts() {
     openModalConfirm();
   };
 
-  const deleteItem = (selectedItem) => {
-    const id = selectedItem.split(",").shift();
+  const deleteItem = (id, name) => {
     axiosInstance
-      .delete(`/stockProducts/${id}`)
+      .delete(`/api/admin/products/${id}`)
       .then((res) => {
         if (res.status === 200) {
-          const selectedItemID = selectedItem.split(",").shift();
-          setItems((prevItems) =>
-            prevItems.filter((item) => item.id !== selectedItemID)
-          );
+          setItems((prevItems) => prevItems.filter((item) => item._id !== id));
         } else {
           throw new Error(`[${res.status}] ERROR en la solicitud`);
         }

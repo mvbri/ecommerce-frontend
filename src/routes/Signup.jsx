@@ -60,9 +60,7 @@ function Signup() {
         headers: {
           "content-Type": "application/json",
         },
-        body: JSON.stringify({
-          values,
-        }),
+        body: JSON.stringify(values),
       });
 
       if (!response.ok) {

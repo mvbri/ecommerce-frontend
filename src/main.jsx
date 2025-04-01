@@ -9,11 +9,11 @@ import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import { AuthProvider } from "./auth/AuthProvider.jsx";
 import AdminDashboard from "./routes/adminDashboard.jsx";
 import CreateProducts from "./routes/CreateProducts.jsx";
-import AdminShowProducts from "./routes/AdminShowProducts.jsx";
 import Shopping from "./routes/Shopping.jsx";
-import ShowProducts from "./routes/ShowProducts.jsx";
+import AdminShowProducts from "./routes/AdminShowProducts.jsx";
 import { FilterProvider } from "./context/filter.jsx";
 import { CartProvider } from "./context/cart.jsx";
+import AdminLogin from "./routes/AdminLogin.jsx";
 
 const router = createBrowserRouter([
   {
@@ -25,32 +25,36 @@ const router = createBrowserRouter([
     element: <Signup />,
   },
   {
-    path: "/",
+    path: "dashboard",
+    element: <Dashboard />,
+  },
+  {
+    path: "shopping",
+    element: <Shopping />,
+  },
+  {
+    path: "/admin",
+    element: <AdminLogin />,
+  },
+  {
+    path: "/admin",
     element: <ProtectedRoute />,
     children: [
       {
-        path: "/dashboard",
-        element: <Dashboard />,
-      },
-      {
-        path: "/products",
-        element: <ShowProducts />,
-      },
-      {
-        path: "/admin-dashboard",
+        path: "dashboard",
         element: <AdminDashboard />,
       },
       {
-        path: "/create",
+        path: "product/create",
         element: <CreateProducts />,
       },
       {
-        path: "/admin-show",
-        element: <AdminShowProducts />,
+        path: "product/:id/edit",
+        element: <CreateProducts />,
       },
       {
-        path: "/shopping",
-        element: <Shopping />,
+        path: "product",
+        element: <AdminShowProducts />,
       },
     ],
   },
