@@ -55,47 +55,65 @@ function Login() {
 
   return (
     <DefaultLayout>
-      <form
-        onSubmit={handleSubmit}
-        className="flex w-[80%] mx-auto items-center flex-col min-h-screen"
-      >
-        <h1 className="mb-20 pt-[6rem]">Login</h1>
-
-        {!!errorResponse && (
-          <div className="bg-red-500 w-80 text-center p-1 mb-3">
-            {errorResponse}
-          </div>
-        )}
-        <div className="flex flex-col w-80 mb-4">
-          <label className="mb-2 text-left font-semibold">Correo</label>
-          <input
-            className="p-2 px-3 rounded"
-            type="text"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-        </div>
-
-        <div className="flex flex-col w-80 mb-8">
-          <label className="mb-2 text-left font-semibold">Contraseña</label>
-          <input
-            className="p-2 px-3 rounded"
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-
-        <button
-          className="bg-sky-500/75 w-[100px] py-1 px-2 rounded-md
- hover:bg-sky-700  hover:border-sky- font-semibold mb-3"
+      <div className=" flex flex-col items-start md:items-center">
+        <form
+          onSubmit={handleSubmit}
+          className="flex w-fit mx-auto items-center flex-col p-3 mb-3 border border-secondary rounded-md
+"
         >
-          Login
-        </button>
-        <p className="pt-3">
-          ¿No tienes cuenta todavía? <Link to="/signup">Registrate</Link>
+          <h1
+            className="mb-4 md:mb-20 p-[2rem] text-secondary text-2xl md:text-4xl text-center rounded-t-md
+"
+          >
+            Login
+          </h1>
+
+          {!!errorResponse && (
+            <div className="bg-red-500 w-80 text-center ml-4 p-1 mb-3">
+              {errorResponse}
+            </div>
+          )}
+          <div className="flex flex-col w-80 mb-4">
+            <label className="mb-2 text-left font-semibold text-secondary">
+              Correo
+            </label>
+            <input
+              className="p-2 px-3 rounded border-b border-secondary-accent"
+              type="text"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+            />
+          </div>
+
+          <div className="flex flex-col w-80 mb-8">
+            <label className="mb-2 text-left font-semibold text-secondary">
+              Contraseña
+            </label>
+            <input
+              className="p-2 px-3 rounded border-b border-secondary-accent"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+          </div>
+
+          <button
+            className="bg-secondary w-fit py-1 px-4 rounded-md
+ hover:bg-secondary-accent text-white font-semibold mb-3"
+          >
+            Login
+          </button>
+        </form>
+        <p className="pt-3 text-center w-full">
+          ¿No tienes cuenta todavía?{" "}
+          <Link
+            className="text-secondary hover:text-secondary-accent"
+            to="/signup"
+          >
+            Registrate
+          </Link>
         </p>
-      </form>
+      </div>
     </DefaultLayout>
   );
 }

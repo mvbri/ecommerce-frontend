@@ -14,6 +14,7 @@ import AdminShowProducts from "./routes/AdminShowProducts.jsx";
 import { FilterProvider } from "./context/filter.jsx";
 import { CartProvider } from "./context/cart.jsx";
 import AdminLogin from "./routes/AdminLogin.jsx";
+import HomePage from "./routes/HomePage.jsx";
 
 const router = createBrowserRouter([
   {
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup />,
+  },
+  {
+    path: "/Home",
+    element: <HomePage />,
   },
   {
     path: "dashboard",

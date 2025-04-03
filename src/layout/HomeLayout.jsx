@@ -2,27 +2,38 @@ import { Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
 import logo from "../img/logo.jpeg";
 
-function DashboardLayout({ children }) {
+function HomeLayout({ children }) {
   const auth = useAuth();
   return (
     <>
-      <header className="flex p-1 items-center max-w-[1400px] m-auto">
-        <img
-          className="w-[100px] h-[100px] rounded-full"
-          src={logo}
-          alt="Logo"
-        />
+      <header className="flex items-center max-w-[1400px] m-auto py-2">
+        <Link to="/home">
+          <img
+            className="w-[80px] h-[80px] rounded-full"
+            src={logo}
+            alt="Logo"
+          />
+        </Link>
         <nav className="px-3 py-4 flex items-center place-content-between w-full">
           <div className="flex">
-            <Link className="ml-4" to="/">
+            <Link
+              className="ml-4 text-secondary hover:text-secondary-accent"
+              to="/"
+            >
               Inicio
             </Link>
-            <Link className="ml-4" to="/admin/product/">
+            <Link
+              className="ml-4 text-secondary hover:text-secondary-accent"
+              to="/admin/product/"
+            >
               Ver productos
             </Link>
           </div>
-          <div className="flex">
-            <Link className="ml-4" to="/shopping">
+          <div className="flex text-secondary">
+            <Link
+              className="ml-4 text-secondary hover:text-secondary-accent"
+              to="/shopping"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -38,9 +49,12 @@ function DashboardLayout({ children }) {
                 />
               </svg>
             </Link>
-            <a className="ml-4" href="#" onClick={auth.handleSignOut}>
-              Cerrar sesión
-            </a>
+            <Link
+              className="ml-4 text-secondary hover:text-secondary-accent"
+              to="/"
+            >
+              Inicia sesión
+            </Link>
           </div>
         </nav>
       </header>
@@ -50,4 +64,4 @@ function DashboardLayout({ children }) {
   );
 }
 
-export default DashboardLayout;
+export default HomeLayout;

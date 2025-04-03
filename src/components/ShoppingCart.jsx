@@ -8,7 +8,7 @@ const ShoppingCart = () => {
     useCart();
 
   return (
-    <div className="p-3 max-w-[1200px] m-auto">
+    <div className="p-3 max-w-[1400px] m-auto">
       <h2 className="text-center text-xl mb-4 font-bold">Carrito de compras</h2>
       <h3 className="text-center text-lg font-semibold">Productos</h3>
       <article className="box grid-responsive mb-3">

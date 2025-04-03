@@ -1,14 +1,28 @@
 import { Link } from "react-router-dom";
+import logo from "../img/logo.jpeg";
 
 function DefaultLayout({ children }) {
   return (
     <>
-      <header>
-        <nav className="px-3 py-4">
-          <Link className="ml-4" to="/">
+      <header className="mb-4">
+        <nav className="px-3 py-2 flex items-center">
+          <Link to="/home">
+            <img
+              className="w-[80px] h-[80px] rounded-full"
+              src={logo}
+              alt="Logo"
+            />
+          </Link>
+          <Link
+            className="ml-4 text-secondary hover:text-secondary-accent"
+            to="/"
+          >
             Inicio
           </Link>
-          <Link className="ml-4" to="/signup">
+          <Link
+            className="ml-4 text-secondary hover:text-secondary-accent"
+            to="/signup"
+          >
             Signup
           </Link>
         </nav>

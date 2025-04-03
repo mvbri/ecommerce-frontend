@@ -5,6 +5,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { API_URL } from "../auth/constants";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import ImgBanner from "../img/imagen-banner.avif";
 
 function Signup() {
   const [errorResponse, setErrorResponse] = useState("");
@@ -82,114 +83,138 @@ function Signup() {
 
   return (
     <DefaultLayout>
-      <h1 className="mb-20 text-center">Registro</h1>
-
-      {!!errorResponse && (
-        <div className="bg-red-500 w-full text-center p-1 mb-2">
-          {errorResponse}
+      <div className="grid md:grid-cols-2">
+        <div className="graphic hidden md:block">
+          <img className="h-full object-cover" src={ImgBanner} />
         </div>
-      )}
+        <div>
+          <div className=" w-80 md:w-96 m-auto">
+            <h1 className="mb-4 md:mb-20 text-2xl md:text-4xl text-center md:text-left text-secondary">
+              Registro
+            </h1>
 
-      <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
-        onSubmit={(values, { setSubmitting }) => {
-          console.log(values);
-          handleSubmit(values, setSubmitting);
-        }}
-      >
-        {({ values, isSubmitting, errors, touched }) => (
-          <Form className="flex flex-col items-center p-6 md:p-4 md:px-8 w-96 m-auto">
-            <div className="w-full flex flex-col mb-4">
-              <label className="mb-3 text-lg inline-block mb-1" htmlFor="name">
-                Nombre
-              </label>
-              <Field
-                className="p-2 rounded-lg"
-                id="name"
-                type="text"
-                placeholder="Nombre"
-                name="name"
-              />
-              {errors.name && touched.name && (
-                <ErrorMessage
-                  className=" -mt-2 p-2 bg-red-500"
-                  name="name"
-                  component="div"
-                ></ErrorMessage>
-              )}
-            </div>
-            <div className="w-full flex flex-col mb-4">
-              <label className="mb-2 text-lg mb-1" htmlFor="lastName">
-                Apellido
-              </label>
-              <Field
-                className="p-2 rounded-lg"
-                id="lastName"
-                type="text"
-                placeholder="Apellido"
-                name="lastName"
-              />
-              {errors.lastName && touched.lastName && (
-                <ErrorMessage
-                  className="-mt-2 p-2 bg-red-500"
-                  name="lastName"
-                  component="div"
-                ></ErrorMessage>
-              )}
-            </div>
-            <div className="w-full flex flex-col mb-4">
-              <label className="mb-2 text-lg mb-1" htmlFor="email">
-                Correo
-              </label>
-              <Field
-                className="p-2 rounded-lg"
-                id="email"
-                type="email"
-                placeholder="email"
-                name="email"
-              />
-              {errors.email && touched.email && (
-                <ErrorMessage
-                  className="-mt-2 p-2 bg-red-500"
-                  name="email"
-                  component="div"
-                ></ErrorMessage>
-              )}
-            </div>
-            <div className="w-full flex flex-col mb-8">
-              <label className="mb-2 text-lg mb-1" htmlFor="password">
-                Contraseña
-              </label>
-              <Field
-                className="p-2 rounded-lg"
-                id="password"
-                type="password"
-                placeholder="password"
-                name="password"
-              />
-              {errors.password && touched.password && (
-                <ErrorMessage
-                  className="-mt-2 p-2 bg-red-500"
-                  name="password"
-                  component="div"
-                ></ErrorMessage>
-              )}
-            </div>
+            {!!errorResponse && (
+              <div className="bg-red-500 w-full text-center p-1 mb-2">
+                {errorResponse}
+              </div>
+            )}
 
-            <button
-              className="w-fit mt-3 m-auto bg-sky-500/75 w-[100px] py-2 px-3 rounded-md
- hover:bg-sky-700  hover:border-sky- font-semibold"
-              type="submit"
+            <Formik
+              initialValues={initialValues}
+              validationSchema={validationSchema}
+              onSubmit={(values, { setSubmitting }) => {
+                console.log(values);
+                handleSubmit(values, setSubmitting);
+              }}
             >
-              Registrarse
-            </button>
-            {isSubmitting ? (
-              <p className="mb-3 text-center">Cargando...</p>
-            ) : null}
-          </Form>
-        )}
-      </Formik>
+              {({ values, isSubmitting, errors, touched }) => (
+                <Form className="flex flex-col items-center p-6 md:p-4 md:px-8 w-80 md:w-96 m-auto mb-3 border border-secondary rounded-md">
+                  <div className="w-full flex flex-col mb-4">
+                    <label
+                      className="mb-3 text-lg inline-block mb-1 text-secondary text-base md:text-xl
+"
+                      htmlFor="name"
+                    >
+                      Nombre
+                    </label>
+                    <Field
+                      className="p-2 rounded-lg border-b border-secondary-accent"
+                      id="name"
+                      type="text"
+                      placeholder="Nombre"
+                      name="name"
+                    />
+                    {errors.name && touched.name && (
+                      <ErrorMessage
+                        className=" p-2 bg-tertiary text-red-800 text-secondary text-base"
+                        name="name"
+                        component="div"
+                      ></ErrorMessage>
+                    )}
+                  </div>
+                  <div className="w-full flex flex-col mb-4">
+                    <label
+                      className="mb-2 text-lg mb-1 text-secondary text-secondary text-base md:text-xl"
+                      htmlFor="lastName"
+                    >
+                      Apellido
+                    </label>
+                    <Field
+                      className="p-2 rounded-lg border-b border-secondary-accent"
+                      id="lastName"
+                      type="text"
+                      placeholder="Apellido"
+                      name="lastName"
+                    />
+                    {errors.lastName && touched.lastName && (
+                      <ErrorMessage
+                        className=" p-2 bg-tertiary text-red-800 text-secondary text-base"
+                        name="lastName"
+                        component="div"
+                      ></ErrorMessage>
+                    )}
+                  </div>
+                  <div className="w-full flex flex-col mb-4">
+                    <label
+                      className="mb-2 text-lg mb-1 text-secondary text-secondary text-base md:text-xl"
+                      htmlFor="email"
+                    >
+                      Correo
+                    </label>
+                    <Field
+                      className="p-2 rounded-lg border-b border-secondary-accent"
+                      id="email"
+                      type="email"
+                      placeholder="email"
+                      name="email"
+                    />
+                    {errors.email && touched.email && (
+                      <ErrorMessage
+                        className=" p-2 bg-tertiary text-red-800 text-secondary text-base"
+                        name="email"
+                        component="div"
+                      ></ErrorMessage>
+                    )}
+                  </div>
+                  <div className="w-full flex flex-col mb-8">
+                    <label
+                      className="mb-2 text-lg mb-1 text-secondary text-base md:text-xl"
+                      htmlFor="password"
+                    >
+                      Contraseña
+                    </label>
+                    <Field
+                      className="p-2 rounded-lg border-b border-secondary-accent"
+                      id="password"
+                      type="password"
+                      placeholder="password"
+                      name="password"
+                    />
+                    {errors.password && touched.password && (
+                      <ErrorMessage
+                        className="p-2 bg-tertiary text-red-800 text-base"
+                        name="password"
+                        component="div"
+                      ></ErrorMessage>
+                    )}
+                  </div>
+
+                  <button
+                    className="w-fit mt-3 m-auto bg-secondary text-white w-fit py-2 px-4 rounded-md
+ hover:bg-secondary-accent font-semibold"
+                    type="submit"
+                  >
+                    Registrarse
+                  </button>
+                  {isSubmitting ? (
+                    <p className="mb-3 text-center">Cargando...</p>
+                  ) : null}
+                </Form>
+              )}
+            </Formik>
+          </div>
+        </div>
+      </div>
     </DefaultLayout>
   );
 }
