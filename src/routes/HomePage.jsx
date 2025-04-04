@@ -1,13 +1,13 @@
-// import HomeBanner from "../components/HomeBanner";
+import HomeSectionCategories from "../components/HomeSectionCategories";
 import Slider from "../components/Slider";
 import HomeLayout from "../layout/HomeLayout";
 
 const HomePage = () => {
   return (
     <HomeLayout>
-      <div className="flex items-center justify-center max-w-[1400px] w-full m-auto">
-        {/* <HomeBanner /> */}
+      <div className="max-w-[1400px] m-auto">
         <Slider />
+        <HomeSectionCategories />
       </div>
     </HomeLayout>
   );

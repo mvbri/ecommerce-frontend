@@ -2,11 +2,9 @@
 
 .slider-container {
   overflow: hidden;
-  /* width: 100%; */
-  /* position: relative; */
 }
 
-.slider {
+.sliders {
   display: flex;
 }
 

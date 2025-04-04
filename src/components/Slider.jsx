@@ -45,7 +45,7 @@ const Slider = () => {
   return (
     <div className="slider-container">
       <div
-        className="slider"
+        className="sliders"
         style={{
           transform: `translateX(-${index * 100}%)`,
           transition: isTransitioning ? "transform 0.5s ease-in-out" : "none",

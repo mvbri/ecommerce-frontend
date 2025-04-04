@@ -3,7 +3,7 @@ import ImgBanner from "../img/imagen-banner.avif";
 
 const HomeBanner = () => {
   return (
-    <section className="main-banner bg-primary w-full">
+    <section className="main-banner bg-primary">
       {/*Grid container*/}
       <div className="grid-container">
         {/*Banner container*/}
