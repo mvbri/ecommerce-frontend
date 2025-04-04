@@ -1,0 +1,83 @@
+/*Inicio: card Slider de Clientes en Home */
+
+.slide-card {
+  padding: 1rem;
+}
+
+.card-slider-review {
+  text-align: center;
+}
+
+.name {
+  text-align: center;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.img-card-slider {
+  margin: auto;
+  width: 7rem;
+  height: 7rem;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Inicio: Arrows personalizadas */
+
+.arrowCustom {
+  font-family: "slick";
+  font-size: 20px;
+  line-height: 1;
+  opacity: 0.75;
+  -webkit-font-smoothing: antialiased;
+  position: absolute;
+  top: 50%;
+  display: block;
+  width: 20px;
+  padding: 0;
+  -webkit-transform: translate(0, -50%);
+  height: 20px;
+  -ms-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  cursor: pointer;
+  color: transparent;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.arrowCustom::before {
+  content: "→";
+  color: #000;
+}
+
+.arrowPrevCustom {
+  font-family: "slick";
+  font-size: 20px;
+  line-height: 1;
+  opacity: 0.75;
+  -webkit-font-smoothing: antialiased;
+  position: absolute;
+  top: 50%;
+  display: block;
+  width: 20px;
+  padding: 0;
+  -webkit-transform: translate(0, -50%);
+  height: 20px;
+  -ms-transform: translate(0, -50%);
+  transform: translate(0, -50%);
+  cursor: pointer;
+  color: transparent;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+.arrowPrevCustom::before {
+  content: "←";
+  color: #000;
+}
+
+/* Fin: Arrows personalizadas */
+
+/*Fin: card Slider de Clientes en Home */

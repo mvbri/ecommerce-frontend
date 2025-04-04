@@ -1124,6 +1124,10 @@ h1 {
     margin: 0px;
   }
 
+  .md\:mb-14 {
+    margin-bottom: 3.5rem;
+  }
+
   .md\:mb-20 {
     margin-bottom: 5rem;
   }
@@ -1134,6 +1138,10 @@ h1 {
 
   .md\:block {
     display: block;
+  }
+
+  .md\:hidden {
+    display: none;
   }
 
   .md\:w-96 {
