@@ -55,14 +55,14 @@ function Login() {
 
   return (
     <DefaultLayout>
-      <div className=" flex flex-col items-start md:items-center">
+      <div className="min-h-screen flex flex-col items-start md:items-center">
         <form
           onSubmit={handleSubmit}
           className="flex w-fit mx-auto items-center flex-col p-3 mb-3 border border-secondary rounded-md
 "
         >
           <h1
-            className="mb-4 md:mb-20 p-[2rem] text-secondary text-2xl md:text-4xl text-center rounded-t-md
+            className="mb-4 md:mb-20 p-[2rem] text-2xl md:text-4xl text-center rounded-t-md
 "
           >
             Login
@@ -74,9 +74,7 @@ function Login() {
             </div>
           )}
           <div className="flex flex-col w-80 mb-4">
-            <label className="mb-2 text-left font-semibold text-secondary">
-              Correo
-            </label>
+            <label className="mb-2 text-left text-lg">Correo</label>
             <input
               className="p-2 px-3 rounded border-b border-secondary-accent"
               type="text"
@@ -86,9 +84,7 @@ function Login() {
           </div>
 
           <div className="flex flex-col w-80 mb-8">
-            <label className="mb-2 text-left font-semibold text-secondary">
-              Contraseña
-            </label>
+            <label className="mb-2 text-left text-lg">Contraseña</label>
             <input
               className="p-2 px-3 rounded border-b border-secondary-accent"
               type="password"

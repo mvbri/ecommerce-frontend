@@ -89,7 +89,7 @@ function Signup() {
         </div>
         <div>
           <div className=" w-80 md:w-96 m-auto">
-            <h1 className="mb-4 md:mb-20 text-2xl md:text-4xl text-center md:text-left text-secondary">
+            <h1 className="mb-4 md:mb-20 text-2xl md:text-4xl text-center md:text-left">
               Registro
             </h1>
 
@@ -111,7 +111,7 @@ function Signup() {
                 <Form className="flex flex-col items-center p-6 md:p-4 md:px-8 w-80 md:w-96 m-auto mb-3 border border-secondary rounded-md">
                   <div className="w-full flex flex-col mb-4">
                     <label
-                      className="mb-3 text-lg inline-block mb-1 text-secondary text-base md:text-xl
+                      className="mb-3 text-lg inline-block mb-1 
 "
                       htmlFor="name"
                     >
@@ -126,17 +126,14 @@ function Signup() {
                     />
                     {errors.name && touched.name && (
                       <ErrorMessage
-                        className=" p-2 bg-tertiary text-red-800 text-secondary text-base"
+                        className=" p-2 bg-tertiary text-red-800"
                         name="name"
                         component="div"
                       ></ErrorMessage>
                     )}
                   </div>
                   <div className="w-full flex flex-col mb-4">
-                    <label
-                      className="mb-2 text-lg mb-1 text-secondary text-secondary text-base md:text-xl"
-                      htmlFor="lastName"
-                    >
+                    <label className="mb-2 text-lg mb-1" htmlFor="lastName">
                       Apellido
                     </label>
                     <Field
@@ -148,17 +145,14 @@ function Signup() {
                     />
                     {errors.lastName && touched.lastName && (
                       <ErrorMessage
-                        className=" p-2 bg-tertiary text-red-800 text-secondary text-base"
+                        className=" p-2 bg-tertiary text-red-800"
                         name="lastName"
                         component="div"
                       ></ErrorMessage>
                     )}
                   </div>
                   <div className="w-full flex flex-col mb-4">
-                    <label
-                      className="mb-2 text-lg mb-1 text-secondary text-secondary text-base md:text-xl"
-                      htmlFor="email"
-                    >
+                    <label className="mb-2 text-lg mb-1" htmlFor="email">
                       Correo
                     </label>
                     <Field
@@ -170,17 +164,14 @@ function Signup() {
                     />
                     {errors.email && touched.email && (
                       <ErrorMessage
-                        className=" p-2 bg-tertiary text-red-800 text-secondary text-base"
+                        className=" p-2 bg-tertiary text-red-800"
                         name="email"
                         component="div"
                       ></ErrorMessage>
                     )}
                   </div>
                   <div className="w-full flex flex-col mb-8">
-                    <label
-                      className="mb-2 text-lg mb-1 text-secondary text-base md:text-xl"
-                      htmlFor="password"
-                    >
+                    <label className="mb-2 text-lg mb-1" htmlFor="password">
                       Contraseña
                     </label>
                     <Field

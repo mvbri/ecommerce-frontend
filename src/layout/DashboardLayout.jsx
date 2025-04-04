@@ -14,15 +14,24 @@ function DashboardLayout({ children }) {
         />
         <nav className="px-3 py-4 flex items-center place-content-between w-full">
           <div className="flex">
-            <Link className="ml-4" to="/">
+            <Link
+              className="ml-4 text-secondary hover:text-secondary-accent"
+              to="/"
+            >
               Inicio
             </Link>
-            <Link className="ml-4" to="/admin/product/">
+            <Link
+              className="ml-4 text-secondary hover:text-secondary-accent"
+              to="/admin/product/"
+            >
               Ver productos
             </Link>
           </div>
           <div className="flex">
-            <Link className="ml-4" to="/shopping">
+            <Link
+              className="ml-4 text-secondary hover:text-secondary-accent"
+              to="/shopping"
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -38,7 +47,11 @@ function DashboardLayout({ children }) {
                 />
               </svg>
             </Link>
-            <a className="ml-4" href="#" onClick={auth.handleSignOut}>
+            <a
+              className="ml-4 text-secondary hover:text-secondary-accent"
+              href="#"
+              onClick={auth.handleSignOut}
+            >
               Cerrar sesión
             </a>
           </div>

@@ -17,8 +17,7 @@ const ProductItem = ({ product }) => {
       </h4>
       <button
         onClick={() => addToCart(id)}
-        className="bg-sky-500/75 py-1 px-2 rounded-md
- hover:bg-sky-700  hover:border-sky- font-semibold mb-3"
+        className="block m-auto md:m-0 bg-secondary hover:bg-secondary-accent text-white py-1 px-2 rounded-md font-semibold mb-3"
       >
         Agregar
       </button>

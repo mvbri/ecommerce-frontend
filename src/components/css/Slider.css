@@ -1,0 +1,38 @@
+/* Inicio: slider */
+
+.slider-container {
+  overflow: hidden;
+  /* width: 100%; */
+  /* position: relative; */
+}
+
+.slider {
+  display: flex;
+}
+
+.slide {
+  flex: 0 0 100%;
+}
+
+/* Estilos de los dots */
+.dots {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.dot {
+  height: 12px;
+  width: 12px;
+  margin: 0 5px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.dot.active {
+  background-color: #333;
+}
+
+/* Fin: slider */

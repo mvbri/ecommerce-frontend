@@ -23,8 +23,8 @@ const ShoppingCart = () => {
       <h3 className="text-center text-lg font-semibold">Carrito</h3>
       <article className="box flex flex-col">
         <button
-          className="bg-sky-500/75 self-end mr-3 mt-2 w-fit py-1 px-2 rounded-md
- hover:bg-sky-700  hover:border-sky- font-semibold mb-3"
+          className="bg-secondary hover:bg-secondary-accent text-white self-end mr-3 mt-2 w-fit py-1 px-2 rounded-md
+  font-semibold mb-3"
           onClick={clearCart}
         >
           Limpiar carrito

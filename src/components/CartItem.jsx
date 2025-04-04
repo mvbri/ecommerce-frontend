@@ -23,20 +23,22 @@ const CartItem = ({ data, delFromCart }) => {
         <img className="object-fit max-h-[300px]" src={image} />
       </figure>
       <h5>{categoria}</h5>
-      <button
-        onClick={() => delFromCart(id)}
-        className="bg-sky-500/75 w-fit py-1 px-2 rounded-md
- hover:bg-sky-700  hover:border-sky- font-semibold mb-3"
-      >
-        Eliminar 1
-      </button>
-      <button
-        onClick={() => delFromCart(id, true)}
-        className="bg-sky-500/75 ml-4 w-fit py-1 px-2 rounded-md
- hover:bg-sky-700  hover:border-sky- font-semibold mb-3"
-      >
-        Eliminar todo
-      </button>
+      <div className="m-auto md:m-0 w-fit">
+        <button
+          onClick={() => delFromCart(id)}
+          className="bg-secondary hover:bg-secondary-accent text-white w-fit py-1 px-2 rounded-md
+  font-semibold mb-3"
+        >
+          Eliminar 1
+        </button>
+        <button
+          onClick={() => delFromCart(id, true)}
+          className="bg-secondary hover:bg-secondary-accent text-white ml-4 w-fit py-1 px-2 rounded-md
+  font-semibold mb-3"
+        >
+          Eliminar todo
+        </button>
+      </div>
     </div>
   );
 };
