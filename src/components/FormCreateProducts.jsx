@@ -325,8 +325,7 @@ function FormCreateProducts() {
             )}
 
             <button
-              className="w-fit mt-3 m-auto bg-sky-500/75 w-[100px] py-2 px-3 rounded-md
- hover:bg-sky-700  hover:border-sky- font-semibold"
+              className="w-fit bg-secondary hover:bg-secondary-accent text-white mt-3 m-auto py-2 px-3 rounded-md font-semibold"
               type="submit"
             >
               Cargar nuevo producto

@@ -1,5 +1,7 @@
 .standard-section {
   padding-top: 3rem;
+  max-width: 1400px;
+  margin: auto;
 }
 
 @media screen and (min-width: 1024px) {

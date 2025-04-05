@@ -67,12 +67,14 @@ function AdminShowProducts() {
   return (
     <AdminLayout>
       <div>
-        <h1 className="text-center p-4">Lista de Productos</h1>
+        <h1 className="text-2xl md:text-4xl text-center mb-8 md:mb-14">
+          Lista de Productos
+        </h1>
         <div className="p-4">
           {items.length > 0 ? (
             <Table onSelectItem={handleSelectedItem} items={items} />
           ) : (
-            <p>No hay productos en el sistema</p>
+            <p className="text-center">No hay productos en el sistema</p>
           )}
           <Modal
             isOpen={isOpen}
