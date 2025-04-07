@@ -1,0 +1,130 @@
+.navbar-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff085;
+  position: fixed;
+  width: 100%;
+  margin: auto;
+  z-index: 9999;
+  padding: 0 1rem;
+  height: 5.6rem;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  background-color: #fff;
+  height: 100vh;
+  width: 100%;
+  padding-top: 2rem;
+  left: 0;
+  top: 5.5rem;
+  padding: 2rem 0;
+  overflow-y: scroll;
+  transform: translateX(-100%);
+  transition: all 0.3s ease;
+}
+
+.navbar.open {
+  transform: translateX(0);
+}
+
+.navbar-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.navbar-item {
+  text-align: center;
+  margin-bottom: 1rem;
+  color: #ff9b17;
+  font-size: 1.25rem;
+}
+
+.navbar-item:hover {
+  color: #ff7300;
+}
+
+.cart {
+  color: #ff9b17;
+  margin-right: 0.5rem;
+}
+
+.cart:hover {
+  color: #ff7300;
+}
+
+/* Inicio: botón de hamburguesa */
+
+.navbar-toggle > span {
+  display: block;
+  width: 1.875rem;
+  height: 0.25rem;
+  background-color: #ff9b17;
+  margin-bottom: 0.3125rem;
+  border-radius: 0.125rem;
+  transform-origin: 0.3125rem 0;
+  transition: all 0.2s linear;
+}
+
+.navbar-toggle:hover > span {
+  background-color: #ff7300;
+}
+
+.navbar-toggle.open > span {
+  transform: rotate(45deg) translate(0, 0);
+}
+
+.navbar-toggle.open > span:nth-child(2) {
+  display: none;
+}
+
+.navbar-toggle.open > span:nth-child(3) {
+  transform: rotate(-45deg) translate(-0.3125rem, 1px);
+}
+
+/* Fin: botón de hamburguesa */
+
+@media screen and (min-width: 1024px) {
+  .navbar-container {
+    background-color: #fff;
+  }
+
+  .navbar {
+    display: flex;
+    position: static;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: inherit;
+    height: initial;
+    overflow-y: initial;
+    transform: initial;
+    padding: 0;
+  }
+
+  .navbar-section {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+  }
+
+  .navbar-item {
+    margin-bottom: 0;
+    font-size: 1rem;
+  }
+
+  .navbar-toggle {
+    display: none;
+  }
+
+  .cart {
+    display: none;
+  }
+
+  .logo {
+    margin-right: 2rem;
+  }
+}

@@ -3,7 +3,7 @@ import ImgBanner from "../img/imagen-banner.avif";
 
 const HomeBanner = () => {
   return (
-    <section className="main-banner bg-primary">
+    <div className="main-banner bg-primary">
       {/*Grid container*/}
       <div className="grid-container">
         {/*Banner container*/}
@@ -25,7 +25,7 @@ const HomeBanner = () => {
           <img src={ImgBanner} />
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

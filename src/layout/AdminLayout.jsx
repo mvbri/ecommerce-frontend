@@ -1,51 +1,63 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
 import { setAuthToken } from "../services/axios.config";
+import "../components/css/Navbar.css";
+import { useState } from "react";
 import logo from "../img/logo.jpeg";
 
 function AdminLayout({ children }) {
   const auth = useAuth();
   setAuthToken(auth.getAccessToken());
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleOpen = () => setIsOpen(!isOpen);
 
   return (
     <>
-      <header className="max-w-[1400px] m-auto">
-        <nav className="px-3 py-2 flex items-center place-content-between w-full">
-          <div className="flex items-center">
-            <Link to="/home">
-              <img
-                className="w-[80px] h-[80px] rounded-full"
-                src={logo}
-                alt="Logo"
-              />
-            </Link>
-            <Link
-              className="ml-4 text-secondary hover:text-secondary-accent"
-              to="/admin/dashboard"
+      <header className="navbar-container">
+        <div className="max-w-[1400px] m-auto flex justify-between w-full">
+          <Link to="/home">
+            <img
+              className="logo w-[80px] h-[80px] rounded-full"
+              src={logo}
+              alt="Logo"
+            />
+          </Link>
+          <div className="flex items-center justify-center">
+            <button
+              className={`navbar-toggle ${isOpen ? "open" : ""}`}
+              onClick={handleOpen}
             >
-              Inicio
-            </Link>
-            <Link
-              className="ml-4 text-secondary hover:text-secondary-accent"
-              to="/admin/product/create"
-            >
-              Crear Producto
-            </Link>
-            <Link
-              className="ml-4 text-secondary hover:text-secondary-accent"
-              to="/admin/product/"
-            >
-              Lista de Productos
-            </Link>
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
           </div>
-          <a
-            className="ml-4 text-secondary hover:text-secondary-accent"
-            href="#"
-            onClick={auth.handleSignOut}
-          >
-            Cerrar sesión
-          </a>
-        </nav>
+          <nav className={`navbar ${isOpen ? "open" : ""}`}>
+            <div className="navbar-section">
+              <Link className="navbar-item" to="/admin/dashboard">
+                Inicio
+              </Link>
+              <Link className="navbar-item" to="/admin/product/create">
+                Crear producto
+              </Link>
+              <Link className="navbar-item" to="/admin/product">
+                Lista de productos
+              </Link>
+            </div>
+            <div className="navbar-section">
+              {auth.isAuthenticated ? (
+                <button onClick={auth.handleSignOut} className="navbar-item">
+                  Cerrar sesion
+                </button>
+              ) : (
+                <Link className="navbar-item" to="/">
+                  Inicia sesión
+                </Link>
+              )}
+            </div>
+          </nav>
+        </div>
       </header>
 
       <main>{children}</main>

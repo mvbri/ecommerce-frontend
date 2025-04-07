@@ -1,11 +1,11 @@
 import ShoppingCart from "../components/ShoppingCart";
-import DashboardLayout from "../layout/DashboardLayout";
+import HomeLayout from "../layout/HomeLayout";
 
 const Shopping = () => {
   return (
-    <DashboardLayout>
+    <HomeLayout>
       <ShoppingCart />
-    </DashboardLayout>
+    </HomeLayout>
   );
 };
 

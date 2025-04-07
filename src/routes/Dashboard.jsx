@@ -1,14 +1,14 @@
 import { useAuth } from "../auth/AuthProvider";
-import DashboardLayout from "../layout/DashboardLayout";
+import HomeLayout from "../layout/HomeLayout";
 
 function Dashboard() {
   const auth = useAuth();
 
   return (
     <>
-      <DashboardLayout>
+      <HomeLayout>
         <div>Dashboard {auth.getUser()?.name || null}</div>
-      </DashboardLayout>
+      </HomeLayout>
     </>
   );
 }

@@ -1,14 +1,14 @@
 import Products from "./Products";
 import Filters from "../components/Filters";
-import DashboardLayout from "../layout/DashboardLayout";
+import HomeLayout from "../layout/HomeLayout";
 import "../components/css/Products.css";
 
 const ShowProducts = () => {
   return (
-    <DashboardLayout>
+    <HomeLayout>
       <Filters />
       <Products />
-    </DashboardLayout>
+    </HomeLayout>
   );
 };
 

@@ -31,7 +31,7 @@ const Products = () => {
 
   return (
     <>
-      <article className="box grid-responsive mb-3">
+      <article className="box pt-[5.6rem] grid-responsive mb-3">
         {filteredProducts.map((product) => (
           <ProductItem key={product.id} product={product} />
         ))}

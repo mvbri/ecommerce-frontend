@@ -168,12 +168,12 @@ function FormCreateProducts() {
         }}
       >
         {({ values, isSubmitting, errors, touched }) => (
-          <Form className="flex flex-col p-4 md:px-8 max-w-5xl m-auto">
+          <Form className="flex flex-col pt-8 p-4 md:px-8 w-full border m-auto">
             <label className="mb-3 text-lg" htmlFor="name">
               Nombre
             </label>
             <Field
-              className="mb-3 p-2 w-full rounded-lg"
+              className="mb-3 p-2 w-full rounded-lg border-b border-secondary mb-5"
               id="name"
               type="text"
               placeholder="Nombre"
@@ -181,7 +181,7 @@ function FormCreateProducts() {
             />
             {errors.name && touched.name && (
               <ErrorMessage
-                className="mb-3 -mt-2 w-full p-2 bg-red-500"
+                className="mb-3 -mt-2 w-full p-2 bg-red-500 text-white"
                 name="name"
                 component="div"
               ></ErrorMessage>
@@ -190,7 +190,7 @@ function FormCreateProducts() {
               Description
             </label>
             <Field
-              className="mb-3 p-2 w-full rounded-lg"
+              className="mb-3 p-2 w-full rounded-lg border-b border-secondary mb-5"
               id="description"
               type="text"
               placeholder="Description"
@@ -198,7 +198,7 @@ function FormCreateProducts() {
             />
             {errors.description && touched.description && (
               <ErrorMessage
-                className="mb-3 -mt-2 w-full p-2 bg-red-500"
+                className="mb-3 -mt-2 w-full p-2 bg-red-500 text-white"
                 name="description"
                 component="div"
               ></ErrorMessage>
@@ -239,11 +239,11 @@ function FormCreateProducts() {
             <Dropzone
               files={files}
               setFiles={setFiles}
-              className="p-16 mt-10 border border-neutral-200 text-center mb-3"
+              className="p-16 mt-10 cursor-pointer border border-dashed border-2 md:w-4/5 m-auto border-neutral-500 text-center mb-3"
             />
             {errors.image && touched.image && (
               <ErrorMessage
-                className="mb-3 -mt-2 w-full p-2 bg-red-500"
+                className="mb-3 -mt-2 w-full p-2 bg-red-500 text-white"
                 name="image"
                 component="div"
               ></ErrorMessage>
@@ -252,7 +252,7 @@ function FormCreateProducts() {
               Categoria
             </label>
             <Field
-              className="mb-3 p-2 w-full rounded-lg"
+              className="mb-3 p-2 w-full rounded-lg border-b border-secondary mb-5"
               id="category"
               as="select"
               multiple
@@ -267,7 +267,7 @@ function FormCreateProducts() {
             </Field>
             {errors.category && touched.category && (
               <ErrorMessage
-                className="mb-3 -mt-2 w-full p-2 bg-red-500"
+                className="mb-3 -mt-2 w-full p-2 bg-red-500 text-white"
                 name="category"
                 component="div"
               ></ErrorMessage>
@@ -276,7 +276,7 @@ function FormCreateProducts() {
               Stock
             </label>
             <Field
-              className="mb-3 p-2 w-full rounded-lg"
+              className="mb-3 p-2 w-full rounded-lg border-b border-secondary mb-5 "
               id="stock"
               type="text"
               placeholder="Stock"
@@ -284,7 +284,7 @@ function FormCreateProducts() {
             />
             {errors.stock && touched.stock && (
               <ErrorMessage
-                className="mb-3 -mt-2 w-full p-2 bg-red-500"
+                className="mb-3 -mt-2 w-full p-2 bg-red-500 text-white"
                 name="stock"
                 component="div"
               ></ErrorMessage>
@@ -293,7 +293,7 @@ function FormCreateProducts() {
               Precio
             </label>
             <Field
-              className="mb-3 p-2 w-full rounded-lg"
+              className="mb-3 p-2 w-full rounded-lg border-b border-secondary mb-5"
               id="price"
               type="text"
               placeholder="Precio"
@@ -301,7 +301,7 @@ function FormCreateProducts() {
             />
             {errors.price && touched.price && (
               <ErrorMessage
-                className="mb-3 -mt-2 w-full p-2 bg-red-500"
+                className="mb-3 -mt-2 w-full p-2 bg-red-500 text-white"
                 name="price"
                 component="div"
               ></ErrorMessage>
@@ -310,7 +310,7 @@ function FormCreateProducts() {
               Precio con IVA
             </label>
             <Field
-              className="mb-3 p-2 w-full rounded-lg"
+              className="mb-3 p-2 w-full rounded-lg border-b border-secondary mb-5"
               id="priceIVA"
               type="text"
               placeholder="Precio con IVA"
@@ -318,7 +318,7 @@ function FormCreateProducts() {
             />
             {errors.priceIVA && touched.priceIVA && (
               <ErrorMessage
-                className="mb-3 -mt-2 w-full p-2 bg-red-500"
+                className="mb-3 -mt-2 w-full p-2 bg-red-500 text-white"
                 name="priceIVA"
                 component="div"
               ></ErrorMessage>

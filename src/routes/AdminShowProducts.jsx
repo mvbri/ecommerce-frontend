@@ -66,8 +66,8 @@ function AdminShowProducts() {
 
   return (
     <AdminLayout>
-      <div>
-        <h1 className="text-2xl md:text-4xl text-center mb-8 md:mb-14">
+      <div className="pt-[5.6rem]">
+        <h1 className="text-2xl pt-4 md:text-4xl text-center mb-8 md:mb-14">
           Lista de Productos
         </h1>
         <div className="p-4">

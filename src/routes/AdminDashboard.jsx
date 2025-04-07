@@ -6,8 +6,10 @@ function AdminDashboard() {
 
   return (
     <AdminLayout>
-      <div className="text-2xl md:text-4xl text-center mb-8 md:mb-14">
-        Bienvenid@ {auth.getUser()?.name || null}
+      <div className="pt-[5.6rem] text-2xl md:text-4xl text-center mb-8 md:mb-14">
+        <h1 className="text-2xl md:text-4xl text-center pt-4">
+          Bienvenid@ {auth.getUser()?.name || null}
+        </h1>
       </div>
     </AdminLayout>
   );
