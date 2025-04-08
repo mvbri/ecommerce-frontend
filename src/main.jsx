@@ -11,10 +11,11 @@ import AdminDashboard from "./routes/adminDashboard.jsx";
 import CreateProducts from "./routes/CreateProducts.jsx";
 import Shopping from "./routes/Shopping.jsx";
 import AdminShowProducts from "./routes/AdminShowProducts.jsx";
-import { FilterProvider } from "./context/filter.jsx";
+import { FilterProvider } from "./context/Filter.jsx";
 import { CartProvider } from "./context/cart.jsx";
 import AdminLogin from "./routes/AdminLogin.jsx";
 import HomePage from "./routes/HomePage.jsx";
+import ShowProducts from "./routes/ShowProducts.jsx";
 
 const router = createBrowserRouter([
   {
@@ -22,20 +23,30 @@ const router = createBrowserRouter([
     element: <Login />,
   },
   {
-    path: "/signup",
-    element: <Signup />,
-  },
-  {
-    path: "/Home",
-    element: <HomePage />,
-  },
-  {
-    path: "dashboard",
-    element: <Dashboard />,
-  },
-  {
-    path: "shopping",
-    element: <Shopping />,
+    path: "/",
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: "/signup",
+        element: <Signup />,
+      },
+      {
+        path: "/Home",
+        element: <HomePage />,
+      },
+      {
+        path: "dashboard",
+        element: <Dashboard />,
+      },
+      {
+        path: "shopping",
+        element: <Shopping />,
+      },
+      {
+        path: "products",
+        element: <ShowProducts />,
+      },
+    ],
   },
   {
     path: "/admin",

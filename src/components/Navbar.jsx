@@ -48,7 +48,7 @@ const Navbar = () => {
           </div>
           <nav className={`navbar ${isOpen ? "open" : ""}`}>
             <div className="navbar-section">
-              <Link className="navbar-item" to="/">
+              <Link className="navbar-item" to="/home">
                 Inicio
               </Link>
               <Link className="navbar-item" to="/products/">

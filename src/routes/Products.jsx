@@ -16,10 +16,13 @@ const Products = () => {
 
   useEffect(() => {
     axiosInstance
-      .get(`/stockProducts`)
+      .get(`/api/category`)
       .then((res) => {
         if (res.status === 200) {
-          dispatch({ type: "SET_PRODUCTS", payload: res.data });
+          dispatch({
+            type: "SET_PRODUCTS",
+            payload: res.data.data || res.data,
+          });
         } else {
           throw new Error(`[${res.status}] Error en la solicitud`);
         }
@@ -27,12 +30,14 @@ const Products = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const filteredProducts = filterProducts(products);
+  const filteredProducts = Array.isArray(products)
+    ? filterProducts(products)
+    : [];
 
   return (
     <>
       <article className="box pt-[5.6rem] grid-responsive mb-3">
-        {filteredProducts.map((product) => (
+        {products.map((product) => (
           <ProductItem key={product.id} product={product} />
         ))}
       </article>

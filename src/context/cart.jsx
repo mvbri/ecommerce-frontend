@@ -13,10 +13,10 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     axiosInstance
-      .get(`/stockProducts`)
+      .get(`/api/category`)
       .then((res) => {
         if (res.status === 200) {
-          dispatch({ type: "SET_PRODUCTS", payload: res.data });
+          dispatch({ type: "SET_PRODUCTS", payload: res.data.data });
         } else {
           throw new Error(`[${res.status}] Error en la solicitud`);
         }

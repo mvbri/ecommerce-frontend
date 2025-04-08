@@ -6,8 +6,10 @@ import "../components/css/Products.css";
 const ShowProducts = () => {
   return (
     <HomeLayout>
-      <Filters />
-      <Products />
+      <div className="pt-[5.6rem] min-h-[100vh]">
+        <Filters />
+        <Products />
+      </div>
     </HomeLayout>
   );
 };

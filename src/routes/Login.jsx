@@ -44,7 +44,7 @@ function Login() {
 
       const json = await response.json();
 
-      if (json.body.accessToken && json.body.refreshToken) {
+      if (json.accessToken && json.refreshToken) {
         auth.saveUser(json);
         goTo("/dashboard");
       }

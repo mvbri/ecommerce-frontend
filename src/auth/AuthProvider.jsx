@@ -13,8 +13,8 @@ const AuthContext = createContext({
 export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [accessToken, setAccessToken] = useState("");
-  const [user, setUser] = useState("");  
- 
+  const [user, setUser] = useState("");
+
   useEffect(() => {
     checkAuth();
   }, []);
@@ -34,7 +34,7 @@ export function AuthProvider({ children }) {
       }
       const json = await response.json();
 
-      return json.body.accessToken;
+      return json.accessToken;
     } catch (error) {
       console.log(error);
       return null;
@@ -58,7 +58,7 @@ export function AuthProvider({ children }) {
       const json = await response.json();
 
       if (json.error) throw new Error(json.error);
-      return json.body;
+      return json;
     } catch (error) {
       console.log(error);
       return null;
@@ -140,11 +140,7 @@ export function AuthProvider({ children }) {
   }
 
   function saveUser(userData) {
-    saveSessionInfo(
-      userData.body.user,
-      userData.body.accessToken,
-      userData.body.refreshToken
-    );
+    saveSessionInfo(userData.user, userData.accessToken, userData.refreshToken);
   }
 
   return (

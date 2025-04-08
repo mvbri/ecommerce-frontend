@@ -21,7 +21,7 @@ const Filters = () => {
 
   return (
     <section className="filters">
-      <div>
+      <div className="mr-4">
         <label htmlFor="price">Precio a partir de:</label>
         <input
           onChange={handleChangeMinPrice}
