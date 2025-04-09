@@ -1,16 +1,24 @@
 import { useCart } from "../hooks/useCart";
+import { API_URL } from "../auth/constants";
 
 const ProductItem = ({ product }) => {
-  console.log(product);
   const { addToCart } = useCart();
 
-  let { id, name, description, image, categoria, price, priceIVA } = product;
+  let { id, name, description, images, categoria, price, priceIVA } = product;
 
   return (
     <div className="p-2 border border-gray-400">
       <h4 className="text-lg font-semibold mb-1">{name}</h4>
       <p className="mb-2">{description}</p>
-      <img className="w-full" src={image}></img>
+
+      {images.map((image, i) => (
+        <img
+          key={i}
+          className="w-full"
+          src={`${API_URL}/public/images/products/${image.url}`}
+        />
+      ))}
+
       <h5>{categoria}</h5>
       <h4 className="mb-2">
         {price} - <span className="font-bold"> Precio con IVA: {priceIVA}</span>

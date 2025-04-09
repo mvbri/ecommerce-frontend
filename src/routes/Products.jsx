@@ -16,14 +16,15 @@ const Products = () => {
 
   useEffect(() => {
     axiosInstance
-      .get(`/api/category`)
+      .get(`/api/category/inicio`)
       .then((res) => {
         if (res.status === 200) {
           dispatch({
             type: "SET_PRODUCTS",
-            payload: res.data.data || res.data,
+            payload: res.data.products || res.data,
           });
         } else {
+          console.log(res + "Aqui");
           throw new Error(`[${res.status}] Error en la solicitud`);
         }
       })
