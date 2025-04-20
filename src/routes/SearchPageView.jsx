@@ -30,8 +30,8 @@ const SearchPageView = () => {
       }
       const data = await response.json();
       setSearchResults(data);
-    } catch (e) {
-      setError(e.message);
+    } catch (error) {
+      setError(error.message);
       setSearchResults([]);
     } finally {
       setLoading(false);

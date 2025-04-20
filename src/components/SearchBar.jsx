@@ -1,12 +1,18 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const SearchBar = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    const params = searchParams.get("q");
+    setSearchTerm(params);
+  }, [searchParams]);
 
   const handleChange = (e) => {
-    setSearchTerm(e.target.value);
+    navigate(`/search?q=${e.target.value}`);
   };
 
   const handleSubmit = (event) => {
