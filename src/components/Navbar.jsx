@@ -3,6 +3,7 @@ import logo from "../img/logo.jpeg";
 import "../components/css/Navbar.css";
 import { useState } from "react";
 import { useAuth } from "../auth/AuthProvider";
+import SearchBar from "./SearchBar";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -54,6 +55,7 @@ const Navbar = () => {
               <Link className="navbar-item" to="/products/">
                 Ver productos
               </Link>
+              <SearchBar />
             </div>
             <div className="navbar-section">
               <Link className="navbar-item hidden md:block" to="/shopping">

@@ -16,6 +16,7 @@ import { CartProvider } from "./context/cart.jsx";
 import AdminLogin from "./routes/AdminLogin.jsx";
 import HomePage from "./routes/HomePage.jsx";
 import ShowProducts from "./routes/ShowProducts.jsx";
+import SearchPageView from "./routes/SearchPageView.jsx";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +34,10 @@ const router = createBrowserRouter([
   {
     path: "products",
     element: <ShowProducts />,
+  },
+  {
+    path: "search",
+    element: <SearchPageView />,
   },
   {
     path: "/",
