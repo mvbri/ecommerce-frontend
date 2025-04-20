@@ -12,7 +12,7 @@ const SearchBar = () => {
   }, [searchParams]);
 
   const handleChange = (e) => {
-    navigate(`/search?q=${e.target.value}`);
+    setSearchTerm(e.target.value);
   };
 
   const handleSubmit = (event) => {
