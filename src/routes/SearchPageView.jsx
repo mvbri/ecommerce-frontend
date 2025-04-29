@@ -41,23 +41,23 @@ const SearchPageView = () => {
   return (
     <HomeLayout>
       <StandardSection>
-        <div className="flex flex-col item-center justify-center pt-6">
+        <div className="flex flex-col item-center justify-center pt-[7rem]">
           {loading && (
-            <p className="text-center">
+            <p className="text- mb-2">
               Cargando resultados para {`"${searchTerm}"`}...
             </p>
           )}
           {error && (
-            <p className="text-center">
+            <p className="text-center mb-2">
               Hubo un error al buscar {`"${searchTerm}"`}: {error}
             </p>
           )}
           {searchResults.length === 0 ? (
-            <h1 className="text-center">
+            <h1 className="text-center font-semibold text-xl md:text-4xl">
               No hay resultados para {`"${searchTerm}"`}
             </h1>
           ) : (
-            <h1 className="text-center">
+            <h1 className="text-center font-semibold text-xl md:text-4xl">
               Resultados de la Búsqueda para {`"${searchTerm}"`}
             </h1>
           )}

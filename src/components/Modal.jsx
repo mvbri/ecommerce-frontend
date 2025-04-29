@@ -1,8 +1,7 @@
 import "./css/Modal.css";
-import FormEditProduct from "./FormEditProduct";
 
 // eslint-disable-next-line react/prop-types
-function Modal({ children, isOpen, closeModal, data, updateItem }) {
+function Modal({ children, isOpen, closeModal }) {
   const handleModalContainerClick = (e) => e.stopPropagation();
 
   return (
@@ -12,17 +11,7 @@ function Modal({ children, isOpen, closeModal, data, updateItem }) {
           <button onClick={closeModal} className="modal-close">
             x
           </button>
-          {children ? (
-            children
-          ) : data ? (
-            <div>
-              <FormEditProduct
-                data={data}
-                updateItem={updateItem}
-                closeModal={closeModal}
-              />
-            </div>
-          ) : null}
+          {children}
         </div>
       </article>
     </>

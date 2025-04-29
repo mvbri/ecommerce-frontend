@@ -1,46 +1,25 @@
 /* eslint-disable react/jsx-key */
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { axiosInstance } from "../services/axios.config";
 import Table from "../components/Table";
 import Modal from "../components/Modal";
 import { useModal } from "../hooks/useModal";
 import AdminLayout from "../layout/AdminLayout";
+import { useFetchProducts } from "../hooks/useFetchProducts";
 
 function AdminShowProducts() {
-  const [items, setItems] = useState([]);
+  const { items, setItems } = useFetchProducts();
   const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItemName, setSelectedItemName] = useState(null);
   const [isOpen, openModal, closeModal] = useModal(false);
-  const [isOpenConfirm, openModalConfirm, closeModalConfirm] = useModal(false);
 
-  useEffect(() => {
-    axiosInstance
-      .get("/api/admin/products")
-      .then((res) => {
-        if (res.status === 200) {
-          setItems(res.data.data);
-        } else {
-          throw new Error(`[${res.status}] ERROR en la solicitud`);
-        }
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
-  // Función para manejar la selección del elemento
-  const handleSelectedItem = (item, action) => {
-    action === "edit" ? handleEditItem(item) : handleDeletetItem(item);
-  };
-
-  const handleEditItem = (item) => {
+  const handleDeletetItem = (item, name) => {
     setSelectedItem(item);
+    setSelectedItemName(name);
     openModal();
   };
 
-  const handleDeletetItem = (item) => {
-    setSelectedItem(item);
-    openModalConfirm();
-  };
-
-  const deleteItem = (id, name) => {
+  const deleteItem = (id) => {
     axiosInstance
       .delete(`/api/admin/products/${id}`)
       .then((res) => {
@@ -52,16 +31,7 @@ function AdminShowProducts() {
       })
       .catch((err) => console.log(err));
 
-    closeModalConfirm();
-  };
-
-  // Función para actualizar el estado local
-  const updateItem = (updatedItem) => {
-    setItems((prevItems) =>
-      prevItems.map((item) =>
-        item.id === updatedItem.id ? { ...updatedItem } : item
-      )
-    );
+    closeModal();
   };
 
   return (
@@ -72,29 +42,23 @@ function AdminShowProducts() {
         </h1>
         <div className="p-4">
           {items.length > 0 ? (
-            <Table onSelectItem={handleSelectedItem} items={items} />
+            <Table onSelectItem={handleDeletetItem} items={items} />
           ) : (
             <p className="text-center">No hay productos en el sistema</p>
           )}
-          <Modal
-            isOpen={isOpen}
-            closeModal={closeModal}
-            data={selectedItem}
-            updateItem={updateItem}
-          ></Modal>
-          <Modal
-            isOpen={isOpenConfirm}
-            closeModal={closeModalConfirm}
-            updateItem={updateItem}
-          >
+          <Modal isOpen={isOpen} closeModal={closeModal}>
             <div className="flex items-center justify-center size-full flex-col">
-              <h2 className="text-center text-gray-950 mb-8 text-xl">
-                ¿Está seguro que desea elimiar el siguiente Item?{" "}
-                {selectedItem ? selectedItem.split(",").shift() : ""}
+              <h2 className="text-center text-gray-950 mb-8 text-xl font-semibold">
+                ¿Está seguro que desea elimiar el siguiente Item? <br />
+                <span>
+                  {`"${
+                    selectedItemName ? selectedItemName.split(",").shift() : ""
+                  }" `}
+                </span>
               </h2>
               <button
-                className="w-fit bg-sky-500/75 w-[100px] py-1 px-2 rounded-md
- hover:bg-sky-700  hover:border-sky- font-semibold"
+                className="bg-secondary w-fit py-1 px-4 rounded-md
+ hover:bg-secondary-accent text-white"
                 onClick={() => deleteItem(selectedItem)}
               >
                 Eliminar

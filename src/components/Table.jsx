@@ -4,14 +4,12 @@ import { Grid, html } from "gridjs";
 import "gridjs/dist/theme/mermaid.css";
 import { useRef, useEffect } from "react";
 import { API_URL } from "../auth/constants";
-import { useNavigate } from "react-router-dom"; 
-
+import { useNavigate } from "react-router-dom";
 
 function Table({ onSelectItem, items }) {
   const wrapperRef = useRef(null);
-  const gridInstance = useRef(null); 
-  const navigate = useNavigate(); 
-
+  const gridInstance = useRef(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (!wrapperRef.current) return;
@@ -25,14 +23,14 @@ function Table({ onSelectItem, items }) {
     gridInstance.current = new Grid({
       columns: [
         {
-          id: 'images',
+          id: "images",
           name: "Imagen",
           formatter: (_, row) => {
-
-
             let imageUrl = row.cells[0].data[0]?.url; // Obtiene la URL de la primera imagen
-            imageUrl = typeof (imageUrl) != "undefined" ? `${API_URL}/public/images/products/${imageUrl}` : `${API_URL}/public/images/default.png`;
-
+            imageUrl =
+              typeof imageUrl != "undefined"
+                ? `${API_URL}/public/images/products/${imageUrl}`
+                : `${API_URL}/public/images/default.png`;
 
             return html(`
               <div class="flex justify-center items-center">
@@ -40,38 +38,38 @@ function Table({ onSelectItem, items }) {
                 
               </div>
             `);
-          }
-
+          },
         },
         {
-          id: 'name',
-          name: 'Name'
+          id: "name",
+          name: "Name",
         },
         {
-          id: 'description',
-          name: "Description"
+          id: "description",
+          name: "Description",
         },
         {
-          id: 'category',
+          id: "category",
           name: "Categoria",
-          formatter: (cell) => `${cell.map(cat => cat.name)}`
+          formatter: (cell) => `${cell.map((cat) => cat.name)}`,
         },
         {
-          id: 'stock',
-          name: "Cantidad"
+          id: "stock",
+          name: "Cantidad",
         },
         {
-          id: 'price',
-          name: "Precio"
+          id: "price",
+          name: "Precio",
         },
         {
-          id: 'priceIVA',
-          name: "Precio con IVA"
+          id: "priceIVA",
+          name: "Precio con IVA",
         },
         {
-          id: '_id',
+          id: "_id",
           name: "Modificar",
-          formatter: (_, row) => html(`
+          formatter: (_, row) =>
+            html(`
               <div class="flex justify-center items-center">
                 <a class="edit-btn cursor-pointer" data-id='${row.cells[7].data}'>
                   ✎
@@ -80,8 +78,7 @@ function Table({ onSelectItem, items }) {
                   ⌫
                 </a>
               </div>
-            `)
-          ,
+            `),
         },
       ],
       data: items,
@@ -120,12 +117,8 @@ function Table({ onSelectItem, items }) {
     };
   }, [items]); // Se ejecuta cada vez que `items` cambia
 
-  const editItem = (item) => {
-    onSelectItem(item, "edit");
-  };
-
-  const deleteItem = (item) => {
-    onSelectItem(item, "delete");
+  const deleteItem = (item, name) => {
+    onSelectItem(item, name);
   };
 
   return <div ref={wrapperRef} />;

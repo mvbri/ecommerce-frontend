@@ -1,6 +1,7 @@
 .navbar-container {
   display: flex;
   justify-content: space-between;
+  flex-direction: column;
   align-items: center;
   background-color: #fff085;
   position: fixed;
@@ -8,7 +9,7 @@
   margin: auto;
   z-index: 9999;
   padding: 0 1rem;
-  height: 5.6rem;
+  margin-bottom: 0;
 }
 
 .navbar {
@@ -93,6 +94,8 @@
 @media screen and (min-width: 1024px) {
   .navbar-container {
     background-color: #fff;
+    flex-direction: row;
+    height: 5.6rem;
   }
 
   .navbar {

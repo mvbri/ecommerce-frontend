@@ -24,7 +24,6 @@ const Products = () => {
             payload: res.data.products || res.data,
           });
         } else {
-          console.log(res + "Aqui");
           throw new Error(`[${res.status}] Error en la solicitud`);
         }
       })

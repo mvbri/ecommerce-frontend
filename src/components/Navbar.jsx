@@ -13,15 +13,15 @@ const Navbar = () => {
   return (
     <>
       <header className="navbar-container">
-        <div className="max-w-[1400px] m-auto flex justify-between w-full">
+        <div className="max-w-[1400px] m-auto flex justify-between w-full mb-2">
           <Link to="/home">
             <img
-              className="logo w-[80px] h-[80px] rounded-full"
+              className="logo w-[60px] h-[60px] md:w-[80px] md:h-[80px] rounded-full mt-1"
               src={logo}
               alt="Logo"
             />
           </Link>
-          <div className="flex items-center justify-center">
+          <div className="flex items-center justify-end">
             <Link className="cart" to="/shopping">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +29,7 @@ const Navbar = () => {
                 viewBox="0 0 24 24"
                 strokeWidth={1.5}
                 stroke="currentColor"
-                className="size-6"
+                className="size-8 mr-1"
               >
                 <path
                   strokeLinecap="round"
@@ -85,6 +85,9 @@ const Navbar = () => {
               )}
             </div>
           </nav>
+        </div>
+        <div className="flex justify-center m-auto items-center block lg:hidden w-full mb-2">
+          <SearchBar />
         </div>
       </header>
     </>

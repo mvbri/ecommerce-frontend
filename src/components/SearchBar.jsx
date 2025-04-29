@@ -21,9 +21,9 @@ const SearchBar = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex">
+    <form onSubmit={handleSubmit} className="flex w-full md:w-[18rem]">
       <input
-        className="mr-2 px-2 py-1 outline-none border-2 border-gray-400 focus:border-secondary rounded-md"
+        className="mr-2 w-full md:w-[18rem px-2 py-1 outline-none border-2 border-gray-400 focus:border-secondary rounded-md"
         type="text"
         placeholder="Buscar productos..."
         value={searchTerm}
