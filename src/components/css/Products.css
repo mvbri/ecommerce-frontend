@@ -5,3 +5,9 @@
   max-width: 1400px;
   margin: auto;
 }
+
+.grid-responsive img {
+  width: 100%;
+  height: 18.75rem;
+  object-fit: cover;
+}

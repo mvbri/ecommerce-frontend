@@ -1,5 +1,11 @@
 .basic-grid-container {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 1rem;
+  gap: 1.5rem;
+}
+
+.basic-grid-container img {
+  width: 100%;
+  height: 18.75rem;
+  object-fit: cover;
 }

@@ -40,13 +40,14 @@ const router = createBrowserRouter([
     element: <SearchPageView />,
   },
   {
+    path: "/signup",
+    element: <Signup />,
+  },
+  {
     path: "/",
     element: <ProtectedRoute />,
     children: [
-      {
-        path: "/signup",
-        element: <Signup />,
-      },
+      
       {
         path: "dashboard",
         element: <Dashboard />,
@@ -67,11 +68,12 @@ const router = createBrowserRouter([
       },
       {
         path: "product/create",
-        element: <CreateProducts />,
+        element: <CreateProducts key="create" />,
       },
       {
         path: "product/:id/edit",
-        element: <CreateProducts />,
+        
+        element: <CreateProducts key="edit" />,
       },
       {
         path: "product",

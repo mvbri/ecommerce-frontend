@@ -23,7 +23,7 @@ const SearchPageView = () => {
     setError(null);
     try {
       const response = await fetch(
-        `http://localhost:5000/api/products/search?q=${term}`
+        `http://localhost:5000/api/product/search?q=${term}`
       );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
