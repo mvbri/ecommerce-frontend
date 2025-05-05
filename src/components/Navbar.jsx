@@ -4,10 +4,14 @@ import "../components/css/Navbar.css";
 import { useState } from "react";
 import { useAuth } from "../auth/AuthProvider";
 import SearchBar from "./SearchBar";
+import Dropdown from "./Dropdown";
+import { useFetchCategories } from "../hooks/useFetchCategories";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const auth = useAuth();
+
+  const { categories } = useFetchCategories();
 
   const handleOpen = () => setIsOpen(!isOpen);
   return (
@@ -55,6 +59,7 @@ const Navbar = () => {
               <Link className="navbar-item whitespace-nowrap" to="/productos/">
                 Ver productos
               </Link>
+              <Dropdown items={categories} />
               <SearchBar className="hidden lg:flex" />
             </div>
             <div className="navbar-section">

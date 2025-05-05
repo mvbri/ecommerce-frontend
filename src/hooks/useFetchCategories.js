@@ -1,29 +1,27 @@
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../services/axios.config";
 
-export const useFetchCategories = (slug) => {
-  const [category, setCategory] = useState([]);
-  const [products, setProducts] = useState([]);
+export const useFetchCategories = () => {
+  const [categories, setCategories] = useState([]);
+
   useEffect(() => {
-    getCategory()
+    getCategories();
   }, []);
 
-  const getCategory = async () => {
+  const getCategories = async () => {
     try {
-      const res = await axiosInstance.get(`/api/category/${slug}`);
+      const res = await axiosInstance.get(`/api/category`);
       if (res.status === 200) {
-        const category = res.data.data;
-        const products = res.data.products;
+        const categories = res.data.data;
 
-        setCategory(category);
-        setProducts(products);
+        setCategories(categories);
       } else {
         throw Error(`[${res.status}] error en la solicitud`);
       }
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
-  return { products, category };
+  return { categories };
 };
