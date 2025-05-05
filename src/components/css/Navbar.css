@@ -4,6 +4,7 @@
   flex-direction: column;
   align-items: center;
   background-color: #fff085;
+  height: 7.5rem;
   position: fixed;
   width: 100%;
   margin: auto;
@@ -22,7 +23,7 @@
   width: 100%;
   padding-top: 2rem;
   left: 0;
-  top: 5.5rem;
+  top: 7.5rem;
   padding: 2rem 0;
   overflow-y: scroll;
   transform: translateX(-100%);

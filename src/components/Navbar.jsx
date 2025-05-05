@@ -16,7 +16,7 @@ const Navbar = () => {
         <div className="max-w-[1400px] m-auto flex justify-between w-full mb-2">
           <Link to="/home">
             <img
-              className="logo w-[60px] h-[60px] md:w-[80px] md:h-[80px] rounded-full mt-1"
+              className="logo w-[60px] h-[60px] lg:w-[80px] lg:h-[80px] rounded-full mt-1"
               src={logo}
               alt="Logo"
             />
@@ -52,13 +52,13 @@ const Navbar = () => {
               <Link className="navbar-item" to="/home">
                 Inicio
               </Link>
-              <Link className="navbar-item" to="/products/">
+              <Link className="navbar-item whitespace-nowrap" to="/products/">
                 Ver productos
               </Link>
-              <SearchBar />
+              <SearchBar className="hidden lg:flex" />
             </div>
             <div className="navbar-section">
-              <Link className="navbar-item hidden md:block" to="/shopping">
+              <Link className="navbar-item hidden lg:block" to="/shopping">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
@@ -86,7 +86,7 @@ const Navbar = () => {
             </div>
           </nav>
         </div>
-        <div className="flex justify-center m-auto items-center block lg:hidden w-full mb-2">
+        <div className="flex justify-center m-auto items-center lg:hidden w-full mb-2">
           <SearchBar />
         </div>
       </header>

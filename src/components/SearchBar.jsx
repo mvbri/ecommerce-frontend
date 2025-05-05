@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-const SearchBar = () => {
+const SearchBar = ({ className }) => {
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -21,9 +21,12 @@ const SearchBar = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="flex w-full md:w-[18rem]">
+    <form
+      onSubmit={handleSubmit}
+      className={className ? `${className} flex w-full` : " flex w-full"}
+    >
       <input
-        className="mr-2 w-full md:w-[18rem px-2 py-1 outline-none border-2 border-gray-400 focus:border-secondary rounded-md"
+        className="mr-2 w-full px-2 py-1 outline-none border-2 border-gray-400 focus:border-secondary rounded-md"
         type="text"
         placeholder="Buscar productos..."
         value={searchTerm}
