@@ -8,7 +8,7 @@ export const useFetchProductsHome = () => {
       .get("/api/category/inicio")
       .then((res) => {
         if (res.status === 200) {
-          setItems(res.data.products);
+          setItems(res.products);
         } else {
           throw new Error(`[${res.status}] ERROR en la solicitud`);
         }

@@ -53,11 +53,11 @@ const SearchPageView = () => {
             </p>
           )}
           {searchResults.length === 0 ? (
-            <h1 className="text-center font-semibold text-xl md:text-4xl">
+            <h1 className="text-center font-semibold text-xl mb-8 md:text-4xl">
               No hay resultados para {`"${searchTerm}"`}
             </h1>
           ) : (
-            <h1 className="text-center font-semibold text-xl md:text-4xl">
+            <h1 className="text-center font-semibold text-xl mb-8 md:text-4xl">
               Resultados de la Búsqueda para {`"${searchTerm}"`}
             </h1>
           )}

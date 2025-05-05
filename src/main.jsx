@@ -17,6 +17,8 @@ import AdminLogin from "./routes/AdminLogin.jsx";
 import HomePage from "./routes/HomePage.jsx";
 import ShowProducts from "./routes/ShowProducts.jsx";
 import SearchPageView from "./routes/SearchPageView.jsx";
+import ShowCategories from "./routes/ShowCategories.jsx";
+import ShowProduct from "./routes/ShowProduct.jsx";
 
 const router = createBrowserRouter([
   {
@@ -28,16 +30,24 @@ const router = createBrowserRouter([
     element: <HomePage />,
   },
   {
-    path: "shopping",
+    path: "/shopping",
     element: <Shopping />,
   },
   {
-    path: "products",
+    path: "/productos",
     element: <ShowProducts />,
   },
   {
-    path: "search",
+    path: "/search",
     element: <SearchPageView />,
+  },
+  {
+    path: "/categoria/:slug",
+    element: <ShowCategories />,
+  },
+  {
+    path: "/producto/:slug",
+    element: <ShowProduct />,
   },
   {
     path: "/signup",
@@ -72,7 +82,6 @@ const router = createBrowserRouter([
       },
       {
         path: "product/:id/edit",
-        
         element: <CreateProducts key="edit" />,
       },
       {
