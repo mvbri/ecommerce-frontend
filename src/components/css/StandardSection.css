@@ -4,8 +4,15 @@
   margin: auto;
 }
 
+.standard-section:last-child {
+  padding-bottom: 3rem;
+}
+
 @media screen and (min-width: 1024px) {
   .standard-section {
     padding-top: 6rem;
+  }
+  .standard-section:last-child {
+    padding-bottom: 6rem;
   }
 }

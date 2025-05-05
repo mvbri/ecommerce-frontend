@@ -16,16 +16,16 @@ export function shoppingReducer(state, action) {
   switch (action.type) {
     case TYPES.ADD_TO_CART: {
       let newItem = state.products.find(
-        (product) => product.id === action.payload
+        (product) => product._id === action.payload
       );
 
-      let itemInCart = state.cart.find((item) => item.id === newItem.id);
+      let itemInCart = state.cart.find((item) => item._id === newItem._id);
 
       if (itemInCart) {
         const newState = {
           ...state,
           cart: state.cart.map((item) =>
-            item.id === newItem.id
+            item._id === newItem._id
               ? {
                   ...item,
                   quantity: item.quantity + 1,
@@ -53,13 +53,13 @@ export function shoppingReducer(state, action) {
       return newState;
     }
     case TYPES.REMOVE_ONE_FROM_CART: {
-      let itemToDelete = state.cart.find((item) => item.id === action.payload);
+      let itemToDelete = state.cart.find((item) => item._id === action.payload);
 
       if (itemToDelete.quantity > 1) {
         const newState = {
           ...state,
           cart: state.cart.map((item) =>
-            item.id === action.payload
+            item._id === action.payload
               ? {
                   ...item,
                   quantity: item.quantity - 1,
@@ -76,7 +76,7 @@ export function shoppingReducer(state, action) {
 
       const newState = {
         ...state,
-        cart: state.cart.filter((item) => item.id !== action.payload),
+        cart: state.cart.filter((item) => item._id !== action.payload),
         total: state.total - itemToDelete.priceIVA,
       };
 
@@ -86,10 +86,10 @@ export function shoppingReducer(state, action) {
     case TYPES.REMOVE_ALL_FROM_CART: {
       const newState = {
         ...state,
-        cart: state.cart.filter((item) => item.id !== action.payload),
+        cart: state.cart.filter((item) => item._id !== action.payload),
         total:
           state.total -
-          state.cart.find((item) => item.id === action.payload).total,
+          state.cart.find((item) => item._id === action.payload).total,
       };
 
       updateLocalStorage(newState);

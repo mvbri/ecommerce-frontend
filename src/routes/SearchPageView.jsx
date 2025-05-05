@@ -23,7 +23,7 @@ const SearchPageView = () => {
     setError(null);
     try {
       const response = await fetch(
-        `http://localhost:5000/api/products/search?q=${term}`
+        `http://localhost:5000/api/product/search?q=${term}`
       );
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -53,11 +53,11 @@ const SearchPageView = () => {
             </p>
           )}
           {searchResults.length === 0 ? (
-            <h1 className="text-center font-semibold text-xl md:text-4xl">
+            <h1 className="text-center font-semibold text-xl mb-8 md:text-4xl">
               No hay resultados para {`"${searchTerm}"`}
             </h1>
           ) : (
-            <h1 className="text-center font-semibold text-xl md:text-4xl">
+            <h1 className="text-center font-semibold text-xl mb-8 md:text-4xl">
               Resultados de la Búsqueda para {`"${searchTerm}"`}
             </h1>
           )}

@@ -26,24 +26,24 @@ export const CartProvider = ({ children }) => {
 
   const { products, cart, total } = state;
 
-  const addToCart = (id) => {
+  const addToCart = (_id) => {
     dispatch({
       type: TYPES.ADD_TO_CART,
-      payload: id,
+      payload: _id,
     });
   };
-  const delFromCart = (id, all = false) => {
+  const delFromCart = (_id, all = false) => {
     if (!all) {
       dispatch({
         type: TYPES.REMOVE_ONE_FROM_CART,
-        payload: id,
+        payload: _id,
       });
       return;
     }
 
     dispatch({
       type: TYPES.REMOVE_ALL_FROM_CART,
-      payload: id,
+      payload: _id,
     });
   };
 

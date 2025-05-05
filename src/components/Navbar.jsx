@@ -52,7 +52,7 @@ const Navbar = () => {
               <Link className="navbar-item" to="/home">
                 Inicio
               </Link>
-              <Link className="navbar-item whitespace-nowrap" to="/products/">
+              <Link className="navbar-item whitespace-nowrap" to="/productos/">
                 Ver productos
               </Link>
               <SearchBar className="hidden lg:flex" />

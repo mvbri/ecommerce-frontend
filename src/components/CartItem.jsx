@@ -1,7 +1,7 @@
 import { API_URL } from "../auth/constants";
 
 const CartItem = ({ data, delFromCart }) => {
-  let { id, name, description, images, categoria, price, priceIVA, quantity } =
+  let { _id, name, description, images, categoria, price, priceIVA, quantity } =
     data;
 
   return (
@@ -21,26 +21,24 @@ const CartItem = ({ data, delFromCart }) => {
       <h5 className="mb-3">
         {priceIVA} x{quantity} = {priceIVA * quantity}
       </h5>
-      {images.map((image, i) => (
-        <figure key={i} className="mb-3">
+        <figure className="mb-3">
           <img
             className="object-fit max-h-[300px]"
-            src={`${API_URL}/public/images/products/${image.url}`}
+            src={`${API_URL}/public/images/products/${images[0].url}`}
           />
         </figure>
-      ))}
 
       <h5>{categoria}</h5>
       <div className="m-auto md:m-0 w-fit">
         <button
-          onClick={() => delFromCart(id)}
+          onClick={() => delFromCart(_id)}
           className="bg-secondary hover:bg-secondary-accent text-white w-fit py-1 px-2 rounded-md
   font-semibold mb-3"
         >
           Eliminar 1
         </button>
         <button
-          onClick={() => delFromCart(id, true)}
+          onClick={() => delFromCart(_id, true)}
           className="bg-secondary hover:bg-secondary-accent text-white ml-4 w-fit py-1 px-2 rounded-md
   font-semibold mb-3"
         >
