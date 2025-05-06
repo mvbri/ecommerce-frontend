@@ -19,6 +19,11 @@ import ShowProducts from "./routes/ShowProducts.jsx";
 import SearchPageView from "./routes/SearchPageView.jsx";
 import ShowCategories from "./routes/ShowCategories.jsx";
 import ShowProduct from "./routes/ShowProduct.jsx";
+import CreateDelivery from "./routes/CreateDelivery.jsx";
+import ShowDeliveries from "./routes/ShowDeliveries.jsx";
+import DeliveryDashboard from "./routes/DeliveryDashboard.jsx";
+import ShowOrders from "./routes/ShowOrders.jsx";
+import EditOrder from "./routes/EditOrder.jsx";
 
 const router = createBrowserRouter([
   {
@@ -57,7 +62,6 @@ const router = createBrowserRouter([
     path: "/",
     element: <ProtectedRoute />,
     children: [
-      
       {
         path: "dashboard",
         element: <Dashboard />,
@@ -87,6 +91,36 @@ const router = createBrowserRouter([
       {
         path: "product",
         element: <AdminShowProducts />,
+      },
+      {
+        path: "delivery/crear",
+        element: <CreateDelivery />,
+      },
+      {
+        path: "deliveries",
+        element: <ShowDeliveries />,
+      },
+      {
+        path: "delivery/:id/editar",
+        element: <CreateProducts key="edit" />,
+      },
+    ],
+  },
+  {
+    path: "/delivery",
+    element: <ProtectedRoute />,
+    children: [
+      {
+        path: "dashboard",
+        element: <DeliveryDashboard />,
+      },
+      {
+        path: "ordenes",
+        element: <ShowOrders />,
+      },
+      {
+        path: "orden/:id/editar",
+        element: <EditOrder />,
       },
     ],
   },

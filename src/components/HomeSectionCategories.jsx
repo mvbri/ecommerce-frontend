@@ -13,32 +13,32 @@ function HomeSectionCategories() {
         </h2>
         <BasicGridLayout>
           <Card
-            title="Bebidas"
+            title="Dulces"
             img={ImgDrinks}
             imgAlt="Cuidad personal"
-            btnText="ir a Bebidas"
-            link="/home"
+            btnText="Dulces"
+            link="/dulces"
           />
           <Card
-            title="Cuidad Personal"
+            title="Frutas"
             img={ImgDrinks}
             imgAlt="Cuidad personal"
-            btnText="ir a Cuidado Personal"
-            link="/home"
+            btnText="Frutas"
+            link="/frutas"
           />
           <Card
-            title="snacks"
+            title="All"
             img={ImgDrinks}
             imgAlt="Cuidad personal"
-            btnText="ir a Snacks"
-            link="/home"
+            btnText="All"
+            link="/all"
           />
           <Card
-            title="Condimentos y Salsas"
+            title="Inicio"
             img={ImgDrinks}
             imgAlt="Cuidad personal"
-            btnText="ir a Condimentos y Salsas"
-            link="/home"
+            btnText="Inicio"
+            link="/inicio"
           />
         </BasicGridLayout>
       </StandardSection>

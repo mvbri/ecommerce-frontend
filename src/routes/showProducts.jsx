@@ -7,7 +7,7 @@ const ShowProducts = () => {
   return (
     <HomeLayout>
       <div className="pt-[5.6rem] min-h-[100vh]">
-        <Filters />
+        {/* <Filters /> */}
         <Products />
       </div>
     </HomeLayout>

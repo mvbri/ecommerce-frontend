@@ -15,6 +15,8 @@ function Login() {
     return <Navigate to="/dashboard" />;
   } else if (auth.isAuthenticated && auth.getUser().role == "admin") {
     return <Navigate to="/admin/dashboard" />;
+  } else if (auth.isAuthenticated && auth.getUser().role == "delivery") {
+    return <Navigate to="/delivery/dashboard" />;
   }
 
   async function handleSubmit(e) {

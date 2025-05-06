@@ -1,19 +1,18 @@
-import AdminLayout from "../layout/AdminLayout";
-import { useAuth } from "../auth/AuthProvider";
+import DeliveryLayout from "../layout/DeliveryLayout";
 import StandardSection from "../components/StandardSection";
+import { useAuth } from "../auth/AuthProvider";
 
-function AdminDashboard() {
+function DeliveryDashboard() {
   const auth = useAuth();
-
   return (
-    <AdminLayout>
+    <DeliveryLayout>
       <StandardSection>
         <h1 className="text-2xl md:text-4xl text-center pt-4">
           Bienvenid@ {auth.getUser()?.name || null}
         </h1>
       </StandardSection>
-    </AdminLayout>
+    </DeliveryLayout>
   );
 }
 
-export default AdminDashboard;
+export default DeliveryDashboard;

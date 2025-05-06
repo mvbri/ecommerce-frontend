@@ -5,13 +5,12 @@ import "../components/css/Navbar.css";
 import { useState } from "react";
 import logo from "../img/logo.jpeg";
 
-function AdminLayout({ children }) {
+function DeliveryLayout({ children }) {
   const auth = useAuth();
   setAuthToken(auth.getAccessToken());
   const [isOpen, setIsOpen] = useState(false);
 
   const handleOpen = () => setIsOpen(!isOpen);
-
   return (
     <>
       <header className="navbar-container">
@@ -35,20 +34,8 @@ function AdminLayout({ children }) {
           </div>
           <nav className={`navbar ${isOpen ? "open" : ""}`}>
             <div className="navbar-section">
-              <Link className="navbar-item" to="/admin/dashboard">
-                Inicio
-              </Link>
-              <Link className="navbar-item" to="/admin/product/create">
-                Crear producto
-              </Link>
-              <Link className="navbar-item" to="/admin/product">
-                Lista de productos
-              </Link>
-              <Link className="navbar-item" to="/admin/delivery/crear">
-                Registrar delivery
-              </Link>
-              <Link className="navbar-item" to="/admin/deliveries">
-                Deliveries
+              <Link className="navbar-item" to="/delivery/ordenes">
+                Lista de Pedidos
               </Link>
             </div>
             <div className="navbar-section">
@@ -71,4 +58,4 @@ function AdminLayout({ children }) {
   );
 }
 
-export default AdminLayout;
+export default DeliveryLayout;
