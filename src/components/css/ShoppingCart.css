@@ -9,3 +9,27 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
 }
+
+.quantity-cart{
+  position: absolute;
+  margin-left: -2.1rem;
+  color: #fff;
+  background: #ff9b17;
+  border-radius: 50rem;
+  padding: 0.4rem;
+  font-size: 0.8rem;
+  top: 1.2rem;
+  line-height: 0.5rem;
+}
+
+.quantity-cart-mobile{
+  position: absolute;
+  margin-left: -1rem;
+  color: #fff;
+  background: #ff9b17;
+  border-radius: 50rem;
+  padding: 0.4rem;
+  font-size: 0.8rem;
+  top: 0.7rem;
+  line-height: 0.5rem;
+}

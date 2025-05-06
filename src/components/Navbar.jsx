@@ -4,10 +4,15 @@ import "../components/css/Navbar.css";
 import { useState } from "react";
 import { useAuth } from "../auth/AuthProvider";
 import SearchBar from "./SearchBar";
+import { useCart } from "../hooks/useCart";
+
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const auth = useAuth();
+  const { cart } =  useCart();
+
 
   const handleOpen = () => setIsOpen(!isOpen);
   return (
@@ -23,6 +28,7 @@ const Navbar = () => {
           </Link>
           <div className="flex items-center justify-end">
             <Link className="cart" to="/shopping">
+            <span className="quantity-cart-mobile">{cart.total_quantity}</span>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -59,6 +65,7 @@ const Navbar = () => {
             </div>
             <div className="navbar-section">
               <Link className="navbar-item hidden md:block" to="/shopping">
+              <span className="quantity-cart">{cart.total_quantity}</span>
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
