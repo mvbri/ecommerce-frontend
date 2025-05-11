@@ -22,7 +22,7 @@ const NumberInput = ({ onQuantityChange , quantityDefault}) => {
 
   return (
     <div>
-      <button className='bg-secondary hover:bg-secondary-accent w-fit px-2 rounded-md 
+      <button className='bg-secondary hover:bg-secondary-accent w-fit px-2 rounded-md  text-white
   font-semibold mb-3' onClick={handleDecrement}>-</button>
       <input
       className='outline-none border-2 border-gray-400 focus:border-secondary rounded-md'
