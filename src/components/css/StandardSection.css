@@ -4,6 +4,11 @@
   margin: auto;
 }
 
+.standard-max-w {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
 .standard-section:last-child {
   padding-bottom: 3rem;
 }

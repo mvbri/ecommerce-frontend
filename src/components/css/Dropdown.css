@@ -10,10 +10,6 @@
   display: block;
 }
 
-.menu a:hover {
-  background-color: #555;
-}
-
 /* Estilos del dropdown */
 
 .dropdown {
@@ -26,6 +22,7 @@
 
 .dropdown-toggle {
   cursor: pointer;
+  display: flex;
 }
 
 .dropdown-menu {
@@ -52,7 +49,6 @@
     z-index: 1;
     min-width: 9.375rem;
     z-index: 1000;
-    background-color: #fff;
     padding-left: 1rem;
   }
 }

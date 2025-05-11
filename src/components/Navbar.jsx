@@ -4,7 +4,6 @@ import "../components/css/Navbar.css";
 import { useState } from "react";
 import { useAuth } from "../auth/AuthProvider";
 import SearchBar from "./SearchBar";
-import Dropdown from "./Dropdown";
 import { useFetchCategories } from "../hooks/useFetchCategories";
 
 const Navbar = () => {
@@ -16,8 +15,8 @@ const Navbar = () => {
   const handleOpen = () => setIsOpen(!isOpen);
   return (
     <>
-      <header className="navbar-container">
-        <div className="max-w-[1400px] m-auto flex justify-between w-full mb-2">
+      <header className="navbar-container max-w-[1400px] md:px-6 m-auto">
+        <div className="flex justify-between w-full">
           <Link to="/home">
             <img
               className="logo w-[60px] h-[60px] lg:w-[80px] lg:h-[80px] rounded-full mt-1"
@@ -56,13 +55,18 @@ const Navbar = () => {
               <Link className="navbar-item" to="/home">
                 Inicio
               </Link>
-              <Link className="navbar-item whitespace-nowrap" to="/productos/">
-                Ver productos
-              </Link>
-              <Dropdown items={categories} />
-              <SearchBar className="hidden lg:flex" />
+              {categories.map((category, i) => (
+                <Link
+                  key={i}
+                  className="navbar-item whitespace-nowrap"
+                  to={category.slug}
+                >
+                  {category.name}
+                </Link>
+              ))}
             </div>
             <div className="navbar-section">
+              <SearchBar className="hidden lg:flex" />
               <Link className="navbar-item hidden lg:block" to="/shopping">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -80,11 +84,14 @@ const Navbar = () => {
                 </svg>
               </Link>
               {auth.isAuthenticated ? (
-                <button onClick={auth.handleSignOut} className="navbar-item">
+                <button
+                  onClick={auth.handleSignOut}
+                  className="navbar-item whitespace-nowrap"
+                >
                   Cerrar sesion
                 </button>
               ) : (
-                <Link className="navbar-item" to="/">
+                <Link className="navbar-item whitespace-nowrap" to="/">
                   Inicia sesión
                 </Link>
               )}

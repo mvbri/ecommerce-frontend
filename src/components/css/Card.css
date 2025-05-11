@@ -17,18 +17,3 @@
 .img-card {
   margin-bottom: 1rem;
 }
-
-.btn-card {
-  font-size: 1rem;
-  width: fit-content;
-  padding: 0.3rem 1.5rem;
-  background-color: #ff9b17;
-  color: #fff;
-}
-
-.btn-card:hover {
-  background-color: #ff7300;
-  color: #fff;
-}
-dia screen and (min-width: 1024px) {
-}

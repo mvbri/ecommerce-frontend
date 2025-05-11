@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import "./css/Dropdown.css";
 import { Link } from "react-router-dom";
 
-const Dropdown = ({ items }) => {
+const Dropdown = ({ items, title, className }) => {
   const [isOpen, setIsOpen] = useState(false);
   const dropdownRef = useRef(null);
   const toggleDropdown = () => {
@@ -23,12 +23,12 @@ const Dropdown = ({ items }) => {
   }, [dropdownRef]);
   return (
     <ul>
-      <li className="dropdown" ref={dropdownRef}>
-        <button
-          className={`dropdown-toggle whitespace-nowrap navbar-item flex`}
-          onClick={toggleDropdown}
-        >
-          Categorias{" "}
+      <li
+        className={className ? `${className} dropdown` : "dropdown"}
+        ref={dropdownRef}
+      >
+        <button className={`dropdown-toggle`} onClick={toggleDropdown}>
+          {title}{" "}
           {isOpen ? (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -63,7 +63,7 @@ const Dropdown = ({ items }) => {
         </button>
         <ul className={`dropdown-menu ${isOpen ? "open" : ""}`}>
           {items.map((item, i) => (
-            <Link to={`/${item.slug}`} key={i} className="navbar-item block">
+            <Link to={`/${item.slug || item.link}`} key={i}>
               {item.name}
             </Link>
           ))}

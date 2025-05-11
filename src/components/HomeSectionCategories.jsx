@@ -2,43 +2,36 @@ import BasicGridLayout from "./BasicGridLayout";
 import Card from "./Card";
 import ImgDrinks from "../img/cards_categories/drinks.jpg";
 import StandardSection from "./StandardSection";
+import "./css/HomeSectionCategories.css";
+import TitleSection from "./TitleSection";
 
 function HomeSectionCategories() {
   return (
     <>
-      <StandardSection>
-        <h2 className="text-2xl md:text-4xl text-center mb-8 md:mb-14 font-semibold">
-          Algunas de Nuestras <br className="md:hidden" />{" "}
-          <span className="text-secondary">Categorias</span>
-        </h2>
+      <StandardSection className="bg-gray-100 py-16 sm:py-24 lg:py-32">
+        <TitleSection text="Algunas de Nuestras" secondText="categorias" />
         <BasicGridLayout>
           <Card
+            className="custom-card"
             title="Dulces"
             img={ImgDrinks}
             imgAlt="Cuidad personal"
-            btnText="Dulces"
             link="/dulces"
           />
           <Card
+            className="custom-card"
             title="Frutas"
             img={ImgDrinks}
             imgAlt="Cuidad personal"
-            btnText="Frutas"
             link="/frutas"
           />
           <Card
+            className="custom-card"
             title="All"
             img={ImgDrinks}
             imgAlt="Cuidad personal"
             btnText="All"
             link="/all"
-          />
-          <Card
-            title="Inicio"
-            img={ImgDrinks}
-            imgAlt="Cuidad personal"
-            btnText="Inicio"
-            link="/inicio"
           />
         </BasicGridLayout>
       </StandardSection>

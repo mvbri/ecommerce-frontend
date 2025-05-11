@@ -1,15 +1,18 @@
 import { Link } from "react-router-dom";
 import "./css/Card.css";
 
-const Card = ({ title, img, imgAlt, btnText, link }) => {
+const Card = ({ title, img, imgAlt, link, className }) => {
   return (
-    <div className="card">
-      <h3 className="title-card">{title}</h3>
-      <img className="img-card" src={img} alt={imgAlt} />
-      <Link className="btn-card" to={link}>
-        {btnText}
-      </Link>
-    </div>
+    <Link to={link}>
+      <div className={className ? `${className} card group` : "card group"}>
+        <h3 className="title-card">{title}</h3>
+        <img
+          className="img-card group-hover:opacity-75"
+          src={img}
+          alt={imgAlt}
+        />
+      </div>
+    </Link>
   );
 };
 

@@ -5,6 +5,7 @@ import Slider from "../components/Slider";
 import HomeBanner from "../components/HomeBanner";
 import HomeLayout from "../layout/HomeLayout";
 import StandardSection from "../components/StandardSection";
+import Example from "../components/Example";
 
 const HomePage = () => {
   return (
@@ -20,6 +21,7 @@ const HomePage = () => {
           </div>
         </Slider>
       </StandardSection>
+      {/* <Example /> */}
       <HomeSectionCategories />
       <HomeSectionCustomers />
       <HomeSectionProducts />
