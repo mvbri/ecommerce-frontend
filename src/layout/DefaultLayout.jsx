@@ -4,7 +4,7 @@ import logo from "../img/logo.jpeg";
 function DefaultLayout({ children }) {
   return (
     <>
-      <header className="mb-4">
+      <header className="max-w-[1400px] md:px-6 m-auto">
         <nav className="px-3 py-2 flex items-center">
           <Link to="/home">
             <img
