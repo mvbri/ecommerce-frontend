@@ -1,0 +1,57 @@
+.menu ul {
+  text-align: center;
+}
+
+.menu li {
+  display: inline-block;
+}
+
+.menu a {
+  display: block;
+}
+
+.menu a:hover {
+  background-color: #555;
+}
+
+/* Estilos del dropdown */
+
+.dropdown {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
+.dropdown-toggle {
+  cursor: pointer;
+}
+
+.dropdown-menu {
+  display: none;
+  text-align: left;
+  z-index: 1;
+  min-width: 9.375rem;
+}
+
+.dropdown-menu.open {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding-left: 1.5rem;
+}
+
+@media screen and (min-width: 1024px) {
+  .dropdown-menu {
+    display: none;
+    position: absolute;
+    bottom: -6.4rem;
+    left: -0.3125rem;
+    z-index: 1;
+    min-width: 9.375rem;
+    z-index: 1000;
+    background-color: #fff;
+    padding-left: 1rem;
+  }
+}

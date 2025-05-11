@@ -32,17 +32,13 @@ function Login() {
         }),
       });
 
+      const json = await response.json();
       if (!response.ok) {
-        console.log("Something Went Wrong");
-        const json = await response.json();
-        setErrorResponse(json.body.error);
-
-        return;
+        setErrorResponse(json.error);
+        throw Error("Something Went Wrong");
       }
       console.log("Login Successful");
       setErrorResponse("");
-
-      const json = await response.json();
 
       if (json.accessToken && json.refreshToken) {
         auth.saveUser(json);
@@ -67,9 +63,8 @@ function Login() {
           >
             Login
           </h1>
-
           {!!errorResponse && (
-            <div className="bg-red-500 w-80 text-center ml-4 p-1 mb-3">
+            <div className="bg-red-500 w-80 text-center text-white ml-4 p-1 mb-3">
               {errorResponse}
             </div>
           )}
