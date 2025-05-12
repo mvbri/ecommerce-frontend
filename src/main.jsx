@@ -127,7 +127,6 @@ const router = createBrowserRouter([
 ]);
 
 createRoot(document.getElementById("root")).render(
-  <StrictMode>
     <AuthProvider>
       <CartProvider>
         <FilterProvider>
@@ -135,5 +134,4 @@ createRoot(document.getElementById("root")).render(
         </FilterProvider>
       </CartProvider>
     </AuthProvider>
-  </StrictMode>
 );
