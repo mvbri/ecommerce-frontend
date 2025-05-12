@@ -12,19 +12,19 @@ const ProductItem = ({ product }) => {
   const handleQuantityChange = (newQuantity) => {
     if (newQuantity !== quantity) {
       setQuantity(newQuantity); // Actualiza el estado de cantidad en el padre
-
     }
   };
 
-
-  let { _id, name, description, images, categoria, price, priceIVA, slug } = product;
+  let { _id, name, description, images, categoria, price, priceIVA, slug } =
+    product;
 
   return (
-
     <div className="p-2 border border-gray-400 max-w-[400px] pointer">
-      <Link to={{
-        pathname: `/producto/${slug}`,
-      }}>
+      <Link
+        to={{
+          pathname: `/producto/${slug}`,
+        }}
+      >
         <h4 className="text-lg font-semibold mb-1">{name}</h4>
       </Link>
 
@@ -34,9 +34,6 @@ const ProductItem = ({ product }) => {
           pathname: `/producto/${slug}`,
         }}
       >
-      <Link to={{
-        pathname: `/producto/${slug}`,
-      }}>
         <img
           className="w-full mb-4"
           src={`${API_URL}/public/images/products/${images[0].url}`}
@@ -49,7 +46,10 @@ const ProductItem = ({ product }) => {
       </h4>
 
       <div>
-        <NumberInput onQuantityChange={handleQuantityChange} quantityDefault={quantity} />
+        <NumberInput
+          onQuantityChange={handleQuantityChange}
+          quantityDefault={quantity}
+        />
 
         <button
           onClick={() => addToCart(_id, quantity)}
@@ -58,8 +58,6 @@ const ProductItem = ({ product }) => {
           Agregar
         </button>
       </div>
-
-
     </div>
   );
 };
