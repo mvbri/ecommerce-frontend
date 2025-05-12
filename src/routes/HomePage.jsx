@@ -4,13 +4,11 @@ import HomeSectionProducts from "../components/HomeSectionProducts";
 import Slider from "../components/Slider";
 import HomeBanner from "../components/HomeBanner";
 import HomeLayout from "../layout/HomeLayout";
-import StandardSection from "../components/StandardSection";
-import Example from "../components/Example";
 
 const HomePage = () => {
   return (
     <HomeLayout>
-      <StandardSection>
+      <div className="max-w-[1400px] m-auto">
         <Slider>
           <HomeBanner />
           <div key="2" className="p-6 bg-green-500 text-white rounded-lg">
@@ -20,7 +18,7 @@ const HomePage = () => {
             Slide 3: Otro contenido aquí.
           </div>
         </Slider>
-      </StandardSection>
+      </div>
       {/* <Example /> */}
       <HomeSectionCategories />
       <HomeSectionCustomers />

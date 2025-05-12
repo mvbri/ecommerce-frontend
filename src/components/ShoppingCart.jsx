@@ -9,7 +9,7 @@ const ShoppingCart = () => {
     useCart();
   return (
     <StandardSection>
-      <div className="p-3 max-w-[1400px] m-auto">
+      <div>
         <h2 className="text-center text-xl mb-4 font-bold">
           Carrito de compras
         </h2>
