@@ -24,8 +24,8 @@ export default function NavTailwind() {
   return (
     <Disclosure as="nav" className="bg-gray-800 fixed w-full z-[9998]">
       <div className="max-w-[1400px] m-auto px-2 sm:px-6">
-        <div className="relative flex flex-col h-32 lg:h-24 items-center justify-center lg:justify-between">
-          <div className="flex justify-center items-center space-between w-full mb-2">
+        <div className="relative flex flex-col h-32 lg:h-20 items-center justify-center lg:justify-between">
+          <div className="flex justify-center items-center space-between w-full mb-2 lg:mb-0">
             <div className="inset-y-0 flex items-center justify-center sm:hidden">
               {/* Mobile menu button*/}
               <DisclosureButton className="group relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-gray-700 hover:text-white focus:ring-2 focus:ring-white focus:outline-hidden focus:ring-inset">
