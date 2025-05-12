@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import {
   Dialog,
   DialogBackdrop,
@@ -12,7 +11,7 @@ import { useCart } from "../hooks/useCart";
 import { API_URL } from "../auth/constants";
 
 export default function SidebarShoppingCart({ open, setOpen }) {
-  const { cart, delFromCart, total } = useCart();
+  const { cart, delFromCart } = useCart();
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-[9999]">
       <DialogBackdrop
@@ -52,13 +51,13 @@ export default function SidebarShoppingCart({ open, setOpen }) {
                         role="list"
                         className="-my-6 divide-y divide-gray-200"
                       >
-                        {cart.length > 0 ? (
-                          cart.map((product) => (
-                            <li key={product.id} className="flex py-6">
+                        {cart?.detail?.length > 0 ? (
+                          cart?.detail.map((item, i) => (
+                            <li key={i} className="flex py-6">
                               <div className="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
                                 <img
-                                  alt={product.name}
-                                  src={`${API_URL}/public/images/products/${product.images[0].url}`}
+                                  alt={item.product.name}
+                                  src={`${API_URL}/public/images/products/${item.product.images[0].url}`}
                                   className="size-full object-cover"
                                 />
                               </div>
@@ -67,20 +66,49 @@ export default function SidebarShoppingCart({ open, setOpen }) {
                                 <div>
                                   <div className="flex justify-between text-base font-medium text-gray-900">
                                     <h3>
-                                      <a href={product.slug}>{product.name}</a>
+                                      <a href={item.product.slug}>
+                                        {item.product.name}
+                                      </a>
                                     </h3>
-                                    <p className="ml-4">{product.price}$</p>
+                                    <div className="text-sm">
+                                      <p className="ml-4">
+                                        Precio sin I.V.A {item.product.price}$
+                                      </p>
+                                      <p className="ml-4">
+                                        Precio con I.V.A {item.product.priceIVA}
+                                        $
+                                      </p>
+                                      <p className="ml-4">
+                                        {item.product.priceIVA} Bs x
+                                        {item.quantity} ={" "}
+                                        {item.product.priceIVA * item.quantity}{" "}
+                                        Bs
+                                      </p>
+                                    </div>
                                   </div>
+                                  <p className="ml-1 text-base font-medium text-gray-500">
+                                    {item.product.description}
+                                  </p>
+                                  {item.product.category.map((cat, i) => {
+                                    return (
+                                      <span
+                                        className="ml-1 text-base font-medium text-gray-500"
+                                        key={i}
+                                      >
+                                        {cat.name}
+                                      </span>
+                                    );
+                                  })}
                                 </div>
                                 <div className="flex flex-1 items-end justify-between text-sm">
                                   <p className="text-gray-500">
-                                    Cantidad: {product.quantity}
+                                    Cantidad: {item.quantity}
                                   </p>
 
                                   <div className="flex">
                                     <button
                                       onClick={() =>
-                                        delFromCart(product._id, true)
+                                        delFromCart(item.product._id, true)
                                       }
                                       type="button"
                                       className="font-medium text-indigo-600 hover:text-indigo-500"
@@ -102,8 +130,27 @@ export default function SidebarShoppingCart({ open, setOpen }) {
 
                 <div className="border-t border-gray-200 px-4 py-6 sm:px-6">
                   <div className="flex justify-between text-base font-medium text-gray-900">
-                    <p>Subtotal</p>
-                    <p>{total}</p>
+                    <p>Total sin I.V.A</p>
+                    <p>{cart?.total_products.toFixed(2)} Bs</p>
+                  </div>
+                  <div className="flex justify-between text-base font-medium text-gray-500 mb-1">
+                    <p>I.V.A</p>
+                    <p>
+                      IVA :{" "}
+                      {(cart?.total_iva - cart?.total_products).toFixed(2)} Bs
+                    </p>
+                  </div>
+                  <div className="flex justify-between text-base font-medium text-gray-900 mb-1">
+                    <p>Total con I.V.A</p>
+                    <p>{cart?.total_iva.toFixed(2)} Bs</p>
+                  </div>
+                  <div className="flex justify-between text-base font-medium text-gray-900 mb-8">
+                    <p>Delivery</p>
+                    <p>{cart?.total_delivery.toFixed(2)} Bs</p>
+                  </div>
+                  <div className="flex justify-between text-base font-medium text-gray-900">
+                    <p>TOTAL</p>
+                    <p>{cart?.total.toFixed(2)} Bs</p>
                   </div>
                   <p className="mt-0.5 text-sm text-gray-500">
                     Impuestos y envíos se calculan al proceder al pago.
