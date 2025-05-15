@@ -1,7 +1,15 @@
 import "./css/BasicGridLayout.css";
 
-function BasicGridLayout({ children }) {
-  return <div className="basic-grid-container">{children}</div>;
+function BasicGridLayout({ className, children }) {
+  return (
+    <div
+      className={
+        className ? `${className} basic-grid-container` : "basic-grid-container"
+      }
+    >
+      {children}
+    </div>
+  );
 }
 
 export default BasicGridLayout;

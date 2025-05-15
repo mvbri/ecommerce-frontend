@@ -5,7 +5,9 @@ function HomeLayout({ children }) {
   return (
     <>
       {/* <Navbar /> */}
-      <NavTailwind />
+      <header>
+        <NavTailwind />
+      </header>
       <main>{children}</main>
     </>
   );

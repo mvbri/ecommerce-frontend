@@ -11,7 +11,7 @@ import { useCart } from "../hooks/useCart";
 import { API_URL } from "../auth/constants";
 
 export default function SidebarShoppingCart({ open, setOpen }) {
-  const { cart, delFromCart } = useCart();
+  const { cart, delFromCart, createOrder } = useCart();
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-[9999]">
       <DialogBackdrop
@@ -156,12 +156,13 @@ export default function SidebarShoppingCart({ open, setOpen }) {
                     Impuestos y envíos se calculan al proceder al pago.
                   </p>
                   <div className="mt-6">
-                    <a
+                    <button
+                      onClick={createOrder}
                       href="#"
-                      className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-xs hover:bg-indigo-700"
+                      className="flex m-auto items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-xs hover:bg-indigo-700"
                     >
                       Proceder al pago
-                    </a>
+                    </button>
                   </div>
                   <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                     <p>

@@ -11,7 +11,7 @@ function AdminLogin() {
   const auth = useAuth();
   const goTo = useNavigate();
 
-  if (auth.isAuthenticated) return <Navigate to="/delivery/dashboard" />;
+  if (auth.isAuthenticated) return <Navigate to="/admin/dashboard" />;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -42,7 +42,7 @@ function AdminLogin() {
 
       if (json.accessToken && json.refreshToken) {
         auth.saveUser(json);
-        goTo("/delivery/dashboard");
+        goTo("/admin/dashboard");
       }
     } catch (error) {
       console.log(error);
