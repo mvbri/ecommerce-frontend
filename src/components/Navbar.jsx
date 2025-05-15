@@ -94,7 +94,7 @@ const Navbar = () => {
                   onClick={auth.handleSignOut}
                   className="navbar-item whitespace-nowrap"
                 >
-                  Cerrar sesion
+                  Cerrar sesión
                 </button>
               ) : (
                 <Link className="navbar-item whitespace-nowrap" to="/">

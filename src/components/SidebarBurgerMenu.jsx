@@ -60,7 +60,7 @@ export function SidebarBurgerMenu() {
       <Drawer className="left-0" open={isDrawerOpen} onClose={closeDrawer}>
         <Card shadow={false} className="h-[calc(100vh-2rem)] w-full p-4">
           <div className="mb-2 flex items-center gap-4 p-4">
-            <Link to="/home">
+            <Link to="/admin">
               <img
                 className="w-[80px] h-[80px] rounded-full"
                 src={logo}

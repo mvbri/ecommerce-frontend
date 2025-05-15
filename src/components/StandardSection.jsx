@@ -5,7 +5,7 @@ const StandardSection = ({ children, className }) => {
     <section
       className={
         className
-          ? `${className} standard-max-w px-6`
+          ? `${className} standard-max-w md:px-6`
           : "standard-section md:px-6"
       }
     >

@@ -1,4 +1,5 @@
 import FormCreateProducts from "../components/FormCreateProducts";
+import StandardSection from "../components/StandardSection";
 import AdminLayout from "../layout/AdminLayout";
 
 import { useParams } from "react-router";
@@ -8,14 +9,14 @@ function CreateProducts() {
 
   return (
     <AdminLayout>
-      <div className="pt-[5.6rem] max-w-[1400px] m-auto">
-        <h1 className="text-2xl pt-8 md:text-4xl text-center mb-8 md:mb-14">
+      <StandardSection className="px-1 pt-[3rem] pb-8">
+        <h1 className="text-2xl md:text-3xl text-center mb-8 md:mb-14 text-gray-800">
           {typeof params.id != "undefined"
             ? "Editar Producto"
             : "Cargar Nuevo Producto"}
         </h1>
         <FormCreateProducts />
-      </div>
+      </StandardSection>
     </AdminLayout>
   );
 }

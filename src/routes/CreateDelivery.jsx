@@ -7,15 +7,13 @@ const CreateDelivery = () => {
   const params = useParams();
   return (
     <AdminLayout>
-      <StandardSection>
-        <div className="pt-[5.6rem] max-w-[1400px] m-auto">
-          <h1 className="text-2xl pt-8 md:text-4xl text-center mb-8 md:mb-14">
-            {typeof params.id != "undefined"
-              ? "Editar Delivery"
-              : "Registrar Delivery"}
-          </h1>
-          <FormCreateDelivery />
-        </div>
+      <StandardSection className="pt-[4rem] px-2">
+        <h1 className="text-2xl text-gray-800 md:text-3xl text-center mb-8 md:mb-14">
+          {typeof params.id != "undefined"
+            ? "Editar Delivery"
+            : "Registrar Delivery"}
+        </h1>
+        <FormCreateDelivery />
       </StandardSection>
     </AdminLayout>
   );

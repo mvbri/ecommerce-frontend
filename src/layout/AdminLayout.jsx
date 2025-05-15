@@ -10,7 +10,7 @@ function AdminLayout({ children }) {
 
   return (
     <>
-      <header className="max-w-[1400px] m-auto w-full relative">
+      <header className="max-w-[1400px] m-auto w-full relative py-1">
         <SidebarBurgerMenu />
       </header>
 

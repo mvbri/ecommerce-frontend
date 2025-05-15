@@ -168,12 +168,12 @@ function FormCreateProducts() {
         }}
       >
         {({ values, isSubmitting, errors, touched }) => (
-          <Form className="flex flex-col pt-8 p-4 md:px-8 w-full border m-auto">
-            <label className="mb-3 text-lg" htmlFor="name">
+          <Form className="flex flex-col pt-8 p-4 md:px-8 w-full border border-gray-700 rounded-md m-auto">
+            <label className="mb-3 text-base" htmlFor="name">
               Nombre
             </label>
             <Field
-              className="mb-3 p-2 w-full rounded-lg border-b border-secondary mb-5"
+              className="mb-4 text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
               id="name"
               type="text"
               placeholder="Nombre"
@@ -186,11 +186,11 @@ function FormCreateProducts() {
                 component="div"
               ></ErrorMessage>
             )}
-            <label className="mb-2 text-lg" htmlFor="description">
+            <label className="mb-2 text-base" htmlFor="description">
               Description
             </label>
             <Field
-              className="mb-3 p-2 w-full rounded-lg border-b border-secondary mb-5"
+              className="mb-4 text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
               id="description"
               type="text"
               placeholder="Description"
@@ -206,10 +206,10 @@ function FormCreateProducts() {
 
             {images.length >= 1 ? (
               <>
-                <label className="mb-2 text-lg" htmlFor="image">
+                <label className="mb-2 text-base" htmlFor="image">
                   Imagen(es) Guardada(s)
                 </label>
-                <ul className="flex ">
+                <ul className="flex">
                   {images.map((image) => (
                     <li key={image._id} className="p-4">
                       <div className="relative size-24">
@@ -232,7 +232,7 @@ function FormCreateProducts() {
               </>
             ) : null}
 
-            <label className="mb-2 text-lg" htmlFor="image">
+            <label className="mb-2 text-base" htmlFor="image">
               Imagen
             </label>
 
@@ -248,11 +248,11 @@ function FormCreateProducts() {
                 component="div"
               ></ErrorMessage>
             )}
-            <label className="mb-2 text-lg" htmlFor="category">
+            <label className="mb-2 text-base" htmlFor="category">
               Categoria
             </label>
             <Field
-              className="mb-3 p-2 w-full rounded-lg border-b border-secondary mb-5"
+              className="mb-4 text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
               id="category"
               as="select"
               multiple
@@ -272,11 +272,11 @@ function FormCreateProducts() {
                 component="div"
               ></ErrorMessage>
             )}
-            <label className="mb-2 text-lg" htmlFor="stock">
+            <label className="mb-2 text-base" htmlFor="stock">
               Stock
             </label>
             <Field
-              className="mb-3 p-2 w-full rounded-lg border-b border-secondary mb-5 "
+              className="mb-4 text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
               id="stock"
               type="text"
               placeholder="Stock"
@@ -289,11 +289,11 @@ function FormCreateProducts() {
                 component="div"
               ></ErrorMessage>
             )}
-            <label className="mb-2 text-lg" htmlFor="price">
+            <label className="mb-2 text-base" htmlFor="price">
               Precio
             </label>
             <Field
-              className="mb-3 p-2 w-full rounded-lg border-b border-secondary mb-5"
+              className="mb-4 text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
               id="price"
               type="text"
               placeholder="Precio"
@@ -306,11 +306,11 @@ function FormCreateProducts() {
                 component="div"
               ></ErrorMessage>
             )}
-            <label className="mb-2 text-lg" htmlFor="priceIVA">
+            <label className="mb-2 text-base" htmlFor="priceIVA">
               Precio con IVA
             </label>
             <Field
-              className="mb-3 p-2 w-full rounded-lg border-b border-secondary mb-5"
+              className="mb-4 text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
               id="priceIVA"
               type="text"
               placeholder="Precio con IVA"
@@ -325,7 +325,7 @@ function FormCreateProducts() {
             )}
 
             <button
-              className="w-fit bg-secondary hover:bg-secondary-accent text-white mt-3 m-auto py-2 px-3 rounded-md font-semibold"
+              className="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm md:text-base rounded-md py-2 px-4 shadow-sm hover:shadow-md bg-slate-800 border-slate-800 text-slate-50 hover:bg-slate-700 hover:border-slate-700 my-8"
               type="submit"
             >
               Cargar nuevo producto

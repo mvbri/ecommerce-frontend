@@ -125,17 +125,17 @@ const FormCreateDelivery = () => {
             }}
           >
             {({ values, isSubmitting, errors, touched }) => (
-              <Form className="flex flex-col items-center p-6 md:p-8 md:px-8 w-80 md:w-[70%] m-auto mb-3 border border-secondary rounded-md">
+              <Form className="flex flex-col items-center py-8 p-6 md:p-8 md:px-8 m-auto mb-3 border border-gray-700 rounded-md">
                 <div className="w-full flex flex-col mb-4">
                   <label
-                    className="mb-3 text-lg inline-block mb-1 
+                    className="mb-3 text-base inline-block mb-1 
 "
                     htmlFor="name"
                   >
                     Nombre
                   </label>
                   <Field
-                    className="p-2 rounded-lg border-b border-secondary-accent pt-6"
+                    className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                     id="name"
                     type="text"
                     placeholder="Nombre"
@@ -150,11 +150,11 @@ const FormCreateDelivery = () => {
                   )}
                 </div>
                 <div className="w-full flex flex-col mb-4">
-                  <label className="mb-2 text-lg mb-1" htmlFor="email">
+                  <label className="mb-2 text-base mb-1" htmlFor="email">
                     Correo
                   </label>
                   <Field
-                    className="p-2 rounded-lg border-b border-secondary-accent"
+                    className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                     id="email"
                     type="email"
                     placeholder="email"
@@ -169,11 +169,11 @@ const FormCreateDelivery = () => {
                   )}
                 </div>
                 <div className="w-full flex flex-col mb-4">
-                  <label className="mb-2 text-lg mb-1" htmlFor="number">
+                  <label className="mb-2 text-base mb-1" htmlFor="number">
                     Número de telefono
                   </label>
                   <Field
-                    className="p-2 rounded-lg border-b border-secondary-accent"
+                    className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                     id="number"
                     type="text"
                     placeholder="Número de Telefono"
@@ -188,11 +188,11 @@ const FormCreateDelivery = () => {
                   )}
                 </div>
                 <div className="w-full flex flex-col mb-8">
-                  <label className="mb-2 text-lg mb-1" htmlFor="password">
+                  <label className="mb-2 text-base mb-1" htmlFor="password">
                     Contraseña
                   </label>
                   <Field
-                    className="p-2 rounded-lg border-b border-secondary-accent"
+                    className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                     id="password"
                     type="password"
                     placeholder="password"
@@ -208,11 +208,10 @@ const FormCreateDelivery = () => {
                 </div>
 
                 <button
-                  className="w-fit mb-4 mt-3 m-auto bg-secondary text-white w-fit py-2 px-4 rounded-md
- hover:bg-secondary-accent font-semibold"
+                  className="w-full inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm md:text-base rounded-md py-2 px-4 shadow-sm hover:shadow-md bg-slate-800 border-slate-800 text-slate-50 hover:bg-slate-700 hover:border-slate-700"
                   type="submit"
                 >
-                  Registrarse
+                  Registrar
                 </button>
                 {isSubmitting ? (
                   <p className="mb-3 text-center">Cargando...</p>

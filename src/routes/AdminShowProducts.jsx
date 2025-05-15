@@ -6,6 +6,7 @@ import Modal from "../components/Modal";
 import { useModal } from "../hooks/useModal";
 import AdminLayout from "../layout/AdminLayout";
 import { useFetchProducts } from "../hooks/useFetchProducts";
+import StandardSection from "../components/StandardSection";
 
 function AdminShowProducts() {
   const { items, setItems } = useFetchProducts();
@@ -36,8 +37,8 @@ function AdminShowProducts() {
 
   return (
     <AdminLayout>
-      <div className="pt-[5.6rem]">
-        <h1 className="text-2xl pt-4 md:text-4xl text-center mb-8 md:mb-14">
+      <StandardSection className="pt-[4rem]">
+        <h1 className="text-2xl pt-4 md:text-3xl text-gray-800 text-center mb-8 md:mb-14">
           Lista de Productos
         </h1>
         <div className="p-4">
@@ -66,7 +67,7 @@ function AdminShowProducts() {
             </div>
           </Modal>
         </div>
-      </div>
+      </StandardSection>
     </AdminLayout>
   );
 }

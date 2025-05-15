@@ -39,45 +39,40 @@ const ShowDeliveries = () => {
   return (
     <AdminLayout>
       <StandardSection>
-        <h1 className="mb-4 pt-4 md:mb-20 text-2xl md:text-4xl text-center">
+        <h1 className="mb-4 pt-4 md:mb-20 text-2xl md:text-3xl text-gray-800 text-center">
           Tabla de Deliveries
         </h1>
 
-        <div className="pt-[5.6rem]">
-          <h1 className="text-2xl pt-4 md:text-4xl text-center mb-8 md:mb-14">
-            Lista de Productos
-          </h1>
-          <div className="p-4">
-            {deliveries.length > 0 ? (
-              <TableDeliveries
-                onSelectItem={handleDeletetItem}
-                items={deliveries}
-              />
-            ) : (
-              <p className="text-center">No hay productos en el sistema</p>
-            )}
-            <Modal isOpen={isOpen} closeModal={closeModal}>
-              <div className="flex items-center justify-center size-full flex-col">
-                <h2 className="text-center text-gray-950 mb-8 text-xl font-semibold">
-                  ¿Está seguro que desea elimiar el siguiente Item? <br />
-                  <span>
-                    {`"${
-                      selectedItemName
-                        ? selectedItemName.split(",").shift()
-                        : ""
-                    }" `}
-                  </span>
-                </h2>
-                <button
-                  className="bg-secondary w-fit py-1 px-4 rounded-md
+        <div className="p-4">
+          {deliveries.length > 0 ? (
+            <TableDeliveries
+              onSelectItem={handleDeletetItem}
+              items={deliveries}
+            />
+          ) : (
+            <p className="text-center md:text-2xl text-gray-700">
+              No hay productos en el sistema
+            </p>
+          )}
+          <Modal isOpen={isOpen} closeModal={closeModal}>
+            <div className="flex items-center justify-center size-full flex-col">
+              <h2 className="text-center text-gray-950 mb-8 text-xl font-semibold">
+                ¿Está seguro que desea elimiar el siguiente Item? <br />
+                <span>
+                  {`"${
+                    selectedItemName ? selectedItemName.split(",").shift() : ""
+                  }" `}
+                </span>
+              </h2>
+              <button
+                className="bg-secondary w-fit py-1 px-4 rounded-md
  hover:bg-secondary-accent text-white"
-                  onClick={() => deleteItem(selectedItem)}
-                >
-                  Eliminar
-                </button>
-              </div>
-            </Modal>
-          </div>
+                onClick={() => deleteItem(selectedItem)}
+              >
+                Eliminar
+              </button>
+            </div>
+          </Modal>
         </div>
       </StandardSection>
     </AdminLayout>
