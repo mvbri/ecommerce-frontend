@@ -73,7 +73,7 @@ export default function NavTailwind() {
                 </div>
               </div>
             </div>
-            <div className=" h-fit inset-y-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+            <div className=" h-fit inset-y-0 flex items-center justify-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
               <SearchBar className="mr-8 hidden lg:flex" />
               <div className="mr-1">
                 <ShoppingCartButton />
@@ -100,7 +100,7 @@ export default function NavTailwind() {
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                       >
-                        Your Profile
+                        Ver perfil
                       </a>
                     </MenuItem>
                     <MenuItem>
@@ -108,7 +108,7 @@ export default function NavTailwind() {
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                       >
-                        Settings
+                        Configuración
                       </a>
                     </MenuItem>
                     <MenuItem>
@@ -117,13 +117,16 @@ export default function NavTailwind() {
                         href="#"
                         className="block px-4 py-2 text-sm text-gray-700 data-focus:bg-gray-100 data-focus:outline-hidden"
                       >
-                        Sign out
+                        Cerrar sesión
                       </Link>
                     </MenuItem>
                   </MenuItems>
                 </Menu>
               ) : (
-                <Link className="navbar-item whitespace-nowrap ml-3" to="/">
+                <Link
+                  className="text-secondary text-base whitespace-nowrap ml-3"
+                  to="/"
+                >
                   Inicia sesión
                 </Link>
               )}
