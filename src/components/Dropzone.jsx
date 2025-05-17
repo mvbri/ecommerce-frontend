@@ -21,17 +21,13 @@ const Dropzone = ({ className, files, setFiles }) => {
     }
   }, []);
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone(
-    {
-      onDrop,
-      accept: {
-        "image/*": [],
-      },
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    maxFiles: 1,
+    onDrop,
+    accept: {
+      "image/*": [],
     },
-    {
-      maxFiles: 1,
-    }
-  );
+  });
 
   const removeFile = (name) => {
     setFiles((files) => files.filter((file) => file.name !== name));
@@ -60,7 +56,7 @@ const Dropzone = ({ className, files, setFiles }) => {
           <p>Drag and drop some files here, or click to select files</p>
         )}
       </div>
-      <ul className="flex">
+      <ul className="flex gap-2">
         {files.map((file) => (
           <li key={file.name} className="mb-4">
             <div className="relative size-24">

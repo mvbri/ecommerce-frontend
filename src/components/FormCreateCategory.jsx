@@ -53,7 +53,7 @@ const FormCreateCategory = () => {
 
   const getValues = async () => {
     try {
-      const res = await axiosInstance.get(`/api/admin/categories/${params.id}`);
+      const res = await axiosInstance.get(`/api/admin/category/${params.id}`);
 
       if (res.status === 200) {
         const data = res.data.data;
@@ -78,14 +78,23 @@ const FormCreateCategory = () => {
         enableReinitialize
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
+          const data = new FormData();
+
+          for (let index in values) {
+            data.append(index, values[index]);
+          }
+
+          for (let key in files) {
+            data.append(`images[]`, files[key]);
+          }
           if (typeof params.id !== "undefined") {
             try {
               const res = await axiosInstance.put(
                 `/api/admin/categories/${params.id}`,
-                values,
+                data,
                 {
                   headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "multipart/form-data",
                   },
                 }
               );
@@ -104,10 +113,10 @@ const FormCreateCategory = () => {
             try {
               const res = await axiosInstance.post(
                 "/api/admin/categories",
-                values,
+                data,
                 {
                   headers: {
-                    "Content-Type": "application/json",
+                    "Content-Type": "multipart/form-data",
                   },
                 }
               );
