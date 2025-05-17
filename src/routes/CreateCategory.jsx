@@ -1,23 +1,22 @@
-import FormCreateProducts from "../components/FormCreateProducts";
 import StandardSection from "../components/StandardSection";
+import FormCreateCategory from "../components/FormCreateCategory";
+import { useParams } from "react-router-dom";
 import AdminLayout from "../layout/AdminLayout";
-import { useParams } from "react-router";
 
-function CreateProducts() {
+const CreateCategory = () => {
   const params = useParams();
-
   return (
     <AdminLayout>
       <StandardSection className="px-1 pt-[3rem] pb-8">
         <h1 className="text-2xl md:text-3xl text-center mb-8 md:mb-14 text-gray-800">
           {typeof params.id != "undefined"
-            ? "Editar Producto"
-            : "Cargar Nuevo Producto"}
+            ? "Editar Categoría"
+            : "Cargar Nueva Categoría"}
         </h1>
-        <FormCreateProducts />
+        <FormCreateCategory />
       </StandardSection>
     </AdminLayout>
   );
-}
+};
 
-export default CreateProducts;
+export default CreateCategory;

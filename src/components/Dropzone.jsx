@@ -3,8 +3,7 @@ import { useDropzone } from "react-dropzone";
 
 import { XMarkIcon } from "@heroicons/react/24/solid";
 
-const Dropzone = ({ className , files, setFiles}) => {
-  /*const [files, setFiles] = useState([]);*/
+const Dropzone = ({ className, files, setFiles }) => {
   const [rejected, setRejected] = useState([]);
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
@@ -22,12 +21,17 @@ const Dropzone = ({ className , files, setFiles}) => {
     }
   }, []);
 
-  const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    onDrop,
-    accept: {
-      "image/*": [],
+  const { getRootProps, getInputProps, isDragActive } = useDropzone(
+    {
+      onDrop,
+      accept: {
+        "image/*": [],
+      },
     },
-  });
+    {
+      maxFiles: 1,
+    }
+  );
 
   const removeFile = (name) => {
     setFiles((files) => files.filter((file) => file.name !== name));

@@ -19,6 +19,7 @@ import SearchPageView from "./routes/SearchPageView.jsx";
 import ShowCategories from "./routes/ShowCategories.jsx";
 import ShowProduct from "./routes/ShowProduct.jsx";
 import CreateDelivery from "./routes/CreateDelivery.jsx";
+import CreateCategory from "./routes/CreateCategory.jsx";
 import ShowDeliveries from "./routes/ShowDeliveries.jsx";
 import DeliveryDashboard from "./routes/DeliveryDashboard.jsx";
 import ShowOrders from "./routes/ShowOrders.jsx";
@@ -98,6 +99,10 @@ const router = createBrowserRouter([
       {
         path: "deliveries",
         element: <ShowDeliveries />,
+      },
+      {
+        path: "categoria/crear",
+        element: <CreateCategory />,
       },
       {
         path: "delivery/:id/editar",

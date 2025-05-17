@@ -130,7 +130,7 @@ export function SidebarBurgerMenu() {
                 <ChevronDownIcon
                   strokeWidth={2.5}
                   className={`mx-auto h-4 w-4 transition-transform ${
-                    open === 2 ? "rotate-180" : ""
+                    open === 1 ? "rotate-180" : ""
                   }`}
                 />
               }
@@ -138,6 +138,57 @@ export function SidebarBurgerMenu() {
               <ListItem className="p-0" selected={open === 2}>
                 <AccordionHeader
                   onClick={() => handleOpen(2)}
+                  className="border-b-0 p-3"
+                >
+                  <ListItemPrefix>
+                    <PresentationChartBarIcon className="h-5 w-5" />
+                  </ListItemPrefix>
+                  <Typography color="blue-gray" className="mr-auto font-normal">
+                    Categorías
+                  </Typography>
+                </AccordionHeader>
+              </ListItem>
+              <AccordionBody className="py-1">
+                <List className="p-0">
+                  <ListItem>
+                    <Link
+                      className="text-gray-600 flex justify-center items-center"
+                      to="/admin/categoria/crear"
+                    >
+                      <ListItemPrefix>
+                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                      </ListItemPrefix>
+                      Crear categoría
+                    </Link>
+                  </ListItem>
+                  <ListItem>
+                    <Link
+                      className="text-gray-600 flex justify-center items-center"
+                      to="/admin/product"
+                    >
+                      <ListItemPrefix>
+                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                      </ListItemPrefix>
+                      Ver categorías
+                    </Link>
+                  </ListItem>
+                </List>
+              </AccordionBody>
+            </Accordion>
+            <Accordion
+              open={open === 3}
+              icon={
+                <ChevronDownIcon
+                  strokeWidth={2.5}
+                  className={`mx-auto h-4 w-4 transition-transform ${
+                    open === 2 ? "rotate-180" : ""
+                  }`}
+                />
+              }
+            >
+              <ListItem className="p-0" selected={open === 3}>
+                <AccordionHeader
+                  onClick={() => handleOpen(3)}
                   className="border-b-0 p-3"
                 >
                   <ListItemPrefix>

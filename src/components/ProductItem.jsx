@@ -1,6 +1,6 @@
 import { useCart } from "../hooks/useCart";
 import { API_URL } from "../auth/constants";
-import { Link, Navigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { useState } from "react";
 import NumberInput from "./NumberInput";
 
