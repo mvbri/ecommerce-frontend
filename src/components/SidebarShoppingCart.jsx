@@ -9,9 +9,10 @@ import {
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useCart } from "../hooks/useCart";
 import { API_URL } from "../auth/constants";
+import NumberInput from "./NumberInput";
 
 export default function SidebarShoppingCart({ open, setOpen }) {
-  const { cart, delFromCart, createOrder } = useCart();
+  const { cart, delFromCart, createOrder, updateQuantityCart } = useCart();
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-[9999]">
       <DialogBackdrop
@@ -101,10 +102,15 @@ export default function SidebarShoppingCart({ open, setOpen }) {
                                   })}
                                 </div>
                                 <div className="flex flex-1 items-end justify-between text-sm">
-                                  <p className="text-gray-500">
-                                    Cantidad: {item.quantity}
-                                  </p>
-
+                                  <div className="flex flex-col gap-2">
+                                    <p className="text-gray-500">
+                                      Cantidad: {item.quantity}
+                                    </p>
+                                    <NumberInput
+                                      onQuantityChange={updateQuantityCart}
+                                      quantityDefault={item.quantity}
+                                    />
+                                  </div>
                                   <div className="flex">
                                     <button
                                       onClick={() =>
