@@ -1,18 +1,16 @@
 import { useState } from "react";
 import { useAuth } from "../auth/AuthProvider";
-import DefaultLayout from "../layout/DefaultLayout";
-import { Formik, Form, Field, ErrorMessage } from "formik";
+import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import StandardSection from "./StandardSection";
 
 const FormUserProfile = () => {
   const [errorResponse, setErrorResponse] = useState("");
+  const auth = useAuth();
 
   const initialValues = {
-    name: "",
-    lastName: "",
-    email: "",
-    password: "",
+    name: auth.getUser()?.name,
+    lastName: auth.getUser()?.lastName,
+    email: auth.getUser()?.email,
   };
 
   const validationSchema = Yup.object().shape({
@@ -65,8 +63,6 @@ const FormUserProfile = () => {
         return;
       }
       setErrorResponse("");
-
-      goTo("/");
     } catch (error) {
       console.log(error);
     } finally {
@@ -133,8 +129,9 @@ const FormUserProfile = () => {
                       Correo
                     </label>
                     <Field
-                      className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                      className="text-gray-400 text-sm sm:text-base placeholder-gray-400 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-gray-400"
                       id="email"
+                      readOnly
                       type="email"
                       placeholder="email"
                       name="email"
