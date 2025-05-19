@@ -1,73 +1,74 @@
 import { API_URL } from "../auth/constants";
-import NumberInput from './NumberInput';
+import NumberInput from "./NumberInput";
 
 const CartItem = ({ product, quantity, delFromCart, updateQuantityCart }) => {
-
-
   const handleQuantityChange = (newQuantity) => {
     if (newQuantity !== quantity) {
       updateQuantityCart(_id, newQuantity); // Actualiza el estado de cantidad en el padre
-
     }
   };
 
-  let { _id, name, description, images, category, price, priceIVA } =
+  let { _id, name, description, images, slug, category, price, priceIVA } =
     product;
 
   return (
-    <div className="border-b p-2 mb-2 ">
-      <div class="grid grid-flow-col grid-rows-2 gap-4">
-        <div class="grid-responsive row-span-3 ...">
-          <figure className="mb-3">
-            <img
-              className="w-full mb-4 max-h-[300px]"
-              src={`${API_URL}/public/images/products/${images[0].url}`}
+    <li className="flex py-6">
+      <div className="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
+        <img
+          alt={name}
+          src={`${API_URL}/public/images/products/${images[0].url}`}
+          className="size-full object-cover"
+        />
+      </div>
+
+      <div className="ml-4 flex flex-1 flex-col">
+        <div>
+          <div className="flex justify-between text-base font-medium text-gray-900">
+            <h3>
+              <a href={slug}>{name}</a>
+            </h3>
+            <div className="text-sm">
+              <p className="ml-4">Precio sin I.V.A {price}$</p>
+              <p className="ml-4">Precio con I.V.A {priceIVA}$</p>
+              <p className="ml-4">
+                {priceIVA} Bs x{quantity} = {priceIVA * quantity} Bs
+              </p>
+            </div>
+          </div>
+          <p className="ml-1 text-base font-medium text-gray-500">
+            {description}
+          </p>
+          {category.map((cat, i) => {
+            return (
+              <span
+                className="ml-1 text-base font-medium text-gray-500"
+                key={i}
+              >
+                {cat.name}
+              </span>
+            );
+          })}
+        </div>
+        <div className="flex flex-1 items-end justify-between text-sm">
+          <div className="flex flex-col gap-2">
+            <p className="text-gray-500">Cantidad: {quantity}</p>
+            <NumberInput
+              onQuantityChange={handleQuantityChange}
+              quantityDefault={quantity}
             />
-          </figure>
-        </div>
-        <div class="col-span-2 ...">
-          <h4
-            className="mb-2 text-lg font-semibold
-"
-          >
-            {name}
-          </h4>
-          <p className="mb-2">{description}</p>
-          <h5>
-            Precio sin IVA: {price.toFixed(2)} Bs
-          </h5>
-          <h5><span className="font-bold">precio con IVA: {priceIVA.toFixed(2)} Bs</span></h5>
-
-          <h5 className="mb-3">
-            {priceIVA.toFixed(2)}  Bs x {quantity} = {(priceIVA * quantity).toFixed(2)} Bs
-          </h5>
-          <h5>{category[0].name}</h5>
-
-        </div>
-        <div class="col-span-2 row-span-2 flex justify-start">
-          <NumberInput onQuantityChange={handleQuantityChange} quantityDefault={quantity} />
-          <div>
+          </div>
+          <div className="flex">
             <button
-              title="Eliminar producto del carrito"
               onClick={() => delFromCart(_id, true)}
-              className="bg-secondary hover:bg-secondary-accent text-white ml-4 w-fit py-1 px-2 rounded-md
-  font-semibold mb-3"
+              type="button"
+              className="font-medium text-indigo-600 hover:text-indigo-500"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="size-5">
-                <path fillRule="evenodd" d="M16.5 4.478v.227a48.816 48.816 0 0 1 3.878.512.75.75 0 1 1-.256 1.478l-.209-.035-1.005 13.07a3 3 0 0 1-2.991 2.77H8.084a3 3 0 0 1-2.991-2.77L4.087 6.66l-.209.035a.75.75 0 0 1-.256-1.478A48.567 48.567 0 0 1 7.5 4.705v-.227c0-1.564 1.213-2.9 2.816-2.951a52.662 52.662 0 0 1 3.369 0c1.603.051 2.815 1.387 2.815 2.951Zm-6.136-1.452a51.196 51.196 0 0 1 3.273 0C14.39 3.05 15 3.684 15 4.478v.113a49.488 49.488 0 0 0-6 0v-.113c0-.794.609-1.428 1.364-1.452Zm-.355 5.945a.75.75 0 1 0-1.5.058l.347 9a.75.75 0 1 0 1.499-.058l-.346-9Zm5.48.058a.75.75 0 1 0-1.498-.058l-.347 9a.75.75 0 0 0 1.5.058l.345-9Z" clipRule="evenodd" />
-              </svg>
-
+              Eliminar
             </button>
           </div>
         </div>
       </div>
-
-
-
-
-
-
-    </div>
+    </li>
   );
 };
 

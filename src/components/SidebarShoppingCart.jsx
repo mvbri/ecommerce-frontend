@@ -10,6 +10,7 @@ import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useCart } from "../hooks/useCart";
 import { API_URL } from "../auth/constants";
 import NumberInput from "./NumberInput";
+import CartItem from "./cartItem";
 
 export default function SidebarShoppingCart({ open, setOpen }) {
   const { cart, delFromCart, createOrder, updateQuantityCart } = useCart();
@@ -53,78 +54,14 @@ export default function SidebarShoppingCart({ open, setOpen }) {
                         className="-my-6 divide-y divide-gray-200"
                       >
                         {cart?.detail?.length > 0 ? (
-                          cart?.detail.map((item, i) => (
-                            <li key={i} className="flex py-6">
-                              <div className="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
-                                <img
-                                  alt={item.product.name}
-                                  src={`${API_URL}/public/images/products/${item.product.images[0].url}`}
-                                  className="size-full object-cover"
-                                />
-                              </div>
-
-                              <div className="ml-4 flex flex-1 flex-col">
-                                <div>
-                                  <div className="flex justify-between text-base font-medium text-gray-900">
-                                    <h3>
-                                      <a href={item.product.slug}>
-                                        {item.product.name}
-                                      </a>
-                                    </h3>
-                                    <div className="text-sm">
-                                      <p className="ml-4">
-                                        Precio sin I.V.A {item.product.price}$
-                                      </p>
-                                      <p className="ml-4">
-                                        Precio con I.V.A {item.product.priceIVA}
-                                        $
-                                      </p>
-                                      <p className="ml-4">
-                                        {item.product.priceIVA} Bs x
-                                        {item.quantity} ={" "}
-                                        {item.product.priceIVA * item.quantity}{" "}
-                                        Bs
-                                      </p>
-                                    </div>
-                                  </div>
-                                  <p className="ml-1 text-base font-medium text-gray-500">
-                                    {item.product.description}
-                                  </p>
-                                  {item.product.category.map((cat, i) => {
-                                    return (
-                                      <span
-                                        className="ml-1 text-base font-medium text-gray-500"
-                                        key={i}
-                                      >
-                                        {cat.name}
-                                      </span>
-                                    );
-                                  })}
-                                </div>
-                                <div className="flex flex-1 items-end justify-between text-sm">
-                                  <div className="flex flex-col gap-2">
-                                    <p className="text-gray-500">
-                                      Cantidad: {item.quantity}
-                                    </p>
-                                    <NumberInput
-                                      onQuantityChange={updateQuantityCart}
-                                      quantityDefault={item.quantity}
-                                    />
-                                  </div>
-                                  <div className="flex">
-                                    <button
-                                      onClick={() =>
-                                        delFromCart(item.product._id, true)
-                                      }
-                                      type="button"
-                                      className="font-medium text-indigo-600 hover:text-indigo-500"
-                                    >
-                                      Eliminar
-                                    </button>
-                                  </div>
-                                </div>
-                              </div>
-                            </li>
+                          cart?.detail.map((item, index) => (
+                            <CartItem
+                              key={index}
+                              product={item.product}
+                              quantity={item.quantity}
+                              updateQuantityCart={updateQuantityCart}
+                              delFromCart={delFromCart}
+                            />
                           ))
                         ) : (
                           <p>No se han agregado productos al carrito.</p>
