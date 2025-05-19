@@ -24,6 +24,7 @@ import ShowDeliveries from "./routes/ShowDeliveries.jsx";
 import DeliveryDashboard from "./routes/DeliveryDashboard.jsx";
 import ShowOrders from "./routes/ShowOrders.jsx";
 import EditOrder from "./routes/EditOrder.jsx";
+import UserProfile from "./routes/UserProfile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -65,6 +66,10 @@ const router = createBrowserRouter([
       {
         path: "dashboard",
         element: <Dashboard />,
+      },
+      {
+        path: "/perfil",
+        element: <UserProfile />,
       },
     ],
   },

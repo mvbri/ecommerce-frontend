@@ -177,6 +177,7 @@ const FormCreateCategory = () => {
             <Dropzone
               files={files}
               setFiles={setFiles}
+              maxfiles={true}
               className="p-16 mt-10 cursor-pointer border border-dashed border-2 md:w-4/5 m-auto border-neutral-500 text-center mb-3"
             />
             {image.length >= 1 ? (

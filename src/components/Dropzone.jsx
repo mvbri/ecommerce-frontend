@@ -1,19 +1,38 @@
 import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
-
 import { XMarkIcon } from "@heroicons/react/24/solid";
 
-const Dropzone = ({ className, files, setFiles }) => {
+const Dropzone = ({ className, maxfiles = false }) => {
+  const [files, setFiles] = useState([]);
   const [rejected, setRejected] = useState([]);
+  const [error, setError] = useState(false);
 
   const onDrop = useCallback((acceptedFiles, rejectedFiles) => {
     if (acceptedFiles?.length) {
-      setFiles((previousFiles) => [
-        ...previousFiles,
-        ...acceptedFiles.map((file) =>
+      if (!maxfiles) {
+        setFiles((previousFiles) => [
+          ...previousFiles,
+          ...acceptedFiles.map((file) =>
+            Object.assign(file, { preview: URL.createObjectURL(file) })
+          ),
+        ]);
+        return;
+      }
+
+      console.log(files.length, acceptedFiles.length);
+      if (files.length + acceptedFiles.length > 1) {
+        setError("Solo se permite subir una imagen."); // Establece el mensaje de error
+        return; // Detiene el proceso de subida
+      }
+
+      setError(null); // Limpia el error si la subida es válida
+      // Almacena solo el primer archivo aceptado, reemplazando cualquier archivo anterior.
+      const newFiles = acceptedFiles
+        .slice(0, 1)
+        .map((file) =>
           Object.assign(file, { preview: URL.createObjectURL(file) })
-        ),
-      ]);
+        );
+      setFiles(newFiles);
     }
 
     if (rejectedFiles?.length) {
@@ -22,7 +41,6 @@ const Dropzone = ({ className, files, setFiles }) => {
   }, []);
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
-    maxFiles: 1,
     onDrop,
     accept: {
       "image/*": [],
@@ -38,7 +56,17 @@ const Dropzone = ({ className, files, setFiles }) => {
   };
 
   return (
-    <>
+    <div>
+      {error && (
+        <div
+          role="alert"
+          className="relative flex w-full items-start rounded-md border border-red-400 bg-red-400 p-2 text-slate-50"
+        >
+          <div className="m-1.5 w-full font-sans text-base leading-none">
+            {error}
+          </div>
+        </div>
+      )}
       <div
         {...getRootProps({
           className: className,
@@ -101,7 +129,7 @@ const Dropzone = ({ className, files, setFiles }) => {
           </li>
         ))}
       </ul>
-    </>
+    </div>
   );
 };
 
