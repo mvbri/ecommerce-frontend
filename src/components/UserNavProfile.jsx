@@ -1,18 +1,17 @@
 import { useAuth } from "../auth/AuthProvider";
 import { Link } from "react-router-dom";
-import FormUserProfile from "./FormUserProfile";
 
 const UserNavProfile = () => {
   const auth = useAuth();
   return (
     <div className="flex flex-col md:flex-row gap-5">
-      <div className="max-w-[300px] min-h-[400px]">
+      <div className="min-w-[250px] min-h-[400px]">
         <div className="text-center p-8 border rounded-md">
           <h3 className="font-semibold">{auth.getUser()?.name || null}</h3>
           <h4>{auth.getUser()?.email || null}</h4>
         </div>
         <nav className="flex flex-col bg-blue-100 pl-4 p-1 bg-gray-200 min-h-[400px]">
-          <Link className="text-gray-800 mb-2" to="/myprofile">
+          <Link className="text-gray-800 mb-2" to="/perfil">
             <div className="flex items-center justify-center w-fit">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +30,7 @@ const UserNavProfile = () => {
               Mi Perfil
             </div>
           </Link>
-          <Link className="text-gray-800 mb-2" to="/address">
+          <Link className="text-gray-800 mb-2" to="/addresses">
             <div className="flex items-center justify-center w-fit">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -75,10 +74,6 @@ const UserNavProfile = () => {
             </div>
           </Link>
         </nav>
-      </div>
-
-      <div className="p-8 border rounded-md flex-1">
-        <FormUserProfile />
       </div>
     </div>
   );
