@@ -7,7 +7,7 @@ const UserProfile = () => {
   return (
     <HomeLayout>
       <StandardSection>
-        <div className="flex flex-wrap gap-8 pt-8">
+        <div className="flex flex-col md:flex-row flex-wrap gap-8 pt-8">
           <UserNavProfile />
           <div className="p-8 border rounded-md flex-1">
             <FormUserProfile />

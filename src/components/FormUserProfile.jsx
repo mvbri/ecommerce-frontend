@@ -12,8 +12,6 @@ const FormUserProfile = () => {
     name: auth.getUser()?.name,
     email: auth.getUser()?.email,
     phone: auth.getUser()?.phone,
-    question: auth.getUser()?.phone,
-    answer: auth.getUser()?.phone,
   };
 
   const validationSchema = Yup.object().shape({
@@ -31,18 +29,6 @@ const FormUserProfile = () => {
     phone: Yup.string()
       .matches(/[0-9]/, "El campo solo puede contener números")
       .max(11, "El campo debe de tener máximo 11 números.")
-      .required("El campo es obligatorio"),
-    question: Yup.string()
-      .matches(
-        /^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(?: [a-zA-ZáéíóúÁÉÍÓÚñÑ]+)*$/,
-        "La pregunta solo debe contener letras y espacios, no números ni caracteres especiales"
-      )
-      .required("El campo es obligatorio"),
-    answer: Yup.string()
-      .matches(
-        /^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(?: [a-zA-ZáéíóúÁÉÍÓÚñÑ]+)*$/,
-        "La pregunta solo debe contener letras y espacios, no números ni caracteres especiales"
-      )
       .required("El campo es obligatorio"),
   });
 
@@ -77,14 +63,12 @@ const FormUserProfile = () => {
     <div>
       <div>
         <div className="m-auto">
-          <div className="flex justify-between">
-            <h3 className="mb-4 text-gray-800 text-2xl md:text-3xl">
-              Mi Perfil
-            </h3>
+          <div className="flex flex-wrap gap-2 justify-between items-center">
+            <h3 className="text-gray-800 text-2xl md:text-3xl">Mi Perfil</h3>
 
             <Link
               to="/contraseña"
-              className="text-blue-400 whitespace-nowrap font-semibold mr-2 hover:text-blue-300 transition ease"
+              className="text-blue-400 text-sm md:text-base whitespace-nowrap font-semibold mr-2 hover:text-blue-300 transition ease"
             >
               CAMBIAR CONTRASEÑA
             </Link>
@@ -109,7 +93,7 @@ const FormUserProfile = () => {
             {({ values, isSubmitting, errors, touched }) => (
               <Form className="flex flex-col items-center p-6 md:p-4 md:px-8  m-auto mb-3  rounded-md">
                 <div className="flex w-full gap-2 mb-4 pt-4">
-                  <div className="flex flex-wrap gap-8 w-full justifi-center items-center">
+                  <div className="flex flex-wrap gap-8 w-full justify-center md:justify-start items-center">
                     <div className="max-w-[20rem] flex flex-col mb-2">
                       <label
                         className="text-sm inline-block mb-1 
@@ -172,51 +156,11 @@ const FormUserProfile = () => {
                         ></ErrorMessage>
                       )}
                     </div>
-                    <div className="max-w-[20rem]  flex flex-col mb-4">
-                      <label className="text-sm mb-1" htmlFor="question">
-                        Pregunta de seguridad
-                      </label>
-                      <Field
-                        className="text-gray-400 text-sm sm:text-base placeholder-gray-400 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-gray-400"
-                        id="question"
-                        readOnly
-                        type="question"
-                        placeholder="question"
-                        name="question"
-                      />
-                      {errors.question && touched.question && (
-                        <ErrorMessage
-                          className="p-2 bg-tertiary text-white text-base"
-                          name="question"
-                          component="div"
-                        ></ErrorMessage>
-                      )}
-                    </div>
-                    <div className="max-w-[20rem]  flex flex-col mb-4">
-                      <label className="text-sm mb-1" htmlFor="answer">
-                        Respuesta
-                      </label>
-                      <Field
-                        className="text-gray-400 text-sm sm:text-base placeholder-gray-400 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-gray-400"
-                        id="answer"
-                        readOnly
-                        type="answer"
-                        placeholder="answer"
-                        name="answer"
-                      />
-                      {errors.answer && touched.answer && (
-                        <ErrorMessage
-                          className="p-2 bg-tertiary text-white text-base"
-                          name="answer"
-                          component="div"
-                        ></ErrorMessage>
-                      )}
-                    </div>
                   </div>
                 </div>
 
                 <button
-                  className="mb-4 inline-flex items-center self-start justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-8 shadow-sm hover:shadow-md bg-red-500 border-red-500 text-slate-50 hover:bg-red-400 hover:border-red-400"
+                  className="mb-4 inline-flex items-center md:self-start self-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-8 shadow-sm hover:shadow-md bg-red-500 border-red-500 text-slate-50 hover:bg-red-400 hover:border-red-400"
                   type="submit"
                 >
                   ACTUALIZAR DATOS

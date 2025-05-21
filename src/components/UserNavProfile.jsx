@@ -10,8 +10,8 @@ const UserNavProfile = () => {
           <h3 className="font-semibold">{auth.getUser()?.name || null}</h3>
           <h4>{auth.getUser()?.email || null}</h4>
         </div>
-        <nav className="flex flex-col bg-blue-100 pl-4 p-1 bg-gray-200 min-h-[400px]">
-          <Link className="text-gray-800 mb-2" to="/perfil">
+        <nav className="flex flex-col bg-blue-100 pl-4 p-2 bg-gray-200 min-h-[400px]">
+          <Link className="text-gray-800 mb-4" to="/perfil">
             <div className="flex items-center justify-center w-fit">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -30,7 +30,7 @@ const UserNavProfile = () => {
               Mi Perfil
             </div>
           </Link>
-          <Link className="text-gray-800 mb-2" to="/addresses">
+          <Link className="text-gray-800 mb-4" to="/direcciones">
             <div className="flex items-center justify-center w-fit">
               <svg
                 xmlns="http://www.w3.org/2000/svg"

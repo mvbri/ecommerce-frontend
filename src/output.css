@@ -1131,6 +1131,10 @@ video {
   gap: 6rem;
 }
 
+.gap-1 {
+  gap: 0.25rem;
+}
+
 .space-x-4 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(1rem * var(--tw-space-x-reverse));
@@ -1166,6 +1170,10 @@ video {
 
 .self-end {
   align-self: flex-end;
+}
+
+.self-center {
+  align-self: center;
 }
 
 .overflow-hidden {
@@ -2213,8 +2221,16 @@ input[type="number"] {
     width: 50%;
   }
 
+  .md\:min-w-\[30rem\] {
+    min-width: 30rem;
+  }
+
   .md\:max-w-\[18rem\] {
     max-width: 18rem;
+  }
+
+  .md\:max-w-\[30rem\] {
+    max-width: 30rem;
   }
 
   .md\:grid-cols-2 {
@@ -2227,6 +2243,22 @@ input[type="number"] {
 
   .md\:items-center {
     align-items: center;
+  }
+
+  .md\:justify-start {
+    justify-content: flex-start;
+  }
+
+  .md\:gap-8 {
+    gap: 2rem;
+  }
+
+  .md\:self-start {
+    align-self: flex-start;
+  }
+
+  .md\:self-center {
+    align-self: center;
   }
 
   .md\:p-4 {
@@ -2323,6 +2355,10 @@ input[type="number"] {
 
   .lg\:grid-cols-3 {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .lg\:flex-row {
+    flex-direction: row;
   }
 
   .lg\:justify-between {
