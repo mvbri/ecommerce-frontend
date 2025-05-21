@@ -79,9 +79,9 @@ const Dropzone = ({ className, maxfiles = false }) => {
           })}
         />
         {isDragActive ? (
-          <p>Drop the files here ...</p>
+          <p>Suelta los archivos aquí ...</p>
         ) : (
-          <p>Drag and drop some files here, or click to select files</p>
+          <p>Arrastre y suelte algunos archivos aquí, o haga clic para seleccionar archivos</p>
         )}
       </div>
       <ul className="flex gap-2">

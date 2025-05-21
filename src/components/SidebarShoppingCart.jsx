@@ -11,9 +11,10 @@ import { useCart } from "../hooks/useCart";
 import { API_URL } from "../auth/constants";
 import NumberInput from "./NumberInput";
 import CartItem from "./cartItem";
+import { Link } from "react-router-dom";
 
 export default function SidebarShoppingCart({ open, setOpen }) {
-  const { cart, delFromCart, createOrder, updateQuantityCart } = useCart();
+  const { cart, delFromCart, updateQuantityCart } = useCart();
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-[9999]">
       <DialogBackdrop
@@ -79,7 +80,6 @@ export default function SidebarShoppingCart({ open, setOpen }) {
                   <div className="flex justify-between text-base font-medium text-gray-500 mb-1">
                     <p>I.V.A</p>
                     <p>
-                      IVA :{" "}
                       {(cart?.total_iva - cart?.total_products).toFixed(2)} Bs
                     </p>
                   </div>
@@ -99,13 +99,12 @@ export default function SidebarShoppingCart({ open, setOpen }) {
                     Impuestos y envíos se calculan al proceder al pago.
                   </p>
                   <div className="mt-6">
-                    <button
-                      onClick={createOrder}
-                      href="#"
+                    <Link
+                      to="/compra"
                       className="flex m-auto items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-xs hover:bg-indigo-700"
                     >
                       Proceder al pago
-                    </button>
+                    </Link>
                   </div>
                   <div className="mt-6 flex justify-center text-center text-sm text-gray-500">
                     <p>
