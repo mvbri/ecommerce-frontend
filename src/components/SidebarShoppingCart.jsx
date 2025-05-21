@@ -79,7 +79,7 @@ export default function SidebarShoppingCart({ open, setOpen }) {
                   <div className="flex justify-between text-base font-medium text-gray-500 mb-1">
                     <p>I.V.A</p>
                     <p>
-                      IVA :{" "}
+                      {" "}
                       {(cart?.total_iva - cart?.total_products).toFixed(2)} Bs
                     </p>
                   </div>

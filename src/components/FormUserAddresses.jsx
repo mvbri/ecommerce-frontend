@@ -7,7 +7,7 @@ const FormUserAddresses = () => {
 
   const initialValues = {
     name: "",
-    email: "",
+    address: "",
     phone: "",
     parish: "",
   };
@@ -31,6 +31,14 @@ const FormUserAddresses = () => {
         "La parroquia solo debe contener letras, sin espacios, números ni caracteres especiales"
       )
       .max(20, "El campo debe de tener máximo 11 números.")
+      .required("El campo es obligatorio"),
+    address: Yup.string()
+      .min(2, "Nombre demasiado corto")
+      .max(40, "Nombre demasiado largo")
+      .matches(
+        /^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$/,
+        "El nombre solo debe contener letras, sin espacios, números ni caracteres especiales"
+      )
       .required("El campo es obligatorio"),
   });
 

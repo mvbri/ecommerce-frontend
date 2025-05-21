@@ -1131,10 +1131,6 @@ video {
   gap: 6rem;
 }
 
-.gap-1 {
-  gap: 0.25rem;
-}
-
 .space-x-4 > :not([hidden]) ~ :not([hidden]) {
   --tw-space-x-reverse: 0;
   margin-right: calc(1rem * var(--tw-space-x-reverse));
@@ -2229,10 +2225,6 @@ input[type="number"] {
     max-width: 18rem;
   }
 
-  .md\:max-w-\[30rem\] {
-    max-width: 30rem;
-  }
-
   .md\:grid-cols-2 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -2255,10 +2247,6 @@ input[type="number"] {
 
   .md\:self-start {
     align-self: flex-start;
-  }
-
-  .md\:self-center {
-    align-self: center;
   }
 
   .md\:p-4 {
