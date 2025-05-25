@@ -25,6 +25,9 @@ import DeliveryDashboard from "./routes/DeliveryDashboard.jsx";
 import ShowOrders from "./routes/ShowOrders.jsx";
 import EditOrder from "./routes/EditOrder.jsx";
 import UserProfile from "./routes/UserProfile.jsx";
+import PasswordChange from "./routes/PasswordChange.jsx";
+import UserAddresses from "./routes/UserAddresses.jsx";
+import CreateAddresses from "./routes/CreateAddresses.jsx";
 
 const router = createBrowserRouter([
   {
@@ -70,6 +73,18 @@ const router = createBrowserRouter([
       {
         path: "/perfil",
         element: <UserProfile />,
+      },
+      {
+        path: "/contraseña",
+        element: <PasswordChange />,
+      },
+      {
+        path: "/direcciones",
+        element: <UserAddresses />,
+      },
+      {
+        path: "/direcciones/crear",
+        element: <CreateAddresses />,
       },
     ],
   },

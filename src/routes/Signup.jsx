@@ -17,9 +17,9 @@ function Signup() {
 
   const initialValues = {
     name: "",
-    lastName: "",
     email: "",
     password: "",
+    phone: "",
   };
 
   const validationSchema = Yup.object().shape({
@@ -27,16 +27,8 @@ function Signup() {
       .min(2, "Nombre demasiado corto")
       .max(15, "Nombre demasiado largo")
       .matches(
-        /^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$/,
-        "El nombre solo debe contener letras, sin espacios, números ni caracteres especiales"
-      )
-      .required("El campo es obligatorio"),
-    lastName: Yup.string()
-      .min(3, "Descripción demasiado corta")
-      .max(10, "Description demasiado larga")
-      .matches(
-        /^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$/,
-        "El apellido solo debe contener letras, sin espacios, números ni caracteres especiales"
+        /^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(?: [a-zA-ZáéíóúÁÉÍÓÚñÑ]+)*$/,
+        "El nombre solo debe contener letras y espacios, no números ni caracteres especiales"
       )
       .required("El campo es obligatorio"),
     email: Yup.string()
@@ -49,6 +41,22 @@ function Signup() {
         "Debe contener al menos un caracter especial"
       )
       .matches(/\d/, "Debe contener al menos un numero")
+      .required("El campo es obligatorio"),
+    phone: Yup.string()
+      .matches(/[0-9]/, "El campo solo puede contener números")
+      .max(11, "El campo debe de tener máximo 11 números.")
+      .required("El campo es obligatorio"),
+    question: Yup.string()
+      .matches(
+        /^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(?: [a-zA-ZáéíóúÁÉÍÓÚñÑ]+)*$/,
+        "La pregunta solo debe contener letras y espacios, no números ni caracteres especiales"
+      )
+      .required("El campo es obligatorio"),
+    answer: Yup.string()
+      .matches(
+        /^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(?: [a-zA-ZáéíóúÁÉÍÓÚñÑ]+)*$/,
+        "La pregunta solo debe contener letras y espacios, no números ni caracteres especiales"
+      )
       .required("El campo es obligatorio"),
   });
 
@@ -132,25 +140,6 @@ function Signup() {
                     )}
                   </div>
                   <div className="w-full flex flex-col mb-4">
-                    <label className="mb-2 text-base mb-1" htmlFor="lastName">
-                      Apellido
-                    </label>
-                    <Field
-                      className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
-                      id="lastName"
-                      type="text"
-                      placeholder="Apellido"
-                      name="lastName"
-                    />
-                    {errors.lastName && touched.lastName && (
-                      <ErrorMessage
-                        className=" p-2 bg-tertiary text-white"
-                        name="lastName"
-                        component="div"
-                      ></ErrorMessage>
-                    )}
-                  </div>
-                  <div className="w-full flex flex-col mb-4">
                     <label className="mb-2 text-base mb-1" htmlFor="email">
                       Correo
                     </label>
@@ -158,7 +147,7 @@ function Signup() {
                       className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                       id="email"
                       type="email"
-                      placeholder="email"
+                      placeholder="user@example.com"
                       name="email"
                     />
                     {errors.email && touched.email && (
@@ -169,7 +158,7 @@ function Signup() {
                       ></ErrorMessage>
                     )}
                   </div>
-                  <div className="w-full flex flex-col mb-8">
+                  <div className="w-full flex flex-col mb-4">
                     <label className="mb-2 text-base mb-1" htmlFor="password">
                       Contraseña
                     </label>
@@ -177,13 +166,83 @@ function Signup() {
                       className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                       id="password"
                       type="password"
-                      placeholder="password"
+                      placeholder="Contraseña"
                       name="password"
                     />
                     {errors.password && touched.password && (
                       <ErrorMessage
                         className="p-2 bg-tertiary text-white text-base"
                         name="password"
+                        component="div"
+                      ></ErrorMessage>
+                    )}
+                  </div>
+                  <div className="w-full flex flex-col mb-4">
+                    <label className="mb-2 text-base mb-1" htmlFor="phone">
+                      Número de teléfono
+                    </label>
+
+                    <div className="relative">
+                      <div className="absolute top-2 left-0 flex items-center pl-3">
+                        <span
+                          id="dropdownButton"
+                          className="h-full text-sm flex items-center bg-transparent text-slate-700 focus:outline-none"
+                        >
+                          <span id="dropdownSpan">+58</span>
+                        </span>
+                        <div className="h-6 border-l border-slate-200 ml-2"></div>
+                      </div>
+                      <Field
+                        className="text-sm pl-14 sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                        id="phone"
+                        type="tel"
+                        placeholder="324-456-2323"
+                        name="phone"
+                      />
+                    </div>
+
+                    {errors.phone && touched.phone && (
+                      <ErrorMessage
+                        className="p-2 bg-tertiary text-white text-base"
+                        name="phone"
+                        component="div"
+                      ></ErrorMessage>
+                    )}
+                  </div>
+                  <div className="w-full flex flex-col mb-4">
+                    <label className="mb-2 text-base mb-1" htmlFor="question">
+                      Pregunta de seguridad
+                    </label>
+                    <Field
+                      className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                      id="question"
+                      type="question"
+                      placeholder="¿Nombre de tu mascota?"
+                      name="question"
+                    />
+                    {errors.question && touched.question && (
+                      <ErrorMessage
+                        className=" p-2 bg-tertiary text-white"
+                        name="question"
+                        component="div"
+                      ></ErrorMessage>
+                    )}
+                  </div>
+                  <div className="w-full flex flex-col mb-4">
+                    <label className="mb-2 text-base mb-1" htmlFor="answer">
+                      Respuesta
+                    </label>
+                    <Field
+                      className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                      id="answer"
+                      type="answer"
+                      placeholder="Ej: Neko"
+                      name="answer"
+                    />
+                    {errors.answer && touched.answer && (
+                      <ErrorMessage
+                        className=" p-2 bg-tertiary text-white"
+                        name="answer"
                         component="div"
                       ></ErrorMessage>
                     )}

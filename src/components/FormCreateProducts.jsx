@@ -120,6 +120,9 @@ function FormCreateProducts() {
             data.append(`images[]`, files[key]);
           }
 
+          console.log(files);
+
+
           if (typeof params.id != "undefined") {
             try {
               const res = await axiosInstance.put(
