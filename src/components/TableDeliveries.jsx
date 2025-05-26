@@ -30,7 +30,7 @@ function TableDeliveries({ onSelectItem, items }) {
           name: "email",
         },
         {
-          id: "number",
+          id: "phone",
           name: "Número de Telefono",
         },
         {
@@ -39,10 +39,10 @@ function TableDeliveries({ onSelectItem, items }) {
           formatter: (_, row) =>
             html(`
               <div class="flex justify-center items-center">
-                <a class="edit-btn cursor-pointer" data-id='${row.cells[7].data}'>
+                <a class="edit-btn cursor-pointer" data-id='${row.cells[3].data}'>
                   ✎
                 </a>
-                <a class="delete-btn ml-4 cursor-pointer" data-name='${row.cells[1].data}' data-id='${row.cells[7].data}'>
+                <a class="delete-btn ml-4 cursor-pointer" data-name='${row.cells[1].data}' data-id='${row.cells[3].data}'>
                   ⌫
                 </a>
               </div>

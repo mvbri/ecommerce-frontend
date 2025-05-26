@@ -5,35 +5,38 @@ import { useParams, useNavigate } from "react-router";
 import { axiosInstance } from "../services/axios.config";
 
 const FormCreateDelivery = () => {
+   const [initialValues, setInitialValues] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    password: "",
+    question: "",
+    answer: "",
+  });
   const params = useParams();
   const navigate = useNavigate();
 
   useEffect(() => {
     if (typeof params.id != "undefined") getValues();
+    
   }, []);
 
-  const [initialValues, setInitialValues] = useState({
-    name: "",
-    email: "",
-    number: "",
-    password: "",
-  });
 
   const getValues = async () => {
     try {
-      const res = await axiosInstance.get(`/api/admin/products/${params.id}`);
+      const res = await axiosInstance.get(`/api/admin/users/delivery/${params.id}`);
 
-      if (res.status === 200) {
         const data = res.data.data;
+        
         setInitialValues({
           name: data.name,
           email: data.email,
-          number: data.number,
+          phone: data.phone,
           password: data.password,
+          question: data.question,
+          answer: data.answer
         });
-      } else {
-        throw Error(`[${res.status}] error en la solicitud`);
-      }
+
     } catch (err) {
       console.log(err);
     }
@@ -42,26 +45,33 @@ const FormCreateDelivery = () => {
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, "Nombre demasiado corto")
-      .max(15, "Nombre demasiado largo")
-      .matches(
-        /^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/,
-        "El nombre solo debe contener letras, no números ni caracteres especiales"
-      )
-      .required("El campo es obligatorio"),
+      // .max(15, "Nombre demasiado largo")
+      // .matches(
+      //   /^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/,
+      //   "El nombre solo debe contener letras, no números ni caracteres especiales"
+      // )
+      .required("El campo es obligatorio") 
+      ,
     email: Yup.string()
       .email("Formato Invalido de correo")
       .required("El campo es obligatorio"),
     password: Yup.string()
       .min(6, "Debe tener al menos 6 caracteres")
-      .matches(
-        /[!@#$%^&*(),.?":{}|<>]/,
-        "Debe contener al menos un caracter especial"
-      )
-      .matches(/\d/, "Debe contener al menos un numero")
+      // .matches(
+      //   /[!@#$%^&*(),.?":{}|<>]/,
+      //   "Debe contener al menos un caracter especial"
+      // )
+      // .matches(/\d/, "Debe contener al menos un numero")
       .required("El campo es obligatorio"),
-    number: Yup.number()
-      .max(6, "Debe tener máximo 6 caracteres")
+    phone: Yup.string()
+      .max(11, "Debe tener máximo 11 caracteres")
+      .min(11, "Debe tener al menos 11 caracteres")
+      .matches(/^[0-9]+$/, "Solo se admiten números")
       .required("El campo es obligatorio"),
+      question: Yup.string()
+      .required("El campo es obligatorio"),
+      answer: Yup.string()
+      .required("El campo es obligatorio")
   });
 
   async function handleSubmit(values, setSubmitting) {
@@ -119,6 +129,7 @@ const FormCreateDelivery = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
+             enableReinitialize={true}
             onSubmit={(values, { setSubmitting }) => {
               console.log(values);
               handleSubmit(values, setSubmitting);
@@ -169,20 +180,20 @@ const FormCreateDelivery = () => {
                   )}
                 </div>
                 <div className="w-full flex flex-col mb-4">
-                  <label className="mb-2 text-base mb-1" htmlFor="number">
+                  <label className="mb-2 text-base mb-1" htmlFor="phone">
                     Número de telefono
                   </label>
                   <Field
                     className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
-                    id="number"
+                    id="phone"
                     type="text"
                     placeholder="Número de Telefono"
-                    name="number"
+                    name="phone"
                   />
-                  {errors.number && touched.number && (
+                  {errors.phone && touched.phone && (
                     <ErrorMessage
                       className=" p-2 bg-tertiary text-white"
-                      name="number"
+                      name="phone"
                       component="div"
                     ></ErrorMessage>
                   )}
@@ -202,6 +213,44 @@ const FormCreateDelivery = () => {
                     <ErrorMessage
                       className="p-2 bg-tertiary text-white text-base"
                       name="password"
+                      component="div"
+                    ></ErrorMessage>
+                  )}
+                </div>
+                <div className="w-full flex flex-col mb-8">
+                  <label className="mb-2 text-base mb-1" htmlFor="question">
+                    Pregunta de seguridad
+                  </label>
+                  <Field
+                    className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                    id="question"
+                    type="question"
+                    placeholder="ej: ¿Nombre de tu mascota?"
+                    name="question"
+                  />
+                  {errors.question && touched.question && (
+                    <ErrorMessage
+                      className="p-2 bg-tertiary text-white text-base"
+                      name="question"
+                      component="div"
+                    ></ErrorMessage>
+                  )}
+                </div>
+                 <div className="w-full flex flex-col mb-8">
+                  <label className="mb-2 text-base mb-1" htmlFor="answer">
+                    Respuesta
+                  </label>
+                  <Field
+                    className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                    id="answer"
+                    type="answer"
+                    placeholder="Ej: Neko"
+                    name="answer"
+                  />
+                  {errors.answer && touched.answer && (
+                    <ErrorMessage
+                      className="p-2 bg-tertiary text-white text-base"
+                      name="answer"
                       component="div"
                     ></ErrorMessage>
                   )}

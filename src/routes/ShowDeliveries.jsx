@@ -13,6 +13,7 @@ const ShowDeliveries = () => {
   const [selectedItemName, setSelectedItemName] = useState(null);
   const [isOpen, openModal, closeModal] = useModal(false);
 
+
   const handleDeletetItem = (item, name) => {
     setSelectedItem(item);
     setSelectedItemName(name);

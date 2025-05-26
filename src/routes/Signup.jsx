@@ -48,8 +48,8 @@ function Signup() {
       .required("El campo es obligatorio"),
     question: Yup.string()
       .matches(
-        /^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(?: [a-zA-ZáéíóúÁÉÍÓÚñÑ]+)*$/,
-        "La pregunta solo debe contener letras y espacios, no números ni caracteres especiales"
+        /^[\DáéíóúÁÉÍÓÚñÑ]+(?: [\DáéíóúÁÉÍÓÚñÑ]+)*$/,
+        "La pregunta solo debe contener letras y espacios, no números"
       )
       .required("El campo es obligatorio"),
     answer: Yup.string()
@@ -193,7 +193,7 @@ function Signup() {
                         <div className="h-6 border-l border-slate-200 ml-2"></div>
                       </div>
                       <Field
-                        className="text-sm pl-14 sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                        className="text-sm pl-14 sm:text-base placeholder-gray-500 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                         id="phone"
                         type="tel"
                         placeholder="324-456-2323"

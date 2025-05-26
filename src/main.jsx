@@ -126,7 +126,7 @@ const router = createBrowserRouter([
       },
       {
         path: "delivery/:id/editar",
-        element: <CreateProducts key="edit" />,
+        element: <CreateDelivery key="edit" />,
       },
     ],
   },

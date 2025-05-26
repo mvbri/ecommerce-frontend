@@ -31,7 +31,7 @@ function FormCreateProducts() {
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .min(4, "Nombre demasiado corto")
-      .max(20, "Nombre demasiado largo")
+      .max(50, "Nombre demasiado largo")
       .required("El campo es obligatorio"),
     description: Yup.string()
       .min(10, "Descripción demasiado corta")
