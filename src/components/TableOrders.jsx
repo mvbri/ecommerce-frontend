@@ -28,7 +28,7 @@ const TableOrders = ({ onSelectItem, items }) => {
           name: "email",
         },
         {
-          id: "number",
+          id: "phone",
           name: "Número de Telefono",
         },
         {

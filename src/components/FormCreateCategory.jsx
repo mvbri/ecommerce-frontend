@@ -15,11 +15,10 @@ const validationSchema = Yup.object().shape({
     .min(10, "Descripción demasiado corta")
     .max(150, "Description demasiado larga")
     .required("El campo es obligatorio"),
-  category: Yup.array().required("El campo es obligatorio"),
 });
 
 const FormCreateCategory = () => {
-  const [files, setFiles] = useState([]);
+  const [file, setFile] = useState([]);
   const [image, setImage] = useState([]);
   const params = useParams();
   const navigate = useNavigate();
@@ -84,13 +83,13 @@ const FormCreateCategory = () => {
             data.append(index, values[index]);
           }
 
-          for (let key in files) {
-            data.append(`images[]`, files[key]);
-          }
+            data.append(`image`, file);
+
+
           if (typeof params.id !== "undefined") {
             try {
               const res = await axiosInstance.put(
-                `/api/admin/categories/${params.id}`,
+                `/api/admin/category/${params.id}`,
                 data,
                 {
                   headers: {
@@ -112,7 +111,7 @@ const FormCreateCategory = () => {
           } else {
             try {
               const res = await axiosInstance.post(
-                "/api/admin/categories",
+                "/api/admin/category",
                 data,
                 {
                   headers: {
@@ -175,8 +174,8 @@ const FormCreateCategory = () => {
               Imagen
             </label>
             <Dropzone
-              files={files}
-              setFiles={setFiles}
+              files={file}
+              setFiles={setFile}
               maxfiles={true}
               className="p-16 mt-10 cursor-pointer border border-dashed border-2 md:w-4/5 m-auto border-neutral-500 text-center mb-3"
             />

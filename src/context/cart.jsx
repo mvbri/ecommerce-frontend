@@ -1,8 +1,8 @@
 import { createContext, useEffect, useReducer } from "react";
 import { TYPES } from "../actions/shoppingAction";
-import { axiosInstance, setAuthToken} from "../services/axios.config";
+import { axiosInstance, setAuthToken } from "../services/axios.config";
 import { useAuth } from "../auth/AuthProvider";
-import {  } from "../services/axios.config";
+import { } from "../services/axios.config";
 import {
   shoppingInitialState,
   shoppingReducer,
@@ -145,20 +145,44 @@ export const CartProvider = ({ children }) => {
 
   };
 
-  const createOrder = async() => {
+  const createOrder = async (data) => {
     
+
+        const newState = {
+          ...state,
+          _id: data._id,
+          detail: data.detail,
+          total_delivery: data.total_delivery,
+          total_products: data.total_products,
+          total_iva: data.total_iva,
+          total: data.total,
+          total_quantity: data.total_quantity
+        }
+
+        dispatch({
+          type: TYPES.CLEAR_CART,
+          payload: newState,
+        });
+
+
+      
+  }
+
+
+  const clearCart = async () => {
     let data = {
       _id: state._id,
     }
+
     try {
-      const res = await axiosInstance.post(
-        `/api/orders`,
+      const res = await axiosInstance.put(
+        `/api/cart/remove/all`,
         data
       );
 
       if (res.status === 200) {
 
-        const data  = res.data.cart
+        const data = res.data.data
 
         const newState = {
           ...state,
@@ -184,49 +208,7 @@ export const CartProvider = ({ children }) => {
       console.log(err);
       return state;
     }
-  }
 
-
-  const clearCart = async () => {
-    let data = {
-      _id: state._id,
-    }
-
-    try {
-        const res = await axiosInstance.put(
-          `/api/cart/remove/all`,
-          data
-        );
-
-        if (res.status === 200) {
-
-          const data  = res.data.data
-
-          const newState = {
-            ...state,
-            _id: data._id,
-            detail: data.detail,
-            total_delivery: data.total_delivery,
-            total_products: data.total_products,
-            total_iva: data.total_iva,
-            total: data.total,
-            total_quantity: data.total_quantity
-          }
-
-          dispatch({
-            type: TYPES.CLEAR_CART,
-            payload: newState,
-          });
-
-
-        } else {
-          throw Error(`[${res.status}] error en la solicitud`);
-        }
-      } catch (err) {
-        console.log(err);
-        return state;
-      }
-   
   };
   return (
     <CartContext.Provider

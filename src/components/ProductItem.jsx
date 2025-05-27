@@ -34,9 +34,10 @@ const ProductItem = ({ product }) => {
           pathname: `/producto/${slug}`,
         }}
       >
+      
         <img
           className="w-full mb-4"
-          src={`${API_URL}/public/images/products/${images[0].url}`}
+          src={ images[0]?.url ? `${API_URL}/public/images/products/${images[0].url}` : `${API_URL}/public/images/default.png`}
         />
       </Link>
       <h5>{categoria}</h5>

@@ -84,7 +84,7 @@ const Dropzone = ({ className,files, setFiles, maxfiles = false }) => {
         )}
       </div>
       <ul className="flex gap-2">
-        {files.map((file) => (
+        {files && files.map((file) => (
           <li key={file.name} className="mb-4">
             <div className="relative size-24">
               <img

@@ -28,6 +28,7 @@ import UserProfile from "./routes/UserProfile.jsx";
 import PasswordChange from "./routes/PasswordChange.jsx";
 import UserAddresses from "./routes/UserAddresses.jsx";
 import CreateAddresses from "./routes/CreateAddresses.jsx";
+import ShowUserOrders from "./routes/ShowUserOrders.jsx";
 
 const router = createBrowserRouter([
   {
@@ -85,6 +86,18 @@ const router = createBrowserRouter([
       {
         path: "/direcciones/crear",
         element: <CreateAddresses />,
+      },
+      {
+        path: "/direcciones/:id/editar",
+        element: <CreateAddresses key="edit"/>,
+      },
+      {
+        path: "/compras",
+        element: <ShowUserOrders />,
+      },
+      {
+        path: "/compras/:id",
+        element: "prueba",
       },
     ],
   },

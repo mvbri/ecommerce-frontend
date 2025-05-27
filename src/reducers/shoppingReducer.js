@@ -1,5 +1,4 @@
 import { TYPES } from "../actions/shoppingAction";
-import { axiosInstance } from "../services/axios.config";
 
 export const shoppingInitialState = JSON.parse(
   localStorage.getItem("cart")
