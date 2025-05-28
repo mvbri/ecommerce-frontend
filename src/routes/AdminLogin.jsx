@@ -9,10 +9,11 @@ function AdminLogin() {
   const [password, setPassword] = useState();
   const [errorResponse, setErrorResponse] = useState();
   const auth = useAuth();
-  const goTo = useNavigate();
 
-  if (auth.isAuthenticated && auth.getUser().role == "admin") return <Navigate to="/admin/dashboard" />;
-  if (auth.isAuthenticated && auth.getUser().role == "delivery") return <Navigate to="/delivery/dashboard" />;
+  if (auth.isAuthenticated && auth.getUser().role == "admin")
+    return <Navigate to="/admin/dashboard" />;
+  if (auth.isAuthenticated && auth.getUser().role == "delivery")
+    return <Navigate to="/delivery/dashboard" />;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -30,11 +31,9 @@ function AdminLogin() {
       });
 
       if (!response.ok) {
-        console.log("Something Went Wrong");
         const json = await response.json();
-        setErrorResponse(json.body.error);
-
-        return;
+        setErrorResponse(json.error);
+        throw Error(json.error);
       }
       console.log("AdminLogin Successful");
       setErrorResponse("");
@@ -43,7 +42,6 @@ function AdminLogin() {
 
       if (json.accessToken && json.refreshToken) {
         auth.saveUser(json);
-        // goTo("/admin/dashboard");
       }
     } catch (error) {
       console.log(error);
@@ -61,8 +59,8 @@ function AdminLogin() {
             Inicio de sesión
           </h1>
 
-          {!!errorResponse && (
-            <div className="bg-red-500 w-80 text-center p-1 mb-3">
+          {errorResponse && (
+            <div className="bg-red-500 w-80 text-center text-white p-1 mb-3">
               {errorResponse}
             </div>
           )}

@@ -55,6 +55,8 @@ const FormCreateCategory = () => {
     try {
       const res = await axiosInstance.get(`/api/admin/category/${params.id}`);
 
+      console.log(res);
+
       if (res.status === 200) {
         const data = res.data.data;
 
@@ -86,8 +88,6 @@ const FormCreateCategory = () => {
           for (let key in file) {
             data.append(`image`, file[key]);
           }
-
-
 
           if (typeof params.id !== "undefined") {
             try {
@@ -219,14 +219,12 @@ const FormCreateCategory = () => {
 
             <label className="mb-3 text-base" htmlFor="status">
               Mostrar en el menu
-
               <Field
                 className="mb-4 text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                 id="menu"
                 type="checkbox"
                 name="menu"
               />
-
             </label>
 
             <button

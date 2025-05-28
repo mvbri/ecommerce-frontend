@@ -91,7 +91,7 @@ function Signup() {
 
   return (
     <DefaultLayout>
-      <div className="grid md:grid-cols-2 pt-[4rem] gap-[6rem] max-w-[1400px] m-auto p-8">
+      <div className="grid md:grid-cols-2 pt-[4rem] gap-[2rem] md:gap-[3rem] max-w-[1400px] m-auto p-8">
         <div className="graphic hidden md:block rounded-md">
           <img className="h-full object-cover rounded-md" src={ImgBanner} />
         </div>
@@ -112,14 +112,13 @@ function Signup() {
               }}
             >
               {({ values, isSubmitting, errors, touched }) => (
-                <Form className="flex flex-col items-center p-6 md:p-4 md:px-8  m-auto mb-3 border border-gray-700 rounded-md">
+                <Form className="flex flex-col items-center p-6 md:p-4 md:px-8 m-auto mb-3 border border-gray-700 rounded-md">
                   <div className="w-full flex flex-col mb-4">
                     <h1 className="mb-4 md:mb-8 text-gray-800 text-2xl md:text-3xl text-center mt-8">
                       Registro
                     </h1>
                     <label
-                      className="mb-3 text-base inline-block mb-1 
-"
+                      className="mb-3 text-base inline-block mb-1"
                       htmlFor="name"
                     >
                       Nombre
@@ -217,7 +216,7 @@ function Signup() {
                       className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                       id="question"
                       type="question"
-                      placeholder="¿Nombre de tu mascota?"
+                      placeholder="Ej: ¿Nombre de tu mascota?"
                       name="question"
                     />
                     {errors.question && touched.question && (

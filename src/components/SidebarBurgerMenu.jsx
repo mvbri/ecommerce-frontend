@@ -153,7 +153,7 @@ export function SidebarBurgerMenu() {
                   <ListItem>
                     <Link
                       className="text-gray-600 flex justify-center items-center"
-                      to="/admin/categoria/crear"
+                      to="/admin/categorias"
                     >
                       <ListItemPrefix>
                         <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
@@ -226,7 +226,7 @@ export function SidebarBurgerMenu() {
                 </List>
               </AccordionBody>
             </Accordion>
-             <Accordion
+            <Accordion
               open={open === 4}
               icon={
                 <ChevronDownIcon

@@ -138,8 +138,12 @@ const router = createBrowserRouter([
         element: <ShowDeliveries />,
       },
       {
-        path: "categoria/crear",
+        path: "categorias",
         element: <CreateCategory />,
+      },
+      {
+        path: "categoria/:id/editar",
+        element: <CreateCategory key="edit" />,
       },
       {
         path: "delivery/:id/editar",
