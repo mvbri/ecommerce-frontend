@@ -13,7 +13,7 @@ function Signup() {
   const auth = useAuth();
   const goTo = useNavigate();
 
-  if (auth.isAuthenticated) return <Navigate to="/dashboard" />;
+  if (auth.isAuthenticated) return <Navigate to="/" />;
 
   const initialValues = {
     name: "",

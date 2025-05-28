@@ -18,7 +18,7 @@ const Navbar = () => {
     <>
       <header className="navbar-container max-w-[1400px] px-1 md:px-6 m-auto">
         <div className="flex justify-between w-full">
-          <Link to="/home">
+          <Link to="/">
             <img
               className="logo w-[60px] h-[60px] lg:w-[80px] lg:h-[80px] rounded-full mt-1"
               src={logo}
@@ -56,7 +56,7 @@ const Navbar = () => {
           </div>
           <nav className={`navbar ${isOpen ? "open" : ""}`}>
             <div className="navbar-section">
-              <Link className="navbar-item" to="/home">
+              <Link className="navbar-item" to="/">
                 Inicio
               </Link>
               {categories.map((category, i) => (
@@ -95,7 +95,7 @@ const Navbar = () => {
                   Cerrar sesión
                 </button>
               ) : (
-                <Link className="navbar-item whitespace-nowrap" to="/">
+                <Link className="navbar-item whitespace-nowrap" to="/login">
                   Inicia sesión
                 </Link>
               )}

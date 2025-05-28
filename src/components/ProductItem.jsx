@@ -70,7 +70,7 @@ const ProductItem = ({ product }) => {
           >
             Agregar
           </button>) : (<Link className="m-auto md:m-0 bg-secondary hover:bg-secondary-accent text-white py-1 px-2 rounded-md font-semibold mb-4"
-            to="/" exact >Agregar</Link>)}
+            to="/login" exact >Agregar</Link>)}
           </div>
     </div>
       );

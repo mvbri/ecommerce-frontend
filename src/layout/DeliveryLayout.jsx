@@ -17,7 +17,7 @@ function DeliveryLayout({ children }) {
     <>
       <header className="navbar-container">
         <div className="max-w-[1400px] m-auto flex justify-between w-full">
-          <Link to="/home">
+          <Link to="/">
             <img
               className="logo w-[80px] h-[80px] rounded-full"
               src={logo}
@@ -46,7 +46,7 @@ function DeliveryLayout({ children }) {
                   Cerrar sesion
                 </button>
               ) : (
-                <Link className="navbar-item" to="/">
+                <Link className="navbar-item" to="/login">
                   Inicia sesión
                 </Link>
               )}

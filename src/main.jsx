@@ -34,15 +34,14 @@ import AdminShowOrders from "./routes/AdminShowOrders.jsx";
 import AdminEditOrder from "./components/AdminEditOrder.jsx";
 
 const router = createBrowserRouter([
-  {
+   {
     path: "/",
-    element: <Login />,
-  },
-  {
-    path: "/Home",
     element: <HomePage />,
   },
-
+  {
+    path: "/login",
+    element: <Login />,
+  },
   {
     path: "/productos",
     element: <ShowProducts />,
