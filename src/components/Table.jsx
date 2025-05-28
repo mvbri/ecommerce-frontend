@@ -21,6 +21,29 @@ function Table({ onSelectItem, items }) {
     }
 
     gridInstance.current = new Grid({
+      language: {
+        loading: 'Cargando...',
+        noRecordsFound: 'No se encontraron registros coincidientes',
+        error: 'Se produjo un error al obtener los datos',
+        search: {
+          placeholder: '🔍 Buscar...'
+        },
+        sort: {
+          sortAsc: 'Ordenar columna ascendente',
+          sortDesc: 'Ordenar columna descendente',
+        },
+        pagination: {
+          previous: '⬅️',
+          next: '➡️',
+          of: 'de',
+          to: 'al',
+          showing: '😃 Mostrando',
+          results: () => 'Resultados',
+          navigate: (page, pages) => `Página ${page} de ${pages}`,
+          page: (page) => `Página ${page}`,
+        }
+      },
+      pagination: true,
       columns: [
         {
           id: "images",
@@ -66,15 +89,21 @@ function Table({ onSelectItem, items }) {
           name: "Precio con IVA",
         },
         {
+          id: "status",
+
+          data: (row) => row.status ? "Activo" : "Inactivo",
+          name: 'Estatus'
+        },
+        {
           id: "_id",
           name: "Modificar",
           formatter: (_, row) =>
             html(`
               <div class="flex justify-center items-center">
-                <a class="edit-btn cursor-pointer" data-id='${row.cells[7].data}'>
+                <a class="edit-btn cursor-pointer" data-id='${row.cells[8].data}'>
                   ✎
                 </a>
-                <a class="delete-btn ml-4 cursor-pointer" data-name='${row.cells[1].data}' data-id='${row.cells[7].data}'>
+                <a class="delete-btn ml-4 cursor-pointer" data-name='${row.cells[1].data}' data-id='${row.cells[8].data}'>
                   ⌫
                 </a>
               </div>

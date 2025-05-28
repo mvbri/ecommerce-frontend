@@ -2,8 +2,7 @@ import { useCallback, useState } from "react";
 import { useDropzone } from "react-dropzone";
 import { XMarkIcon } from "@heroicons/react/24/solid";
 
-const Dropzone = ({ className, maxfiles = false }) => {
-  const [files, setFiles] = useState([]);
+const Dropzone = ({ className,files, setFiles, maxfiles = false }) => {
   const [rejected, setRejected] = useState([]);
   const [error, setError] = useState(false);
 
@@ -79,13 +78,13 @@ const Dropzone = ({ className, maxfiles = false }) => {
           })}
         />
         {isDragActive ? (
-          <p>Drop the files here ...</p>
+          <p>Suelta los archivos aquí ...</p>
         ) : (
-          <p>Drag and drop some files here, or click to select files</p>
+          <p>Arrastre y suelte algunos archivos aquí, o haga clic para seleccionar archivos</p>
         )}
       </div>
       <ul className="flex gap-2">
-        {files.map((file) => (
+        {files && files.map((file) => (
           <li key={file.name} className="mb-4">
             <div className="relative size-24">
               <img

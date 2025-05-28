@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { API_URL } from "../auth/constants";
 import NumberInput from "./NumberInput";
 
@@ -16,7 +17,7 @@ const CartItem = ({ product, quantity, delFromCart, updateQuantityCart }) => {
       <div className="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
         <img
           alt={name}
-          src={`${API_URL}/public/images/products/${images[0].url}`}
+          src={images[0]?.url ? `${API_URL}/public/images/products/${images[0].url}` : `${API_URL}/public/images/default.png`}
           className="size-full object-cover"
         />
       </div>
@@ -25,11 +26,11 @@ const CartItem = ({ product, quantity, delFromCart, updateQuantityCart }) => {
         <div>
           <div className="flex justify-between text-base font-medium text-gray-900">
             <h3>
-              <a href={slug}>{name}</a>
+              <Link to={`/producto/${slug}`}>{name}</Link>
             </h3>
             <div className="text-sm">
-              <p className="ml-4">Precio sin I.V.A {price}$</p>
-              <p className="ml-4">Precio con I.V.A {priceIVA}$</p>
+              <p className="ml-4">Precio sin I.V.A {price} Bs</p>
+              <p className="ml-4">Precio con I.V.A {priceIVA} Bs</p>
               <p className="ml-4">
                 {priceIVA} Bs x{quantity} = {priceIVA * quantity} Bs
               </p>

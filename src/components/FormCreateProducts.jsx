@@ -26,12 +26,12 @@ function FormCreateProducts() {
     stock: "",
     price: "",
     priceIVA: "",
+    status: true,
   });
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .min(4, "Nombre demasiado corto")
-      .max(20, "Nombre demasiado largo")
       .required("El campo es obligatorio"),
     description: Yup.string()
       .min(10, "Descripción demasiado corta")
@@ -78,6 +78,7 @@ function FormCreateProducts() {
           stock: data.stock,
           price: data.price,
           priceIVA: data.priceIVA,
+          status: data.status,
         });
       } else {
         throw Error(`[${res.status}] error en la solicitud`);
@@ -119,6 +120,7 @@ function FormCreateProducts() {
           for (let key in files) {
             data.append(`images[]`, files[key]);
           }
+
 
           if (typeof params.id != "undefined") {
             try {
@@ -169,6 +171,18 @@ function FormCreateProducts() {
       >
         {({ values, isSubmitting, errors, touched }) => (
           <Form className="flex flex-col pt-8 p-4 md:px-8 w-full border border-gray-700 rounded-md m-auto">
+            <label className="mb-3 text-base" htmlFor="status">
+              Activo
+
+              <Field
+                className="mb-4 text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                id="status"
+                type="checkbox"
+                name="status"
+              />
+
+            </label>
+
             <label className="mb-3 text-base" htmlFor="name">
               Nombre
             </label>

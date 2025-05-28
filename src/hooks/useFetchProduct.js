@@ -6,7 +6,7 @@ export const useFetchProduct = (slug) => {
   const [images, setImages] = useState([]);
   useEffect(() => {
     getProduct()
-  }, []);
+  }, [ slug ]);
 
   const getProduct = async () => {
     try {

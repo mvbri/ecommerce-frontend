@@ -11,25 +11,12 @@
 }
 
 .quantity-cart{
-  position: absolute;
-  margin-left: -2.1rem;
-  color: #fff;
-  background: #ff9b17;
-  border-radius: 50rem;
-  padding: 0.4rem;
-  font-size: 0.8rem;
-  top: 1.2rem;
-  line-height: 0.5rem;
-}
-
-.quantity-cart-mobile{
-  position: absolute;
-  margin-left: -1rem;
-  color: #fff;
-  background: #ff9b17;
-  border-radius: 50rem;
-  padding: 0.4rem;
-  font-size: 0.8rem;
-  top: 0.7rem;
-  line-height: 0.5rem;
+    position: absolute;
+    margin-left: 1.3rem;
+    border-radius: 50rem;
+    border: solid;
+    padding: 0.2rem;
+    font-size: 0.7rem;
+    top: 0.6rem;
+    line-height: 0.5rem;
 }

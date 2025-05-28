@@ -1,10 +1,10 @@
-import ShoppingCart from "../components/ShoppingCart";
+import Checkout from "../components/ShoppingCart";
 import HomeLayout from "../layout/HomeLayout";
 
 const Shopping = () => {
   return (
     <HomeLayout>
-      <ShoppingCart />
+      <Checkout />
     </HomeLayout>
   );
 };

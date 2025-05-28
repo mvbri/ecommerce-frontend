@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
-import { setAuthToken } from "../services/axios.config";
+import { setAuthToken, useAxiosWithAuth } from "../services/axios.config";
 import "../components/css/Navbar.css";
 import { useState } from "react";
 import logo from "../img/logo.jpeg";
@@ -9,6 +9,8 @@ function DeliveryLayout({ children }) {
   const auth = useAuth();
   setAuthToken(auth.getAccessToken());
   const [isOpen, setIsOpen] = useState(false);
+
+  useAxiosWithAuth();
 
   const handleOpen = () => setIsOpen(!isOpen);
   return (

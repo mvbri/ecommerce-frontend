@@ -56,9 +56,11 @@ export default function NavTailwind() {
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
                   {categories.map((item, i) => (
+                    item.menu &&
                     <Link
+                    
                       key={i}
-                      href={item.slug}
+                      to={`/categoria/${item.slug}`}
                       aria-current={item.current ? "page" : undefined}
                       className={classNames(
                         item.current
@@ -68,7 +70,7 @@ export default function NavTailwind() {
                       )}
                     >
                       {item.name}
-                    </Link>
+                    </Link> 
                   ))}
                 </div>
               </div>

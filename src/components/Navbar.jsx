@@ -5,9 +5,7 @@ import { useState } from "react";
 import { useAuth } from "../auth/AuthProvider";
 import SearchBar from "./SearchBar";
 import { useCart } from "../hooks/useCart";
-import Dropdown from "./Dropdown";
 import { useFetchCategories } from "../hooks/useFetchCategories";
-import ShoppingCartButton from "./ShoppingCartButton";
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);

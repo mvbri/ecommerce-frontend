@@ -4,7 +4,56 @@ import BannerAdmin from "../components/BannerAdmin";
 import CardDashboard from "../components/CardDashboard";
 import BasicGridLayout from "../components/BasicGridLayout";
 
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend,
+} from 'chart.js';
+import { Line } from 'react-chartjs-2';
+import { useFetchOrdersChart } from "../hooks/useFetchOrdersChart";
+
 function AdminDashboard() {
+const { orders } = useFetchOrdersChart();
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: 'top',
+      },
+      title: {
+        display: true,
+        text: 'Pedidos Generados',
+      },
+    },
+  };
+
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    PointElement,
+    LineElement,
+    Title,
+    Tooltip,
+    Legend
+  );
+  const labels = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+  const data = {
+    labels,
+    datasets: [
+      {
+        label: 'Pedidos',
+        data: orders,
+        borderColor: 'rgb(53, 162, 235)',
+        backgroundColor: 'rgba(53, 162, 235, 0.5)',
+      },
+    ],
+  };
   return (
     <AdminLayout>
       <StandardSection className="px-1 pt-8">
@@ -146,6 +195,8 @@ function AdminDashboard() {
               />
             </svg>
           </CardDashboard>
+        <Line options={options} data={data} />
+
         </BasicGridLayout>
       </StandardSection>
     </AdminLayout>

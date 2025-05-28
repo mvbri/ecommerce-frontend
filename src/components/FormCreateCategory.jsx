@@ -15,11 +15,10 @@ const validationSchema = Yup.object().shape({
     .min(10, "Descripción demasiado corta")
     .max(150, "Description demasiado larga")
     .required("El campo es obligatorio"),
-  category: Yup.array().required("El campo es obligatorio"),
 });
 
 const FormCreateCategory = () => {
-  const [files, setFiles] = useState([]);
+  const [file, setFile] = useState([]);
   const [image, setImage] = useState([]);
   const params = useParams();
   const navigate = useNavigate();
@@ -31,6 +30,7 @@ const FormCreateCategory = () => {
   const [initialValues, setInitialValues] = useState({
     name: "",
     description: "",
+    menu: false,
   });
 
   const dropImage = async (image) => {
@@ -83,14 +83,16 @@ const FormCreateCategory = () => {
           for (let index in values) {
             data.append(index, values[index]);
           }
-
-          for (let key in files) {
-            data.append(`images[]`, files[key]);
+          for (let key in file) {
+            data.append(`image`, file[key]);
           }
+
+
+
           if (typeof params.id !== "undefined") {
             try {
               const res = await axiosInstance.put(
-                `/api/admin/categories/${params.id}`,
+                `/api/admin/category/${params.id}`,
                 data,
                 {
                   headers: {
@@ -112,7 +114,7 @@ const FormCreateCategory = () => {
           } else {
             try {
               const res = await axiosInstance.post(
-                "/api/admin/categories",
+                "/api/admin/category",
                 data,
                 {
                   headers: {
@@ -175,8 +177,8 @@ const FormCreateCategory = () => {
               Imagen
             </label>
             <Dropzone
-              files={files}
-              setFiles={setFiles}
+              files={file}
+              setFiles={setFile}
               maxfiles={true}
               className="p-16 mt-10 cursor-pointer border border-dashed border-2 md:w-4/5 m-auto border-neutral-500 text-center mb-3"
             />
@@ -215,11 +217,23 @@ const FormCreateCategory = () => {
               ></ErrorMessage>
             )}
 
+            <label className="mb-3 text-base" htmlFor="status">
+              Mostrar en el menu
+
+              <Field
+                className="mb-4 text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                id="menu"
+                type="checkbox"
+                name="menu"
+              />
+
+            </label>
+
             <button
               className="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm md:text-base rounded-md py-2 px-4 shadow-sm hover:shadow-md bg-slate-800 border-slate-800 text-slate-50 hover:bg-slate-700 hover:border-slate-700 my-8"
               type="submit"
             >
-              Cargar nuevo producto
+              Cargar nueva categoria
             </button>
             {isSubmitting ? (
               <p className="mb-3 text-center">Enviando nuevo producto</p>

@@ -1,6 +1,7 @@
-import { useParams } from "react-router";
+import { useParams  } from "react-router";
 import CategorySectionProducts from "../components/CategorySectionProducts";
 import HomeLayout from "../layout/HomeLayout";
+
 
 const ShowCategories = () => {
     const params = useParams();

@@ -1,25 +1,53 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { axiosInstance } from "../services/axios.config";
+import { useNavigate, useParams } from "react-router-dom";
 
 const FormUserAddresses = () => {
   const [errorResponse, setErrorResponse] = useState("");
 
-  const initialValues = {
+  const params = useParams();
+  const navigate = useNavigate();
+
+
+  useEffect(() => {
+    if (typeof params.id != "undefined") getValues();
+  }, []);
+
+  const [initialValues, setInitialValues] = useState({
     name: "",
     address: "",
     phone: "",
     parish: "",
+  });
+
+  const parishes = ['Catedral', "Zea", "Orinoco", "José Antonio Páez", "Marhuanta", "Agua Salada", "Vista Hermosa", "La Sabanita", "Panapana"]
+
+  const getValues = async () => {
+    try {
+      const res = await axiosInstance.get(`/api/address/${params.id}`);
+
+      if (res.status === 200) {
+        const data = res.data.data;
+        console.log(data)
+        setInitialValues({
+          name: data.name,
+          address: data.address,
+          phone: data.phone,
+          parish: data.parish,
+        });
+      } else {
+        throw Error(`[${res.status}] error en la solicitud`);
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, "Nombre demasiado corto")
-      .max(15, "Nombre demasiado largo")
-      .matches(
-        /^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$/,
-        "El nombre solo debe contener letras, sin espacios, números ni caracteres especiales"
-      )
       .required("El campo es obligatorio"),
     phone: Yup.string()
       .matches(/[0-9]/, "El campo solo puede contener números")
@@ -34,38 +62,44 @@ const FormUserAddresses = () => {
       .required("El campo es obligatorio"),
     address: Yup.string()
       .min(2, "Nombre demasiado corto")
-      .max(40, "Nombre demasiado largo")
-      .matches(
-        /^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$/,
-        "El nombre solo debe contener letras, sin espacios, números ni caracteres especiales"
-      )
       .required("El campo es obligatorio"),
   });
 
-  async function handleSubmit(values, setSubmitting) {
-    console.log(values);
+  const handleSubmit = async (values, setSubmitting) => {
+    if (typeof params.id != "undefined") {
+      try {
+        const res = await axiosInstance.put(
+          `/api/address/${params.id}`,
+          values,
+        );
 
-    try {
-      let response = await fetch(`${API_URL}/signup`, {
-        method: "POST",
-        headers: {
-          "content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-
-      if (!response.ok) {
-        console.log("Something Went Wrong");
-        const json = await response.json();
-        setErrorResponse(json.body.error);
-
-        return;
+        if (res.status === 201) {
+          alert("actualizado");
+        } else {
+          throw Error(`[${res.status}] error en la solicitud`);
+        }
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setSubmitting(false);
       }
-      setErrorResponse("");
-    } catch (error) {
-      console.log(error);
-    } finally {
-      setSubmitting(false);
+    } else {
+      try {
+        const res = await axiosInstance.post(
+          "/api/address",
+          values
+        );
+
+        if (res.status === 201) {
+          navigate(`/direcciones/${res.data.data._id}/editar`);
+        } else {
+          throw Error(`[${res.status}] error en la solicitud`);
+        }
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setSubmitting(false);
+      }
     }
   }
 
@@ -84,8 +118,8 @@ const FormUserAddresses = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
+            enableReinitialize={true}
             onSubmit={(values, { setSubmitting }) => {
-              console.log(values);
               handleSubmit(values, setSubmitting);
             }}
           >
@@ -123,10 +157,16 @@ const FormUserAddresses = () => {
                       <Field
                         className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                         id="parish"
-                        type="parish"
+                        as="select"
                         placeholder="parish"
                         name="parish"
-                      />
+                      >
+                        <option value="">Seleccione parroquía</option>
+                        {parishes.map((parish) => (
+                          <option key={parish} value={parish}>{parish}</option>
+                        ))}
+                      </Field>
+
                       {errors.parish && touched.parish && (
                         <ErrorMessage
                           className="p-2 bg-tertiary text-white text-base"
@@ -140,10 +180,9 @@ const FormUserAddresses = () => {
                         Dirección
                       </label>
                       <Field
-                        className="text-gray-400 text-sm sm:text-base placeholder-gray-400 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-gray-400"
+                        className="text-gray-800 text-sm sm:text-base placeholder-gray-800 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-gray-400"
                         id="address"
-                        readOnly
-                        type="address"
+                        as="textarea"
                         placeholder="address"
                         name="address"
                       />
@@ -181,7 +220,9 @@ const FormUserAddresses = () => {
                   className="mb-4 inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 md:px-8 shadow-sm hover:shadow-md bg-red-500 border-red-500 text-slate-50 hover:bg-red-400 hover:border-red-400"
                   type="submit"
                 >
-                  AGREGAR NUEVA DIRECCIÓN
+                  {typeof params.id != "undefined"
+                    ? "ACTUALIZAR DIRECCIÓN"
+                    : "REGISTRAR NUEVA DIRECCIÓN"}
                 </button>
                 {isSubmitting ? (
                   <p className="mb-3 text-center">Cargando...</p>

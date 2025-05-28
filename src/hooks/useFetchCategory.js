@@ -6,7 +6,7 @@ export const useFetchCategory = (slug) => {
   const [products, setProducts] = useState([]);
   useEffect(() => {
     getCategory();
-  }, []);
+  }, [ slug ]);
 
   const getCategory = async () => {
     try {
