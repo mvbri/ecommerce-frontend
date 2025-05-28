@@ -1,4 +1,4 @@
-import { createContext, useEffect, useReducer } from "react";
+import { createContext, useEffect, useReducer, useState } from "react";
 import { TYPES } from "../actions/shoppingAction";
 import { axiosInstance, setAuthToken } from "../services/axios.config";
 import { useAuth } from "../auth/AuthProvider";
@@ -17,8 +17,9 @@ export const CartProvider = ({ children }) => {
 
   const [state, dispatch] = useReducer(shoppingReducer, shoppingInitialState);
 
-  const cart = state;
+  const [open, setOpen] = useState(false)
 
+  const cart = state;
 
   const addToCart = async (_id, quantity = 1) => {
     let data = {
@@ -52,6 +53,7 @@ export const CartProvider = ({ children }) => {
           payload: newState
         });
 
+        setOpen(true);
       } else {
         throw Error(`[${res.status}] error en la solicitud`);
       }
@@ -146,26 +148,25 @@ export const CartProvider = ({ children }) => {
   };
 
   const createOrder = async (data) => {
-    
 
-        const newState = {
-          ...state,
-          _id: data._id,
-          detail: data.detail,
-          total_delivery: data.total_delivery,
-          total_products: data.total_products,
-          total_iva: data.total_iva,
-          total: data.total,
-          total_quantity: data.total_quantity
-        }
+    const newState = {
+      ...state,
+      _id: data._id,
+      detail: data.detail,
+      total_delivery: data.total_delivery,
+      total_products: data.total_products,
+      total_iva: data.total_iva,
+      total: data.total,
+      total_quantity: data.total_quantity
+    }
 
-        dispatch({
-          type: TYPES.CLEAR_CART,
-          payload: newState,
-        });
+    dispatch({
+      type: TYPES.CLEAR_CART,
+      payload: newState,
+    });
 
 
-      
+
   }
 
 
@@ -212,7 +213,7 @@ export const CartProvider = ({ children }) => {
   };
   return (
     <CartContext.Provider
-      value={{ cart, addToCart, clearCart, delFromCart, updateQuantityCart, createOrder }}
+      value={{ setOpen,open, cart, addToCart, clearCart, delFromCart, updateQuantityCart, createOrder }}
     >
       {children}
     </CartContext.Provider>

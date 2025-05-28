@@ -7,22 +7,24 @@ import { useNavigate, useParams } from "react-router-dom";
 const FormUserAddresses = () => {
   const [errorResponse, setErrorResponse] = useState("");
 
-    const params = useParams(); 
+  const params = useParams();
   const navigate = useNavigate();
 
 
   useEffect(() => {
-      if (typeof params.id != "undefined") getValues();
-    }, []); 
+    if (typeof params.id != "undefined") getValues();
+  }, []);
 
-   const [initialValues, setInitialValues] = useState({
-   name: "",
+  const [initialValues, setInitialValues] = useState({
+    name: "",
     address: "",
     phone: "",
     parish: "",
   });
 
-   const getValues = async () => {
+  const parishes = ['Catedral', "Zea", "Orinoco", "José Antonio Páez", "Marhuanta", "Agua Salada", "Vista Hermosa", "La Sabanita", "Panapana"]
+
+  const getValues = async () => {
     try {
       const res = await axiosInstance.get(`/api/address/${params.id}`);
 
@@ -63,42 +65,42 @@ const FormUserAddresses = () => {
       .required("El campo es obligatorio"),
   });
 
- const handleSubmit = async (values, setSubmitting) => {
-      if (typeof params.id != "undefined") {
-            try {
-              const res = await axiosInstance.put(
-                `/api/address/${params.id}`,
-                values,
-              );
+  const handleSubmit = async (values, setSubmitting) => {
+    if (typeof params.id != "undefined") {
+      try {
+        const res = await axiosInstance.put(
+          `/api/address/${params.id}`,
+          values,
+        );
 
-              if (res.status === 201) {
-                alert("actualizado");
-              } else {
-                throw Error(`[${res.status}] error en la solicitud`);
-              }
-            } catch (err) {
-              console.log(err);
-            } finally {
-              setSubmitting(false);
-            }
-          } else {
-            try {
-              const res = await axiosInstance.post(
-                "/api/address",
-                values
-              );
+        if (res.status === 201) {
+          alert("actualizado");
+        } else {
+          throw Error(`[${res.status}] error en la solicitud`);
+        }
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setSubmitting(false);
+      }
+    } else {
+      try {
+        const res = await axiosInstance.post(
+          "/api/address",
+          values
+        );
 
-              if (res.status === 201) {
-                navigate(`/direcciones/${res.data.data._id}/editar`);
-              } else {
-                throw Error(`[${res.status}] error en la solicitud`);
-              }
-            } catch (err) {
-              console.log(err);
-            } finally {
-              setSubmitting(false);
-            }
-          }
+        if (res.status === 201) {
+          navigate(`/direcciones/${res.data.data._id}/editar`);
+        } else {
+          throw Error(`[${res.status}] error en la solicitud`);
+        }
+      } catch (err) {
+        console.log(err);
+      } finally {
+        setSubmitting(false);
+      }
+    }
   }
 
   return (
@@ -155,10 +157,16 @@ const FormUserAddresses = () => {
                       <Field
                         className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                         id="parish"
-                        type="parish"
+                        as="select"
                         placeholder="parish"
                         name="parish"
-                      />
+                      >
+                        <option value="">Seleccione parroquía</option>
+                        {parishes.map((parish) => (
+                          <option key={parish} value={parish}>{parish}</option>
+                        ))}
+                      </Field>
+
                       {errors.parish && touched.parish && (
                         <ErrorMessage
                           className="p-2 bg-tertiary text-white text-base"
@@ -173,8 +181,8 @@ const FormUserAddresses = () => {
                       </label>
                       <Field
                         className="text-gray-800 text-sm sm:text-base placeholder-gray-800 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-gray-400"
-                        id="address"                        
-                        type="textarea"
+                        id="address"
+                        as="textarea"
                         placeholder="address"
                         name="address"
                       />
@@ -212,9 +220,9 @@ const FormUserAddresses = () => {
                   className="mb-4 inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 md:px-8 shadow-sm hover:shadow-md bg-red-500 border-red-500 text-slate-50 hover:bg-red-400 hover:border-red-400"
                   type="submit"
                 >
-                 {typeof params.id != "undefined"
-                  ? "ACTUALIZAR DIRECCIÓN"
-                  : "REGISTRAR NUEVA DIRECCIÓN"}
+                  {typeof params.id != "undefined"
+                    ? "ACTUALIZAR DIRECCIÓN"
+                    : "REGISTRAR NUEVA DIRECCIÓN"}
                 </button>
                 {isSubmitting ? (
                   <p className="mb-3 text-center">Cargando...</p>

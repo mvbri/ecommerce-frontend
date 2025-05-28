@@ -2,7 +2,7 @@ import { createRoot } from "react-dom/client";
 import "./output.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Signup from "./routes/Signup.jsx";
-import Dashboard from "./routes/Dashboard.jsx";
+// import Dashboard from "./routes/Dashboard.jsx";
 import Login from "./routes/Login.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import { AuthProvider } from "./auth/AuthProvider.jsx";
@@ -29,6 +29,9 @@ import PasswordChange from "./routes/PasswordChange.jsx";
 import UserAddresses from "./routes/UserAddresses.jsx";
 import CreateAddresses from "./routes/CreateAddresses.jsx";
 import ShowUserOrders from "./routes/ShowUserOrders.jsx";
+import ShowUserOrder from "./routes/ShowUserOrder.jsx";
+import AdminShowOrders from "./routes/AdminShowOrders.jsx";
+import AdminEditOrder from "./components/AdminEditOrder.jsx";
 
 const router = createBrowserRouter([
   {
@@ -39,10 +42,7 @@ const router = createBrowserRouter([
     path: "/Home",
     element: <HomePage />,
   },
-  {
-    path: "/compra",
-    element: <Shopping />,
-  },
+
   {
     path: "/productos",
     element: <ShowProducts />,
@@ -69,7 +69,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: "dashboard",
-        element: <Dashboard />,
+        element: <HomePage />,
       },
       {
         path: "/perfil",
@@ -89,7 +89,7 @@ const router = createBrowserRouter([
       },
       {
         path: "/direcciones/:id/editar",
-        element: <CreateAddresses key="edit"/>,
+        element: <CreateAddresses key="edit" />,
       },
       {
         path: "/compras",
@@ -97,7 +97,11 @@ const router = createBrowserRouter([
       },
       {
         path: "/compras/:id",
-        element: "prueba",
+        element: <ShowUserOrder />,
+      },
+      {
+        path: "/compra",
+        element: <Shopping />,
       },
     ],
   },
@@ -140,6 +144,14 @@ const router = createBrowserRouter([
       {
         path: "delivery/:id/editar",
         element: <CreateDelivery key="edit" />,
+      },
+      {
+        path: "ordenes",
+        element: <AdminShowOrders />,
+      },
+      {
+        path: "ordenes/:id/editar",
+        element: <AdminEditOrder />,
       },
     ],
   },

@@ -255,7 +255,7 @@ export function SidebarBurgerMenu() {
                   <ListItem>
                     <Link
                       className="text-gray-600 flex justify-center items-center"
-                      to="/admin/orders"
+                      to="/admin/ordenes"
                     >
                       <ListItemPrefix>
                         <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />

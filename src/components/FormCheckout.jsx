@@ -2,28 +2,20 @@ import { useEffect, useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { axiosInstance } from "../services/axios.config";
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { useCart } from "../hooks/useCart";
-import FormUserAddresses from "./FormUserAddresses";
 import Dropzone from "./Dropzone";
 
 const FormCheckout = () => {
-    const [errorResponse, setErrorResponse] = useState("");
-    const { cart, createOrder } = useCart();
+    const { cart, createOrder,setOpen } = useCart();
     const [addresses, setAddresses] = useState([]);
     const [payments, setPayments] = useState([]);
     const [file, setFile] = useState("");
-    const [address, setAddress] = useState("");
-    const [payment, setPayment] = useState("");
-    const [dataPayment, setDataPayment] = useState("");
-    const [date, setDate] = useState("");
-    const [reference, setReference] = useState("");
+    const [payment, setPayment] = useState({});
 
-    const params = useParams();
     const navigate = useNavigate();
 
-
-    useEffect(() => { getData() }, [])
+    useEffect(() => { setOpen(false),getData() }, [])
 
     const getData = async () => {
         try {
@@ -33,6 +25,14 @@ const FormCheckout = () => {
         } catch (error) {
             console.log(error);
         }
+
+    }
+
+    const handlePayment = (_id) => {
+
+        if (_id !== "") {
+            setPayment(payments.find((element) => element._id === _id));
+        } else setPayment({});
 
     }
 
@@ -64,7 +64,9 @@ const FormCheckout = () => {
 
         data.append(`_id`, cart._id);
 
-        data.append(`imagen`, file);
+         for (let key in file) {
+            data.append(`image`, file[key]);
+          }
 
         try {
             const res = await axiosInstance.post(
@@ -83,6 +85,8 @@ const FormCheckout = () => {
 
                 createOrder(newdata);
 
+                navigate(`/compras/${res.data.data._id}`)
+
             }
         }
         catch (err) {
@@ -95,11 +99,6 @@ const FormCheckout = () => {
             <div>
                 <div className="m-auto">
 
-                    {!!errorResponse && (
-                        <div className="bg-red-500 w-full text-center p-1 mb-2">
-                            {errorResponse}
-                        </div>
-                    )}
                     <Formik
                         initialValues={initialValues}
                         validationSchema={validationSchema}
@@ -108,7 +107,7 @@ const FormCheckout = () => {
                             handleSubmit(values, setSubmitting);
                         }}
                     >
-                        {({ values, isSubmitting, errors, touched }) => (
+                        {({ values, isSubmitting, errors, touched, setFieldValue  }) => (
                             <Form className="flex flex-col items-center p-6 md:p-4 md:px-8  m-auto mb-3  rounded-md">
                                 <div className="flex w-full gap-2 mb-4 pt-4">
                                     <div className="flex flex-col flex-wrap gap-4 md:gap-8 w-full justify-center items-center">
@@ -140,7 +139,7 @@ const FormCheckout = () => {
                                                         )}
 
                                                     </div>
-                                                </div> : <FormUserAddresses />}
+                                                </div> : <Link to="/direcciones/crear">Crear dirección</Link>}
                                             </div>
                                             <div className="md:min-w-[30rem] flex flex-col mb-1">
                                                 <label htmlFor="address" className="block text-sm/6 font-semibold text-gray-900">
@@ -152,12 +151,19 @@ const FormCheckout = () => {
                                                         as="select"
                                                         name="payment"
                                                         className="col-start-1 cursor-pointer row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                                                        onChange={(e) => {
+                                                            const selectedValue = e.target.value;
+                                                            // Llama a tu función personalizada con el valor seleccionado
+                                                            handlePayment(selectedValue);
+                                                            // Llama a setFieldValue para actualizar el estado de Formik
+                                                            setFieldValue('payment', selectedValue);
+                                                        }}
                                                     >
                                                         <option value="">Seleccione método de pago</option>
-
-
                                                         {payments.map((payment) => (
-                                                            <option key={payment._id} value={payment._id}>{payment.name}</option>
+                                                            <option key={payment._id} value={payment._id}>
+                                                                {payment.type} - {payment.bank} - {payment.type}
+                                                            </option>
                                                         ))}
                                                     </Field>
                                                     {errors.payment && touched.payment && (
@@ -165,22 +171,26 @@ const FormCheckout = () => {
                                                             className="p-2 bg-tertiary text-white text-base"
                                                             name="payment"
                                                             component="div"
-                                                        ></ErrorMessage>
+                                                        />
                                                     )}
 
                                                 </div>
                                             </div>
-                                        </div>
-                                        <div className="flex">
-                                            {dataPayment ? (
+                                            {payment.bank ? (
                                                 <div>
                                                     <p>Datos de pago</p>
-                                                    <p>Banco: {dataPayment.bank}</p>
+                                                    <p>Banco: {payment.bank}</p>
+                                                    <p>Documento: {payment.document}</p>
+                                                    <p>Numero: {payment.number}</p>
+                                                    <p>Tipo: {payment.type}</p>
                                                 </div>
                                             ) : (
                                                 <div></div>
 
                                             )}
+                                        </div>
+                                        <div className="flex">
+
                                             <div className="sm:col-span-2">
                                                 <label htmlFor="message" className="block text-sm/6 font-semibold text-gray-900">
                                                     Comprobante de pago (capture)
@@ -270,6 +280,7 @@ const FormCheckout = () => {
                                         </div>
                                         <div className="mt-10">
                                             <button
+                                            disabled={!addresses.length}
                                                 type="submit"
                                                 className="block w-full rounded-md bg-indigo-600 px-3.5 py-2.5 text-center text-sm font-semibold text-white shadow-xs hover:bg-indigo-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
                                             >

@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { CartContext } from "../context/cart";
 
 export const useCart = () => {
-  const { cart, addToCart, clearCart, delFromCart , updateQuantityCart, createOrder} =
+  const { setOpen,open,cart, addToCart, clearCart, delFromCart , updateQuantityCart, createOrder} =
     useContext(CartContext);
 
 
@@ -10,5 +10,5 @@ export const useCart = () => {
     throw new Error("Probablemente no esta en el rango de un provider");
   }
 
-  return { cart, addToCart, clearCart, delFromCart, updateQuantityCart, createOrder };
+  return { setOpen, cart, open, addToCart, clearCart, delFromCart, updateQuantityCart, createOrder };
 };

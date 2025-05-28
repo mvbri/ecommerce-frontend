@@ -18,6 +18,29 @@ const TableOrders = ({ onSelectItem, items }) => {
     }
 
     gridInstance.current = new Grid({
+      language: {
+        loading: 'Cargando...',
+        noRecordsFound: 'No se encontraron registros coincidientes',
+        error: 'Se produjo un error al obtener los datos',
+        search: {
+          placeholder: '🔍 Buscar...'
+        },
+        sort: {
+          sortAsc: 'Ordenar columna ascendente',
+          sortDesc: 'Ordenar columna descendente',
+        },
+        pagination: {
+          previous: '⬅️',
+          next: '➡️',
+          of: 'de',
+          to: 'al',
+          showing: '😃 Mostrando',
+          results: () => 'Resultados',
+          navigate: (page, pages) => `Página ${page} de ${pages}`,
+          page: (page) => `Página ${page}`,
+        }
+      },
+      pagination: true,
       columns: [
         {
           id: "name",

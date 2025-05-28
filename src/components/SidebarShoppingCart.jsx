@@ -8,13 +8,11 @@ import {
 } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
 import { useCart } from "../hooks/useCart";
-import { API_URL } from "../auth/constants";
-import NumberInput from "./NumberInput";
 import CartItem from "./cartItem";
 import { Link } from "react-router-dom";
 
-export default function SidebarShoppingCart({ open, setOpen }) {
-  const { cart, delFromCart, updateQuantityCart } = useCart();
+export default function SidebarShoppingCart() {
+  const { cart, delFromCart, updateQuantityCart, open, setOpen } = useCart();
   return (
     <Dialog open={open} onClose={setOpen} className="relative z-[9999]">
       <DialogBackdrop
@@ -100,6 +98,7 @@ export default function SidebarShoppingCart({ open, setOpen }) {
                   </p>
                   <div className="mt-6">
                     <Link
+                    onClick={() => setOpen(true)}
                       to="/compra"
                       className="flex m-auto items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-xs hover:bg-indigo-700"
                     >

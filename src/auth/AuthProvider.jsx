@@ -96,7 +96,7 @@ export function AuthProvider({ children }) {
   const signOut = () => {
     setIsAuthenticated(false);
     setAccessToken("");
-    setUser(undefined);
+    setUser(null);
     localStorage.removeItem("token");
   };
 

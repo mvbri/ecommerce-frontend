@@ -5,7 +5,6 @@ import HomeLayout from "../layout/HomeLayout";
 
 const ShowCategories = () => {
     const params = useParams();
-    console.log(params)
     return (
         <HomeLayout>
             <CategorySectionProducts slug={params.slug} />

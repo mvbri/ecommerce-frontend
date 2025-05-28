@@ -3,12 +3,10 @@ import "gridjs/dist/theme/mermaid.css";
 import { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-const TableUserOrders = ({ onSelectItem, items }) => {
+const TableAdminOrders = ({ onSelectItem, items }) => {
     const wrapperRef = useRef(null);
     const gridInstance = useRef(null);
     const navigate = useNavigate();
-
-
 
     useEffect(() => {
         if (!wrapperRef.current) return;
@@ -53,28 +51,32 @@ const TableUserOrders = ({ onSelectItem, items }) => {
                     name: 'Fecha de pago'
                 },
                 {
-                    id: "status",
-                    name: "Estatus",
+                    data: (row) => row.voucher.reference,
+                    name: 'Referencia'
                 },
                 {
-                    data: (row) => row.delivery ? row.delivery.name : 'N/A',
-                    name: 'Delivery'
+                    data: (row) => row.customer.name,
+                    name: 'Cliente'
                 },
                 {
-                    data: (row) => `${row.total.toFixed(2)} Bs`,
-                    name: 'Total a Pagar'
+                    data: (row) => row.status,
+                    name: 'Estatus'
+                },
+                {
+                    data: (row) => `${row.total}bs`,
+                    name: 'Total'
                 },
                 {
                     id: "_id",
                     name: "Acciones",
                     formatter: (_, row) =>
-                        html(`              
-                            <div class="flex justify-center items-center">
-                                <a class="show-btn cursor-pointer" data-id='${row.cells[4].data}'>
-                                    ver
-                                </a>
-                            </div>
-                        `),
+                        html(`
+              <div class="flex justify-center items-center">
+                <a class="edit-btn cursor-pointer" data-id='${row.cells[5].data}'>
+                  ✎
+                </a>
+              </div>
+            `),
                 },
 
             ],
@@ -88,9 +90,9 @@ const TableUserOrders = ({ onSelectItem, items }) => {
 
         // Agrega event listeners para los botones de editar y eliminar
         const handleClick = (e) => {
-            if (e.target.classList.contains("show-btn")) {
+            if (e.target.classList.contains("edit-btn")) {
                 const rowId = e.target.getAttribute("data-id");
-                navigate(`/compras/${rowId}`); // Navegación programática
+                navigate(`/admin/ordenes/${rowId}/editar`); // Navegación programática
             }
         };
 
@@ -116,4 +118,4 @@ const TableUserOrders = ({ onSelectItem, items }) => {
     return <div ref={wrapperRef} />;
 };
 
-export default TableUserOrders;
+export default TableAdminOrders;
