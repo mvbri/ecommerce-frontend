@@ -1,4 +1,4 @@
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import { useAuth } from "../auth/AuthProvider";
 import AdminLoginLayout from "../layout/AdminLoginLayout";
 import { useState } from "react";
@@ -35,7 +35,6 @@ function AdminLogin() {
         setErrorResponse(json.error);
         throw Error(json.error);
       }
-      console.log("AdminLogin Successful");
       setErrorResponse("");
 
       const json = await response.json();
@@ -56,7 +55,7 @@ function AdminLogin() {
           className="flex mx-auto items-center flex-col px-8 p-3 mb-3 border border-gray-700 rounded-md"
         >
           <h1 className="mmb-4 md:mb-6 p-[2rem] text-2xl md:text-3xl text-gray-800 text-center rounded-t-md">
-            Inicio de sesión
+            Inicio de sesión de Aministrador
           </h1>
 
           {errorResponse && (
@@ -116,8 +115,8 @@ function AdminLogin() {
             </div>
           </div>
 
-          <button className="mb-4 w-full inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm hover:shadow-md bg-slate-800 border-slate-800 text-slate-50 hover:bg-slate-700 hover:border-slate-700">
-            iniciar sesión
+          <button className="mb-4 w-full inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-4 shadow-sm hover:shadow-md bg-secondary border-slate-800 text-secondary-50 hover:bg-secondary-700 hover:border-slate-700">
+            Iniciar sesión
           </button>
         </form>
       </div>

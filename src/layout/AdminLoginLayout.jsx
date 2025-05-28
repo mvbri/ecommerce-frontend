@@ -6,7 +6,7 @@ function DefaultLayout({ children }) {
     <>
       <header className="mb-4">
         <nav className="px-3 py-2 flex items-center">
-          <Link to="/home">
+          <Link to="/">
             <img
               className="w-[80px] h-[80px] rounded-full"
               src={logo}
@@ -15,9 +15,15 @@ function DefaultLayout({ children }) {
           </Link>
           <Link
             className="ml-4 text-secondary hover:text-secondary-accent"
-            to="/admin"
+            to="/"
           >
-            Inicio
+            Ver Tienda
+          </Link>
+          <Link
+            className="ml-4 text-secondary hover:text-secondary-accent"
+            to="/login"
+          >
+            Iniciar sesión como cliente
           </Link>
         </nav>
       </header>

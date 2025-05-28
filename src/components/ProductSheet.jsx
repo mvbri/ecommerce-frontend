@@ -79,7 +79,7 @@ const ProductSheet = ({ slug }) => {
                 >
                   Agregar
                 </button>) : (<Link className="m-auto  bg-secondary hover:bg-secondary-accent hover:text-white text-white py-2 px-8 rounded-md font-semibold"
-                  to="/" exact >Agregar</Link>)}
+                  to="/login" exact >Agregar</Link>)}
 
             </div>
 

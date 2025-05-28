@@ -45,7 +45,7 @@ export default function NavTailwind() {
             </div>
             <div className="flex flex-1 items-center justify-start">
               <div className="flex shrink-0 items-center">
-                <Link to="/home">
+                <Link to="/">
                   <img
                     className="logo w-[60px] h-[60px] lg:w-[70px] lg:h-[70px] rounded-full mt-1"
                     src={logo}
@@ -127,7 +127,7 @@ export default function NavTailwind() {
               ) : (
                 <Link
                   className="text-secondary text-base whitespace-nowrap ml-3"
-                  to="/"
+                  to="/login"
                 >
                   Inicia sesión
                 </Link>
