@@ -26,7 +26,7 @@ export default function NavTailwind() {
   return (
     <Disclosure as="nav" className="bg-gray-800 fixed w-full z-[9998]">
       <div className="max-w-[1400px] m-auto px-2 sm:px-6">
-        <div className="relative flex flex-col h-32 lg:h-20 items-center justify-center lg:justify-between">
+        <div className="relative flex flex-wrap flex-col h-32 lg:h-20 items-center justify-center lg:justify-between">
           <div className="flex justify-center items-center space-between w-full mb-2 lg:mb-0">
             <div className="inset-y-0 flex items-center justify-center sm:hidden">
               {/* Mobile menu button*/}
@@ -55,23 +55,24 @@ export default function NavTailwind() {
               </div>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
-                  {categories.map((item, i) => (
-                    item.menu &&
-                    <Link
-                    
-                      key={i}
-                      to={`/categoria/${item.slug}`}
-                      aria-current={item.current ? "page" : undefined}
-                      className={classNames(
-                        item.current
-                          ? "bg-gray-900 text-white"
-                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                        "rounded-md px-3 py-2 text-sm font-medium"
-                      )}
-                    >
-                      {item.name}
-                    </Link> 
-                  ))}
+                  {categories.map(
+                    (item, i) =>
+                      item.menu && (
+                        <Link
+                          key={i}
+                          to={`/categoria/${item.slug}`}
+                          aria-current={item.current ? "page" : undefined}
+                          className={classNames(
+                            item.current
+                              ? "bg-gray-900 text-white"
+                              : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                            "rounded-md px-3 py-2 text-sm font-medium"
+                          )}
+                        >
+                          {item.name}
+                        </Link>
+                      )
+                  )}
                 </div>
               </div>
             </div>

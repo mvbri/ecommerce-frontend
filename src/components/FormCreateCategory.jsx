@@ -55,6 +55,8 @@ const FormCreateCategory = () => {
     try {
       const res = await axiosInstance.get(`/api/admin/category/${params.id}`);
 
+      console.log(res);
+
       if (res.status === 200) {
         const data = res.data.data;
 
@@ -86,8 +88,6 @@ const FormCreateCategory = () => {
           for (let key in file) {
             data.append(`image`, file[key]);
           }
-
-
 
           if (typeof params.id !== "undefined") {
             try {
@@ -182,7 +182,7 @@ const FormCreateCategory = () => {
               maxfiles={true}
               className="p-16 mt-10 cursor-pointer border border-dashed border-2 md:w-4/5 m-auto border-neutral-500 text-center mb-3"
             />
-            {image.length >= 1 ? (
+            {image ? (
               <>
                 <label className="mb-2 text-base" htmlFor="image">
                   Imagen Guardada
@@ -194,7 +194,7 @@ const FormCreateCategory = () => {
                         <img
                           className="size-6 mr-3 object-cover"
                           alt="Imagen de WhatsApp 2025-03-20 a las 15.15.09_d5242c1d.jpg"
-                          src={`${API_URL}/public/images/products/${image.url}`}
+                          src={`${API_URL}/public/images/category/${image.url}`}
                         ></img>
                         <button
                           type="button"
@@ -219,21 +219,22 @@ const FormCreateCategory = () => {
 
             <label className="mb-3 text-base" htmlFor="status">
               Mostrar en el menu
-
               <Field
                 className="mb-4 text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                 id="menu"
                 type="checkbox"
                 name="menu"
               />
-
             </label>
 
             <button
               className="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm md:text-base rounded-md py-2 px-4 shadow-sm hover:shadow-md bg-slate-800 border-slate-800 text-slate-50 hover:bg-slate-700 hover:border-slate-700 my-8"
               type="submit"
             >
-              Cargar nueva categoria
+              {typeof params.id != "undefined"
+            ? "Editar categoria"
+            : "Cargar nueva categoria"}
+              
             </button>
             {isSubmitting ? (
               <p className="mb-3 text-center">Enviando nuevo producto</p>

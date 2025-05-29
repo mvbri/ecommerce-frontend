@@ -10,7 +10,6 @@ const FormUserAddresses = () => {
   const params = useParams();
   const navigate = useNavigate();
 
-
   useEffect(() => {
     if (typeof params.id != "undefined") getValues();
   }, []);
@@ -22,7 +21,17 @@ const FormUserAddresses = () => {
     parish: "",
   });
 
-  const parishes = ['Catedral', "Zea", "Orinoco", "José Antonio Páez", "Marhuanta", "Agua Salada", "Vista Hermosa", "La Sabanita", "Panapana"]
+  const parishes = [
+    "Catedral",
+    "Zea",
+    "Orinoco",
+    "José Antonio Páez",
+    "Marhuanta",
+    "Agua Salada",
+    "Vista Hermosa",
+    "La Sabanita",
+    "Panapana",
+  ];
 
   const getValues = async () => {
     try {
@@ -30,7 +39,7 @@ const FormUserAddresses = () => {
 
       if (res.status === 200) {
         const data = res.data.data;
-        console.log(data)
+        console.log(data);
         setInitialValues({
           name: data.name,
           address: data.address,
@@ -70,7 +79,7 @@ const FormUserAddresses = () => {
       try {
         const res = await axiosInstance.put(
           `/api/address/${params.id}`,
-          values,
+          values
         );
 
         if (res.status === 201) {
@@ -85,12 +94,10 @@ const FormUserAddresses = () => {
       }
     } else {
       try {
-        const res = await axiosInstance.post(
-          "/api/address",
-          values
-        );
+        const res = await axiosInstance.post("/api/address", values);
 
         if (res.status === 201) {
+          alert("Nueva dirección creada");
           navigate(`/direcciones/${res.data.data._id}/editar`);
         } else {
           throw Error(`[${res.status}] error en la solicitud`);
@@ -101,7 +108,7 @@ const FormUserAddresses = () => {
         setSubmitting(false);
       }
     }
-  }
+  };
 
   return (
     <div>
@@ -163,7 +170,9 @@ const FormUserAddresses = () => {
                       >
                         <option value="">Seleccione parroquía</option>
                         {parishes.map((parish) => (
-                          <option key={parish} value={parish}>{parish}</option>
+                          <option key={parish} value={parish}>
+                            {parish}
+                          </option>
                         ))}
                       </Field>
 

@@ -10,8 +10,10 @@ function AdminLogin() {
   const [errorResponse, setErrorResponse] = useState();
   const auth = useAuth();
 
-  if (auth.isAuthenticated && auth.getUser().role == "admin") return <Navigate to="/admin/dashboard" />;
-  if (auth.isAuthenticated && auth.getUser().role == "delivery") return <Navigate to="/delivery/dashboard" />;
+  if (auth.isAuthenticated && auth.getUser().role == "admin")
+    return <Navigate to="/admin/dashboard" />;
+  if (auth.isAuthenticated && auth.getUser().role == "delivery")
+    return <Navigate to="/delivery/dashboard" />;
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -29,11 +31,9 @@ function AdminLogin() {
       });
 
       if (!response.ok) {
-        console.log("Something Went Wrong");
         const json = await response.json();
         setErrorResponse(json.error);
-
-        return;
+        throw Error(json.error);
       }
       setErrorResponse("");
 
@@ -55,11 +55,11 @@ function AdminLogin() {
           className="flex mx-auto items-center flex-col px-8 p-3 mb-3 border border-gray-700 rounded-md"
         >
           <h1 className="mmb-4 md:mb-6 p-[2rem] text-2xl md:text-3xl text-gray-800 text-center rounded-t-md">
-            Inicio de sesión de Aministrador
+            Inicio de sesión de Administrador
           </h1>
 
-          {!!errorResponse && (
-            <div className="bg-red-500 w-80 text-center p-1 mb-3">
+          {errorResponse && (
+            <div className="bg-red-500 w-80 text-center text-white p-1 mb-3">
               {errorResponse}
             </div>
           )}

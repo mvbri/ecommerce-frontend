@@ -44,7 +44,10 @@ const ShowUserOrders = () => {
               Compras
             </h1>
             {orders.length > 0 ? (
-              <TableUserOrders onSelectItem={handleDeletetItem} items={orders} />
+              <TableUserOrders
+                onSelectItem={handleDeletetItem}
+                items={orders}
+              />
             ) : (
               <p className="text-center">No hay ordenes en el sistema</p>
             )}

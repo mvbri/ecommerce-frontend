@@ -4,13 +4,13 @@ import { Link } from "react-router-dom";
 const UserNavProfile = () => {
   const auth = useAuth();
   return (
-    <div className="flex flex-col md:flex-row gap-5">
+    <div className="flex flex-col md:flex-row gap-5 rounded-md">
       <div className="min-w-[250px] min-h-[400px]">
-        <div className="text-center p-8 border rounded-md">
+        <div className="text-center p-8 border">
           <h3 className="font-semibold">{auth.getUser()?.name || null}</h3>
           <h4>{auth.getUser()?.email || null}</h4>
         </div>
-        <nav className="flex flex-col bg-blue-100 pl-4 p-2 bg-gray-200 min-h-[400px]">
+        <nav className="flex flex-col bg-blue-100 pl-4 p-2 pt-8 bg-gray-200 min-h-[400px]">
           <Link className="text-gray-800 mb-4" to="/perfil">
             <div className="flex items-center justify-center w-fit">
               <svg

@@ -17,7 +17,7 @@ const CartItem = ({ product, quantity, delFromCart, updateQuantityCart }) => {
       <div className="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
         <img
           alt={name}  
-          src={images && images.lenght > 0  &&  images[0]?.url ? `${API_URL}/public/images/products/${images[0].url}` : `${API_URL}/public/images/default.png`}
+          src={images && images[0]?.url ? `${API_URL}/public/images/products/${images[0].url}` : `${API_URL}/public/images/default.png`}
           className="size-full object-cover"
         />
       </div>

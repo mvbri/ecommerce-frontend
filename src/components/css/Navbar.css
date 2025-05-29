@@ -1,10 +1,12 @@
 .navbar-container {
   display: flex;
   justify-content: space-between;
+  align-items: center;
   flex-direction: column;
   align-items: center;
   background-color: #fff085;
   height: 7.5rem;
+  padding: 1rem;
   position: fixed;
   width: 100%;
   z-index: 9999;
@@ -20,7 +22,6 @@
   background-color: #fff;
   height: 100vh;
   width: 100%;
-  padding-top: 2rem;
   left: 0;
   top: 7.5rem;
   overflow-y: scroll;

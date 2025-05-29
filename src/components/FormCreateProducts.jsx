@@ -121,7 +121,6 @@ function FormCreateProducts() {
             data.append(`images[]`, files[key]);
           }
 
-
           if (typeof params.id != "undefined") {
             try {
               const res = await axiosInstance.put(
@@ -146,18 +145,10 @@ function FormCreateProducts() {
             }
           } else {
             try {
-              const res = await axiosInstance.post(
-                "/api/admin/products",
-                data,
-                {
-                  headers: {
-                    "Content-Type": "multipart/form-data",
-                  },
-                }
-              );
+              const res = await axiosInstance.post("/api/admin/products", data);
 
               if (res.status === 201) {
-                navigate(`/admin/product/${res.data.data._id}/edit`);
+                navigate(`/admin/producto/${res.data.data._id}/editar`);
               } else {
                 throw Error(`[${res.status}] error en la solicitud`);
               }
@@ -173,14 +164,12 @@ function FormCreateProducts() {
           <Form className="flex flex-col pt-8 p-4 md:px-8 w-full border border-gray-700 rounded-md m-auto">
             <label className="mb-3 text-base" htmlFor="status">
               Activo
-
               <Field
                 className="mb-4 text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                 id="status"
                 type="checkbox"
                 name="status"
               />
-
             </label>
 
             <label className="mb-3 text-base" htmlFor="name">

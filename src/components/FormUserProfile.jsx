@@ -58,6 +58,7 @@ const FormUserProfile = () => {
       );
 
       auth.saveUser(res.data);
+      alert("Usuario actualizado");
       setErrorResponse("");
 
     } catch (err) {

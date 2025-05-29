@@ -3,9 +3,10 @@
 import { Grid, html } from "gridjs";
 import "gridjs/dist/theme/mermaid.css";
 import { useRef, useEffect } from "react";
+import { API_URL } from "../auth/constants";
 import { useNavigate } from "react-router-dom";
 
-function TableDeliveries({ onSelectItem, items }) {
+function TableCategories({ onSelectItem, items }) {
   const wrapperRef = useRef(null);
   const gridInstance = useRef(null);
   const navigate = useNavigate();
@@ -45,27 +46,45 @@ function TableDeliveries({ onSelectItem, items }) {
       pagination: true,
       columns: [
         {
-          id: "name",
-          name: "Name",
+          data: (row) => row.name,
+          name: "name",
         },
         {
-          id: "email",
-          name: "email",
+          id: "image",
+          name: "Imagen",
+          formatter: (_, row) => {
+            let imageUrl = row.cells[1].data?.url; // Obtiene la URL de la primera imagen
+            imageUrl =
+              typeof imageUrl != "undefined"
+                ? `${API_URL}/public/images/category/${imageUrl}`
+                : `${API_URL}/public/images/default.png`;
+
+            return html(`
+                      <div class="flex justify-center items-center">
+                        <img width="100px" height="100px" src='${imageUrl}'>                  
+                        
+                      </div>
+                    `);
+          },
         },
         {
-          id: "phone",
-          name: "Número de Telefono",
+          data: (row) => row.description,
+          name: "Descripción",
         },
         {
+          data: (row) => (row.menu ? "True" : "False"),
+          name: "Menu",
+        },
+         {
           id: "_id",
           name: "Modificar",
           formatter: (_, row) =>
             html(`
               <div class="flex justify-center items-center">
-                <a class="edit-btn cursor-pointer" data-id='${row.cells[3].data}'>
+                <a class="edit-btn cursor-pointer" data-id='${row.cells[4].data}'>
                   ✎
                 </a>
-                <a class="delete-btn ml-4 cursor-pointer" data-name='${row.cells[1].data}' data-id='${row.cells[3].data}'>
+                <a class="delete-btn ml-4 cursor-pointer" data-name='${row.cells[0].data}' data-id='${row.cells[4].data}'>
                   ⌫
                 </a>
               </div>
@@ -84,7 +103,7 @@ function TableDeliveries({ onSelectItem, items }) {
     const handleClick = (e) => {
       if (e.target.classList.contains("edit-btn")) {
         const rowId = e.target.getAttribute("data-id");
-        navigate(`/admin/delivery/${rowId}/editar`); // Navegación programática
+        navigate(`/admin/categoria/${rowId}/editar`); // Navegación programática
       }
       if (e.target.classList.contains("delete-btn")) {
         const id = e.target.getAttribute("data-id");
@@ -115,4 +134,4 @@ function TableDeliveries({ onSelectItem, items }) {
   return <div ref={wrapperRef} />;
 }
 
-export default TableDeliveries;
+export default TableCategories;

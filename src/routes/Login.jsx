@@ -135,6 +135,15 @@ function Login() {
             Registrate
           </Link>
         </p>
+        <p className="pt-3 text-center w-full">
+          ¿Olvidaste tu Contraseña?{" "}
+          <Link
+            className="text-secondary hover:text-secondary-accent font-bold"
+            to="/recuperar"
+          >
+            ingresa aquí
+          </Link>
+        </p>
       </div>
     </DefaultLayout>
   );
