@@ -21,26 +21,26 @@ function TableDeliveries({ onSelectItem, items }) {
 
     gridInstance.current = new Grid({
       language: {
-        loading: 'Cargando...',
-        noRecordsFound: 'No se encontraron registros coincidientes',
-        error: 'Se produjo un error al obtener los datos',
+        loading: "Cargando...",
+        noRecordsFound: "No se encontraron registros coincidientes",
+        error: "Se produjo un error al obtener los datos",
         search: {
-          placeholder: '🔍 Buscar...'
+          placeholder: "🔍 Buscar...",
         },
         sort: {
-          sortAsc: 'Ordenar columna ascendente',
-          sortDesc: 'Ordenar columna descendente',
+          sortAsc: "Ordenar columna ascendente",
+          sortDesc: "Ordenar columna descendente",
         },
         pagination: {
-          previous: '⬅️',
-          next: '➡️',
-          of: 'de',
-          to: 'al',
-          showing: '😃 Mostrando',
-          results: () => 'Resultados',
+          previous: "⬅️",
+          next: "➡️",
+          of: "de",
+          to: "al",
+          showing: "Mostrando",
+          results: () => "Resultados",
           navigate: (page, pages) => `Página ${page} de ${pages}`,
           page: (page) => `Página ${page}`,
-        }
+        },
       },
       pagination: true,
       columns: [

@@ -5,7 +5,7 @@ import { useParams, useNavigate } from "react-router";
 import { axiosInstance } from "../services/axios.config";
 
 const FormCreateDelivery = () => {
-   const [initialValues, setInitialValues] = useState({
+  const [initialValues, setInitialValues] = useState({
     name: "",
     email: "",
     phone: "",
@@ -18,25 +18,24 @@ const FormCreateDelivery = () => {
 
   useEffect(() => {
     if (typeof params.id != "undefined") getValues();
-    
   }, []);
-
 
   const getValues = async () => {
     try {
-      const res = await axiosInstance.get(`/api/admin/users/delivery/${params.id}`);
+      const res = await axiosInstance.get(
+        `/api/admin/users/delivery/${params.id}`
+      );
 
-        const data = res.data.data;
-        
-        setInitialValues({
-          name: data.name,
-          email: data.email,
-          phone: data.phone,
-          password: data.password,
-          question: data.question,
-          answer: data.answer
-        });
+      const data = res.data.data;
 
+      setInitialValues({
+        name: data.name,
+        email: data.email,
+        phone: data.phone,
+        password: data.password,
+        question: data.question,
+        answer: data.answer,
+      });
     } catch (err) {
       console.log(err);
     }
@@ -45,33 +44,20 @@ const FormCreateDelivery = () => {
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, "Nombre demasiado corto")
-      // .max(15, "Nombre demasiado largo")
-      // .matches(
-      //   /^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$/,
-      //   "El nombre solo debe contener letras, no números ni caracteres especiales"
-      // )
-      .required("El campo es obligatorio") 
-      ,
+      .required("El campo es obligatorio"),
     email: Yup.string()
       .email("Formato Invalido de correo")
       .required("El campo es obligatorio"),
     password: Yup.string()
       .min(6, "Debe tener al menos 6 caracteres")
-      // .matches(
-      //   /[!@#$%^&*(),.?":{}|<>]/,
-      //   "Debe contener al menos un caracter especial"
-      // )
-      // .matches(/\d/, "Debe contener al menos un numero")
       .required("El campo es obligatorio"),
     phone: Yup.string()
       .max(11, "Debe tener máximo 11 caracteres")
       .min(11, "Debe tener al menos 11 caracteres")
       .matches(/^[0-9]+$/, "Solo se admiten números")
       .required("El campo es obligatorio"),
-      question: Yup.string()
-      .required("El campo es obligatorio"),
-      answer: Yup.string()
-      .required("El campo es obligatorio")
+    question: Yup.string().required("El campo es obligatorio"),
+    answer: Yup.string().required("El campo es obligatorio"),
   });
 
   async function handleSubmit(values, setSubmitting) {
@@ -129,7 +115,7 @@ const FormCreateDelivery = () => {
           <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
-             enableReinitialize={true}
+            enableReinitialize={true}
             onSubmit={(values, { setSubmitting }) => {
               console.log(values);
               handleSubmit(values, setSubmitting);
@@ -236,7 +222,7 @@ const FormCreateDelivery = () => {
                     ></ErrorMessage>
                   )}
                 </div>
-                 <div className="w-full flex flex-col mb-8">
+                <div className="w-full flex flex-col mb-8">
                   <label className="mb-2 text-base mb-1" htmlFor="answer">
                     Respuesta
                   </label>

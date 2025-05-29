@@ -22,26 +22,26 @@ function Table({ onSelectItem, items }) {
 
     gridInstance.current = new Grid({
       language: {
-        loading: 'Cargando...',
-        noRecordsFound: 'No se encontraron registros coincidientes',
-        error: 'Se produjo un error al obtener los datos',
+        loading: "Cargando...",
+        noRecordsFound: "No se encontraron registros coincidientes",
+        error: "Se produjo un error al obtener los datos",
         search: {
-          placeholder: '🔍 Buscar...'
+          placeholder: "🔍 Buscar...",
         },
         sort: {
-          sortAsc: 'Ordenar columna ascendente',
-          sortDesc: 'Ordenar columna descendente',
+          sortAsc: "Ordenar columna ascendente",
+          sortDesc: "Ordenar columna descendente",
         },
         pagination: {
-          previous: '⬅️',
-          next: '➡️',
-          of: 'de',
-          to: 'al',
-          showing: '😃 Mostrando',
-          results: () => 'Resultados',
+          previous: "⬅️",
+          next: "➡️",
+          of: "de",
+          to: "al",
+          showing: "Mostrando",
+          results: () => "Resultados",
           navigate: (page, pages) => `Página ${page} de ${pages}`,
           page: (page) => `Página ${page}`,
-        }
+        },
       },
       pagination: true,
       columns: [
@@ -91,8 +91,8 @@ function Table({ onSelectItem, items }) {
         {
           id: "status",
 
-          data: (row) => row.status ? "Activo" : "Inactivo",
-          name: 'Estatus'
+          data: (row) => (row.status ? "Activo" : "Inactivo"),
+          name: "Estatus",
         },
         {
           id: "_id",
@@ -122,7 +122,7 @@ function Table({ onSelectItem, items }) {
     const handleClick = (e) => {
       if (e.target.classList.contains("edit-btn")) {
         const rowId = e.target.getAttribute("data-id");
-        navigate(`/admin/product/${rowId}/edit`); // Navegación programática
+        navigate(`/admin/producto/${rowId}/editar`); // Navegación programática
       }
       if (e.target.classList.contains("delete-btn")) {
         const id = e.target.getAttribute("data-id");

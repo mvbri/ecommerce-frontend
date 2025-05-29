@@ -102,7 +102,7 @@ export function SidebarBurgerMenu() {
                   <ListItem>
                     <Link
                       className="text-gray-600 flex justify-center items-center"
-                      to="/admin/product/create"
+                      to="/admin/producto/crear"
                     >
                       <ListItemPrefix>
                         <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
@@ -113,7 +113,7 @@ export function SidebarBurgerMenu() {
                   <ListItem>
                     <Link
                       className="text-gray-600 flex justify-center items-center"
-                      to="/admin/product"
+                      to="/admin/productos"
                     >
                       <ListItemPrefix>
                         <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
@@ -153,7 +153,7 @@ export function SidebarBurgerMenu() {
                   <ListItem>
                     <Link
                       className="text-gray-600 flex justify-center items-center"
-                      to="/admin/categorias"
+                      to="/admin/categoria/crear"
                     >
                       <ListItemPrefix>
                         <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
@@ -164,7 +164,7 @@ export function SidebarBurgerMenu() {
                   <ListItem>
                     <Link
                       className="text-gray-600 flex justify-center items-center"
-                      to="/admin/product"
+                      to="/admin/categorias"
                     >
                       <ListItemPrefix>
                         <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />

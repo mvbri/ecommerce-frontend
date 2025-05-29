@@ -145,18 +145,10 @@ function FormCreateProducts() {
             }
           } else {
             try {
-              const res = await axiosInstance.post(
-                "/api/admin/products",
-                data,
-                {
-                  headers: {
-                    "Content-Type": "multipart/form-data",
-                  },
-                }
-              );
+              const res = await axiosInstance.post("/api/admin/products", data);
 
               if (res.status === 201) {
-                navigate(`/admin/product/${res.data.data._id}/editar`);
+                navigate(`/admin/producto/${res.data.data._id}/editar`);
               } else {
                 throw Error(`[${res.status}] error en la solicitud`);
               }

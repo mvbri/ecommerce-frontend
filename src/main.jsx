@@ -2,7 +2,6 @@ import { createRoot } from "react-dom/client";
 import "./output.css";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Signup from "./routes/Signup.jsx";
-// import Dashboard from "./routes/Dashboard.jsx";
 import Login from "./routes/Login.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
 import { AuthProvider } from "./auth/AuthProvider.jsx";
@@ -32,9 +31,10 @@ import ShowUserOrders from "./routes/ShowUserOrders.jsx";
 import ShowUserOrder from "./routes/ShowUserOrder.jsx";
 import AdminShowOrders from "./routes/AdminShowOrders.jsx";
 import AdminEditOrder from "./components/AdminEditOrder.jsx";
+import AdminShowCategories from "./routes/AdminShowCategories.jsx";
 
 const router = createBrowserRouter([
-   {
+  {
     path: "/",
     element: <HomePage />,
   },
@@ -117,15 +117,15 @@ const router = createBrowserRouter([
         element: <AdminDashboard />,
       },
       {
-        path: "product/create",
+        path: "producto/crear",
         element: <CreateProducts key="create" />,
       },
       {
-        path: "product/:id/edit",
+        path: "producto/:id/editar",
         element: <CreateProducts key="edit" />,
       },
       {
-        path: "product",
+        path: "productos",
         element: <AdminShowProducts />,
       },
       {
@@ -137,16 +137,20 @@ const router = createBrowserRouter([
         element: <ShowDeliveries />,
       },
       {
-        path: "categorias",
+        path: "delivery/:id/editar",
+        element: <CreateDelivery key="edit" />,
+      },
+      {
+        path: "categoria/crear",
         element: <CreateCategory />,
+      },
+      {
+        path: "categorias",
+        element: <AdminShowCategories />,
       },
       {
         path: "categoria/:id/editar",
         element: <CreateCategory key="edit" />,
-      },
-      {
-        path: "delivery/:id/editar",
-        element: <CreateDelivery key="edit" />,
       },
       {
         path: "ordenes",

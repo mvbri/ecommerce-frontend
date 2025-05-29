@@ -37,7 +37,7 @@ function TableCategories({ onSelectItem, items }) {
           next: "➡️",
           of: "de",
           to: "al",
-          showing: "😃 Mostrando",
+          showing: "Mostrando",
           results: () => "Resultados",
           navigate: (page, pages) => `Página ${page} de ${pages}`,
           page: (page) => `Página ${page}`,
@@ -46,68 +46,35 @@ function TableCategories({ onSelectItem, items }) {
       pagination: true,
       columns: [
         {
-          id: "images",
+          data: (row) => row.name,
+          name: "name",
+        },
+        {
+          id: "image",
           name: "Imagen",
           formatter: (_, row) => {
-            let imageUrl = row.cells[0].data[0]?.url; // Obtiene la URL de la primera imagen
+            console.log(row.cells[1].data?.url);
+            let imageUrl = row.cells[1].data?.url; // Obtiene la URL de la primera imagen
             imageUrl =
               typeof imageUrl != "undefined"
                 ? `${API_URL}/public/images/products/${imageUrl}`
                 : `${API_URL}/public/images/default.png`;
 
             return html(`
-              <div class="flex justify-center items-center">
-                <img width="100px" height="100px" src='${imageUrl}'>                  
-                
-              </div>
-            `);
+                      <div class="flex justify-center items-center">
+                        <img width="100px" height="100px" src='${imageUrl}'>                  
+                        
+                      </div>
+                    `);
           },
         },
         {
-          id: "name",
-          name: "Name",
+          data: (row) => row.description,
+          name: "Descripción",
         },
         {
-          id: "description",
-          name: "Description",
-        },
-        {
-          id: "category",
-          name: "Categoria",
-          formatter: (cell) => `${cell.map((cat) => cat.name)}`,
-        },
-        {
-          id: "stock",
-          name: "Cantidad",
-        },
-        {
-          id: "price",
-          name: "Precio",
-        },
-        {
-          id: "priceIVA",
-          name: "Precio con IVA",
-        },
-        {
-          id: "status",
-
-          data: (row) => (row.status ? "Activo" : "Inactivo"),
-          name: "Estatus",
-        },
-        {
-          id: "_id",
-          name: "Modificar",
-          formatter: (_, row) =>
-            html(`
-              <div class="flex justify-center items-center">
-                <a class="edit-btn cursor-pointer" data-id='${row.cells[8].data}'>
-                  ✎
-                </a>
-                <a class="delete-btn ml-4 cursor-pointer" data-name='${row.cells[1].data}' data-id='${row.cells[8].data}'>
-                  ⌫
-                </a>
-              </div>
-            `),
+          data: (row) => (row.menu ? "True" : "False"),
+          name: "Menu",
         },
       ],
       data: items,
@@ -122,7 +89,7 @@ function TableCategories({ onSelectItem, items }) {
     const handleClick = (e) => {
       if (e.target.classList.contains("edit-btn")) {
         const rowId = e.target.getAttribute("data-id");
-        navigate(`/admin/product/${rowId}/edit`); // Navegación programática
+        navigate(`/admin/category/${rowId}/editar`); // Navegación programática
       }
       if (e.target.classList.contains("delete-btn")) {
         const id = e.target.getAttribute("data-id");
