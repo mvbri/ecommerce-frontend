@@ -78,9 +78,8 @@ export function SidebarBurgerMenu() {
               icon={
                 <ChevronDownIcon
                   strokeWidth={2.5}
-                  className={`mx-auto h-4 w-4 transition-transform ${
-                    open === 1 ? "rotate-180" : ""
-                  }`}
+                  className={`mx-auto h-4 w-4 transition-transform ${open === 1 ? "rotate-180" : ""
+                    }`}
                 />
               }
             >
@@ -129,9 +128,8 @@ export function SidebarBurgerMenu() {
               icon={
                 <ChevronDownIcon
                   strokeWidth={2.5}
-                  className={`mx-auto h-4 w-4 transition-transform ${
-                    open === 1 ? "rotate-180" : ""
-                  }`}
+                  className={`mx-auto h-4 w-4 transition-transform ${open === 1 ? "rotate-180" : ""
+                    }`}
                 />
               }
             >
@@ -180,9 +178,8 @@ export function SidebarBurgerMenu() {
               icon={
                 <ChevronDownIcon
                   strokeWidth={2.5}
-                  className={`mx-auto h-4 w-4 transition-transform ${
-                    open === 2 ? "rotate-180" : ""
-                  }`}
+                  className={`mx-auto h-4 w-4 transition-transform ${open === 2 ? "rotate-180" : ""
+                    }`}
                 />
               }
             >
@@ -226,14 +223,13 @@ export function SidebarBurgerMenu() {
                 </List>
               </AccordionBody>
             </Accordion>
-             <Accordion
+            <Accordion
               open={open === 4}
               icon={
                 <ChevronDownIcon
                   strokeWidth={2.5}
-                  className={`mx-auto h-4 w-4 transition-transform ${
-                    open === 2 ? "rotate-180" : ""
-                  }`}
+                  className={`mx-auto h-4 w-4 transition-transform ${open === 2 ? "rotate-180" : ""
+                    }`}
                 />
               }
             >
@@ -266,6 +262,17 @@ export function SidebarBurgerMenu() {
                 </List>
               </AccordionBody>
             </Accordion>
+             <ListItem>
+              <Link
+                className="text-gray-600 flex justify-center items-center"
+                to="/admin/reportes"
+              >
+                <ListItemPrefix>
+                  <PresentationChartBarIcon className="h-5 w-5" />
+                </ListItemPrefix>
+                Reportes
+              </Link>
+            </ListItem>
             <hr className="my-2 border-blue-gray-50" />
             <ListItem>
               <ListItemPrefix>
@@ -273,6 +280,7 @@ export function SidebarBurgerMenu() {
               </ListItemPrefix>
               Perfil
             </ListItem>
+           
             <ListItem>
               <ListItemPrefix>
                 <Cog6ToothIcon className="h-5 w-5" />

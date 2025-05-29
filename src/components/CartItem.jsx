@@ -16,8 +16,8 @@ const CartItem = ({ product, quantity, delFromCart, updateQuantityCart }) => {
     <li className="flex py-6">
       <div className="size-24 shrink-0 overflow-hidden rounded-md border border-gray-200">
         <img
-          alt={name}
-          src={images[0]?.url ? `${API_URL}/public/images/products/${images[0].url}` : `${API_URL}/public/images/default.png`}
+          alt={name}  
+          src={images && images.lenght > 0  &&  images[0]?.url ? `${API_URL}/public/images/products/${images[0].url}` : `${API_URL}/public/images/default.png`}
           className="size-full object-cover"
         />
       </div>
@@ -39,7 +39,7 @@ const CartItem = ({ product, quantity, delFromCart, updateQuantityCart }) => {
           <p className="ml-1 text-base font-medium text-gray-500">
             {description}
           </p>
-          {category.map((cat, i) => {
+          {category && category.map((cat, i) => {
             return (
               <span
                 className="ml-1 text-base font-medium text-gray-500"

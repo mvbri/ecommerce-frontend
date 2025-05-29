@@ -5,8 +5,9 @@ import Signup from "./routes/Signup.jsx";
 // import Dashboard from "./routes/Dashboard.jsx";
 import Login from "./routes/Login.jsx";
 import ProtectedRoute from "./routes/ProtectedRoute.jsx";
+import ProtectedAdminRoute from "./routes/ProtectedAdminRoute.jsx";
 import { AuthProvider } from "./auth/AuthProvider.jsx";
-import AdminDashboard from "./routes/adminDashboard.jsx";
+import AdminDashboard from "./routes/AdminDashboard.jsx";
 import CreateProducts from "./routes/CreateProducts.jsx";
 import Shopping from "./routes/Shopping.jsx";
 import AdminShowProducts from "./routes/AdminShowProducts.jsx";
@@ -32,6 +33,7 @@ import ShowUserOrders from "./routes/ShowUserOrders.jsx";
 import ShowUserOrder from "./routes/ShowUserOrder.jsx";
 import AdminShowOrders from "./routes/AdminShowOrders.jsx";
 import AdminEditOrder from "./components/AdminEditOrder.jsx";
+import ReportOrders from "./routes/ReportOrders.jsx";
 
 const router = createBrowserRouter([
    {
@@ -110,7 +112,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/admin",
-    element: <ProtectedRoute />,
+    element: <ProtectedAdminRoute />,
     children: [
       {
         path: "dashboard",
@@ -152,6 +154,10 @@ const router = createBrowserRouter([
         path: "ordenes/:id/editar",
         element: <AdminEditOrder />,
       },
+       {
+        path: "reportes",
+        element: <ReportOrders />,
+      },
     ],
   },
   {
@@ -168,7 +174,7 @@ const router = createBrowserRouter([
       },
       {
         path: "orden/:id/editar",
-        element: <EditOrder />,
+        element: <EditOrder  />,
       },
     ],
   },

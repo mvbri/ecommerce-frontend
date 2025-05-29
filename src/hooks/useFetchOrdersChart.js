@@ -3,6 +3,15 @@ import { axiosInstance } from "../services/axios.config";
 
 export const useFetchOrdersChart = () => {
   const [orders, setOrders] = useState([]);
+
+  const [dataChart, setData] = useState([]);
+
+  const [customers, setCustomers] = useState([]);
+
+  const [products, setProducts] = useState([]);
+
+  const [category, setCategory] = useState([]);
+
   useEffect(() => {
     getOrders();
   }, []);
@@ -11,9 +20,13 @@ export const useFetchOrdersChart = () => {
     try {
       const res = await axiosInstance.get(`/api/admin/ordersData/`);
       if (res.status === 200) {
-        const orders = res.data.data;
+        const data = res.data;
 
-        setOrders(orders);
+        setProducts(data.products);
+        setCategory(data.category);
+        setCustomers(data.customers);
+        setOrders(data.orders);
+        setData(data.data);
       } else {
         throw Error(`[${res.status}] error en la solicitud`);
       }
@@ -22,5 +35,5 @@ export const useFetchOrdersChart = () => {
     }
   };
 
-  return { orders, setOrders };
+  return { orders, dataChart, category, products, customers };
 };

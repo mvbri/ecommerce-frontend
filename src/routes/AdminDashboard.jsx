@@ -18,7 +18,7 @@ import { Line } from 'react-chartjs-2';
 import { useFetchOrdersChart } from "../hooks/useFetchOrdersChart";
 
 function AdminDashboard() {
-const { orders } = useFetchOrdersChart();
+const { orders, dataChart, category, products, customers } = useFetchOrdersChart();
 
   const options = {
     responsive: true,
@@ -48,7 +48,7 @@ const { orders } = useFetchOrdersChart();
     datasets: [
       {
         label: 'Pedidos',
-        data: orders,
+        data: dataChart,
         borderColor: 'rgb(53, 162, 235)',
         backgroundColor: 'rgba(53, 162, 235, 0.5)',
       },
@@ -76,7 +76,7 @@ const { orders } = useFetchOrdersChart();
             </svg>
             <div>
               <h3 className="text-white">Total Usuarios</h3>
-              <span className="text-white font-bold text-lg">318</span>
+              <span className="text-white font-bold text-lg">{customers}</span>
             </div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -110,7 +110,7 @@ const { orders } = useFetchOrdersChart();
             </svg>
             <div>
               <h3 className="text-white">Total Ordenes</h3>
-              <span className="text-white font-bold text-lg">318</span>
+              <span className="text-white font-bold text-lg">{orders}</span>
             </div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -144,7 +144,7 @@ const { orders } = useFetchOrdersChart();
             </svg>
             <div>
               <h3 className="text-white">Total Productos</h3>
-              <span className="text-white font-bold text-lg">318</span>
+              <span className="text-white font-bold text-lg">{products}</span>
             </div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -178,7 +178,7 @@ const { orders } = useFetchOrdersChart();
             </svg>
             <div>
               <h3 className="text-white">Total Categorias</h3>
-              <span className="text-white font-bold text-lg">318</span>
+              <span className="text-white font-bold text-lg">{category}</span>
             </div>
             <svg
               xmlns="http://www.w3.org/2000/svg"
