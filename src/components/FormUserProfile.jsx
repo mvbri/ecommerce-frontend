@@ -3,6 +3,7 @@ import { useAuth } from "../auth/AuthProvider";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { Link } from "react-router-dom";
+import { API_URL } from "../auth/constants";
 
 const FormUserProfile = () => {
   const [errorResponse, setErrorResponse] = useState("");
@@ -37,7 +38,7 @@ const FormUserProfile = () => {
 
     try {
       let response = await fetch(`${API_URL}/signup`, {
-        method: "POST",
+        method: "PUT",
         headers: {
           "content-Type": "application/json",
         },
@@ -51,6 +52,7 @@ const FormUserProfile = () => {
 
         return;
       }
+      alert("Usuario actualizado");
       setErrorResponse("");
     } catch (error) {
       console.log(error);

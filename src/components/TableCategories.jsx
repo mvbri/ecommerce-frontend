@@ -57,7 +57,7 @@ function TableCategories({ onSelectItem, items }) {
             let imageUrl = row.cells[1].data?.url; // Obtiene la URL de la primera imagen
             imageUrl =
               typeof imageUrl != "undefined"
-                ? `${API_URL}/public/images/products/${imageUrl}`
+                ? `${API_URL}/public/images/category/${imageUrl}`
                 : `${API_URL}/public/images/default.png`;
 
             return html(`

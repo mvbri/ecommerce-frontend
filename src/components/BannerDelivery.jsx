@@ -1,7 +1,7 @@
 import imgShop from "../img/admin/carro-tienda.png";
 import { useAuth } from "../auth/AuthProvider";
 
-const BannerAdmin = () => {
+const BannerDelivery = () => {
   const auth = useAuth();
 
   return (
@@ -12,8 +12,7 @@ const BannerAdmin = () => {
           <span className="text-secondary">{auth.getUser()?.name || null}</span>
         </h1>
         <p className="text-gray-800">
-          Aquí está lo que está pasando actualmente con tu tienda. Mira todas
-          las estadísticas a la vez.
+          Revisa tus pedidos y actualiza su estado.
         </p>
       </div>
       <div className="max-w-[10rem] md:h-[auto] md:max-w-[18rem] m-auto md:m-0">
@@ -23,4 +22,4 @@ const BannerAdmin = () => {
   );
 };
 
-export default BannerAdmin;
+export default BannerDelivery;

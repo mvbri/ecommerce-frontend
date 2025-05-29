@@ -32,6 +32,8 @@ import ShowUserOrder from "./routes/ShowUserOrder.jsx";
 import AdminShowOrders from "./routes/AdminShowOrders.jsx";
 import AdminEditOrder from "./components/AdminEditOrder.jsx";
 import AdminShowCategories from "./routes/AdminShowCategories.jsx";
+import DeliveryProfile from "./routes/DeliveryProfile.jsx";
+import AdminProfile from "./routes/AdminProfile.jsx";
 
 const router = createBrowserRouter([
   {
@@ -160,6 +162,10 @@ const router = createBrowserRouter([
         path: "ordenes/:id/editar",
         element: <AdminEditOrder />,
       },
+      {
+        path: "perfil",
+        element: <AdminProfile />,
+      },
     ],
   },
   {
@@ -177,6 +183,10 @@ const router = createBrowserRouter([
       {
         path: "orden/:id/editar",
         element: <EditOrder />,
+      },
+      {
+        path: "perfil",
+        element: <DeliveryProfile />,
       },
     ],
   },

@@ -37,14 +37,17 @@ const ShowUserOrders = () => {
   return (
     <HomeLayout>
       <StandardSection>
-        <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex flex-col md:flex-row gap-8 pt-8">
           <UserNavProfile />
           <div>
             <h1 className="text-2xl pt-4 md:text-4xl text-center mb-4 md:mb-14">
               Compras
             </h1>
             {orders.length > 0 ? (
-              <TableUserOrders onSelectItem={handleDeletetItem} items={orders} />
+              <TableUserOrders
+                onSelectItem={handleDeletetItem}
+                items={orders}
+              />
             ) : (
               <p className="text-center">No hay ordenes en el sistema</p>
             )}

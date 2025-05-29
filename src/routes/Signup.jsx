@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DefaultLayout from "../layout/DefaultLayout";
 import { useAuth } from "../auth/AuthProvider";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Link, Navigate, useNavigate } from "react-router-dom";
 import { API_URL } from "../auth/constants";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
@@ -117,6 +117,9 @@ function Signup() {
                     <h1 className="mb-4 md:mb-8 text-gray-800 text-2xl md:text-3xl text-center mt-8">
                       Registro
                     </h1>
+                    <Link className="text-center" to="/login">
+                      ¿Ya tienes cuenta? inicia sesión
+                    </Link>
                     <label
                       className="mb-3 text-base inline-block mb-1"
                       htmlFor="name"

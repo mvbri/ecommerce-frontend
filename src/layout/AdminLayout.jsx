@@ -1,8 +1,8 @@
 import { useAuth } from "../auth/AuthProvider";
 import { setAuthToken, useAxiosWithAuth } from "../services/axios.config";
 import "../components/css/Navbar.css";
-
 import { SidebarBurgerMenu } from "../components/SidebarBurgerMenu";
+
 function AdminLayout({ children }) {
   const auth = useAuth();
   setAuthToken(auth.getAccessToken());

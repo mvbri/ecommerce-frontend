@@ -19,7 +19,6 @@ const HomePage = () => {
           </div>
         </Slider>
       </div>
-      {/* <Example /> */}
       <HomeSectionCategories />
       <HomeSectionCustomers />
       <HomeSectionProducts />

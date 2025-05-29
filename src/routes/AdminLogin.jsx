@@ -55,7 +55,7 @@ function AdminLogin() {
           className="flex mx-auto items-center flex-col px-8 p-3 mb-3 border border-gray-700 rounded-md"
         >
           <h1 className="mmb-4 md:mb-6 p-[2rem] text-2xl md:text-3xl text-gray-800 text-center rounded-t-md">
-            Inicio de sesión de Aministrador
+            Inicio de sesión de Administrador
           </h1>
 
           {errorResponse && (

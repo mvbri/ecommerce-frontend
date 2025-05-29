@@ -9,7 +9,7 @@ const CategorySectionProducts = ({ slug }) => {
 
   if (loading) {
     return (
-      <StandardSection>
+      <StandardSection className="pt-[12rem]">
         <p className="text-center font-semibold">Cargando productos...</p>
       </StandardSection>
     );
