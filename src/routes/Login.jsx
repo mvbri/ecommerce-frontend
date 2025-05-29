@@ -130,7 +130,7 @@ function Login() {
           ¿No tienes cuenta todavía?{" "}
           <Link
             className="text-secondary hover:text-secondary-accent font-bold"
-            to="/signup"
+            to="/registrarse"
           >
             Registrate
           </Link>

@@ -21,9 +21,15 @@ function DefaultLayout({ children }) {
           </Link>
           <Link
             className="ml-4 text-secondary hover:text-secondary-accent"
-            to="/signup"
+            to="/registrarse"
           >
-            Signup
+            Registrarse
+          </Link>
+          <Link
+            className="ml-4 text-secondary hover:text-secondary-accent"
+            to="/recuperar"
+          >
+            Recuperar Acceso
           </Link>
         </nav>
       </header>

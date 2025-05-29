@@ -26,7 +26,7 @@ import DeliveryDashboard from "./routes/DeliveryDashboard.jsx";
 import ShowOrders from "./routes/ShowOrders.jsx";
 import EditOrder from "./routes/EditOrder.jsx";
 import UserProfile from "./routes/UserProfile.jsx";
-import PasswordChange from "./routes/PasswordChange.jsx";
+import PasswordReset from "./routes/PasswordReset.jsx";
 import UserAddresses from "./routes/UserAddresses.jsx";
 import CreateAddresses from "./routes/CreateAddresses.jsx";
 import ShowUserOrders from "./routes/ShowUserOrders.jsx";
@@ -34,6 +34,8 @@ import ShowUserOrder from "./routes/ShowUserOrder.jsx";
 import AdminShowOrders from "./routes/AdminShowOrders.jsx";
 import AdminEditOrder from "./components/AdminEditOrder.jsx";
 import ReportOrders from "./routes/ReportOrders.jsx";
+import AdminUserProfile from "./routes/AdminUserProfile.jsx";
+
 
 const router = createBrowserRouter([
    {
@@ -61,8 +63,12 @@ const router = createBrowserRouter([
     element: <ShowProduct />,
   },
   {
-    path: "/signup",
+    path: "/registrarse",
     element: <Signup />,
+  },
+  {
+    path: "/recuperar",
+    element: <PasswordReset />,
   },
   {
     path: "/",
@@ -75,11 +81,7 @@ const router = createBrowserRouter([
       {
         path: "/perfil",
         element: <UserProfile />,
-      },
-      {
-        path: "/contraseña",
-        element: <PasswordChange />,
-      },
+      },      
       {
         path: "/direcciones",
         element: <UserAddresses />,
@@ -158,6 +160,10 @@ const router = createBrowserRouter([
         path: "reportes",
         element: <ReportOrders />,
       },
+      {
+        path: "/admin/perfil",
+        element: <AdminUserProfile />,
+      },   
     ],
   },
   {

@@ -19,7 +19,7 @@ function FormPasswordChange() {
     console.log(values);
 
     try {
-      let response = await fetch(`${API_URL}/signup`, {
+      let response = await fetch(`${API_URL}/registrarse`, {
         method: "POST",
         headers: {
           "content-Type": "application/json",

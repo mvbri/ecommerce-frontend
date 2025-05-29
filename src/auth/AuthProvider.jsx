@@ -1,5 +1,9 @@
 import { useContext, createContext, useState, useEffect } from "react";
 import { API_URL } from "./constants";
+import {
+  shoppingInitialState,
+  updateLocalStorage
+} from "../reducers/shoppingReducer";
 
 const AuthContext = createContext({
   isAuthenticated: false,
@@ -14,6 +18,7 @@ export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [accessToken, setAccessToken] = useState("");
   const [user, setUser] = useState("");
+
 
   useEffect(() => {
     checkAuth();
@@ -42,8 +47,12 @@ export function AuthProvider({ children }) {
   }
 
   async function getUserInfo(accessToken) {
+
+    const cart = shoppingInitialState;
+    
     try {
-      const response = await fetch(`${API_URL}/user`, {
+      const params = new URLSearchParams({ _id: cart._id })
+      const response = await fetch(`${API_URL}/user?${params}`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -58,7 +67,8 @@ export function AuthProvider({ children }) {
       const json = await response.json();
 
       if (json.error) throw new Error(json.error);
-      return json;
+      updateLocalStorage(json.data); 
+      return json.user;
     } catch (error) {
       console.log(error);
       return null;

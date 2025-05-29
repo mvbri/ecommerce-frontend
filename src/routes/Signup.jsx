@@ -19,17 +19,16 @@ function Signup() {
     name: "",
     email: "",
     password: "",
+    passwordConfirmation: "",
+    question: "",
+    answer: "",
     phone: "",
   };
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, "Nombre demasiado corto")
-      .max(15, "Nombre demasiado largo")
-      .matches(
-        /^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(?: [a-zA-ZáéíóúÁÉÍÓÚñÑ]+)*$/,
-        "El nombre solo debe contener letras y espacios, no números ni caracteres especiales"
-      )
+      .max(20, "Nombre demasiado largo")
       .required("El campo es obligatorio"),
     email: Yup.string()
       .email("Formato Invalido de correo")
@@ -42,21 +41,17 @@ function Signup() {
       )
       .matches(/\d/, "Debe contener al menos un numero")
       .required("El campo es obligatorio"),
+
     phone: Yup.string()
       .matches(/[0-9]/, "El campo solo puede contener números")
       .max(11, "El campo debe de tener máximo 11 números.")
       .required("El campo es obligatorio"),
     question: Yup.string()
-      .matches(
-        /^[\DáéíóúÁÉÍÓÚñÑ]+(?: [\DáéíóúÁÉÍÓÚñÑ]+)*$/,
-        "La pregunta solo debe contener letras y espacios, no números"
-      )
       .required("El campo es obligatorio"),
     answer: Yup.string()
-      .matches(
-        /^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+(?: [a-zA-ZáéíóúÁÉÍÓÚñÑ]+)*$/,
-        "La pregunta solo debe contener letras y espacios, no números ni caracteres especiales"
-      )
+      .required("El campo es obligatorio"),
+    passwordConfirmation: Yup.string()
+      .oneOf([Yup.ref("password"), null], "El campo debe de ser igual a la contraseña.")
       .required("El campo es obligatorio"),
   });
 
@@ -81,7 +76,7 @@ function Signup() {
       }
       setErrorResponse("");
 
-      goTo("/");
+      goTo("/login");
     } catch (error) {
       console.log(error);
     } finally {
@@ -107,7 +102,6 @@ function Signup() {
               initialValues={initialValues}
               validationSchema={validationSchema}
               onSubmit={(values, { setSubmitting }) => {
-                console.log(values);
                 handleSubmit(values, setSubmitting);
               }}
             >
@@ -178,6 +172,26 @@ function Signup() {
                     )}
                   </div>
                   <div className="w-full flex flex-col mb-4">
+                    <label className="mb-2 text-base mb-1" htmlFor="passwordConfirmation">
+                      Confirmar Contraseña
+                    </label>
+                    <Field
+                      className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                      id="passwordConfirmation"
+                      type="password"
+                      placeholder="Confirmar Contraseña"
+                      name="passwordConfirmation"
+                    />
+                    {errors.passwordConfirmation && touched.passwordConfirmation && (
+                      <ErrorMessage
+                        className="p-2 bg-tertiary text-white text-base"
+                        name="passwordConfirmation"
+                        component="div"
+                      ></ErrorMessage>
+                    )}
+                  </div>
+
+                  <div className="w-full flex flex-col mb-4">
                     <label className="mb-2 text-base mb-1" htmlFor="phone">
                       Número de teléfono
                     </label>
@@ -235,7 +249,7 @@ function Signup() {
                     <Field
                       className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                       id="answer"
-                      type="answer"
+                      type="password"
                       placeholder="Ej: Neko"
                       name="answer"
                     />

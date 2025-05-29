@@ -262,7 +262,7 @@ export function SidebarBurgerMenu() {
                 </List>
               </AccordionBody>
             </Accordion>
-             <ListItem>
+            <ListItem>
               <Link
                 className="text-gray-600 flex justify-center items-center"
                 to="/admin/reportes"
@@ -275,12 +275,17 @@ export function SidebarBurgerMenu() {
             </ListItem>
             <hr className="my-2 border-blue-gray-50" />
             <ListItem>
-              <ListItemPrefix>
-                <UserCircleIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Perfil
+              <Link
+                className="text-gray-600 flex justify-center items-center"
+                to="/admin/perfil"
+              >
+                <ListItemPrefix>
+                  <UserCircleIcon className="h-5 w-5" />
+                </ListItemPrefix>
+                Perfil
+              </Link>
             </ListItem>
-           
+
             <ListItem>
               <ListItemPrefix>
                 <Cog6ToothIcon className="h-5 w-5" />

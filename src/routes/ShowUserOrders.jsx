@@ -37,10 +37,10 @@ const ShowUserOrders = () => {
   return (
     <HomeLayout>
       <StandardSection>
-        <div className="flex flex-col md:flex-row gap-8">
+        <div className="flex flex-col md:flex-row gap-8 ">
           <UserNavProfile />
-          <div>
-            <h1 className="text-2xl pt-4 md:text-4xl text-center mb-4 md:mb-14">
+          <div className="p-8 border rounded-md flex-1">
+            <h1 className="text-2xl pt-4 md:text-4xl text-center mb-4 md:mb-14 ">
               Compras
             </h1>
             {orders.length > 0 ? (

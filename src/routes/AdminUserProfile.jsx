@@ -1,18 +1,20 @@
 import StandardSection from "../components/StandardSection";
-import FormReportOrder from "../components/FormReportOrder";
 import AdminLayout from "../layout/AdminLayout";
+import FormUserProfile from "../components/FormUserProfile";
 
-const ReportOrders = () => {
+
+const AdminUserProfile = () => {
   return (
     <AdminLayout>
       <StandardSection className="px-1 pt-[3rem] pb-8">
         <h1 className="text-2xl md:text-3xl text-center mb-8 md:mb-14 text-gray-800">
-          Reportes
+          Mi Perfil
         </h1>
-        <FormReportOrder />
+        <FormUserProfile />
+
       </StandardSection>
     </AdminLayout>
   );
 };
 
-export default ReportOrders;
+export default AdminUserProfile;

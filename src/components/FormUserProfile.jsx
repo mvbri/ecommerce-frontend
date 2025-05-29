@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../auth/AuthProvider";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
-import { Link } from "react-router-dom";
+import { axiosInstance } from "../services/axios.config";
 
 const FormUserProfile = () => {
   const [errorResponse, setErrorResponse] = useState("");
@@ -12,16 +12,18 @@ const FormUserProfile = () => {
     name: auth.getUser()?.name,
     email: auth.getUser()?.email,
     phone: auth.getUser()?.phone,
+    question: auth.getUser()?.question,
+    answer: "",
+    password: "",
+    passwordConfirmation: "",
+    newPassword: "",
+    answerConfirmation: ""
   };
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .min(2, "Nombre demasiado corto")
       .max(15, "Nombre demasiado largo")
-      .matches(
-        /^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$/,
-        "El nombre solo debe contener letras, sin espacios, números ni caracteres especiales"
-      )
       .required("El campo es obligatorio"),
     email: Yup.string()
       .email("Formato Invalido de correo")
@@ -30,49 +32,48 @@ const FormUserProfile = () => {
       .matches(/[0-9]/, "El campo solo puede contener números")
       .max(11, "El campo debe de tener máximo 11 números.")
       .required("El campo es obligatorio"),
+    password: Yup.string()
+      .required("El campo es obligatorio"),
+    newPassword: Yup.string()
+      .min(6, "Debe tener al menos 6 caracteres")
+      .matches(
+        /[!@#$%^&*(),.?":{}|<>]/,
+        "Debe contener al menos un caracter especial"
+      )
+      .matches(/\d/, "Debe contener al menos un numero"),
+    passwordConfirmation: Yup.string()
+      .oneOf([Yup.ref("newPassword"), null], "El campo debe de ser igual a la nueva contraseña."),
+    question: Yup.string()
+      .required("El campo es obligatorio"),
+    answer: Yup.string(),
+    answerConfirmation: Yup.string()
+      .oneOf([Yup.ref("answer"), null], "El campo debe de ser igual a la respuesta de seguridad."),
   });
 
-  async function handleSubmit(values, setSubmitting) {
-    console.log(values);
-
+  const handleSubmit = async (values, setSubmitting) => {
     try {
-      let response = await fetch(`${API_URL}/signup`, {
-        method: "POST",
-        headers: {
-          "content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
+      const res = await axiosInstance.post(
+        "/api/user/update",
+        values,
+      );
 
-      if (!response.ok) {
-        console.log("Something Went Wrong");
-        const json = await response.json();
-        setErrorResponse(json.body.error);
-
-        return;
-      }
+      auth.saveUser(res.data);
       setErrorResponse("");
-    } catch (error) {
-      console.log(error);
+
+    } catch (err) {
+      console.log(err);
+      setErrorResponse(err.response.data.message);
     } finally {
       setSubmitting(false);
     }
+
   }
 
   return (
     <div>
       <div>
         <div className="m-auto">
-          <div className="flex flex-wrap gap-2 justify-between items-center">
-            <h3 className="text-gray-800 text-2xl md:text-3xl">Mi Perfil</h3>
 
-            <Link
-              to="/contraseña"
-              className="text-blue-400 text-sm md:text-base whitespace-nowrap font-semibold mr-2 hover:text-blue-300 transition ease"
-            >
-              CAMBIAR CONTRASEÑA
-            </Link>
-          </div>
 
           <div className="h-6 border-b border-slate-200 mt-2"></div>
 
@@ -86,7 +87,6 @@ const FormUserProfile = () => {
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={(values, { setSubmitting }) => {
-              console.log(values);
               handleSubmit(values, setSubmitting);
             }}
           >
@@ -125,7 +125,7 @@ const FormUserProfile = () => {
                         className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                         id="phone"
                         type="phone"
-                        placeholder="phone"
+                        placeholder="Número de teléfono"
                         name="phone"
                       />
                       {errors.phone && touched.phone && (
@@ -143,7 +143,6 @@ const FormUserProfile = () => {
                       <Field
                         className="text-gray-400 text-sm sm:text-base placeholder-gray-400 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-gray-400"
                         id="email"
-                        readOnly
                         type="email"
                         placeholder="email"
                         name="email"
@@ -156,10 +155,108 @@ const FormUserProfile = () => {
                         ></ErrorMessage>
                       )}
                     </div>
+                    <div className="w-64 flex flex-col mb-8">
+                      <label className="mb-2 text-base mb-1" htmlFor="password">
+                        Ingrese su contraseña actual
+                      </label>
+                      <Field
+                        className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                        id="password"
+                        type="password"
+                        placeholder="Contraseña"
+                        name="password"
+                      />
+                      {errors.password && touched.password && (
+                        <ErrorMessage
+                          className="p-2 bg-tertiary text-white text-base"
+                          name="password"
+                          component="div"
+                        ></ErrorMessage>
+                      )}
+                    </div>
+
+                    <div className="w-64 flex flex-col mb-8">
+                      <label className="mb-2 text-base mb-1" htmlFor="newPassword">
+                        Nueva contraseña
+                      </label>
+                      <Field
+                        className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                        id="newPassword"
+                        type="password"
+                        placeholder="Nueva contraseña"
+                        name="newPassword"
+                      />
+                    </div>
+                    <div className="w-64 flex flex-col mb-8">
+                      <label className="mb-2 text-base mb-1" htmlFor="passwordConfirmation">
+                        Confirmar nueva contraseña
+                      </label>
+                      <Field
+                        className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                        id="passwordConfirmation"
+                        type="password"
+                        placeholder="Confirmar nueva contraseña"
+                        name="passwordConfirmation"
+                      />
+                      {errors.passwordConfirmation && touched.passwordConfirmation && (
+                        <ErrorMessage
+                          className="p-2 bg-tertiary text-white text-base"
+                          name="passwordConfirmation"
+                          component="div"
+                        ></ErrorMessage>
+                      )}
+                    </div>
+
+                    <div className="w-64 flex flex-col mb-8">
+                      <label className="mb-2 text-base mb-1" htmlFor="question">
+                        Pregunta de seguridad
+                      </label>
+                      <Field
+                        className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                        id="question"
+                        type="text"
+                        placeholder="Pregunta de seguridad"
+                        name="question"
+                      />
+                    </div>
+
+                    <div className="w-64 flex flex-col mb-8">
+                      <label className="mb-2 text-base mb-1" htmlFor="answer">
+                        Nueva respuesta de seguridad
+                      </label>
+                      <Field
+                        className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                        id="answer"
+                        type="password"
+                        placeholder="Nueva respuesta de seguridad"
+                        name="answer"
+                      />
+                    </div>
+
+                    <div className="w-64 flex flex-col mb-8">
+                      <label className="mb-2 text-base mb-1" htmlFor="answerConfirmation">
+                        Confirmar respuesta de seguridad
+                      </label>
+                      <Field
+                        className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                        id="answerConfirmation"
+                        type="password"
+                        placeholder="Confirmar respuesta de seguridad"
+                        name="answerConfirmation"
+                      />
+                      {errors.answerConfirmation && touched.answerConfirmation && (
+                        <ErrorMessage
+                          className="p-2 bg-tertiary text-white text-base"
+                          name="password"
+                          component="div"
+                        ></ErrorMessage>
+                      )}
+                    </div>
                   </div>
                 </div>
 
                 <button
+                  disabled={isSubmitting}
                   className="mb-4 inline-flex items-center md:self-start self-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm rounded-md py-2 px-8 shadow-sm hover:shadow-md bg-red-500 border-red-500 text-slate-50 hover:bg-red-400 hover:border-red-400"
                   type="submit"
                 >
