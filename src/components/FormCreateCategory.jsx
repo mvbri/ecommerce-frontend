@@ -24,7 +24,7 @@ const FormCreateCategory = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (typeof params.id != "undefined") getValues();
+    if (typeof params.id !== "undefined") getValues();
   });
 
   const [initialValues, setInitialValues] = useState({
@@ -32,24 +32,6 @@ const FormCreateCategory = () => {
     description: "",
     menu: false,
   });
-
-  const dropImage = async (image) => {
-    try {
-      const res = await axiosInstance.delete(`/api/admin/image/${image._id}`);
-
-      if (res.status === 200) {
-        setImage((prevImages) =>
-          prevImages.filter((item) => {
-            return item._id != image._id;
-          })
-        );
-      } else {
-        throw new Error(`[${res.status}] ERROR en la solicitud`);
-      }
-    } catch (error) {
-      console.log(error);
-    }
-  };
 
   const getValues = async () => {
     try {
@@ -182,33 +164,7 @@ const FormCreateCategory = () => {
               maxfiles={true}
               className="p-16 mt-10 cursor-pointer border border-dashed border-2 md:w-4/5 m-auto border-neutral-500 text-center mb-3"
             />
-            {image ? (
-              <>
-                <label className="mb-2 text-base" htmlFor="image">
-                  Imagen Guardada
-                </label>
-                <ul className="flex">
-                  {
-                    <li className="p-4">
-                      <div className="relative size-24">
-                        <img
-                          className="size-6 mr-3 object-cover"
-                          alt="Imagen de WhatsApp 2025-03-20 a las 15.15.09_d5242c1d.jpg"
-                          src={`${API_URL}/public/images/category/${image.url}`}
-                        ></img>
-                        <button
-                          type="button"
-                          className="bg-transparent absolute top-0 right-0"
-                          onClick={() => dropImage(image)}
-                        >
-                          <span className="text-blue-500"> X</span>
-                        </button>
-                      </div>
-                    </li>
-                  }
-                </ul>
-              </>
-            ) : null}
+            
             {errors.image && touched.image && (
               <ErrorMessage
                 className="mb-3 -mt-2 w-full p-2 bg-red-500 text-white"

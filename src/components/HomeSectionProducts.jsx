@@ -5,7 +5,7 @@ import StandardSection from "./StandardSection";
 import TitleSection from "./TitleSection";
 
 const HomeSectionProducts = () => {
-  const { products } = useFetchCategory("harinas");
+  const { products } = useFetchCategory("inicio");
   return (
     <StandardSection>
       <TitleSection text="Nuestros" secondText="Productos" />

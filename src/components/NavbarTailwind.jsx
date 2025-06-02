@@ -14,6 +14,7 @@ import logo from "../img/logo.jpeg";
 import ShoppingCartButton from "./ShoppingCartButton";
 import SearchBar from "./SearchBar";
 import { useAuth } from "../auth/AuthProvider";
+import userTest from "../img/user-test.jpg"
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -89,7 +90,7 @@ export default function NavTailwind() {
                     <MenuButton className="relative size-8 flex items-center rounded-full bg-gray-800 text-sm focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800 focus:outline-hidden">
                       <img
                         alt=""
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                        src={userTest}
                         className="size-8 rounded-full"
                       />
                     </MenuButton>
