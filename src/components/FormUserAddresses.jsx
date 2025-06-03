@@ -56,21 +56,16 @@ const FormUserAddresses = () => {
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
-      .min(2, "Nombre demasiado corto")
+      .min(2, "El campo es demasiado corto")
       .required("El campo es obligatorio"),
     phone: Yup.string()
       .matches(/[0-9]/, "El campo solo puede contener números")
       .max(11, "El campo debe de tener máximo 11 números.")
       .required("El campo es obligatorio"),
     parish: Yup.string()
-      .matches(
-        /^[a-zA-ZáéíóúÁÉÍÓÚñÑ]+$/,
-        "La parroquia solo debe contener letras, sin espacios, números ni caracteres especiales"
-      )
-      .max(20, "El campo debe de tener máximo 11 números.")
       .required("El campo es obligatorio"),
     address: Yup.string()
-      .min(2, "Nombre demasiado corto")
+      .min(2, "El campo es demasiado corto")
       .required("El campo es obligatorio"),
   });
 

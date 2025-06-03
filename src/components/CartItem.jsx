@@ -3,9 +3,9 @@ import { API_URL } from "../auth/constants";
 import NumberInput from "./NumberInput";
 
 const CartItem = ({ product, quantity, delFromCart, updateQuantityCart }) => {
-  const handleQuantityChange = (newQuantity) => {
+  const handleQuantityChange = async (newQuantity) => {
     if (newQuantity !== quantity) {
-      updateQuantityCart(_id, newQuantity); // Actualiza el estado de cantidad en el padre
+      await updateQuantityCart(_id, newQuantity); // Actualiza el estado de cantidad en el padre
     }
   };
 

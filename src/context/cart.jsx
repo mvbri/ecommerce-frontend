@@ -59,6 +59,8 @@ export const CartProvider = ({ children }) => {
       }
     } catch (err) {
       console.log(err);
+      if(err.response.data.message) alert(err.response.data.message)
+
     }
 
 
@@ -99,6 +101,8 @@ export const CartProvider = ({ children }) => {
       }
     } catch (err) {
       console.log(err);
+      if(err.response.data.message) alert(err.response.data.message)
+
     }
 
 
@@ -141,6 +145,11 @@ export const CartProvider = ({ children }) => {
         throw Error(`[${res.status}] error en la solicitud`);
       }
     } catch (err) {
+      
+      setOpen(false);
+
+      if(err.response.data.message) alert(err.response.data.message)
+
       console.log(err);
     }
 
@@ -207,13 +216,16 @@ export const CartProvider = ({ children }) => {
       }
     } catch (err) {
       console.log(err);
+
+      if(err.response.data.message) alert(err.response.data.message)
+
       return state;
     }
 
   };
   return (
     <CartContext.Provider
-      value={{ setOpen,open, cart, addToCart, clearCart, delFromCart, updateQuantityCart, createOrder }}
+      value={{ setOpen, open, cart, addToCart, clearCart, delFromCart, updateQuantityCart, createOrder }}
     >
       {children}
     </CartContext.Provider>
