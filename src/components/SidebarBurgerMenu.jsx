@@ -202,7 +202,7 @@ export function SidebarBurgerMenu() {
               icon={
                 <ChevronDownIcon
                   strokeWidth={2.5}
-                  className={`mx-auto h-4 w-4 transition-transform ${open === 2 ? "rotate-180" : ""
+                  className={`mx-auto h-4 w-4 transition-transform ${open === 3 ? "rotate-180" : ""
                     }`}
                 />
               }
@@ -265,7 +265,7 @@ export function SidebarBurgerMenu() {
               icon={
                 <ChevronDownIcon
                   strokeWidth={2.5}
-                  className={`mx-auto h-4 w-4 transition-transform ${open === 2 ? "rotate-180" : ""
+                  className={`mx-auto h-4 w-4 transition-transform ${open === 4 ? "rotate-180" : ""
                     }`}
                 />
               }
@@ -312,6 +312,69 @@ export function SidebarBurgerMenu() {
                 </List>
               </AccordionBody>
             </Accordion>
+            <Accordion
+              open={open === 5}
+              icon={
+                <ChevronDownIcon
+                  strokeWidth={2.5}
+                  className={`mx-auto h-4 w-4 transition-transform ${open === 5 ? "rotate-180" : ""
+                    }`}
+                />
+              }
+            >
+              <ListItem className="p-0" selected={open === 5}>
+                <AccordionHeader
+                  onClick={() => handleOpen(5)}
+                  className="border-b-0 p-3"
+                >
+                  <ListItemPrefix>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="size-5"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M11.35 3.836c-.065.21-.1.433-.1.664 0 .414.336.75.75.75h4.5a.75.75 0 0 0 .75-.75 2.25 2.25 0 0 0-.1-.664m-5.8 0A2.251 2.251 0 0 1 13.5 2.25H15c1.012 0 1.867.668 2.15 1.586m-5.8 0c-.376.023-.75.05-1.124.08C9.095 4.01 8.25 4.973 8.25 6.108V8.25m8.9-4.414c.376.023.75.05 1.124.08 1.131.094 1.976 1.057 1.976 2.192V16.5A2.25 2.25 0 0 1 18 18.75h-2.25m-7.5-10.5H4.875c-.621 0-1.125.504-1.125 1.125v11.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125V18.75m-7.5-10.5h6.375c.621 0 1.125.504 1.125 1.125v9.375m-8.25-3 1.5 1.5 3-3.75"
+                      />
+                    </svg>
+                  </ListItemPrefix>
+                  <Typography color="blue-gray" className="mr-auto font-normal">
+                    Respaldo
+                  </Typography>
+                </AccordionHeader>
+              </ListItem>
+              <AccordionBody className="py-1">
+                <List className="p-0">
+                  <ListItem>
+                    <Link
+                      className="text-gray-600 flex justify-center items-center"
+                      to="/admin/respaldo/subir"
+                    >
+                      <ListItemPrefix>
+                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                      </ListItemPrefix>
+                      Subir Respaldo
+                    </Link>
+                  </ListItem>
+                  <ListItem>
+                    <Link
+                      className="text-gray-600 flex justify-center items-center"
+                      to="/admin/respaldos"
+                    >
+                      <ListItemPrefix>
+                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                      </ListItemPrefix>
+                      Ver Respaldos
+                    </Link>
+                  </ListItem>
+                </List>
+              </AccordionBody>
+            </Accordion>
             <ListItem>
               <Link
                 className="text-gray-600 flex justify-center items-center"
@@ -332,12 +395,6 @@ export function SidebarBurgerMenu() {
                 Perfil
               </Link>
             </ListItem>
-            {/* <ListItem>
-              <ListItemPrefix>
-                <Cog6ToothIcon className="h-5 w-5" />
-              </ListItemPrefix>
-              Configuración
-            </ListItem> */}
             <ListItem>
               <button className="flex" onClick={auth.handleSignOut}>
                 <ListItemPrefix>
@@ -347,39 +404,6 @@ export function SidebarBurgerMenu() {
               </button>
             </ListItem>
           </List>
-          {/* <Alert
-            open={openAlert}
-            className="mt-auto"
-            onClose={() => setOpenAlert(false)}
-          >
-            <CubeTransparentIcon className="mb-4 h-12 w-12" />
-            <Typography variant="h6" className="mb-1">
-              Upgrade to PRO
-            </Typography>
-            <Typography variant="small" className="font-normal opacity-80">
-              Upgrade to Material Tailwind PRO and get even more components,
-              plugins, advanced features and premium.
-            </Typography>
-            <div className="mt-4 flex gap-3">
-              <Typography
-                as="a"
-                href="#"
-                variant="small"
-                className="font-medium opacity-80"
-                onClick={() => setOpenAlert(false)}
-              >
-                Dismiss
-              </Typography>
-              <Typography
-                as="a"
-                href="#"
-                variant="small"
-                className="font-medium"
-              >
-                Upgrade Now
-              </Typography>
-            </div>
-          </Alert> */}
         </Card>
       </Drawer>
     </>

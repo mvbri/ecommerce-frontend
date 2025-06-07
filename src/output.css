@@ -734,10 +734,6 @@ video {
   margin-bottom: 1rem;
 }
 
-.mb-5 {
-  margin-bottom: 1.25rem;
-}
-
 .mb-6 {
   margin-bottom: 1.5rem;
 }
@@ -764,10 +760,6 @@ video {
 
 .mr-1 {
   margin-right: 0.25rem;
-}
-
-.mr-2 {
-  margin-right: 0.5rem;
 }
 
 .mr-3 {
@@ -1081,6 +1073,14 @@ video {
   flex-shrink: 0;
 }
 
+.table-auto {
+  table-layout: auto;
+}
+
+.border-collapse {
+  border-collapse: collapse;
+}
+
 .origin-top-right {
   transform-origin: top right;
 }
@@ -1180,6 +1180,10 @@ video {
 
 .gap-\[2rem\] {
   gap: 2rem;
+}
+
+.gap-\[6rem\] {
+  gap: 6rem;
 }
 
 .space-x-4 > :not([hidden]) ~ :not([hidden]) {
@@ -1328,11 +1332,6 @@ video {
 .border-red-500 {
   --tw-border-opacity: 1;
   border-color: rgb(239 68 68 / var(--tw-border-opacity, 1));
-}
-
-.border-secondary {
-  --tw-border-opacity: 1;
-  border-color: rgb(255 155 23 / var(--tw-border-opacity, 1));
 }
 
 .border-slate-200 {
@@ -1755,11 +1754,6 @@ video {
   line-height: 1;
 }
 
-.text-blue-400 {
-  --tw-text-opacity: 1;
-  color: rgb(96 165 250 / var(--tw-text-opacity, 1));
-}
-
 .text-blue-500 {
   --tw-text-opacity: 1;
   color: rgb(59 130 246 / var(--tw-text-opacity, 1));
@@ -2114,11 +2108,6 @@ input[type="number"] {
 
 .hover\:stroke-secondary-accent:hover {
   stroke: #ff7300;
-}
-
-.hover\:text-blue-300:hover {
-  --tw-text-opacity: 1;
-  color: rgb(147 197 253 / var(--tw-text-opacity, 1));
 }
 
 .hover\:text-gray-500:hover {
@@ -2532,5 +2521,12 @@ input[type="number"] {
   .lg\:py-32 {
     padding-top: 8rem;
     padding-bottom: 8rem;
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  .dark\:bg-gray-800 {
+    --tw-bg-opacity: 1;
+    background-color: rgb(31 41 55 / var(--tw-bg-opacity, 1));
   }
 }
