@@ -13,8 +13,6 @@ const AdminShowCategories = () => {
   const [selectedItemName, setSelectedItemName] = useState(null);
   const [isOpen, openModal, closeModal] = useModal(false);
 
-  console.log(categories);
-
   const handleDeletetItem = (item, name) => {
     setSelectedItem(item);
     setSelectedItemName(name);

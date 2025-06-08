@@ -39,7 +39,6 @@ const FormUserAddresses = () => {
 
       if (res.status === 200) {
         const data = res.data.data;
-        console.log(data);
         setInitialValues({
           name: data.name,
           address: data.address,
@@ -50,6 +49,7 @@ const FormUserAddresses = () => {
         throw Error(`[${res.status}] error en la solicitud`);
       }
     } catch (err) {
+      setErrorResponse(err);
       console.log(err);
     }
   };
@@ -62,8 +62,7 @@ const FormUserAddresses = () => {
       .matches(/[0-9]/, "El campo solo puede contener números")
       .max(11, "El campo debe de tener máximo 11 números.")
       .required("El campo es obligatorio"),
-    parish: Yup.string()
-      .required("El campo es obligatorio"),
+    parish: Yup.string().required("El campo es obligatorio"),
     address: Yup.string()
       .min(2, "El campo es demasiado corto")
       .required("El campo es obligatorio"),

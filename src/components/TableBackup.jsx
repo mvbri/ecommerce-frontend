@@ -2,13 +2,17 @@
 
 import { Grid, html } from "gridjs";
 import "gridjs/dist/theme/mermaid.css";
-import { useRef, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useRef, useEffect, useState } from "react";
+import { axiosInstance } from "../services/axios.config";
+import Modal from "./Modal";
+import { useModal } from "../hooks/useModal";
 
-function TableBackup({ onSelectItem, items }) {
+function TableBackup({ items, setItems }) {
+  const [selectedItemName, setSelectedItemName] = useState(null);
+  const [isOpen, openModal, closeModal] = useModal(false);
+
   const wrapperRef = useRef(null);
   const gridInstance = useRef(null);
-  const navigate = useNavigate();
 
   useEffect(() => {
     if (!wrapperRef.current) return;
@@ -43,17 +47,18 @@ function TableBackup({ onSelectItem, items }) {
         },
       },
       pagination: true,
-      columns: [ {
+      columns: [
+        {
           data: (row) => row.name,
           name: "name",
         },
-           {
+        {
           id: "_id",
           name: "Modificar",
           formatter: (_, row) =>
             html(`
               <div class="flex justify-center items-center">
-                <a class="restore-btn cursor-pointer" data-id='${row.cells[1].data}'>
+                <a class="restore-btn cursor-pointer" data-name='${row.cells[0].data}' data-id='${row.cells[1].data}'>
                   Restaurar
                 </a>
                 <a class="delete-btn ml-4 cursor-pointer" data-name='${row.cells[0].data}' data-id='${row.cells[1].data}'>
@@ -61,8 +66,8 @@ function TableBackup({ onSelectItem, items }) {
                 </a>
               </div>
             `),
-        }
-    ],
+        },
+      ],
       data: () => items,
       sort: true,
       search: true,
@@ -73,13 +78,16 @@ function TableBackup({ onSelectItem, items }) {
 
     // Agrega event listeners para los botones de editar y eliminar
     const handleClick = (e) => {
-      if (e.target.classList.contains("restore-btn")) {
-        const rowId = e.target.getAttribute("data-id");
-      }
       if (e.target.classList.contains("delete-btn")) {
         const id = e.target.getAttribute("data-id");
         const name = e.target.getAttribute("data-name");
-        deleteItem(id, name);
+        setSelectedItemName(name);
+        openModal();
+      }
+
+      if (e.target.classList.contains("restore-btn")) {
+        const name = e.target.getAttribute("data-name");
+        restoreBackup(name);
       }
     };
 
@@ -98,11 +106,59 @@ function TableBackup({ onSelectItem, items }) {
     };
   }, [items]); // Se ejecuta cada vez que `items` cambia
 
-  const deleteItem = (item, name) => {
-    onSelectItem(item, name);
+  const restoreBackup = async (name) => {
+    try {
+      const res = await axiosInstance.post("/api/backup/restore", {
+        file: name,
+      });
+
+      if (res.status !== 200) throw Error(res.statusText);
+
+      alert("Respaldo restaurado");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  return <div ref={wrapperRef} />;
+  const deleteItem = async (name) => {
+    try {
+      const res = await axiosInstance.post(`/api/backup/destroy`, {
+        file: name,
+      });
+
+      if (res.status === 200) {
+        const data = res.data.data;
+        setItems(data);
+      } else {
+        throw new Error(`[${res.status}] ERROR en la solicitud`);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      closeModal();
+    }
+  };
+
+  return (
+    <>
+      <div ref={wrapperRef} />
+      <Modal isOpen={isOpen} closeModal={closeModal}>
+        <div className="flex items-center justify-center size-full flex-col">
+          <h2 className="text-center text-gray-950 mb-8 text-xl font-semibold">
+            ¿Está seguro que desea elimiar el siguiente Item? <br />
+            <span>{`"${selectedItemName ? selectedItemName : ""}" `}</span>
+          </h2>
+          <button
+            className="bg-secondary w-fit py-1 px-4 rounded-md
+    hover:bg-secondary-accent text-white"
+            onClick={() => deleteItem(selectedItemName)}
+          >
+            Eliminar
+          </button>
+        </div>
+      </Modal>
+    </>
+  );
 }
 
 export default TableBackup;

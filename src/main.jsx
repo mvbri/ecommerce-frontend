@@ -39,6 +39,8 @@ import AdminShowCategories from "./routes/AdminShowCategories.jsx";
 import DeliveryProfile from "./routes/DeliveryProfile.jsx";
 import UploadBackup from "./routes/uploadBackup.jsx";
 import ShowBackup from "./routes/ShowBackup.jsx";
+import ShowPayments from "./routes/ShowPayments.jsx";
+import CreatePayment from "./routes/createPayment.jsx";
 
 const router = createBrowserRouter([
   {
@@ -84,7 +86,7 @@ const router = createBrowserRouter([
       {
         path: "/perfil",
         element: <UserProfile />,
-      },      
+      },
       {
         path: "/direcciones",
         element: <UserAddresses />,
@@ -167,22 +169,30 @@ const router = createBrowserRouter([
         path: "ordenes/:id/editar",
         element: <AdminEditOrder />,
       },
-       {
+      {
         path: "reportes",
         element: <ReportOrders />,
       },
       {
         path: "respaldos",
         element: <ShowBackup />,
-      }, 
+      },
       {
         path: "respaldo/subir",
         element: <UploadBackup />,
-      }, 
+      },
+      {
+        path: "pago/registrar",
+        element: <CreatePayment />,
+      },
+      {
+        path: "pagos",
+        element: <ShowPayments />,
+      },
       {
         path: "/admin/perfil",
         element: <AdminUserProfile />,
-      },   
+      },
     ],
   },
   {
@@ -199,7 +209,7 @@ const router = createBrowserRouter([
       },
       {
         path: "ordenes/:id/editar",
-        element: <EditOrder  />,
+        element: <EditOrder />,
       },
       {
         path: "perfil",
