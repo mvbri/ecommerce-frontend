@@ -850,6 +850,11 @@ video {
   display: none;
 }
 
+.size-2 {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
 .size-24 {
   width: 6rem;
   height: 6rem;
@@ -873,6 +878,11 @@ video {
 .size-full {
   width: 100%;
   height: 100%;
+}
+
+.size-3 {
+  width: 0.75rem;
+  height: 0.75rem;
 }
 
 .h-10 {
@@ -1217,10 +1227,6 @@ video {
 
 .self-start {
   align-self: flex-start;
-}
-
-.self-end {
-  align-self: flex-end;
 }
 
 .self-center {

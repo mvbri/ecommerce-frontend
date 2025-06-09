@@ -50,10 +50,10 @@ const FormPayment = () => {
 
   const getValues = async () => {
     try {
-      const res = await axiosInstance.get(`/api/payment/${params.id}`);
+      const res = await axiosInstance.get(`/api/checkout/${params.id}`);
 
       if (res.status === 200) {
-        const data = res.data.data;
+        const data = res.data.payments;
         setInitialValues({
           document: data.document,
           bank: data.bank,

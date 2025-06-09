@@ -190,6 +190,10 @@ const router = createBrowserRouter([
         element: <ShowPayments />,
       },
       {
+        path: "pago/:id/editar",
+        element: <CreatePayment key="edit" />,
+      },
+      {
         path: "/admin/perfil",
         element: <AdminUserProfile />,
       },
