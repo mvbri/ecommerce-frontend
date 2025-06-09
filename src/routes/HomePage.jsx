@@ -37,7 +37,7 @@ const HomePage = () => {
               </div>
             </div>
           </div>
-          <div className="bg-green-500 text-white rounded-lg">
+          <div className="bg-blue-600 text-white rounded-lg">
             <div className="grid-container">
               <div className="container">
                 <h1 className="title s-center">

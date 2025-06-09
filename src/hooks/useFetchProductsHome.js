@@ -9,6 +9,7 @@ export const useFetchProductsHome = () => {
       .then((res) => {
         if (res.status === 200) {
           setItems(res.products);
+          console.log(res);
         } else {
           throw new Error(`[${res.status}] ERROR en la solicitud`);
         }

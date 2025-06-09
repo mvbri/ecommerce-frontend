@@ -4,35 +4,34 @@ import ImgDrinks from "../img/cards_categories/drinks.jpg";
 import StandardSection from "./StandardSection";
 import "./css/HomeSectionCategories.css";
 import TitleSection from "./TitleSection";
+import { useFetchCategories } from "../hooks/useFetchCategories";
+import { API_URL } from "../auth/constants";
 
 function HomeSectionCategories() {
+  const { categories } = useFetchCategories();
+
+  console.log(categories);
+
   return (
     <>
       <StandardSection className="bg-gray-100 py-16 sm:py-24 lg:py-32">
         <TitleSection text="Algunas de Nuestras" secondText="categorias" />
         <BasicGridLayout>
-          <Card
-            className="custom-card"
-            title="Dulces"
-            img={ImgDrinks}
-            imgAlt="Cuidad personal"
-            link="/dulces"
-          />
-          <Card
-            className="custom-card"
-            title="Frutas"
-            img={ImgDrinks}
-            imgAlt="Cuidad personal"
-            link="/frutas"
-          />
-          <Card
-            className="custom-card"
-            title="All"
-            img={ImgDrinks}
-            imgAlt="Cuidad personal"
-            btnText="All"
-            link="/all"
-          />
+          {categories.map((item, i) => (
+            <Card
+              key={i}
+              className="custom-card"
+              title={item.name}
+              description={item.description}
+              img={
+                item.image
+                  ? `${API_URL}/public/images/category/${item.image.url}`
+                  : `${API_URL}/public/images/default.png`
+              }
+              imgAlt={item.name}
+              link={`/categoria/${item.slug}`}
+            />
+          ))}
         </BasicGridLayout>
       </StandardSection>
     </>

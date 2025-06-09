@@ -7,14 +7,14 @@ import {
   MenuItem,
   MenuItems,
 } from "@headlessui/react";
-import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useFetchCategories } from "../hooks/useFetchCategories";
 import { Link } from "react-router-dom";
 import logo from "../img/logo.jpeg";
 import ShoppingCartButton from "./ShoppingCartButton";
 import SearchBar from "./SearchBar";
 import { useAuth } from "../auth/AuthProvider";
-import userTest from "../img/user-test.jpg"
+import userTest from "../img/user-test.jpg";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
