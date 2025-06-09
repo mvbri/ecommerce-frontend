@@ -13,16 +13,19 @@ const HomeBanner = () => {
             <br />
             <span className="line-2">Piñero</span>
           </h1>
-          <p className="description s-center">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Soluta
-            debitis ab beatae temporibus aliquam cum consequatur nam at.
-            Molestias cupiditate adipisci expedita corporis quas voluptate vel
-            laboriosam quibusdam iure non.
+          <h3 className="font-semibold s-center text-gray-800">
+            ¡Tu Despensa Completa, Cerca de Ti!
+          </h3>
+          <p className="description s-center text-gray-700">
+            ¡Aquí en nuestro abasto, hacer tu compra es fácil y rápido!
+            Encuentra toda la variedad de productos frescos y esenciales que tu
+            hogar necesita, siempre con la comodidad y los precios que buscas.
+            ¡Ven y llena tu carrito sin complicaciones!
           </p>
         </div>
         {/* Imagen*/}
         <div className="graphic">
-          <img src={ImgBanner} />
+          <img className="h-64 md:h-96 w-full object-cover" src={ImgBanner} />
         </div>
       </div>
     </div>
