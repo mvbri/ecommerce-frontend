@@ -11,7 +11,7 @@ const CreateCategory = () => {
         <h1 className="text-2xl md:text-3xl text-center mb-8 md:mb-14 text-gray-800">
           {typeof params.id != "undefined"
             ? "Editar Categoría"
-            : "Cargar Nueva Categoría"}
+            : "Crear Nueva Categoría"}
         </h1>
         <FormCreateCategory />
       </StandardSection>

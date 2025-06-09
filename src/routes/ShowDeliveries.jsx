@@ -6,6 +6,7 @@ import { useModal } from "../hooks/useModal";
 import Modal from "../components/Modal";
 import { useFetchDeliveries } from "../hooks/useFetchDeliveries";
 import TableDeliveries from "../components/TableDeliveries";
+import { ToastContainer, toast } from "react-toastify";
 
 const ShowDeliveries = () => {
   const { deliveries, setDeliveries } = useFetchDeliveries();
@@ -13,28 +14,38 @@ const ShowDeliveries = () => {
   const [selectedItemName, setSelectedItemName] = useState(null);
   const [isOpen, openModal, closeModal] = useModal(false);
 
-
   const handleDeletetItem = (item, name) => {
     setSelectedItem(item);
     setSelectedItemName(name);
     openModal();
   };
 
-  const deleteItem = (id) => {
-    axiosInstance
-      .delete(`/api/admin/users/delivery/${id}`)
-      .then((res) => {
-        if (res.status === 200) {
-          setDeliveries((prevItems) =>
-            prevItems.filter((item) => item._id !== id)
-          );
-        } else {
-          throw new Error(`[${res.status}] ERROR en la solicitud`);
-        }
-      })
-      .catch((err) => console.log(err));
+  const notifySuccess = (noty, options = {}) => toast.success(noty, options);
 
-    closeModal();
+  const notifyError = (noty, options = {}) => toast.error(noty, options);
+
+  const deleteItem = (id) => {
+    try {
+      const res = axiosInstance.delete(`/api/admin/users/delivery/${id}`);
+      if (res.status === 200 || res.status === 201) {
+        notifySuccess("¡Delivery eliminado con éxito!", {
+          position: "top-center",
+        });
+
+        setDeliveries((prevItems) =>
+          prevItems.filter((item) => item._id !== id)
+        );
+      } else {
+        throw new Error(`[${res.status}] ERROR en la solicitud`);
+      }
+    } catch (error) {
+      notifyError("Ocurrió un error", {
+        position: "top-center",
+      });
+      console.log(error);
+    } finally {
+      closeModal();
+    }
   };
 
   return (
@@ -44,6 +55,8 @@ const ShowDeliveries = () => {
           Tabla de Deliveries
         </h1>
 
+        <ToastContainer />
+
         <div className="p-4">
           {deliveries.length > 0 ? (
             <TableDeliveries
@@ -52,7 +65,7 @@ const ShowDeliveries = () => {
             />
           ) : (
             <p className="text-center md:text-2xl text-gray-700">
-              No hay productos en el sistema
+              No hay deliveries en el sistema
             </p>
           )}
           <Modal isOpen={isOpen} closeModal={closeModal}>

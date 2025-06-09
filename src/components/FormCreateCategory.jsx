@@ -4,17 +4,14 @@ import { axiosInstance } from "../services/axios.config";
 import { useEffect, useState } from "react";
 import Dropzone from "./Dropzone";
 import { useNavigate, useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 import { API_URL } from "../auth/constants";
 
 const validationSchema = Yup.object().shape({
   name: Yup.string()
     .min(4, "Nombre demasiado corto")
-    .max(20, "Nombre demasiado largo")
     .required("El campo es obligatorio"),
-  description: Yup.string()
-    .min(10, "Descripción demasiado corta")
-    .max(150, "Description demasiado larga")
-    .required("El campo es obligatorio"),
+  description: Yup.string().required("El campo es obligatorio"),
 });
 
 const FormCreateCategory = () => {
@@ -25,7 +22,7 @@ const FormCreateCategory = () => {
 
   useEffect(() => {
     if (typeof params.id !== "undefined") getValues();
-  });
+  }, []);
 
   const [initialValues, setInitialValues] = useState({
     name: "",
@@ -36,8 +33,6 @@ const FormCreateCategory = () => {
   const getValues = async () => {
     try {
       const res = await axiosInstance.get(`/api/admin/category/${params.id}`);
-
-      console.log(res);
 
       if (res.status === 200) {
         const data = res.data.data;
@@ -55,8 +50,13 @@ const FormCreateCategory = () => {
     }
   };
 
+  const notifySuccess = (noty, options = {}) => toast.success(noty, options);
+
+  const notifyError = (noty, options = {}) => toast.error(noty, options);
+
   return (
     <>
+      <ToastContainer />
       <Formik
         initialValues={initialValues}
         enableReinitialize
@@ -83,12 +83,17 @@ const FormCreateCategory = () => {
                 }
               );
 
-              if (res.status === 201) {
-                alert("actualizado");
+              if (res.status === 201 || res.status === 200) {
+                notifySuccess("¡Categoría actualizada con éxito!", {
+                  position: "top-center",
+                });
               } else {
                 throw Error(`[${res.status}] error en la solicitud`);
               }
             } catch (err) {
+              notifyError("Ocurrió un error", {
+                position: "top-center",
+              });
               console.log(err);
             } finally {
               setSubmitting(false);
@@ -105,12 +110,20 @@ const FormCreateCategory = () => {
                 }
               );
 
-              if (res.status === 201) {
-                navigate(`/admin/categoria/${res.data.data._id}/editar`);
+              if (res.status === 201 || res.status === 200) {
+                notifySuccess("¡categoría Creada con éxito!", {
+                  position: "top-center",
+                });
+                setTimeout(() => {
+                  navigate(`/admin/categoria/${res.data.data._id}/editar`);
+                }, 2000);
               } else {
                 throw Error(`[${res.status}] error en la solicitud`);
               }
             } catch (err) {
+              notifyError("Ocurrió un error", {
+                position: "top-center",
+              });
               console.log(err);
             } finally {
               setSubmitting(false);
@@ -164,7 +177,7 @@ const FormCreateCategory = () => {
               maxfiles={true}
               className="p-16 mt-10 cursor-pointer border border-dashed border-2 md:w-4/5 m-auto border-neutral-500 text-center mb-3"
             />
-            
+
             {errors.image && touched.image && (
               <ErrorMessage
                 className="mb-3 -mt-2 w-full p-2 bg-red-500 text-white"
@@ -188,9 +201,8 @@ const FormCreateCategory = () => {
               type="submit"
             >
               {typeof params.id != "undefined"
-            ? "Editar categoria"
-            : "Cargar nueva categoria"}
-              
+                ? "EDITAR CATEGORÍA"
+                : "CREAR NUEVA CATEGORÍA"}
             </button>
             {isSubmitting ? (
               <p className="mb-3 text-center">Enviando nuevo producto</p>

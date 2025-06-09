@@ -1,11 +1,12 @@
 /* eslint-disable react/prop-types */
-
 import { Grid, html } from "gridjs";
 import "gridjs/dist/theme/mermaid.css";
 import { useRef, useEffect, useState } from "react";
 import { axiosInstance } from "../services/axios.config";
 import Modal from "./Modal";
 import { useModal } from "../hooks/useModal";
+import { toast } from "react-toastify";
+const URL = `${import.meta.env.VITE_API_URL}`;
 
 function TableBackup({ items, setItems }) {
   const [selectedItemName, setSelectedItemName] = useState(null);
@@ -50,7 +51,7 @@ function TableBackup({ items, setItems }) {
       columns: [
         {
           data: (row) => row.name,
-          name: "name",
+          name: "Nombre",
         },
         {
           id: "_id",
@@ -62,18 +63,15 @@ function TableBackup({ items, setItems }) {
                   Restaurar
                 </a>
                 <a class="delete-btn flex ml-4 cursor-pointer" data-name='${row.cells[0].data}' data-id='${row.cells[1].data}'>
-                  Eliminar
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="size-6 ml-1">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M12 9.75 14.25 12m0 0 2.25 2.25M14.25 12l2.25-2.25M14.25 12 12 14.25m-2.58 4.92-6.374-6.375a1.125 1.125 0 0 1 0-1.59L9.42 4.83c.21-.211.497-.33.795-.33H19.5a2.25 2.25 0 0 1 2.25 2.25v10.5a2.25 2.25 0 0 1-2.25 2.25h-9.284c-.298 0-.585-.119-.795-.33Z" />
                   </svg>
 
                 </a>
                 <a class="download-btn flex ml-4 cursor-pointer" data-name='${row.cells[0].data}' data-id='${row.cells[1].data}'>
-                  Descargar 
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" class="size-6 ml-1">
                     <path strokeLinecap="round" strokeLinejoin="round" d="M3 16.5v2.25A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75V16.5M16.5 12 12 16.5m0 0L7.5 12m4.5 4.5V3" />
                   </svg>
-
                 </a>
               </div>
             `),
@@ -123,16 +121,25 @@ function TableBackup({ items, setItems }) {
     };
   }, [items]); // Se ejecuta cada vez que `items` cambia
 
+  const notifySuccess = (noty, options = {}) => toast.success(noty, options);
+
+  const notifyError = (noty, options = {}) => toast.error(noty, options);
+
   const restoreBackup = async (name) => {
     try {
       const res = await axiosInstance.post("/api/backup/restore", {
         file: name,
       });
 
-      if (res.status !== 200) throw Error(res.statusText);
+      if (res.status !== 200 && res.status !== 201) throw Error(res.statusText);
 
-      alert("Respaldo restaurado");
+      notifySuccess("¡Respaldo restaurado con éxito!", {
+        position: "top-center",
+      });
     } catch (error) {
+      notifyError("Ocurrió un error", {
+        position: "top-center",
+      });
       console.log(error);
     }
   };
@@ -143,13 +150,20 @@ function TableBackup({ items, setItems }) {
         file: name,
       });
 
-      if (res.status === 200) {
+      if (res.status === 200 || res.status === 201) {
         const data = res.data.data;
         setItems(data);
+
+        notifySuccess("¡Respaldo eliminado con éxito!", {
+          position: "top-center",
+        });
       } else {
         throw new Error(`[${res.status}] ERROR en la solicitud`);
       }
     } catch (error) {
+      notifyError("Ocurrió un error", {
+        position: "top-center",
+      });
       console.log(error);
     } finally {
       closeModal();
@@ -159,7 +173,7 @@ function TableBackup({ items, setItems }) {
   const BackupDownloader = (filename) => {
     if (filename) {
       // Construct the URL with the query parameter
-      const downloadUrl = `/api/backup/download?file=${encodeURIComponent(
+      const downloadUrl = `${URL}/api/backup/download?file=${encodeURIComponent(
         filename
       )}`;
 

@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { axiosInstance } from "../services/axios.config";
 import { useNavigate, useParams } from "react-router-dom";
+import { ToastContainer, toast } from "react-toastify";
 
 const FormUserAddresses = () => {
   const [errorResponse, setErrorResponse] = useState("");
@@ -32,6 +33,10 @@ const FormUserAddresses = () => {
     "La Sabanita",
     "Panapana",
   ];
+
+  const notifySuccess = (noty, options = {}) => toast.success(noty, options);
+
+  const notifyError = (noty, options = {}) => toast.error(noty, options);
 
   const getValues = async () => {
     try {
@@ -77,11 +82,16 @@ const FormUserAddresses = () => {
         );
 
         if (res.status === 201) {
-          alert("actualizado");
+          notifySuccess("¡Dirección actualizada con éxito!", {
+            position: "top-center",
+          });
         } else {
           throw Error(`[${res.status}] error en la solicitud`);
         }
       } catch (err) {
+        notifyError("Ocurrió un error", {
+          position: "top-center",
+        });
         console.log(err);
       } finally {
         setSubmitting(false);
@@ -90,13 +100,20 @@ const FormUserAddresses = () => {
       try {
         const res = await axiosInstance.post("/api/address", values);
 
-        if (res.status === 201) {
-          alert("Nueva dirección creada");
-          navigate(`/direcciones/${res.data.data._id}/editar`);
+        if (res.status === 201 || res.status === 200) {
+          notifySuccess("¡Nueva dirección creada con éxito!", {
+            position: "top-center",
+          });
+          setTimeout(() => {
+            navigate(`/direcciones/${res.data.data._id}/editar`);
+          }, 2000);
         } else {
           throw Error(`[${res.status}] error en la solicitud`);
         }
       } catch (err) {
+        notifyError("Ocurrió un error", {
+          position: "top-center",
+        });
         console.log(err);
       } finally {
         setSubmitting(false);
@@ -109,6 +126,8 @@ const FormUserAddresses = () => {
       <div>
         <div className="m-auto">
           <div className="h-6 border-b border-slate-200 mt-2"></div>
+
+          <ToastContainer />
 
           {!!errorResponse && (
             <div className="bg-red-500 w-full text-center p-1 mb-2">
@@ -205,7 +224,7 @@ const FormUserAddresses = () => {
                         className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
                         id="phone"
                         type="phone"
-                        placeholder="phone"
+                        placeholder="Número"
                         name="phone"
                       />
                       {errors.phone && touched.phone && (

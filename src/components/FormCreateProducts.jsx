@@ -5,6 +5,7 @@ import Dropzone from "./Dropzone";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router";
 import { API_URL } from "../auth/constants";
+import { ToastContainer, toast } from "react-toastify";
 
 function FormCreateProducts() {
   const [files, setFiles] = useState([]);
@@ -15,7 +16,7 @@ function FormCreateProducts() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (typeof params.id != "undefined") getValues();
+    if (params.id !== undefined) getValues();
     else getCategory();
   }, []);
 
@@ -104,8 +105,13 @@ function FormCreateProducts() {
     }
   };
 
+  const notifySuccess = (noty, options = {}) => toast.success(noty, options);
+
+  const notifyError = (noty, options = {}) => toast.error(noty, options);
+
   return (
     <>
+      <ToastContainer />
       <Formik
         initialValues={initialValues}
         enableReinitialize
@@ -133,9 +139,14 @@ function FormCreateProducts() {
                 }
               );
 
-              if (res.status === 201) {
-                alert("actualizado");
+              if (res.status === 201 || res.status === 200) {
+                notifySuccess("¡Producto Actualizado!", {
+                  position: "top-center",
+                });
               } else {
+                notifyError("Ocurrió un error", {
+                  position: "top-center",
+                });
                 throw Error(`[${res.status}] error en la solicitud`);
               }
             } catch (err) {
@@ -147,9 +158,15 @@ function FormCreateProducts() {
             try {
               const res = await axiosInstance.post("/api/admin/products", data);
 
-              if (res.status === 201) {
-                navigate(`/admin/producto/${res.data.data._id}/editar`);
+              if (res.status === 201 || res.status === 200) {
+                notifySuccess("¡Producto Creado Correctamente!", {
+                  position: "top-center",
+                });
+                setTimeout(() => {
+                  navigate(`/admin/producto/${res.data.data._id}/editar`);
+                }, 2000);
               } else {
+                notifyError("Ocurrió un error");
                 throw Error(`[${res.status}] error en la solicitud`);
               }
             } catch (err) {
@@ -331,7 +348,9 @@ function FormCreateProducts() {
               className="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm md:text-base rounded-md py-2 px-4 shadow-sm hover:shadow-md bg-slate-800 border-slate-800 text-slate-50 hover:bg-slate-700 hover:border-slate-700 my-8"
               type="submit"
             >
-              Cargar nuevo producto
+              {params.id !== undefined
+                ? "ACTUALIZAR PRODUCTO"
+                : "CARGAR NUEVO PRODUCTO"}
             </button>
             {isSubmitting ? (
               <p className="mb-3 text-center">Enviando nuevo producto</p>

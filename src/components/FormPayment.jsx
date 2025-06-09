@@ -3,10 +3,9 @@ import { useNavigate, useParams } from "react-router-dom";
 import { axiosInstance } from "../services/axios.config";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
+import { ToastContainer, toast } from "react-toastify";
 
 const FormPayment = () => {
-  const [errorResponse, setErrorResponse] = useState("");
-
   const params = useParams();
   const navigate = useNavigate();
 
@@ -80,6 +79,10 @@ const FormPayment = () => {
     type: Yup.string().required("El campo es obligatorio"),
   });
 
+  const notifySuccess = (noty, options = {}) => toast.success(noty, options);
+
+  const notifyError = (noty, options = {}) => toast.error(noty, options);
+
   const handleSubmit = async (values, setSubmitting) => {
     if (typeof params.id != "undefined") {
       try {
@@ -88,27 +91,39 @@ const FormPayment = () => {
           values
         );
 
-        if (res.status === 201) {
-          alert("actualizado");
+        if (res.status === 201 || res.status === 200) {
+          notifySuccess("¡Método de pago actualizado con éxito!", {
+            position: "top-center",
+          });
         } else {
           throw Error(`[${res.status}] error en la solicitud`);
         }
       } catch (err) {
+        notifyError("Ocurrió un error", {
+          position: "top-center",
+        });
         console.log(err);
       } finally {
         setSubmitting(false);
       }
     } else {
       try {
-        const res = await axiosInstance.post("/api/address", values);
+        const res = await axiosInstance.post("/api/payment", values);
 
-        if (res.status === 201) {
-          alert("Nueva dirección creada");
-          navigate(`/direcciones/${res.data.data._id}/editar`);
+        if (res.status === 201 || res.status === 200) {
+          notifySuccess("¡Método de pago agregado con éxito!", {
+            position: "top-center",
+          });
+          setTimeout(() => {
+            navigate(`/admin/pagos/${res.data.data._id}/editar`);
+          }, 2000);
         } else {
           throw Error(`[${res.status}] error en la solicitud`);
         }
       } catch (err) {
+        notifyError("Ocurrió un error", {
+          position: "top-center",
+        });
         console.log(err);
       } finally {
         setSubmitting(false);
@@ -120,13 +135,7 @@ const FormPayment = () => {
     <div>
       <div className="m-auto">
         <div className="h-6 border-b border-slate-200 mt-2"></div>
-
-        {!!errorResponse && (
-          <div className="bg-red-500 w-full text-center p-1 mb-2">
-            {errorResponse}
-          </div>
-        )}
-
+        <ToastContainer />
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchema}

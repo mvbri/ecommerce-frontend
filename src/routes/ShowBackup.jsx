@@ -1,26 +1,34 @@
 import StandardSection from "../components/StandardSection";
 import { useFetchBackups } from "../hooks/useFetchBackups";
 import AdminLayout from "../layout/AdminLayout";
-
 import TableBackup from "../components/TableBackup";
 import { axiosInstance } from "../services/axios.config";
+import { ToastContainer, toast } from "react-toastify";
 
 const ShowBackup = () => {
   const { items, setItems } = useFetchBackups();
+
+  const notifySuccess = (noty, options = {}) => toast.success(noty, options);
+
+  const notifyError = (noty, options = {}) => toast.error(noty, options);
 
   const generateBackup = async () => {
     try {
       const res = await axiosInstance.post(`/api/backup/generate`);
 
-      if (!res.status === 200) {
+      if (!res.status === 200 || !res.status === 201) {
         throw new Error(`[${res.status}] ERROR en la solicitud`);
       }
       const data = res.data.data;
 
       setItems(data);
-
-      alert("Respaldo generado");
+      notifySuccess("¡Respaldo generado con éxito!", {
+        position: "top-center",
+      });
     } catch (error) {
+      notifyError("Ocurrió un error", {
+        position: "top-center",
+      });
       console.log(error);
     }
   };
@@ -31,6 +39,7 @@ const ShowBackup = () => {
         <h1 className="text-2xl pt-4 md:text-3xl text-gray-800 text-center mb-8 md:mb-14">
           Respaldos
         </h1>
+        <ToastContainer />
         <div className="flex justify-end">
           <button
             onClick={generateBackup}

@@ -3,6 +3,7 @@ import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import { useParams, useNavigate } from "react-router";
 import { axiosInstance } from "../services/axios.config";
+import { ToastContainer, toast } from "react-toastify";
 
 const FormCreateDelivery = () => {
   const [initialValues, setInitialValues] = useState({
@@ -60,25 +61,29 @@ const FormCreateDelivery = () => {
     answer: Yup.string().required("El campo es obligatorio"),
   });
 
+  const notifySuccess = (noty, options = {}) => toast.success(noty, options);
+
+  const notifyError = (noty, options = {}) => toast.error(noty, options);
+
   async function handleSubmit(values, setSubmitting) {
     if (typeof params.id != "undefined") {
       try {
         const res = await axiosInstance.put(
           `/api/admin/users/delivery/${params.id}`,
-          JSON.stringify(values),
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
+          values
         );
 
-        if (res.status === 201) {
-          alert("actualizado");
+        if (res.status === 201 || res.status === 200) {
+          notifySuccess("¡Perfil delivery actualizado con éxito!", {
+            position: "top-center",
+          });
         } else {
           throw Error(`[${res.status}] error en la solicitud`);
         }
       } catch (err) {
+        notifyError("Ocurrió un error", {
+          position: "top-center",
+        });
         console.log(err);
       } finally {
         setSubmitting(false);
@@ -87,20 +92,23 @@ const FormCreateDelivery = () => {
       try {
         const res = await axiosInstance.post(
           "/api/admin/users/delivery",
-          JSON.stringify(values),
-          {
-            headers: {
-              "Content-Type": "application/json",
-            },
-          }
+          values
         );
 
-        if (res.status === 201) {
-          navigate(`/admin/product/${res.data.data._id}/edit`);
+        if (res.status === 201 || res.status === 200) {
+          notifySuccess("¡Delivery creado con éxito!", {
+            position: "top-center",
+          });
+          setTimeout(() => {
+            navigate(`/admin/delivery/${res.data.data._id}/editar`);
+          }, 2000);
         } else {
           throw Error(`[${res.status}] error en la solicitud`);
         }
       } catch (err) {
+        notifyError("Ocurrió un error", {
+          position: "top-center",
+        });
         console.log(err);
       } finally {
         setSubmitting(false);
@@ -111,6 +119,7 @@ const FormCreateDelivery = () => {
   return (
     <div className="grid">
       <div>
+        <ToastContainer />
         <div className=" w-full m-auto">
           <Formik
             initialValues={initialValues}
@@ -246,7 +255,9 @@ const FormCreateDelivery = () => {
                   className="w-full inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm md:text-base rounded-md py-2 px-4 shadow-sm hover:shadow-md bg-slate-800 border-slate-800 text-slate-50 hover:bg-slate-700 hover:border-slate-700"
                   type="submit"
                 >
-                  Registrar
+                  {typeof params.id != "undefined"
+                    ? "EDITAR DELIVERY"
+                    : "REGISTRAR DELIVERY"}
                 </button>
                 {isSubmitting ? (
                   <p className="mb-3 text-center">Cargando...</p>

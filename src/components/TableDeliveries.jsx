@@ -46,11 +46,11 @@ function TableDeliveries({ onSelectItem, items }) {
       columns: [
         {
           id: "name",
-          name: "Name",
+          name: "Nombre",
         },
         {
           id: "email",
-          name: "email",
+          name: "Correo",
         },
         {
           id: "phone",

@@ -2,7 +2,6 @@ import StandardSection from "../components/StandardSection";
 import AdminLayout from "../layout/AdminLayout";
 import FormUserProfile from "../components/FormUserProfile";
 
-
 const AdminUserProfile = () => {
   return (
     <AdminLayout>
@@ -11,7 +10,6 @@ const AdminUserProfile = () => {
           Mi Perfil
         </h1>
         <FormUserProfile />
-
       </StandardSection>
     </AdminLayout>
   );

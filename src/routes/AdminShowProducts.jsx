@@ -7,6 +7,7 @@ import { useModal } from "../hooks/useModal";
 import AdminLayout from "../layout/AdminLayout";
 import { useFetchProducts } from "../hooks/useFetchProducts";
 import StandardSection from "../components/StandardSection";
+import { ToastContainer, toast } from "react-toastify";
 
 function AdminShowProducts() {
   const { items, setItems } = useFetchProducts();
@@ -20,17 +21,27 @@ function AdminShowProducts() {
     openModal();
   };
 
-  const deleteItem = (id) => {
-    axiosInstance
-      .delete(`/api/admin/products/${id}`)
-      .then((res) => {
-        if (res.status === 200) {
-          setItems((prevItems) => prevItems.filter((item) => item._id !== id));
-        } else {
-          throw new Error(`[${res.status}] ERROR en la solicitud`);
-        }
-      })
-      .catch((err) => console.log(err));
+  const notifySuccess = (noty, options = {}) => toast.success(noty, options);
+
+  const notifyError = (noty, options = {}) => toast.error(noty, options);
+
+  const deleteItem = async (id) => {
+    try {
+      const res = await axiosInstance.delete(`/api/admin/products/${id}`);
+      if (res.status === 200 || res.status === 201) {
+        notifySuccess("¡Producto eliminado con éxito!", {
+          position: "top-center",
+        });
+        setItems((prevItems) => prevItems.filter((item) => item._id !== id));
+      } else {
+        throw new Error(`[${res.status}] ERROR en la solicitud`);
+      }
+    } catch (error) {
+      notifyError("Ocurrió un error", {
+        position: "top-center",
+      });
+      console.log(error);
+    }
 
     closeModal();
   };
@@ -41,6 +52,8 @@ function AdminShowProducts() {
         <h1 className="text-2xl pt-4 md:text-3xl text-gray-800 text-center mb-8 md:mb-14">
           Lista de Productos
         </h1>
+
+        <ToastContainer />
         <div className="p-4">
           {items.length > 0 ? (
             <Table onSelectItem={handleDeletetItem} items={items} />

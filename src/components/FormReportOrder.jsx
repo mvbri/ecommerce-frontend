@@ -7,14 +7,11 @@ import { useNavigate, useParams } from "react-router-dom";
 import { API_URL } from "../auth/constants";
 
 const validationSchema = Yup.object().shape({
-  startDate: Yup.date()
-    .required("El campo es obligatorio"),
-  endDate: Yup.date()
-    .required("El campo es obligatorio"),
+  startDate: Yup.date().required("El campo es obligatorio"),
+  endDate: Yup.date().required("El campo es obligatorio"),
 });
 
 const FormCreateCategory = () => {
-
   useEffect(() => {
     getValues();
   }, []);
@@ -30,13 +27,13 @@ const FormCreateCategory = () => {
   const [payments, setPayments] = useState([]);
 
   const statuses = [
-    'Pago rechazado',
-    'Pago aceptado',
-    'Enviado',
-    'En camino',
-    'Recibido por el cliente',
-    'En verificación de pago',
-  ]
+    "Pago rechazado",
+    "Pago aceptado",
+    "Enviado",
+    "En camino",
+    "Recibido por el cliente",
+    "En verificación de pago",
+  ];
 
   const [initialValues, setInitialValues] = useState({
     startDate: "",
@@ -49,28 +46,21 @@ const FormCreateCategory = () => {
 
   const handleSubmit = async (values) => {
     try {
-      const res = await axiosInstance.post(
-        "/api/admin/report",
-        values,
-      );
+      const res = await axiosInstance.post("/api/admin/report", values);
 
-      setOrders(res.data.orders)
-      setGeneratePdf(true)
-      setInitialValues(values)
-
+      setOrders(res.data.orders);
+      setGeneratePdf(true);
+      setInitialValues(values);
     } catch (err) {
       console.log(err);
     }
-
-  }
+  };
 
   const openPdf = () => {
     window.open(
-      `${API_URL}/admin/order/report/${initialValues.startDate}/${initialValues.endDate}`,
+      `${API_URL}/admin/order/report/${initialValues.startDate}/${initialValues.endDate}`
     );
-  }
-
-
+  };
 
   const getValues = async () => {
     try {
@@ -79,10 +69,9 @@ const FormCreateCategory = () => {
       if (res.status === 200) {
         const data = res.data;
 
-        setCustomers(data.customers)
-        setDelivery(data.delivery)
-        setPayments(data.payments)
-
+        setCustomers(data.customers);
+        setDelivery(data.delivery);
+        setPayments(data.payments);
       } else {
         throw Error(`[${res.status}] error en la solicitud`);
       }
@@ -93,15 +82,22 @@ const FormCreateCategory = () => {
 
   return (
     <div>
+      {generatePdf && orders.length < 1 && (
+        <div className="text-center mb-3 -mt-2 w-full p-2 bg-red-500 text-white">
+          {" "}
+          No hay resultados en el reporte{" "}
+        </div>
+      )}
       <Formik
         initialValues={initialValues}
         enableReinitialize
         validationSchema={validationSchema}
-        onSubmit={(values) => { handleSubmit(values) }}
+        onSubmit={(values) => {
+          handleSubmit(values);
+        }}
       >
         {({ values, isSubmitting, errors, touched }) => (
           <Form className="flex flex-col pt-8 p-4 md:px-8 w-full border border-gray-700 rounded-md m-auto">
-
             <label className="mb-2 text-base" htmlFor="startDate">
               Fecha de Inicio
             </label>
@@ -148,11 +144,14 @@ const FormCreateCategory = () => {
               id="status"
               as="select"
               name="status"
-              className="col-start-1 cursor-pointer row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+              className="col-start-1 cursor-pointer row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+            >
               <option value="">Seleccione Estado</option>
 
               {statuses.map((status) => (
-                <option key={status} value={status}>{status}</option>
+                <option key={status} value={status}>
+                  {status}
+                </option>
               ))}
             </Field>
 
@@ -166,12 +165,17 @@ const FormCreateCategory = () => {
               id="delivery"
               as="select"
               name="delivery"
-              className="col-start-1 cursor-pointer row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+              className="col-start-1 cursor-pointer row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+            >
               <option value="">Seleccione Delivery</option>
 
-              {delivery && delivery.length > 0 && delivery.map((item) => (
-                <option key={item._id} value={item._id}>{item.name} - {item.email} - {item.phone}</option>
-              ))}
+              {delivery &&
+                delivery.length > 0 &&
+                delivery.map((item) => (
+                  <option key={item._id} value={item._id}>
+                    {item.name} - {item.email} - {item.phone}
+                  </option>
+                ))}
             </Field>
 
             <label
@@ -184,12 +188,17 @@ const FormCreateCategory = () => {
               id="customer"
               as="select"
               name="customer"
-              className="col-start-1 cursor-pointer row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+              className="col-start-1 cursor-pointer row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+            >
               <option value="">Seleccione Cliente</option>
 
-              {customers && customers.length > 0 && customers.map((item) => (
-                <option key={item._id} value={item._id}>{item.name} - {item.email} - {item.phone}</option>
-              ))}
+              {customers &&
+                customers.length > 0 &&
+                customers.map((item) => (
+                  <option key={item._id} value={item._id}>
+                    {item.name} - {item.email} - {item.phone}
+                  </option>
+                ))}
             </Field>
 
             <label
@@ -202,12 +211,17 @@ const FormCreateCategory = () => {
               id="payment"
               as="select"
               name="payment"
-              className="col-start-1 cursor-pointer row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+              className="col-start-1 cursor-pointer row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+            >
               <option value="">Seleccione Metodo de Pago</option>
 
-              {payments && payments.length > 0 && payments.map((item) => (
-                <option key={item._id} value={item._id}>{item.type} - {item.bank} - {item.number} - {item.document}</option>
-              ))}
+              {payments &&
+                payments.length > 0 &&
+                payments.map((item) => (
+                  <option key={item._id} value={item._id}>
+                    {item.type} - {item.bank} - {item.number} - {item.document}
+                  </option>
+                ))}
             </Field>
 
             <button
@@ -216,21 +230,14 @@ const FormCreateCategory = () => {
             >
               Generar Reporte
             </button>
-
           </Form>
         )}
       </Formik>
 
-      {generatePdf && orders.length < 1 && (
-        <div className="text-center mb-3 -mt-2 w-full p-2 bg-red-500 text-white"> No hay resultados en el reporte </div>
-      )}
-
       {generatePdf && orders.length > 0 && (
-
         <div className="text-center">
-
           <button
-          onClick={() => openPdf()}
+            onClick={() => openPdf()}
             className="inline-flex items-center justify-center border align-middle select-none font-sans font-medium text-center transition-all duration-300 ease-in disabled:opacity-50 disabled:shadow-none disabled:cursor-not-allowed data-[shape=pill]:rounded-full data-[width=full]:w-full focus:shadow-none text-sm md:text-base rounded-md py-2 px-4 shadow-sm hover:shadow-md bg-slate-800 border-slate-800 text-slate-50 hover:bg-slate-700 hover:border-slate-700 my-8"
             type="button"
           >
@@ -252,8 +259,8 @@ const FormCreateCategory = () => {
               </tr>
             </thead>
             <tbody className="bg-white dark:bg-gray-800">
-              {orders.map((order) => (
-                <tr>
+              {orders.map((order, i) => (
+                <tr key={i}>
                   <td>{order.date}</td>
                   <td>{order.type}</td>
                   <td>{order.reference}</td>
@@ -269,7 +276,6 @@ const FormCreateCategory = () => {
           </table>
         </div>
       )}
-
     </div>
   );
 };
