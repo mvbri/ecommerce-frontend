@@ -47,7 +47,7 @@ function TableCategories({ onSelectItem, items }) {
       columns: [
         {
           data: (row) => row.name,
-          name: "name",
+          name: "Nombre",
         },
         {
           id: "image",
@@ -75,7 +75,7 @@ function TableCategories({ onSelectItem, items }) {
           data: (row) => (row.menu ? "True" : "False"),
           name: "Menu",
         },
-         {
+        {
           id: "_id",
           name: "Modificar",
           formatter: (_, row) =>

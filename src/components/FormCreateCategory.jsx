@@ -30,6 +30,24 @@ const FormCreateCategory = () => {
     menu: false,
   });
 
+  const dropImage = async (image) => {
+    try {
+      const res = await axiosInstance.delete(`/api/admin/image/${image._id}`);
+
+      if (res.status === 200) {
+        setImage((prevImages) =>
+          prevImages.filter((item) => {
+            return item._id != image._id;
+          })
+        );
+      } else {
+        throw new Error(`[${res.status}] ERROR en la solicitud`);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const getValues = async () => {
     try {
       const res = await axiosInstance.get(`/api/admin/category/${params.id}`);
@@ -59,7 +77,7 @@ const FormCreateCategory = () => {
       <ToastContainer />
       <Formik
         initialValues={initialValues}
-        enableReinitialize
+        enableReinitialize={true}
         validationSchema={validationSchema}
         onSubmit={async (values, { setSubmitting }) => {
           const data = new FormData();
@@ -168,9 +186,36 @@ const FormCreateCategory = () => {
               ></ErrorMessage>
             )}
 
+            {image?.url ? (
+              <>
+                <label className="mb-2 text-base" htmlFor="image">
+                  Imagen guardada
+                </label>
+                <ul className="flex">
+                  <li className="p-4">
+                    <div className="relative size-24">
+                      <img
+                        className="size-full mr-3"
+                        alt="Imagen de WhatsApp 2025-03-20 a las 15.15.09_d5242c1d.jpg"
+                        src={`${API_URL}/public/images/category/${image.url}`}
+                      ></img>
+                      <button
+                        type="button"
+                        className="bg-transparent absolute top-0 right-0"
+                        onClick={() => dropImage(image)}
+                      >
+                        <span className="text-blue-500"> X</span>
+                      </button>
+                    </div>
+                  </li>
+                </ul>
+              </>
+            ) : null}
+
             <label className="mb-2 text-base" htmlFor="image">
               Imagen
             </label>
+
             <Dropzone
               files={file}
               setFiles={setFile}

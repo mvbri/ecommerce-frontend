@@ -2,11 +2,11 @@ import { useState } from "react";
 import DefaultLayout from "../layout/DefaultLayout";
 import { useAuth } from "../auth/AuthProvider";
 import { Navigate, useNavigate } from "react-router-dom";
-import { API_URL } from "../auth/constants";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from "yup";
 import ImgBanner from "../img/imagen-banner.avif";
 import { axiosInstance } from "../services/axios.config";
+import { ToastContainer, toast } from "react-toastify";
 
 function Signup() {
   const [errorResponse, setErrorResponse] = useState("");
@@ -32,27 +32,7 @@ function Signup() {
   });
 
   const stepTwoValidationSchema = Yup.object().shape({
-    // email: Yup.string()
-    //   .email("Formato Invalido de correo")
-    //   .required("El campo es obligatorio"),
-    // password: Yup.string()
-    //   .min(6, "Debe tener al menos 6 caracteres")
-    //   .matches(
-    //     /[!@#$%^&*(),.?":{}|<>]/,
-    //     "Debe contener al menos un caracter especial"
-    //   )
-    //   .matches(/\d/, "Debe contener al menos un numero")
-    //   .required("El campo es obligatorio"),
-    // password: Yup.string()
-    //   .min(6, "Debe tener al menos 6 caracteres")
-    //   .matches(
-    //     /[!@#$%^&*(),.?":{}|<>]/,
-    //     "Debe contener al menos un caracter especial"
-    //   )
-    //   .matches(/\d/, "Debe contener al menos un numero")
-    //   .required("El campo es obligatorio"),
-    answer: Yup.string()
-      .required("El campo es obligatorio"),
+    answer: Yup.string().required("El campo es obligatorio"),
   });
 
   const stepThreeValidationSchema = Yup.object().shape({
@@ -65,70 +45,69 @@ function Signup() {
       .matches(/\d/, "Debe contener al menos un numero")
       .required("El campo es obligatorio"),
     passwordConfirmation: Yup.string()
-          .oneOf([Yup.ref("password"), null], "El campo debe de ser igual a la contraseña.")
-          .required("El campo es obligatorio"),
+      .oneOf(
+        [Yup.ref("password"), null],
+        "El campo debe de ser igual a la contraseña."
+      )
+      .required("El campo es obligatorio"),
   });
+
+  const notifySuccess = (noty, options = {}) => toast.success(noty, options);
+
+  const notifyError = (noty, options = {}) => toast.error(noty, options);
 
   const stepOne = async (values, setSubmitting) => {
     try {
-      const res = await axiosInstance.post(
-        "/api/user/reset/1",
-        values,
-      );
+      const res = await axiosInstance.post("/api/user/reset/1", values);
 
       setErrorResponse("");
       setInitialValues(res.data.data);
       setStep(2);
-
     } catch (err) {
       console.log(err);
       setErrorResponse(err.response.data.message);
     } finally {
       setSubmitting(false);
     }
-
-  }
+  };
 
   const stepTwo = async (values, setSubmitting) => {
     try {
-      const res = await axiosInstance.post(
-        "/api/user/reset/2",
-        values,
-      );
+      const res = await axiosInstance.post("/api/user/reset/2", values);
 
       setErrorResponse("");
       setInitialValues(res.data.data);
       setStep(3);
-
     } catch (err) {
       console.log(err);
       setErrorResponse(err.response.data.message);
     } finally {
       setSubmitting(false);
     }
-
-  }
+  };
 
   const stepThree = async (values, setSubmitting) => {
     try {
-      const res = await axiosInstance.post(
-        "/api/user/reset/3",
-        values,
-      );
+      const res = await axiosInstance.post("/api/user/reset/3", values);
 
       setErrorResponse("");
-      setInitialValues(res.data.data);      
-      goTo("/login")
-
+      setInitialValues(res.data.data);
+      notifySuccess("¡Contraseña actualizada Correctamente!", {
+        position: "top-center",
+      });
+      setTimeout(() => {
+        goTo("/login");
+      }, 2000);
     } catch (err) {
+      notifyError(err.response.data.message, {
+        position: "top-center",
+      });
       console.log(err);
       setErrorResponse(err.response.data.message);
     } finally {
       setSubmitting(false);
     }
-
-  }
-
+  };
 
   return (
     <DefaultLayout>
@@ -139,11 +118,12 @@ function Signup() {
         <div>
           <div className="m-auto">
             {!!errorResponse && (
-              <div className="bg-red-500 w-full text-center p-1 mb-2">
+              <div className="bg-red-500 w-full text-center text-white p-1 mb-2">
                 {errorResponse}
               </div>
             )}
 
+            <ToastContainer />
 
             {step == 1 && (
               <Formik
@@ -190,11 +170,9 @@ function Signup() {
                     >
                       Verificar
                     </button>
-
                   </Form>
                 )}
               </Formik>
-
             )}
 
             {step == 2 && (
@@ -248,11 +226,9 @@ function Signup() {
                     >
                       Verificar
                     </button>
-
                   </Form>
                 )}
               </Formik>
-
             )}
 
             {step == 3 && (
@@ -272,7 +248,7 @@ function Signup() {
                     </div>
                     <div className="w-full flex flex-col mb-4">
                       <label className="mb-2 text-base mb-1" htmlFor="password">
-                        Contraseña
+                        Nueva contraseña
                       </label>
                       <Field
                         className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
@@ -290,7 +266,10 @@ function Signup() {
                       )}
                     </div>
                     <div className="w-full flex flex-col mb-4">
-                      <label className="mb-2 text-base mb-1" htmlFor="passwordConfirmation">
+                      <label
+                        className="mb-2 text-base mb-1"
+                        htmlFor="passwordConfirmation"
+                      >
                         Confirmar Contraseña
                       </label>
                       <Field
@@ -300,13 +279,14 @@ function Signup() {
                         placeholder="Confirmar Contraseña"
                         name="passwordConfirmation"
                       />
-                      {errors.passwordConfirmation && touched.passwordConfirmation && (
-                        <ErrorMessage
-                          className="p-2 bg-tertiary text-white text-base"
-                          name="passwordConfirmation"
-                          component="div"
-                        ></ErrorMessage>
-                      )}
+                      {errors.passwordConfirmation &&
+                        touched.passwordConfirmation && (
+                          <ErrorMessage
+                            className="p-2 bg-tertiary text-white text-base"
+                            name="passwordConfirmation"
+                            component="div"
+                          ></ErrorMessage>
+                        )}
                     </div>
                     {isSubmitting ? (
                       <p className="mb-3 text-center">Cargando...</p>
@@ -319,14 +299,10 @@ function Signup() {
                     >
                       Verificar
                     </button>
-
                   </Form>
                 )}
               </Formik>
-
             )}
-
-
           </div>
         </div>
       </div>

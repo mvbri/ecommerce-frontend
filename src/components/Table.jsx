@@ -65,11 +65,11 @@ function Table({ onSelectItem, items }) {
         },
         {
           id: "name",
-          name: "Name",
+          name: "Nombre",
         },
         {
           id: "description",
-          name: "Description",
+          name: "Descripción",
         },
         {
           id: "category",

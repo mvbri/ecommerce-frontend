@@ -32,12 +32,12 @@ const UserAddresses = () => {
           })
         );
       } else {
-        notifyError("Ocurrió un error", {
-          position: "top-center",
-        });
         throw new Error(`[${res.status}] ERROR en la solicitud`);
       }
     } catch (err) {
+      notifyError("Ocurrió un error", {
+        position: "top-center",
+      });
       console.log(err);
     }
   };
