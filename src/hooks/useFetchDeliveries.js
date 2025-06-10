@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { axiosInstance } from "../services/axios.config";
 
-export const useFetchDeliveries = () => {
+export const useFetchDeliveries = (type = 'delivery') => {
   const [deliveries, setDeliveries] = useState([]);
   useEffect(() => {
     getDeliveries();
@@ -9,7 +9,7 @@ export const useFetchDeliveries = () => {
 
   const getDeliveries = async () => {
     try {
-      const res = await axiosInstance.get(`/api/admin/users/delivery`);
+      const res = await axiosInstance.get(`/api/admin/users/${type}`);
       if (res.status === 200) {
         const deliveries = res.data.data;
 

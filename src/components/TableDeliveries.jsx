@@ -5,7 +5,7 @@ import "gridjs/dist/theme/mermaid.css";
 import { useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
-function TableDeliveries({ onSelectItem, items }) {
+function TableDeliveries({type="delivery" , onSelectItem, items }) {
   const wrapperRef = useRef(null);
   const gridInstance = useRef(null);
   const navigate = useNavigate();
@@ -56,16 +56,22 @@ function TableDeliveries({ onSelectItem, items }) {
           id: "phone",
           name: "Número de Telefono",
         },
+         {
+          id: "status",
+
+          data: (row) => (row.status ? "Activo" : "Inactivo"),
+          name: "Estatus",
+        },
         {
           id: "_id",
           name: "Modificar",
           formatter: (_, row) =>
             html(`
               <div class="flex justify-center items-center">
-                <a class="edit-btn cursor-pointer" data-id='${row.cells[3].data}'>
+                <a class="edit-btn cursor-pointer" data-id='${row.cells[4].data}'>
                   ✎
                 </a>
-                <a class="delete-btn ml-4 cursor-pointer" data-name='${row.cells[1].data}' data-id='${row.cells[3].data}'>
+                <a class="delete-btn ml-4 cursor-pointer" data-name='${row.cells[1].data}' data-id='${row.cells[4].data}'>
                   ⌫
                 </a>
               </div>
@@ -84,7 +90,7 @@ function TableDeliveries({ onSelectItem, items }) {
     const handleClick = (e) => {
       if (e.target.classList.contains("edit-btn")) {
         const rowId = e.target.getAttribute("data-id");
-        navigate(`/admin/delivery/${rowId}/editar`); // Navegación programática
+        navigate(`/admin/${type}/${rowId}/editar`); // Navegación programática
       }
       if (e.target.classList.contains("delete-btn")) {
         const id = e.target.getAttribute("data-id");

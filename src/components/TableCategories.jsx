@@ -72,7 +72,7 @@ function TableCategories({ onSelectItem, items }) {
           name: "Descripción",
         },
         {
-          data: (row) => (row.menu ? "True" : "False"),
+          data: (row) => (row.menu ? "Si" : "No"),
           name: "Menu",
         },
          {

@@ -14,6 +14,8 @@ const FormPayment = () => {
   }, []);
 
   const [initialValues, setInitialValues] = useState({
+    status: true,
+    name: "",
     document: "",
     bank: "",
     number: "",
@@ -49,12 +51,14 @@ const FormPayment = () => {
 
   const getValues = async () => {
     try {
-      const res = await axiosInstance.get(`/api/checkout/${params.id}`);
+      const res = await axiosInstance.get(`/api/admin/payments/${params.id}`);
 
       if (res.status === 200) {
-        const data = res.data.payments;
+        const data = res.data.data;
         setInitialValues({
+          status: data.status,
           document: data.document,
+          name: data.name,
           bank: data.bank,
           number: data.number,
           type: data.type,
@@ -63,15 +67,21 @@ const FormPayment = () => {
         throw Error(`[${res.status}] error en la solicitud`);
       }
     } catch (err) {
+      notifyError("Ocurrió un error", {
+          position: "top-center",
+        });
       console.log(err);
     }
   };
 
   const validationSchema = Yup.object().shape({
+    name: Yup.string()
+      .min(2, "El campo es demasiado corto")
+      .required("El campo es obligatorio"),
     document: Yup.string()
       .min(2, "El campo es demasiado corto")
       .required("El campo es obligatorio"),
-    phone: Yup.string()
+    number: Yup.string()
       .matches(/[0-9]/, "El campo solo puede contener números")
       .max(11, "El campo debe de tener máximo 11 números.")
       .required("El campo es obligatorio"),
@@ -87,7 +97,7 @@ const FormPayment = () => {
     if (typeof params.id != "undefined") {
       try {
         const res = await axiosInstance.put(
-          `/api/address/${params.id}`,
+          `/api/admin/payments/${params.id}`,
           values
         );
 
@@ -108,14 +118,14 @@ const FormPayment = () => {
       }
     } else {
       try {
-        const res = await axiosInstance.post("/api/payment", values);
+        const res = await axiosInstance.post("/api/admin/payments", values);
 
         if (res.status === 201 || res.status === 200) {
           notifySuccess("¡Método de pago agregado con éxito!", {
             position: "top-center",
           });
           setTimeout(() => {
-            navigate(`/admin/pagos/${res.data.data._id}/editar`);
+            navigate(`/admin/pago/${res.data.data._id}/editar`);
           }, 2000);
         } else {
           throw Error(`[${res.status}] error en la solicitud`);
@@ -148,6 +158,17 @@ const FormPayment = () => {
             <Form className="flex flex-col items-center p-6 md:p-4 md:px-8  m-auto mb-3  rounded-md">
               <div className="flex w-full gap-2 mb-4 pt-4">
                 <div className="flex flex-col flex-wrap gap-4 md:gap-8 w-full justify-center items-center">
+                  <div className="md:min-w-[30rem] flex flex-col mb-1">
+                    <label className="mb-3 text-base" htmlFor="status">
+                      Activo
+                      <Field
+                        className="mb-4 text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                        id="status"
+                        type="checkbox"
+                        name="status"
+                      />
+                    </label>
+                  </div>
                   <div role="group" aria-labelledby="my-radio-group">
                     <label className="mr-4">
                       <Field type="radio" name="type" value="Pago móvil" />
@@ -165,6 +186,7 @@ const FormPayment = () => {
                       component="div"
                     ></ErrorMessage>
                   )}
+
                   <div className="md:min-w-[30rem] flex flex-col mb-1">
                     <label className="text-sm mb-1" htmlFor="bank">
                       Banco
@@ -193,8 +215,30 @@ const FormPayment = () => {
                   </div>
                   <div className="md:min-w-[30rem] flex flex-col mb-1">
                     <label
-                      className="text-sm inline-block mb-1 
-          "
+                      className="text-sm inline-block mb-1"
+                      htmlFor="name"
+                    >
+                      Razón social
+                    </label>
+                    <Field
+                      className="text-sm sm:text-base placeholder-gray-500 pl-4 pr-4 rounded-lg border border-gray-400 w-full py-2 focus:outline-none focus:border-blue-400"
+                      id="name"
+                      type="text"
+                      placeholder="Razón social"
+                      name="name"
+                    />
+                    {errors.name && touched.name && (
+                      <ErrorMessage
+                        className="p-2 bg-tertiary text-white text-base"
+                        name="name"
+                        component="div"
+                      ></ErrorMessage>
+                    )}
+                  </div>
+                  
+                  <div className="md:min-w-[30rem] flex flex-col mb-1">
+                    <label
+                      className="text-sm inline-block mb-1"
                       htmlFor="document"
                     >
                       Documento
@@ -248,8 +292,8 @@ const FormPayment = () => {
                 type="submit"
               >
                 {typeof params.id != "undefined"
-                  ? "ACTUALIZAR PAGO MÓVIL"
-                  : "REGISTRAR NUEVO PAGO MÓVIL"}
+                  ? "ACTUALIZAR MÉTODO DE PAGO"
+                  : "REGISTRAR NUEVO MÉTODO DE PAGO"}
               </button>
               {isSubmitting ? (
                 <p className="mb-3 text-center">Cargando...</p>
