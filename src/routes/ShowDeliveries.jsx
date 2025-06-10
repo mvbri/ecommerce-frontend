@@ -8,8 +8,9 @@ import { useFetchDeliveries } from "../hooks/useFetchDeliveries";
 import TableDeliveries from "../components/TableDeliveries";
 import { ToastContainer, toast } from "react-toastify";
 
-const ShowDeliveries = () => {
-  const { deliveries, setDeliveries } = useFetchDeliveries();
+const ShowDeliveries = ({ type = 'delivery' }) => {
+  
+  const { deliveries, setDeliveries } = useFetchDeliveries(type);
   const [selectedItem, setSelectedItem] = useState(null);
   const [selectedItemName, setSelectedItemName] = useState(null);
   const [isOpen, openModal, closeModal] = useModal(false);
@@ -24,11 +25,11 @@ const ShowDeliveries = () => {
 
   const notifyError = (noty, options = {}) => toast.error(noty, options);
 
-  const deleteItem = (id) => {
+  const deleteItem = async (id) => {
     try {
-      const res = axiosInstance.delete(`/api/admin/users/delivery/${id}`);
+      const res = await axiosInstance.delete(`/api/admin/users/${id}`);
       if (res.status === 200 || res.status === 201) {
-        notifySuccess("¡Delivery eliminado con éxito!", {
+        notifySuccess(`${type.charAt(0).toUpperCase() + type.slice(1)} eliminado con éxito!`, {
           position: "top-center",
         });
 
@@ -52,7 +53,7 @@ const ShowDeliveries = () => {
     <AdminLayout>
       <StandardSection>
         <h1 className="mb-4 pt-4 md:mb-20 text-2xl md:text-3xl text-gray-800 text-center">
-          Tabla de Deliveries
+          Tabla de {type.charAt(0).toUpperCase() + type.slice(1)}
         </h1>
 
         <ToastContainer />
@@ -60,12 +61,13 @@ const ShowDeliveries = () => {
         <div className="p-4">
           {deliveries.length > 0 ? (
             <TableDeliveries
+              type={type}
               onSelectItem={handleDeletetItem}
               items={deliveries}
             />
           ) : (
             <p className="text-center md:text-2xl text-gray-700">
-              No hay deliveries en el sistema
+              No hay {type.charAt(0).toUpperCase() + type.slice(1)}s en el sistema
             </p>
           )}
           <Modal isOpen={isOpen} closeModal={closeModal}>
@@ -73,9 +75,8 @@ const ShowDeliveries = () => {
               <h2 className="text-center text-gray-950 mb-8 text-xl font-semibold">
                 ¿Está seguro que desea elimiar el siguiente Item? <br />
                 <span>
-                  {`"${
-                    selectedItemName ? selectedItemName.split(",").shift() : ""
-                  }" `}
+                  {`"${selectedItemName ? selectedItemName.split(",").shift() : ""
+                    }" `}
                 </span>
               </h2>
               <button

@@ -413,7 +413,7 @@ export function SidebarBurgerMenu() {
                     </svg>
                   </ListItemPrefix>
                   <Typography color="blue-gray" className="mr-auto font-normal">
-                    Pago Móvil
+                    Métodos de Pago
                   </Typography>
                 </AccordionHeader>
               </ListItem>
@@ -427,7 +427,7 @@ export function SidebarBurgerMenu() {
                       <ListItemPrefix>
                         <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
                       </ListItemPrefix>
-                      Registrar pago móvil
+                      Registrar método de pago
                     </Link>
                   </ListItem>
                   <ListItem>
@@ -444,6 +444,136 @@ export function SidebarBurgerMenu() {
                 </List>
               </AccordionBody>
             </Accordion>
+            <Accordion
+              open={open === 7}
+              icon={
+                <ChevronDownIcon
+                  strokeWidth={2.5}
+                  className={`mx-auto h-4 w-4 transition-transform ${
+                    open === 7 ? "rotate-180" : ""
+                  }`}
+                />
+              }
+            >
+              <ListItem className="p-0" selected={open === 7}>
+                <AccordionHeader
+                  onClick={() => handleOpen(7)}
+                  className="border-b-0 p-3"
+                >
+                  <ListItemPrefix>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="size-5"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                      />
+                    </svg>
+                  </ListItemPrefix>
+                  <Typography color="blue-gray" className="mr-auto font-normal">
+                    Clientes
+                  </Typography>
+                </AccordionHeader>
+              </ListItem>
+              <AccordionBody className="py-1">
+                <List className="p-0">
+                  <ListItem>
+                    <Link
+                      className="text-gray-600 flex justify-center items-center"
+                      to="/admin/clientes/crear"
+                    >
+                      <ListItemPrefix>
+                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                      </ListItemPrefix>
+                      Registrar cliente
+                    </Link>
+                  </ListItem>
+                  <ListItem>
+                    <Link
+                      className="text-gray-600 flex justify-center items-center"
+                      to="/admin/clientes"
+                    >
+                      <ListItemPrefix>
+                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                      </ListItemPrefix>
+                      Ver Clientes
+                    </Link>
+                  </ListItem>
+                </List>
+              </AccordionBody>
+            </Accordion>
+
+            <Accordion
+              open={open === 8}
+              icon={
+                <ChevronDownIcon
+                  strokeWidth={2.5}
+                  className={`mx-auto h-4 w-4 transition-transform ${
+                    open === 8 ? "rotate-180" : ""
+                  }`}
+                />
+              }
+            >
+              <ListItem className="p-0" selected={open === 8}>
+                <AccordionHeader
+                  onClick={() => handleOpen(8)}
+                  className="border-b-0 p-3"
+                >
+                  <ListItemPrefix>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="size-5"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M15.75 10.5V6a3.75 3.75 0 1 0-7.5 0v4.5m11.356-1.993 1.263 12c.07.665-.45 1.243-1.119 1.243H4.25a1.125 1.125 0 0 1-1.12-1.243l1.264-12A1.125 1.125 0 0 1 5.513 7.5h12.974c.576 0 1.059.435 1.119 1.007ZM8.625 10.5a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Zm7.5 0a.375.375 0 1 1-.75 0 .375.375 0 0 1 .75 0Z"
+                      />
+                    </svg>
+                  </ListItemPrefix>
+                  <Typography color="blue-gray" className="mr-auto font-normal">
+                    Administradores
+                  </Typography>
+                </AccordionHeader>
+              </ListItem>
+              <AccordionBody className="py-1">
+                <List className="p-0">
+                  <ListItem>
+                    <Link
+                      className="text-gray-600 flex justify-center items-center"
+                      to="/admin/admins/crear"
+                    >
+                      <ListItemPrefix>
+                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                      </ListItemPrefix>
+                      Registrar administrador
+                    </Link>
+                  </ListItem>
+                  <ListItem>
+                    <Link
+                      className="text-gray-600 flex justify-center items-center"
+                      to="/admin/admins"
+                    >
+                      <ListItemPrefix>
+                        <ChevronRightIcon strokeWidth={3} className="h-3 w-5" />
+                      </ListItemPrefix>
+                      Ver Administradores
+                    </Link>
+                  </ListItem>
+                </List>
+              </AccordionBody>
+            </Accordion>
+            
             <ListItem>
               <Link
                 className="text-gray-600 flex justify-center items-center"

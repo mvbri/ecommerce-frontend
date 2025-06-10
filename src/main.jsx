@@ -144,10 +144,34 @@ const router = createBrowserRouter([
       {
         path: "deliveries",
         element: <ShowDeliveries />,
-      },
+      },     
       {
         path: "delivery/:id/editar",
         element: <CreateDelivery key="edit" />,
+      },
+       {
+        path: "admins",
+        element: <ShowDeliveries type="admin" key="showadmins" />,
+      },
+      {
+        path: "admin/crear",
+        element: <CreateDelivery type="admin" key="createadmins"/>,
+      },   
+      {
+        path: "admin/:id/editar",
+        element: <CreateDelivery type="admin" key="editadmins" />,
+      },
+      {
+        path: "clientes",
+        element: <ShowDeliveries type="cliente" key="showclientes" />,
+      },
+      {
+        path: "clientes/crear",
+        element: <CreateDelivery type="cliente" key="createclientes"/>,
+      },   
+      {
+        path: "cliente/:id/editar",
+        element: <CreateDelivery type="cliente" key="editclientes" />,
       },
       {
         path: "categoria/crear",
