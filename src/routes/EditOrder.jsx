@@ -176,13 +176,16 @@ const EditOrder = () => {
 
         <BasicGridLayout>
           {orderVal.detail &&
-            orderVal.detail.map((detail, i) => (
-              <DetailAdminProduct
-                key={i}
-                product={detail.product}
-                detail={detail}
-              />
-            ))}
+            orderVal.detail.map(
+              (detail, i) =>
+                detail.product && (
+                  <DetailAdminProduct
+                    key={i}
+                    product={detail.product}
+                    detail={detail}
+                  />
+                )
+            )}
         </BasicGridLayout>
       </StandardSection>
     </DeliveryLayout>
