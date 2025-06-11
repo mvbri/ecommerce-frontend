@@ -3,10 +3,10 @@ import { API_URL } from "../auth/constants";
 
 
 const DetailAdminProduct = ({ product, detail }) => {
-  let { _id, name, description, images, category } =
+  const { _id, name, description, images, category } =
     product;
 
-  let { quantity, price_unit,price_unit_iva, price_total, price_total_iva } =
+  const { quantity, price_unit,price_unit_iva, price_total, price_total_iva } =
     detail;
 
   return (

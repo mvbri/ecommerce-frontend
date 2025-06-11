@@ -22,5 +22,5 @@ export const useFetchDeliveries = (type = 'delivery') => {
     }
   };
 
-  return { deliveries };
+  return { deliveries, setDeliveries };
 };

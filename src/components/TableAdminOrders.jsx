@@ -54,7 +54,7 @@ const TableAdminOrders = ({ onSelectItem, items }) => {
           name: "Referencia",
         },
         {
-          data: (row) => row.customer.name,
+          data: (row) => row.customer ? row.customer.name : "Cliente Eliminado",
           name: "Cliente",
         },
         {
