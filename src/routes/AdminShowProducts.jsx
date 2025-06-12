@@ -62,7 +62,7 @@ function AdminShowProducts() {
           )}
           <Modal isOpen={isOpen} closeModal={closeModal}>
             <div className="flex items-center justify-center size-full flex-col">
-              <h2 className="text-center text-gray-950 mb-8 text-xl font-semibold">
+              <h2 className="text-gray-950 mb-8 text-xl font-semibold">
                 ¿Está seguro que desea elimiar el siguiente Item? <br />
                 <span>
                   {`"${
@@ -70,13 +70,22 @@ function AdminShowProducts() {
                   }" `}
                 </span>
               </h2>
-              <button
-                className="bg-secondary w-fit py-1 px-4 rounded-md
- hover:bg-secondary-accent text-white"
-                onClick={() => deleteItem(selectedItem)}
-              >
-                Eliminar
-              </button>
+              <div className="flex self-end gap-3">
+                <button
+                  className="bg-gray-400 w-fit py-1 px-4 rounded-md
+ hover:bg-gray-500 text-white transition-all duration-300 ease-in"
+                  onClick={closeModal}
+                >
+                  Cerrar
+                </button>
+                <button
+                  className="bg-secondary w-fit py-1 px-4 rounded-md
+ hover:bg-secondary-accent text-white transition-all duration-300 ease-in"
+                  onClick={() => deleteItem(selectedItem)}
+                >
+                  Sí
+                </button>
+              </div>
             </div>
           </Modal>
         </div>

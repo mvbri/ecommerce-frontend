@@ -4,7 +4,7 @@ import { Grid, html } from "gridjs";
 import "gridjs/dist/theme/mermaid.css";
 import { useRef, useEffect } from "react";
 import { API_URL } from "../auth/constants";
-import { useNavigate } from "react-router-dom";
+import { data, useNavigate } from "react-router-dom";
 
 function Table({ onSelectItem, items }) {
   const wrapperRef = useRef(null);

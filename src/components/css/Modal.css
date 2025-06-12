@@ -16,9 +16,8 @@
 }
 
 .modal-container {
-  padding: 1rem;
-  min-width: 90%;
-  height: 500px;
+  padding: 2rem;
+  border-radius: 5px;
   position: relative;
   background-color: #fff;
   overflow-y: auto;
@@ -27,14 +26,12 @@
 
 .modal-close {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: 0.5rem;
+  right: 0.5rem;
 }
 
-@media (min-width: 768px) {
+/* @media (min-width: 768px) {
   .modal-container {
     padding: 1rem;
-    min-width: 60%;
-    height: 700px;
   }
-}
+} */
