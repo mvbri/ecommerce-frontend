@@ -41,6 +41,7 @@ import UploadBackup from "./routes/uploadBackup.jsx";
 import ShowBackup from "./routes/ShowBackup.jsx";
 import ShowPayments from "./routes/ShowPayments.jsx";
 import CreatePayment from "./routes/createPayment.jsx";
+import image from './img/logo.jpeg';
 
 const router = createBrowserRouter([
   {
@@ -251,6 +252,7 @@ createRoot(document.getElementById("root")).render(
   <AuthProvider>
     <CartProvider>
       <FilterProvider>
+        <link rel="icon" type="image/jpg" href={image}/>
         <RouterProvider router={router} />
       </FilterProvider>
     </CartProvider>
