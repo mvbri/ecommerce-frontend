@@ -1,13 +1,11 @@
 import { Link } from "react-router-dom";
 import { API_URL } from "../auth/constants";
 
-
 const DetailProduct = ({ product, detail }) => {
   let { _id, name, description, images, category, price, priceIVA, slug } =
     product;
 
-  let { quantity } =
-    detail;
+  let { quantity } = detail;
 
   return (
     <li className="flex py-6 bg-gray-200 p-4 rounded-md">
@@ -15,7 +13,11 @@ const DetailProduct = ({ product, detail }) => {
         <Link to={`/producto/${slug}`}>
           <img
             alt={name}
-            src={images[0]?.url ? `${API_URL}/public/images/products/${images[0].url}` : `${API_URL}/public/images/default.png`}
+            src={
+              images[0]?.url
+                ? `${API_URL}/public/images/products/${images[0].url}`
+                : `${API_URL}/public/images/default.png`
+            }
             className="size-full object-cover"
           />
         </Link>
@@ -28,14 +30,14 @@ const DetailProduct = ({ product, detail }) => {
               <Link to={`/producto/${slug}`}>{name}</Link>
             </h3>
             <div className="text-sm">
-              <p className="ml-4">Precio sin I.V.A {price} Bs</p>
-              <p className="ml-4">Precio con I.V.A {priceIVA} Bs</p>
-              <p className="ml-4">
-                {priceIVA} Bs x{quantity} = {priceIVA * quantity} Bs
+              <p className="ml-4 font-semibold mb-2">{price} Bs.</p>
+              <p className="ml-4 mb-2"> {priceIVA} Bs.</p>
+              <p className="ml-4 mb-8">
+                {priceIVA} Bs x{quantity} = {priceIVA * quantity} Bs.
               </p>
             </div>
           </div>
-          <p className="ml-1 text-base font-medium text-gray-500">
+          <p className="ml-1 text-base font-medium text-gray-500 mb-4">
             {description}
           </p>
           {category.map((cat, i) => {
@@ -57,6 +59,6 @@ const DetailProduct = ({ product, detail }) => {
       </div>
     </li>
   );
-}
+};
 
-export default DetailProduct
+export default DetailProduct;

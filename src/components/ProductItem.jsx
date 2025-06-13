@@ -24,8 +24,7 @@ const ProductItem = ({ product }) => {
     addToCart(_id, quantity);
   };
 
-  let { _id, name, description, images, categoria, price, priceIVA, slug } =
-    product;
+  let { _id, name, images, categoria, price, priceIVA, slug } = product;
 
   return (
     <div className="p-2 border border-gray-400 max-w-[400px] pointer rounded-md py-4">
@@ -38,8 +37,6 @@ const ProductItem = ({ product }) => {
           {name}
         </h4>
       </Link>
-
-      <p className="mb-2 text-center">{description}</p>
       <Link
         to={{
           pathname: `/producto/${slug}`,

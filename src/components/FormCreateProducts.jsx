@@ -31,13 +31,8 @@ function FormCreateProducts() {
   });
 
   const validationSchema = Yup.object().shape({
-    name: Yup.string()
-      .min(4, "Nombre demasiado corto")
-      .required("El campo es obligatorio"),
-    description: Yup.string()
-      .min(10, "Descripción demasiado corta")
-      .max(150, "Description demasiado larga")
-      .required("El campo es obligatorio"),
+    name: Yup.string().required("El campo es obligatorio"),
+    description: Yup.string().required("El campo es obligatorio"),
     stock: Yup.number().required("El campo es obligatorio"),
     price: Yup.number().required("El campo es obligatorio"),
     priceIVA: Yup.number().required("El campo es obligatorio"),

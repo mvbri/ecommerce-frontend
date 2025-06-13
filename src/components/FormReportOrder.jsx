@@ -244,7 +244,7 @@ const FormCreateCategory = () => {
             Generar Pdf
           </button>
 
-          <table className="table-auto w-full table-auto border-collapse text-sm">
+          <table className="table-auto w-full table-auto border-collapse text-sm p-2">
             <thead>
               <tr>
                 <th>Fecha de Pago</th>
