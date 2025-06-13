@@ -129,7 +129,7 @@ const FormCreateCategory = () => {
               );
 
               if (res.status === 201 || res.status === 200) {
-                notifySuccess("¡categoría Creada con éxito!", {
+                notifySuccess("¡Categoría creada con éxito!", {
                   position: "top-center",
                 });
                 setTimeout(() => {

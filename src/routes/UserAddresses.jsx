@@ -6,10 +6,15 @@ import { Link } from "react-router-dom";
 import { useFetchAddresses } from "../hooks/useFetchAddresses";
 import { axiosInstance } from "../services/axios.config";
 import { ToastContainer, toast } from "react-toastify";
+import Modal from "../components/Modal";
+import { useModal } from "../hooks/useModal";
 
 const UserAddresses = () => {
   const { addresses } = useFetchAddresses();
   const [addressState, setAddressState] = useState([]);
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [selectedItemName, setSelectedItemName] = useState(null);
+  const [isOpen, openModal, closeModal] = useModal(false);
 
   useEffect(() => {
     setAddressState(addresses);
@@ -19,7 +24,13 @@ const UserAddresses = () => {
 
   const notifyError = (noty, options = {}) => toast.error(noty, options);
 
-  const handleDelete = async (id) => {
+  const handleDelete = async (id, name) => {
+    openModal();
+    setSelectedItem(id);
+    setSelectedItemName(name);
+  };
+
+  const deleteItem = async (id) => {
     try {
       const res = await axiosInstance.delete(`/api/address/${id}`);
       if (res.status === 200 || res.status === 201) {
@@ -89,7 +100,9 @@ const UserAddresses = () => {
                         />
                       </svg>
                     </Link>
-                    <button onClick={() => handleDelete(address._id)}>
+                    <button
+                      onClick={() => handleDelete(address._id, address.name)}
+                    >
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         fill="none"
@@ -105,6 +118,33 @@ const UserAddresses = () => {
                         />
                       </svg>
                     </button>
+                    <Modal isOpen={isOpen} closeModal={closeModal}>
+                      <div className="flex items-center justify-center size-full flex-col">
+                        <h2 className="text-gray-950 mb-8 text-xl font-semibold">
+                          ¿Está seguro que desea elimiar la siguiente dirección?{" "}
+                          <br />
+                          <span>{`"${
+                            selectedItemName ? selectedItemName : ""
+                          }" `}</span>
+                        </h2>
+                        <div className="flex self-end gap-3">
+                          <button
+                            className="bg-gray-400 w-fit py-1 px-4 rounded-md
+ hover:bg-gray-500 text-white transition-all duration-300 ease-in"
+                            onClick={closeModal}
+                          >
+                            Cerrar
+                          </button>
+                          <button
+                            className="bg-secondary w-fit py-1 px-4 rounded-md
+ hover:bg-secondary-accent text-white transition-all duration-300 ease-in"
+                            onClick={() => deleteItem(selectedItem)}
+                          >
+                            Sí
+                          </button>
+                        </div>
+                      </div>
+                    </Modal>
                   </div>
                 ))
               ) : (

@@ -3,31 +3,28 @@ import "./css/CardSlider.css";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
+import customer from "../img/customers/cliente.jfif";
+import customerTwo from "../img/customers/cliente-2.jfif";
+import customerthree from "../img/customers/cliente-3.jfif";
 
 const data = [
   {
-    name: "Luis",
-    img: ImgUser,
+    name: "Luis Mendez",
+    img: customer,
     review:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis repellendus natus laudantium facere nostrum magnam.",
+      "La gente que atiende aquí es un amor. Siempre sonríen y te ayudan si buscas algo.",
   },
   {
-    name: "Pedro",
-    img: ImgUser,
+    name: "Ana Campanelli",
+    img: customerTwo,
     review:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis repellendus natus laudantium facere nostrum magnam.",
+      "Sencillamente, ¡genial! Buena variedad, buenos precios y gente amable",
   },
   {
-    name: "Pablo",
-    img: ImgUser,
+    name: "Nirvana Rodriguez",
+    img: customerthree,
     review:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis repellendus natus laudantium facere nostrum magnam.",
-  },
-  {
-    name: "Gabriela",
-    img: ImgUser,
-    review:
-      "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Perspiciatis repellendus natus laudantium facere nostrum magnam.",
+      "¡Este abasto es una bendición, de verdad! Siempre que vengo, resuelvo todo de una.",
   },
 ];
 
@@ -110,12 +107,12 @@ const CardSlider = () => {
         {data.map((d, i) => (
           <div className="slide-card" key={i}>
             <img
-              className="img-card-slider"
+              className="img-card-slider mb-4"
               src={d.img}
               alt="imagen de usuario"
             />
             <h3 className="name">{d.name}</h3>
-            <p className="card-slider-review">{`"${d.review}"`}</p>
+            <p className="card-slider-review font-semibold text-gray-700">{`"${d.review}"`}</p>
           </div>
         ))}
       </Slider>

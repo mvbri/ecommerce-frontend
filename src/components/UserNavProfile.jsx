@@ -5,7 +5,7 @@ const UserNavProfile = () => {
   const auth = useAuth();
   return (
     <div className="flex flex-col md:flex-row gap-5 rounded-md">
-      <div className="min-w-[250px] min-h-[400px]">
+      <div className="min-w-[250px] min-h-[400px] w-fit">
         <div className="text-center p-8 border">
           <h3 className="font-semibold">{auth.getUser()?.name || null}</h3>
           <h4>{auth.getUser()?.email || null}</h4>

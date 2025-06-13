@@ -113,7 +113,9 @@ const ShowUserOrder = () => {
                         <h2 className="font-semibold text-xl mt-4 mb-4">Productos</h2>
                         <BasicGridLayout>
                             {orderVal.detail && orderVal.detail.map((detail, i) => (
-                                <DetailProduct key={i} product={detail.product} detail={detail} />
+                                detail.product && (
+                                    <DetailProduct key={i} product={detail.product} detail={detail} />
+                                )
                             ))}
                         </BasicGridLayout>
                     </div>

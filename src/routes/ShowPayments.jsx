@@ -8,7 +8,6 @@ import Modal from "../components/Modal";
 import { useModal } from "../hooks/useModal";
 import { ToastContainer, toast } from "react-toastify";
 
-
 const ShowPayments = () => {
   const { payments, setPayments } = useFetchPayments();
   const [selectedItem, setSelectedItem] = useState(null);
@@ -27,11 +26,9 @@ const ShowPayments = () => {
 
   const deleteItem = async (id) => {
     try {
-      const res = axiosInstance.delete(`/api/admin/payments/${id}`)
+      const res = axiosInstance.delete(`/api/admin/payments/${id}`);
       if (res.status === 200) {
-        setPayments((prevItems) =>
-          prevItems.filter((item) => item._id !== id)
-        );
+        setPayments((prevItems) => prevItems.filter((item) => item._id !== id));
         notifySuccess("¡Método de pago eliminado con éxito!", {
           position: "top-center",
         });
@@ -41,9 +38,8 @@ const ShowPayments = () => {
     } catch (error) {
       notifyError("Ocurrió un error", {
         position: "top-center",
-      })
-      console.error(error)
-
+      });
+      console.error(error);
     }
 
     closeModal();
@@ -53,16 +49,18 @@ const ShowPayments = () => {
     <AdminLayout>
       <StandardSection>
         <ToastContainer />
-        <TablePayments items={payments}
-          onSelectItem={handleDeletetItem}
-        />
+        <h1 className="text-2xl pt-4 md:text-3xl text-gray-800 text-center mb-8 md:mb-14">
+          Métodos de Pago
+        </h1>
+        <TablePayments items={payments} onSelectItem={handleDeletetItem} />
         <Modal isOpen={isOpen} closeModal={closeModal}>
           <div className="flex items-center justify-center size-full flex-col">
-            <h2 className="text-center text-gray-950 mb-8 text-xl font-semibold">
+            <h2 className="text-gray-950 mb-8 text-xl font-semibold">
               ¿Está seguro que desea elimiar el siguiente Item? <br />
               <span>
-                {`"${selectedItemName ? selectedItemName.split(",").shift() : ""
-                  }" `}
+                {`"${
+                  selectedItemName ? selectedItemName.split(",").shift() : ""
+                }" `}
               </span>
             </h2>
             <button

@@ -3,17 +3,16 @@ import ImgBanner from "../img/imagen-banner.avif";
 
 const HomeBanner = () => {
   return (
-    <div className="main-banner bg-primary">
+    <div className="main-banner bg-primary rounded-lg">
       {/*Grid container*/}
       <div className="grid-container">
         {/*Banner container*/}
         <div className="container">
           <h1 className="title s-center">
-            <span> Viveres</span>
-            <br />
+            <span> Viveres </span>
             <span className="line-2">Piñero</span>
           </h1>
-          <h3 className="font-semibold s-center text-gray-800">
+          <h3 className="font-semibold s-center text-gray-800 mb-4">
             ¡Tu Despensa Completa, Cerca de Ti!
           </h3>
           <p className="description s-center text-gray-700">

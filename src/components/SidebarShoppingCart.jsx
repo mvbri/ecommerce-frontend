@@ -98,9 +98,9 @@ export default function SidebarShoppingCart() {
                   </p>
                   <div className="mt-6">
                     <Link
-                    onClick={() => setOpen(true)}
+                      onClick={() => setOpen(true)}
                       to="/compra"
-                      className="flex m-auto items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-xs hover:bg-indigo-700"
+                      className="flex m-auto items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-xs hover:bg-indigo-700 hover:text-white"
                     >
                       Proceder al pago
                     </Link>
