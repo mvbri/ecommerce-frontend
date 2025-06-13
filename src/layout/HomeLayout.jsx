@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import NavTailwind from "../components/NavbarTailwind";
+import manual from '../img/manual/Presentación de Manual de Instrucciones de Software o Aplicación Informática Corporativa Empresarial Azul y Blanco.pdf'
 
 function HomeLayout({ children }) {
   return (
@@ -33,7 +34,7 @@ function HomeLayout({ children }) {
           </div>
           <div>
             <h4 className="text-white mb-2">Ayuda</h4>
-            <Link className="text-white ml-2">Manual de uso</Link>
+            <a href={manual} target="_blank"  className="text-white ml-2">Manual de uso</a>
           </div>
         </div>
       </footer>
