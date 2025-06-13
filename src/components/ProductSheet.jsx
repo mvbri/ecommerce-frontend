@@ -56,7 +56,7 @@ const ProductSheet = ({ slug }) => {
 
   return (
     <article>
-      <div className="flex flex-col md:flex-row mb-8 p-4 md:p-8">
+      <div className="flex gap-8 flex-col md:flex-row mb-8 p-4 md:p-8">
         <div className="w-full md:w-[50%]">
           {images_products.length > 0 ? (
             <ImageGallery showPlayButton={false} items={images_products} />
@@ -70,12 +70,12 @@ const ProductSheet = ({ slug }) => {
           )}
         </div>
         <div className="product-details p-2 px-3">
-          <h2 className="text-2xl md:text-4xl mb-4">{product.name}</h2>
+          <h2 className="text-xl font-bold mb-4">{product.name}</h2>
           <div className="description">
             <p>{product.description}</p>
           </div>
           <h4 className="text-sm mb-2 font-semibold">{product.price} Bs.</h4>
-          <h4 className="text-secondary text-lg font-bold mb-2">
+          <h4 className="text-secondary text-xl font-bold mb-8">
             {product.priceIVA} Bs.
           </h4>
 
@@ -84,7 +84,7 @@ const ProductSheet = ({ slug }) => {
               onQuantityChange={handleQuantityChange}
               quantityDefault={quantity}
             />
-            <div className="my-4">
+            <div className="my-[1.5rem]">
               {auth.isAuthenticated ? (
                 <button
                   onClick={() => handleAddTocart(product._id, quantity)}
@@ -94,7 +94,7 @@ const ProductSheet = ({ slug }) => {
                 </button>
               ) : (
                 <Link
-                  className="m-auto  bg-secondary hover:bg-secondary-accent hover:text-white text-white py-2 px-8 rounded-md font-semibold"
+                  className="m-auto  bg-secondary hover:bg-secondary-accent hover:text-white text-white py-2 px-8 rounded-md font-semibold transition-all duration-300 ease-in"
                   to="/login"
                   exact
                 >

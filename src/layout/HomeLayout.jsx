@@ -33,7 +33,14 @@ function HomeLayout({ children }) {
           </div>
           <div>
             <h4 className="text-white mb-2">Ayuda</h4>
-            <Link className="text-white ml-2">Manual de uso</Link>
+            <a
+              target="_blank"
+              rel="noopener"
+              href=""
+              className="text-white ml-2"
+            >
+              Manual de uso
+            </a>
           </div>
         </div>
       </footer>
